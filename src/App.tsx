@@ -10,7 +10,7 @@ for (let rank: number = 7; rank >= 0; rank--) {
     for (let file: number = 0; file < 8; file++) {
         const color: Colors =
             (file + rank) % 2 !== 0 ? Colors.WHITE : Colors.BLACK;
-        squares.push(new Square(index, color, file, rank));
+        squares.push(new Square(index, color, file, rank, null));
         index += 1;
     }
 }
