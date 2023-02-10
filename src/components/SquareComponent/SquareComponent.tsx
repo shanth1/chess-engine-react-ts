@@ -8,6 +8,10 @@ export interface ISquareProps {
 
 const SquareComponent: React.FC<ISquareProps> = (props) => {
     const color: Colors = props.square.color;
-    return <div className={[styles.square, styles[color]].join(" ")}></div>;
+    return (
+        <div className={[styles.square, styles[color]].join(" ")}>
+            {props.square.name}
+        </div>
+    );
 };
 export default SquareComponent;

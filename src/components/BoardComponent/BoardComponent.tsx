@@ -11,7 +11,9 @@ const BoardComponent: React.FC<IBoardProps> = (props) => {
     const squares: Array<Square> = props.board.squares;
 
     const squaresElement = squares.map((square) => {
-        return <div key={square.id}>{<SquareComponent square={square} />}</div>;
+        return (
+            <div key={square.index}>{<SquareComponent square={square} />}</div>
+        );
     });
 
     return <div className={styles.board}>{squaresElement}</div>;
