@@ -1,6 +1,7 @@
 import "./App.css";
 import BoardComponent from "./components/BoardComponent/BoardComponent";
 import { Board } from "./models/Board";
+import { Bishop } from "./models/Pieces/Bishop";
 import { Square } from "./models/Square";
 import { Colors } from "./models/_enums";
 
@@ -14,6 +15,8 @@ for (let rank: number = 7; rank >= 0; rank--) {
         index += 1;
     }
 }
+
+squares[2].piece = new Bishop(Colors.WHITE);
 
 const App = () => {
     return (

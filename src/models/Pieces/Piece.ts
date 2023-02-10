@@ -1,1 +1,3 @@
-export abstract class Piece {}
+export abstract class Piece {
+    abstract icon: string;
+}
