@@ -3,24 +3,6 @@ export enum Colors {
     WHITE = "white",
 }
 
-export enum PieceTypes {
-    KING = "king",
-    QUEEN = "queen",
-    ROOK = "rook",
-    BISHOP = "bishop",
-    KNIGHT = "knight",
-    PAWN = "pawn",
-}
-
-export enum PieceNames {
-    KING = "k",
-    QUEEN = "q",
-    ROOK = "r",
-    BISHOP = "b",
-    KNIGHT = "n",
-    PAWN = "p",
-}
-
 export enum FileCoordinates {
     A = "a",
     B = "b",
