@@ -12,7 +12,7 @@ const SquareComponent: React.FC<ISquareProps> = (props) => {
     const color: Colors = props.square.color;
     return (
         <div className={[styles.square, styles[color]].join(" ")}>
-            {0 && <PieceComponent />}
+            {!!props.square.piece && <PieceComponent />}
         </div>
     );
 };

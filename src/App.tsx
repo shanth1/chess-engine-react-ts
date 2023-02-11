@@ -4,7 +4,7 @@ import BoardComponent from "./components/BoardComponent/BoardComponent";
 const App = () => {
     return (
         <div>
-            <BoardComponent />
+            <BoardComponent boardPosition={new Array(64)} />
         </div>
     );
 };
