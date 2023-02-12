@@ -4,7 +4,7 @@ import SquareComponent from "../SquareComponent/SquareComponent";
 import styles from "./BoardComponent.module.css";
 
 export interface IBoardProps {
-    boardPosition: Array<number>;
+    boardPosition: Array<PieceCodes>;
 }
 
 const squares: Array<Square> = [];
@@ -21,7 +21,8 @@ for (let rank: number = 7; rank >= 0; rank--) {
 const BoardComponent: React.FC<IBoardProps> = (props) => {
     return (
         <div className={styles.board}>
-            {squares.map((square) => {
+            {squares.map((square, index) => {
+                square.piece = props.boardPosition[index];
                 return (
                     <div key={square.index}>
                         {<SquareComponent square={square} />}
