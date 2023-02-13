@@ -1,4 +1,3 @@
-import { Piece } from "./Pieces/Piece";
 import { Colors, FileCoordinates } from "./_enums";
 
 const fileCoordinates: Array<FileCoordinates> = [
@@ -17,14 +16,14 @@ export class Square {
     readonly color: Colors;
     readonly name: string;
 
-    piece: Piece | null;
+    piece: number;
 
     constructor(
         index: number,
         color: Colors,
         file: number,
         rank: number,
-        piece: Piece | null,
+        piece: number,
     ) {
         this.index = index;
         this.color = color;
