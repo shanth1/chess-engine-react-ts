@@ -10,9 +10,10 @@ export interface ISquareProps {
 
 const SquareComponent: React.FC<ISquareProps> = (props) => {
     const color: Colors = props.square.color;
+    const piece: number = props.square.piece;
     return (
         <div className={[styles.square, styles[color]].join(" ")}>
-            {!!props.square.piece && <PieceComponent />}
+            {!!piece && <PieceComponent pieceCode={piece} />}
         </div>
     );
 };

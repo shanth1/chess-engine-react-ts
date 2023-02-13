@@ -3,19 +3,37 @@ export enum Colors {
     WHITE = "white",
 }
 
-export enum ColorCodes {
-    BLACK = 8,
-    WHITE = 16,
+export enum ColorBinaryCodes {
+    BLACK = 0b01000,
+    WHITE = 0b10000,
 }
 
-export enum PieceCodes {
+export const ColorBinaryMask = 0b11000;
+export const PieceBinaryMask = 0b00111;
+
+export enum PieceBinaryCodes {
     NONE = 0,
-    KING = 1,
-    QUEEN = 2,
-    ROOK = 3,
-    BISHOP = 4,
-    KNIGHT = 5,
-    PAWN = 6,
+    KING = 0b00001,
+    QUEEN = 0b00010,
+    ROOK = 0b00011,
+    BISHOP = 0b00100,
+    KNIGHT = 0b00101,
+    PAWN = 0b00110,
+}
+
+export enum ColorFileNames {
+    "b",
+    "w",
+}
+
+export enum PieceFileNames {
+    "NONE",
+    "K",
+    "Q",
+    "R",
+    "B",
+    "N",
+    "P",
 }
 
 export enum FileCoordinates {

@@ -1,14 +1,14 @@
 import "./App.css";
 import BoardComponent from "./components/BoardComponent/BoardComponent";
-import { PieceCodes } from "./models/_enums";
+import { ColorBinaryCodes, PieceBinaryCodes } from "./models/_enums";
 
-const boardPosition: Array<PieceCodes> = [];
+const boardPosition: Array<number> = [];
 
 for (let index = 0; index < 64; index++) {
-    boardPosition.push(PieceCodes.NONE);
+    boardPosition.push(PieceBinaryCodes.NONE);
 }
 
-boardPosition[8] = 1;
+boardPosition[21] = ColorBinaryCodes.WHITE | PieceBinaryCodes.ROOK;
 
 const App = () => {
     return (
