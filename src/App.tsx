@@ -8,7 +8,7 @@ for (let index = 0; index < 64; index++) {
     boardPosition.push(PieceBinaryCodes.NONE);
 }
 
-boardPosition[21] = ColorBinaryCodes.WHITE | PieceBinaryCodes.ROOK;
+boardPosition[21] = ColorBinaryCodes.BLACK | PieceBinaryCodes.QUEEN;
 
 const App = () => {
     return (

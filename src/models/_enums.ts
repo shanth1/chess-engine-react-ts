@@ -8,9 +8,6 @@ export enum ColorBinaryCodes {
     WHITE = 0b10000,
 }
 
-export const ColorBinaryMask = 0b11000;
-export const PieceBinaryMask = 0b00111;
-
 export enum PieceBinaryCodes {
     NONE = 0,
     KING = 0b00001,
@@ -22,8 +19,8 @@ export enum PieceBinaryCodes {
 }
 
 export enum ColorFileNames {
-    "b",
-    "w",
+    BLACK = "b",
+    WHITE = "w",
 }
 
 export enum PieceFileNames {
