@@ -17,3 +17,7 @@ export const gameState: IGameState = {
     halfMoveClock: 0,
     fullMoveNumber: 0,
 };
+
+export function setGameFromFen(fen: string): void {
+    console.log(fen.split(" "));
+}
