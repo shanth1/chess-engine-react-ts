@@ -1,4 +1,8 @@
-import { ColorBinaryCodes, PieceBinaryCodes } from "./../models/_enums";
+import {
+    CastlingRightsBinaryCodes,
+    ColorBinaryCodes,
+    PieceBinaryCodes,
+} from "./../models/_enums";
 import { Colors } from "../models/_enums";
 
 interface IGameState {
@@ -13,7 +17,7 @@ interface IGameState {
 export const gameState: IGameState = {
     piecePlacement: [],
     activeColor: Colors.WHITE,
-    castlingRights: 1,
+    castlingRights: CastlingRightsBinaryCodes.NeitherSide,
     enPassant: false,
     halfMoveClock: 0,
     fullMoveNumber: 0,
@@ -72,7 +76,35 @@ function setActiveColor(fenActiveColor: string): void {
         fenActiveColor.toLowerCase() === "w" ? Colors.WHITE : Colors.BLACK;
 }
 
+function setCastlingRights(fenCastlingRights: string): void {
+    for (let symbol of fenCastlingRights) {
+        if (symbol === "K") {
+            gameState.castlingRights =
+                gameState.castlingRights |
+                CastlingRightsBinaryCodes.WhiteKingNearRookSide;
+        } else if (symbol === "Q") {
+            gameState.castlingRights =
+                gameState.castlingRights |
+                CastlingRightsBinaryCodes.WitheKingQueenSide;
+        } else if (symbol === "k") {
+            gameState.castlingRights =
+                gameState.castlingRights |
+                CastlingRightsBinaryCodes.BlackKingNearRookSide;
+        } else if (symbol === "q") {
+            gameState.castlingRights =
+                gameState.castlingRights |
+                CastlingRightsBinaryCodes.BlackKingQueenSide;
+        } else if (symbol === "-") {
+            gameState.castlingRights = CastlingRightsBinaryCodes.NeitherSide;
+        } else {
+            alert("undefined castling right symbol");
+        }
+    }
+}
+
 export function setGameFromFen(fen: string): void {
     setPiecePlacement(fen.split(" ")[0]);
     setActiveColor(fen.split(" ")[1]);
+    setCastlingRights(fen.split(" ")[2]);
+    console.log(gameState);
 }

@@ -18,6 +18,14 @@ export enum PieceBinaryCodes {
     PAWN = 0b00110,
 }
 
+export enum CastlingRightsBinaryCodes {
+    NeitherSide = 0b0000,
+    WhiteKingNearRookSide = 0b1000,
+    WitheKingQueenSide = 0b0100,
+    BlackKingNearRookSide = 0b0010,
+    BlackKingQueenSide = 0b0001,
+}
+
 export enum ColorFileNames {
     BLACK = "b",
     WHITE = "w",
