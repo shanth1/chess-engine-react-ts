@@ -9,7 +9,7 @@ interface IGameState {
     piecePlacement: Array<number>;
     activeColor: Colors;
     castlingRights: number;
-    enPassant: boolean;
+    enPassant: string;
     halfMoveClock: number;
     fullMoveNumber: number;
 }
@@ -18,7 +18,7 @@ export const gameState: IGameState = {
     piecePlacement: [],
     activeColor: Colors.WHITE,
     castlingRights: CastlingRightsBinaryCodes.NeitherSide,
-    enPassant: false,
+    enPassant: "-",
     halfMoveClock: 0,
     fullMoveNumber: 0,
 };
@@ -102,9 +102,14 @@ function setCastlingRights(fenCastlingRights: string): void {
     }
 }
 
+function setEnPassant(fenEnPassant: string): void {
+    gameState.enPassant = fenEnPassant;
+}
+
 export function setGameFromFen(fen: string): void {
     setPiecePlacement(fen.split(" ")[0]);
     setActiveColor(fen.split(" ")[1]);
     setCastlingRights(fen.split(" ")[2]);
+    setEnPassant(fen.split(" ")[3]);
     console.log(gameState);
 }
