@@ -37,7 +37,7 @@ function getPieceBinaryCodeFromFenSymbol(symbol: string): number {
     return pieceBinaryCode;
 }
 
-function setPiecePlacement(fenPiecePlacement: string) {
+function setPiecePlacement(fenPiecePlacement: string): void {
     const piecePlacement: Array<number> = new Array(64);
 
     let file: number = 0;
@@ -67,6 +67,12 @@ function setPiecePlacement(fenPiecePlacement: string) {
     gameState.piecePlacement = piecePlacement;
 }
 
+function setActiveColor(fenActiveColor: string): void {
+    gameState.activeColor =
+        fenActiveColor.toLowerCase() === "w" ? Colors.WHITE : Colors.BLACK;
+}
+
 export function setGameFromFen(fen: string): void {
     setPiecePlacement(fen.split(" ")[0]);
+    setActiveColor(fen.split(" ")[1]);
 }
