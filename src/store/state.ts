@@ -106,10 +106,20 @@ function setEnPassant(fenEnPassant: string): void {
     gameState.enPassant = fenEnPassant;
 }
 
+function setHalfMoveClock(fenHalfMoveClock: string): void {
+    const halfMoveClock: number = Number(fenHalfMoveClock);
+    if (isNaN(halfMoveClock)) {
+        alert("incorrect halfMoveClock: not a Number input");
+    } else {
+        gameState.halfMoveClock = halfMoveClock;
+    }
+}
+
 export function setGameFromFen(fen: string): void {
     setPiecePlacement(fen.split(" ")[0]);
     setActiveColor(fen.split(" ")[1]);
     setCastlingRights(fen.split(" ")[2]);
     setEnPassant(fen.split(" ")[3]);
-    console.log(gameState);
+    setHalfMoveClock(fen.split(" ")[4]);
+    console.log(gameState.halfMoveClock);
 }
