@@ -115,11 +115,20 @@ function setHalfMoveClock(fenHalfMoveClock: string): void {
     }
 }
 
+function setFullMoveNumber(fenFullMoveNumber: string): void {
+    const fullMoveNumber: number = Number(fenFullMoveNumber);
+    if (isNaN(fullMoveNumber)) {
+        alert("incorrect fullMoveNumber: not a Number input");
+    } else {
+        gameState.fullMoveNumber = fullMoveNumber;
+    }
+}
+
 export function setGameFromFen(fen: string): void {
     setPiecePlacement(fen.split(" ")[0]);
     setActiveColor(fen.split(" ")[1]);
     setCastlingRights(fen.split(" ")[2]);
     setEnPassant(fen.split(" ")[3]);
     setHalfMoveClock(fen.split(" ")[4]);
-    console.log(gameState.halfMoveClock);
+    setFullMoveNumber(fen.split(" ")[5]);
 }
