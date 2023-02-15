@@ -1,7 +1,7 @@
 import {
-    CastlingRightsBinaryCodes,
-    ColorBinaryCodes,
-    PieceBinaryCodes,
+    CastlingRightsCodes,
+    ColorCodes,
+    PieceCodes,
 } from "./../models/_enums";
 import { Colors } from "../models/_enums";
 
@@ -17,7 +17,7 @@ interface IGameState {
 export const gameState: IGameState = {
     piecePlacement: [],
     activeColor: Colors.WHITE,
-    castlingRights: CastlingRightsBinaryCodes.NeitherSide,
+    castlingRights: CastlingRightsCodes.NeitherSide,
     enPassant: "-",
     halfMoveClock: 0,
     fullMoveNumber: 0,
@@ -26,18 +26,18 @@ export const gameState: IGameState = {
 function getPieceBinaryCodeFromFenSymbol(symbol: string): number {
     const pieceBinaryCode =
         symbol === "k"
-            ? PieceBinaryCodes.KING
+            ? PieceCodes.KING
             : symbol === "q"
-            ? PieceBinaryCodes.QUEEN
+            ? PieceCodes.QUEEN
             : symbol === "r"
-            ? PieceBinaryCodes.ROOK
+            ? PieceCodes.ROOK
             : symbol === "b"
-            ? PieceBinaryCodes.BISHOP
+            ? PieceCodes.BISHOP
             : symbol === "n"
-            ? PieceBinaryCodes.KNIGHT
+            ? PieceCodes.KNIGHT
             : symbol === "p"
-            ? PieceBinaryCodes.PAWN
-            : PieceBinaryCodes.NONE;
+            ? PieceCodes.PAWN
+            : PieceCodes.NONE;
     return pieceBinaryCode;
 }
 
@@ -57,8 +57,8 @@ function setPiecePlacement(fenPiecePlacement: string): void {
             } else {
                 const pieceColor =
                     symbol === symbol.toUpperCase()
-                        ? ColorBinaryCodes.WHITE
-                        : ColorBinaryCodes.BLACK;
+                        ? ColorCodes.WHITE
+                        : ColorCodes.BLACK;
 
                 const pieceType = getPieceBinaryCodeFromFenSymbol(
                     symbol.toLowerCase(),
@@ -81,21 +81,21 @@ function setCastlingRights(fenCastlingRights: string): void {
         if (symbol === "K") {
             gameState.castlingRights =
                 gameState.castlingRights |
-                CastlingRightsBinaryCodes.WhiteKingNearRookSide;
+                CastlingRightsCodes.WhiteKingNearRookSide;
         } else if (symbol === "Q") {
             gameState.castlingRights =
                 gameState.castlingRights |
-                CastlingRightsBinaryCodes.WitheKingQueenSide;
+                CastlingRightsCodes.WitheKingQueenSide;
         } else if (symbol === "k") {
             gameState.castlingRights =
                 gameState.castlingRights |
-                CastlingRightsBinaryCodes.BlackKingNearRookSide;
+                CastlingRightsCodes.BlackKingNearRookSide;
         } else if (symbol === "q") {
             gameState.castlingRights =
                 gameState.castlingRights |
-                CastlingRightsBinaryCodes.BlackKingQueenSide;
+                CastlingRightsCodes.BlackKingQueenSide;
         } else if (symbol === "-") {
-            gameState.castlingRights = CastlingRightsBinaryCodes.NeitherSide;
+            gameState.castlingRights = CastlingRightsCodes.NeitherSide;
         } else {
             alert("undefined castling right symbol");
         }

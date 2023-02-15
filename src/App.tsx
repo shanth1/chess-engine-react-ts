@@ -7,7 +7,7 @@ setGameFromFen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
 const App = () => {
     return (
         <div>
-            <BoardComponent boardPosition={gameState.piecePlacement} />
+            <BoardComponent piecePlacement={gameState.piecePlacement} />
         </div>
     );
 };
