@@ -3,12 +3,12 @@ export enum Colors {
     WHITE = "white",
 }
 
-export enum ColorBinaryCodes {
+export enum ColorCodes {
     BLACK = 0b01000,
     WHITE = 0b10000,
 }
 
-export enum PieceBinaryCodes {
+export enum PieceCodes {
     NONE = 0,
     KING = 0b00001,
     QUEEN = 0b00010,
@@ -16,6 +16,14 @@ export enum PieceBinaryCodes {
     BISHOP = 0b00100,
     KNIGHT = 0b00101,
     PAWN = 0b00110,
+}
+
+export enum CastlingRightsCodes {
+    NeitherSide = 0b0000,
+    WhiteKingNearRookSide = 0b1000,
+    WitheKingQueenSide = 0b0100,
+    BlackKingNearRookSide = 0b0010,
+    BlackKingQueenSide = 0b0001,
 }
 
 export enum ColorFileNames {
@@ -42,4 +50,15 @@ export enum FileCoordinates {
     F = "f",
     G = "g",
     H = "h",
+}
+
+export enum PieceStyles {
+    ALPHA = "alpha",
+    FANTASY = "fantasy",
+    KOSAL = "kosal",
+    LETTER = "letter",
+    PIXEL = "pixel",
+    SHAPES = "shapes",
+    SPATIAL = "spatial",
+    WIKIPEDIA = "wikipedia",
 }
