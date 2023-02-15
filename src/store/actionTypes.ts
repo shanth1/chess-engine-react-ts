@@ -1,0 +1,1 @@
+export const SET_PIECE_PLACEMENT: string = "SET_PIECE_PLACEMENT";
