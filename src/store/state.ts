@@ -19,10 +19,6 @@ export const gameState: IGameState = {
     fullMoveNumber: 0,
 };
 
-function setEnPassant(fenEnPassant: string): void {
-    gameState.enPassant = fenEnPassant;
-}
-
 function setHalfMoveClock(fenHalfMoveClock: string): void {
     const halfMoveClock: number = Number(fenHalfMoveClock);
     if (isNaN(halfMoveClock)) {
@@ -42,7 +38,6 @@ function setFullMoveNumber(fenFullMoveNumber: string): void {
 }
 
 export function setGameFromFen(fen: string): void {
-    setEnPassant(fen.split(" ")[3]);
     setHalfMoveClock(fen.split(" ")[4]);
     setFullMoveNumber(fen.split(" ")[5]);
 }
