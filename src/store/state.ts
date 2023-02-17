@@ -19,11 +19,6 @@ export const gameState: IGameState = {
     fullMoveNumber: 0,
 };
 
-function setActiveColor(fenActiveColor: string): void {
-    gameState.activeColor =
-        fenActiveColor.toLowerCase() === "w" ? Colors.WHITE : Colors.BLACK;
-}
-
 function setCastlingRights(fenCastlingRights: string): void {
     for (let symbol of fenCastlingRights) {
         if (symbol === "K") {
@@ -73,7 +68,6 @@ function setFullMoveNumber(fenFullMoveNumber: string): void {
 }
 
 export function setGameFromFen(fen: string): void {
-    setActiveColor(fen.split(" ")[1]);
     setCastlingRights(fen.split(" ")[2]);
     setEnPassant(fen.split(" ")[3]);
     setHalfMoveClock(fen.split(" ")[4]);
