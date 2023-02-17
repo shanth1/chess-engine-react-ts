@@ -12,10 +12,22 @@ export interface IActionActiveColor extends IAction {
     activeColorFen: string;
 }
 
+export interface IActionCastlingRight extends IAction {
+    castlingRightsFen: string;
+}
+
 export interface IStatePiecePlacement {
     piecePlacement: Array<number>;
 }
 
 export interface IStateActiveColor {
     activeColor: Colors;
+}
+
+export interface IStateActiveColor {
+    activeColor: Colors;
+}
+
+export interface IStateCastlingRights {
+    castlingRights: number;
 }

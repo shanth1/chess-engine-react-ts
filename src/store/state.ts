@@ -19,32 +19,6 @@ export const gameState: IGameState = {
     fullMoveNumber: 0,
 };
 
-function setCastlingRights(fenCastlingRights: string): void {
-    for (let symbol of fenCastlingRights) {
-        if (symbol === "K") {
-            gameState.castlingRights =
-                gameState.castlingRights |
-                CastlingRightsCodes.WhiteKingNearRookSide;
-        } else if (symbol === "Q") {
-            gameState.castlingRights =
-                gameState.castlingRights |
-                CastlingRightsCodes.WitheKingQueenSide;
-        } else if (symbol === "k") {
-            gameState.castlingRights =
-                gameState.castlingRights |
-                CastlingRightsCodes.BlackKingNearRookSide;
-        } else if (symbol === "q") {
-            gameState.castlingRights =
-                gameState.castlingRights |
-                CastlingRightsCodes.BlackKingQueenSide;
-        } else if (symbol === "-") {
-            gameState.castlingRights = CastlingRightsCodes.NeitherSide;
-        } else {
-            alert("undefined castling right symbol");
-        }
-    }
-}
-
 function setEnPassant(fenEnPassant: string): void {
     gameState.enPassant = fenEnPassant;
 }
@@ -68,7 +42,6 @@ function setFullMoveNumber(fenFullMoveNumber: string): void {
 }
 
 export function setGameFromFen(fen: string): void {
-    setCastlingRights(fen.split(" ")[2]);
     setEnPassant(fen.split(" ")[3]);
     setHalfMoveClock(fen.split(" ")[4]);
     setFullMoveNumber(fen.split(" ")[5]);
