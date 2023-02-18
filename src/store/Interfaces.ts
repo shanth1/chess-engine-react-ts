@@ -24,6 +24,10 @@ export interface IActionHalfMoveClock extends IAction {
     halfMoveClockFen: string;
 }
 
+export interface IActionFullMoveNumber extends IAction {
+    fullMoveNumberFen: string;
+}
+
 export interface IStatePiecePlacement {
     piecePlacement: Array<number>;
 }
@@ -42,4 +46,8 @@ export interface IStateEnPassant {
 
 export interface IStateHalfMoveClock {
     halfMoveClock: number;
+}
+
+export interface IStateFullMoveNumber {
+    fullMoveNumber: number;
 }
