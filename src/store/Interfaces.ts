@@ -20,12 +20,12 @@ export interface IActionEnPassant extends IAction {
     enPassantFen: string;
 }
 
-export interface IStatePiecePlacement {
-    piecePlacement: Array<number>;
+export interface IActionHalfMoveClock extends IAction {
+    halfMoveClockFen: string;
 }
 
-export interface IStateActiveColor {
-    activeColor: Colors;
+export interface IStatePiecePlacement {
+    piecePlacement: Array<number>;
 }
 
 export interface IStateActiveColor {
@@ -38,4 +38,8 @@ export interface IStateCastlingRights {
 
 export interface IStateEnPassant {
     enPassant: string;
+}
+
+export interface IStateHalfMoveClock {
+    halfMoveClock: number;
 }
