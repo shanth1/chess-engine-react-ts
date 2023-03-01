@@ -2,14 +2,18 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { getPiecePlacementArrayFromFen } from "./setPiecePlacement";
 
-const initialState: Array<number> = new Array(64);
+const initialState = {
+    piecePlacementArray: new Array(64),
+};
 
 const piecePlacementSlice = createSlice({
     name: "piecePlacement",
     initialState,
     reducers: {
         setPiecePlacement: (state, action) => {
-            state = getPiecePlacementArrayFromFen(action.payload);
+            state.piecePlacementArray = getPiecePlacementArrayFromFen(
+                action.payload,
+            );
         },
     },
 });
