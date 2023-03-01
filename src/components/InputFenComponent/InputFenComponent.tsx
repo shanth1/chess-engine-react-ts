@@ -1,5 +1,5 @@
 import styles from "./InputFenComponent.module.css";
-import { setPiecePlacement } from "../../app/slices/piecePlacement/piecePlacementSlice";
+import { setFenPosition } from "../../app/slices/gameSlice/gameSlice";
 import { useAppDispatch } from "../../app/hooks";
 import { useState } from "react";
 
@@ -20,7 +20,7 @@ const InputFenComponent: React.FC = () => {
             <button
                 className={styles.button}
                 onClick={() => {
-                    dispatch(setPiecePlacement(text));
+                    dispatch(setFenPosition({ fen: text }));
                     setText("");
                 }}
             >

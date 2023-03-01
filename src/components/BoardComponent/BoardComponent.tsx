@@ -17,7 +17,7 @@ for (let rank: number = 7; rank >= 0; rank--) {
 
 const BoardComponent: React.FC = () => {
     const piecePlacement: Array<number> = useAppSelector(
-        (state) => state.piecePlacement.piecePlacementArray,
+        (state) => state.game.piecePlacement,
     );
 
     return (
