@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import piecePlacementReducer from "./slices/piecePlacement/piecePlacementSlice";
+import gameSliceReducer from "./slices/gameSlice/gameSlice";
 
 export const store = configureStore({
     reducer: {
-        piecePlacement: piecePlacementReducer,
+        game: gameSliceReducer,
     },
 });
 
