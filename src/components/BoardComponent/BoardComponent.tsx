@@ -1,11 +1,8 @@
+import { useAppSelector } from "../../app/hooks";
 import { Square } from "../../models/Square";
 import { Colors } from "../../models/_enums";
 import SquareComponent from "../SquareComponent/SquareComponent";
 import styles from "./BoardComponent.module.css";
-
-export interface IBoardProps {
-    piecePlacement: Array<number>;
-}
 
 const squares: Array<Square> = [];
 let index: number = 0;
@@ -18,11 +15,15 @@ for (let rank: number = 7; rank >= 0; rank--) {
     }
 }
 
-const BoardComponent: React.FC<IBoardProps> = (props) => {
+const BoardComponent: React.FC = () => {
+    const piecePlacement: Array<number> = useAppSelector(
+        (state) => state.piecePlacement.piecePlacementArray,
+    );
+
     return (
         <div className={styles.board}>
             {squares.map((square, index) => {
-                square.piece = props.piecePlacement[index];
+                square.piece = piecePlacement[index];
                 return (
                     <div key={square.index}>
                         {<SquareComponent square={square} />}
