@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../app/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { Square } from "../../models/Square";
 import { Colors } from "../../models/_enums";
 import SquareComponent from "../SquareComponent/SquareComponent";

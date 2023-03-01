@@ -1,6 +1,6 @@
 import styles from "./InputFenComponent.module.css";
-import { setFenPosition } from "../../app/slices/gameSlice/gameSlice";
-import { useAppDispatch } from "../../app/hooks";
+import { setFenPosition } from "../../redux/slices/gameSlice/gameSlice";
+import { useAppDispatch } from "../../redux/hooks";
 import { useState } from "react";
 
 const InputFenComponent: React.FC = () => {
