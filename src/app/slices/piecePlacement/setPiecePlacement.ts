@@ -18,10 +18,10 @@ function getPieceBinaryCodeFromFenSymbol(symbol: string): number {
     return pieceBinaryCode;
 }
 
-export function getPiecePlacementArrayFromFen(
-    fenPiecePlacement: string,
-): Array<number> {
+export function getPiecePlacementArrayFromFen(fen: string): Array<number> {
     const piecePlacement: Array<number> = new Array(64);
+
+    const fenPiecePlacement = fen.split(" ")[0];
 
     let file: number = 0;
     let rank: number = 0;
