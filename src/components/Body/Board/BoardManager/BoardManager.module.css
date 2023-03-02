@@ -1,0 +1,7 @@
+.board_manager {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    grid-area: bottom;
+}

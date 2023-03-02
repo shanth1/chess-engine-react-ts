@@ -1,5 +1,5 @@
-import { Square } from "../../models/Square";
-import { Colors, PieceCodes } from "../../models/_enums";
+import { Square } from "../../../../models/Square";
+import { Colors, PieceCodes } from "../../../../models/_enums";
 import styles from "./SquareComponent.module.css";
 
 import PieceComponent from "../PieceComponent/PieceComponent";
