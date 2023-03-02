@@ -1,7 +1,7 @@
 import styles from "./InputFenComponent.module.css";
-import { setFenPosition } from "../../redux/slices/gameSlice/gameSlice";
-import { useAppDispatch } from "../../redux/hooks";
 import { useState } from "react";
+import { useAppDispatch } from "../../../../../redux/hooks";
+import { setFenPosition } from "../../../../../redux/slices/gameSlice/gameSlice";
 
 const InputFenComponent: React.FC = () => {
     const [text, setText] = useState(

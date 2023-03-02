@@ -1,6 +1,6 @@
-import { useAppSelector } from "../../redux/hooks";
-import { Square } from "../../models/Square";
-import { Colors } from "../../models/_enums";
+import { useAppSelector } from "../../../../redux/hooks";
+import { Square } from "../../../../models/Square";
+import { Colors } from "../../../../models/_enums";
 import SquareComponent from "../SquareComponent/SquareComponent";
 import styles from "./BoardComponent.module.css";
 

@@ -3,7 +3,7 @@ import {
     ColorFileNames,
     PieceFileNames,
     PieceStyles,
-} from "../../models/_enums";
+} from "../../../../models/_enums";
 import styles from "./PieceComponent.module.css";
 
 interface IPiece {
@@ -22,8 +22,7 @@ const PieceComponent: React.FC<IPiece> = (props) => {
         (props.pieceCode & colorBitMask) === ColorCodes.WHITE
             ? ColorFileNames.WHITE
             : ColorFileNames.BLACK;
-
-    const iconPath = require(`./../../assets/${iconStyle}/${colorFileName}${pieceFileName}.png`);
+    const iconPath = require(`./../../../..//assets/${iconStyle}/${colorFileName}${pieceFileName}.png`);
 
     return <img className={styles.piece} alt="" src={iconPath} />;
 };
