@@ -1,8 +1,12 @@
-import "./index.css";
-import { withProviders } from "./providers";
+import { withProviders } from "app/providers";
+import { GamePage } from "pages";
 
 const App = () => {
-    return <div></div>;
+    return (
+        <div>
+            <GamePage />
+        </div>
+    );
 };
 
 export default withProviders(App);
