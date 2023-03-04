@@ -1,6 +1,6 @@
-import { Button, Input } from "shared";
 import { useAppDispatch } from "app/model/hooks";
 import { useState } from "react";
+import { Button, Input } from "shared";
 import { setFenPosition } from "widgets/ChessGame/model/gameSlice";
 
 export const LoadFen: React.FC = () => {
