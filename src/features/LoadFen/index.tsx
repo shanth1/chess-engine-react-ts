@@ -1,7 +1,7 @@
 import { Button, Input } from "shared";
-import { useAppDispatch } from "redux/hooks";
+import { useAppDispatch } from "app/model/hooks";
 import { useState } from "react";
-import { setFenPosition } from "redux/slices/gameSlice/gameSlice";
+import { setFenPosition } from "widgets/ChessGame/model/gameSlice";
 
 export const LoadFen: React.FC = () => {
     const [value, setText] = useState(

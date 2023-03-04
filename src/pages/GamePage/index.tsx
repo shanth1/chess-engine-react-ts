@@ -1,4 +1,4 @@
-import { Analysis, Board, BoardManager, Header, History } from "widgets";
+import { Analysis, BoardManager, ChessGame, Header, History } from "widgets";
 import styles from "./style.module.css";
 
 export const GamePage: React.FC = () => {
@@ -8,7 +8,7 @@ export const GamePage: React.FC = () => {
             <div className={styles.body_wrapper}>
                 <div className={styles.horizontal_split}>
                     <Analysis />
-                    <Board />
+                    <ChessGame />
                     <History />
                 </div>
                 <BoardManager />

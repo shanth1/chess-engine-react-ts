@@ -2,4 +2,4 @@ export * from "./Header";
 export * from "./Analysis";
 export * from "./BoardManager";
 export * from "./History";
-export * from "./Board";
+export * from "./ChessGame/ui";
