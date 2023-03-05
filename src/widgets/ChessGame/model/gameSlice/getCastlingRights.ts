@@ -1,4 +1,4 @@
-import { CastlingRightsCodes } from "../../types/enums";
+import { CastlingRightsCodes } from "widgets/ChessGame/types/enums";
 
 export function getCastlingRights(fenCastlingRights: string): number {
     let castlingRights: number = Number();

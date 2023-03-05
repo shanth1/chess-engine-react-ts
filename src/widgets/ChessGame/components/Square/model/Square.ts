@@ -1,4 +1,5 @@
-import { Colors, FileCoordinates, PieceCodes } from "../../../types/enums";
+import { Colors, PieceCodes } from "widgets/ChessGame/types/enums";
+import { FileCoordinates } from "../types/enums";
 
 const fileCoordinates: Array<FileCoordinates> = [
     FileCoordinates.A,
