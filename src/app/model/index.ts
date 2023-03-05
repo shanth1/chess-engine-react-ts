@@ -1,3 +1,3 @@
 export * from "../hooks/hooks";
-export * from "./store";
-export * from "./types";
+export * from "./store/store";
+export * from "./types/types";

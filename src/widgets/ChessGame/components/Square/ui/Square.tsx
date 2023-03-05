@@ -1,5 +1,5 @@
 import { Colors, PieceCodes } from "widgets/ChessGame/types/enums";
-import { Piece } from "../../Piece/ui";
+import { Piece } from "../../Piece/ui/Piece";
 import { ISquareProps } from "../types/interfaces";
 import styles from "./styles.module.css";
 
