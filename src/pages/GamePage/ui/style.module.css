@@ -1,0 +1,21 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.body_wrapper {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.horizontal_split {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
