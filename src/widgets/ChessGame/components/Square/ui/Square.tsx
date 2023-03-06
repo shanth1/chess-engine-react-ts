@@ -1,6 +1,6 @@
 import { Colors, PieceCodes } from "widgets/ChessGame/types/enums";
 import { Piece } from "../../Piece/ui/Piece";
-import { ISquareProps } from "../types/interfaces";
+import { ISquareProps } from "../types/props";
 import styles from "./styles.module.css";
 
 export const Square: React.FC<ISquareProps> = ({ square }: ISquareProps) => {
