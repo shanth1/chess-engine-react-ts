@@ -7,6 +7,7 @@ export const Square: React.FC<ISquareProps> = ({
     color,
     piece,
     selected,
+    available,
     onClick,
 }: ISquareProps) => {
     return (
@@ -21,6 +22,7 @@ export const Square: React.FC<ISquareProps> = ({
                 onClick(index);
             }}
         >
+            {available && <div className={styles.available} />}
             {!!piece && <Piece pieceCode={piece} />}
         </div>
     );

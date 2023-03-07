@@ -5,5 +5,6 @@ export interface ISquareProps {
     color: Colors;
     piece: PieceCodes;
     selected: boolean;
+    available: boolean;
     onClick: (index: number) => void;
 }

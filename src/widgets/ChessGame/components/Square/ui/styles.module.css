@@ -21,3 +21,11 @@
 .selected {
     background-color: red;
 }
+
+.available {
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    border-radius: 90%;
+    background-color: gray;
+}

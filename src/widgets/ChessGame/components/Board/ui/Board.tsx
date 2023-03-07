@@ -1,6 +1,7 @@
 import { useAppSelector } from "app/model";
 import { useState } from "react";
 import { Colors, PieceCodes } from "widgets/ChessGame/types/enums";
+import { colorBitMask } from "../../Piece/lib/bitMasks";
 import { Square } from "../../Square";
 import { FileCoordinates } from "../../Square/types/enums";
 import styles from "./styles.module.css";
@@ -20,6 +21,7 @@ interface ISquare {
     readonly index: number;
     readonly color: Colors;
     readonly name: string;
+    available: boolean;
     piece: PieceCodes;
 }
 
@@ -35,10 +37,25 @@ for (let rank: number = 7; rank >= 0; rank--) {
             color: color,
             name: `${fileCoordinates[file]}${rank + 1}`,
             piece: PieceCodes.NONE,
+            available: false,
         });
         index += 1;
     }
 }
+
+const getAvailable = (selectedSquare: ISquare) => {
+    squares.forEach((square) => {
+        if (
+            (square.piece & colorBitMask) !==
+                (selectedSquare.piece & colorBitMask) &&
+            selectedSquare.piece
+        ) {
+            square.available = true;
+        } else {
+            square.available = false;
+        }
+    });
+};
 
 export const Board: React.FC = () => {
     const piecePlacement: Array<number> = useAppSelector(
@@ -48,6 +65,7 @@ export const Board: React.FC = () => {
     const [selectedSquare, setSelectedSquare] = useState<ISquare | null>(null);
 
     const onClick = (index: number) => {
+        getAvailable(squares[index]);
         setSelectedSquare(squares[index]);
     };
 
@@ -65,6 +83,7 @@ export const Board: React.FC = () => {
                             square.index === selectedSquare?.index &&
                             !!square.piece
                         }
+                        available={square.available}
                         onClick={onClick}
                     />
                 );
