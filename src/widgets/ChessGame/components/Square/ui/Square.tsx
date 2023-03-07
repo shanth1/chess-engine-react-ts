@@ -20,7 +20,7 @@ export const Square: React.FC<ISquareProps> = ({
                 selected ? styles.selected : "",
             ].join(" ")}
             onClick={() => {
-                onClick(index);
+                if (piece) onClick(index);
             }}
         >
             {available && <div className={styles.available} />}
