@@ -17,7 +17,7 @@ const fileCoordinates: Array<FileCoordinates> = [
     FileCoordinates.H,
 ];
 
-interface ISquare {
+export interface ISquare {
     readonly index: number;
     readonly color: Colors;
     readonly name: string;
@@ -43,18 +43,24 @@ for (let rank: number = 7; rank >= 0; rank--) {
     }
 }
 
-const getAvailable = (selectedSquare: ISquare) => {
-    squares.forEach((square) => {
-        if (
-            (square.piece & colorBitMask) !==
-                (selectedSquare.piece & colorBitMask) &&
-            selectedSquare.piece
-        ) {
-            square.available = true;
-        } else {
+const getAvailable = (selectedSquare: ISquare | null) => {
+    if (!selectedSquare) {
+        squares.forEach((square) => {
             square.available = false;
-        }
-    });
+        });
+    } else {
+        squares.forEach((square) => {
+            if (
+                (square.piece & colorBitMask) !==
+                    (selectedSquare.piece & colorBitMask) &&
+                selectedSquare.piece
+            ) {
+                square.available = true;
+            } else {
+                square.available = false;
+            }
+        });
+    }
 };
 
 export const Board: React.FC = () => {
@@ -69,6 +75,12 @@ export const Board: React.FC = () => {
         setSelectedSquare(squares[index]);
     };
 
+    const targetMove = (index: number) => {
+        console.log(selectedSquare?.name, "to", squares[index].name);
+        setSelectedSquare(null);
+        getAvailable(null);
+    };
+
     return (
         <div className={styles.board}>
             {squares.map((square, index) => {
@@ -79,12 +91,10 @@ export const Board: React.FC = () => {
                         index={square.index}
                         color={square.color}
                         piece={square.piece}
-                        selected={
-                            square.index === selectedSquare?.index &&
-                            !!square.piece
-                        }
+                        selectedSquare={selectedSquare}
                         available={square.available}
                         onClick={onClick}
+                        targetMove={targetMove}
                     />
                 );
             })}

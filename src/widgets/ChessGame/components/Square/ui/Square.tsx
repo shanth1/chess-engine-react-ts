@@ -6,10 +6,13 @@ export const Square: React.FC<ISquareProps> = ({
     index,
     color,
     piece,
-    selected,
+    selectedSquare,
     available,
     onClick,
+    targetMove,
 }: ISquareProps) => {
+    const isSelected = index === selectedSquare?.index && !!piece;
+
     return (
         <div
             className={[
@@ -17,10 +20,12 @@ export const Square: React.FC<ISquareProps> = ({
                 styles[color],
                 piece ? styles.clickable : "",
                 available ? styles.clickable : "",
-                selected ? styles.selected : "",
+                isSelected ? styles.selected : "",
             ].join(" ")}
             onClick={() => {
+                if (isSelected) return;
                 if (piece) onClick(index);
+                if (available && selectedSquare) targetMove(index);
             }}
         >
             {available && <div className={styles.available} />}
