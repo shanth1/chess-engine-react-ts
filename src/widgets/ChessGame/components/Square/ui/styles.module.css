@@ -13,3 +13,7 @@
 .black {
     background-color: darkslategray;
 }
+
+.includes_piece {
+    cursor: pointer;
+}
