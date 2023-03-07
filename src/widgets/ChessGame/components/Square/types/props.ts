@@ -1,5 +1,9 @@
-import { Square } from "../model/Square";
+import { Colors, PieceCodes } from "widgets/ChessGame/types/enums";
 
 export interface ISquareProps {
-    square: Square;
+    index: number;
+    color: Colors;
+    piece: PieceCodes;
+    selected: boolean;
+    onClick: (index: number) => void;
 }
