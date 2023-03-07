@@ -14,7 +14,7 @@
     background-color: darkslategray;
 }
 
-.includes_piece {
+.clickable {
     cursor: pointer;
 }
 

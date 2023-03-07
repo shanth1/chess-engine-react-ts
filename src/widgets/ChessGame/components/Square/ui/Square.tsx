@@ -15,7 +15,8 @@ export const Square: React.FC<ISquareProps> = ({
             className={[
                 styles.square,
                 styles[color],
-                piece ? styles.includes_piece : "",
+                piece ? styles.clickable : "",
+                available ? styles.clickable : "",
                 selected ? styles.selected : "",
             ].join(" ")}
             onClick={() => {
