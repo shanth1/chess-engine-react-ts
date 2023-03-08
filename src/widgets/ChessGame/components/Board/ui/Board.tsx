@@ -1,5 +1,6 @@
-import { useAppSelector } from "app/model";
+import { useAppDispatch, useAppSelector } from "app/model";
 import { useState } from "react";
+import { moveFigure } from "widgets/ChessGame/model";
 import { Colors, PieceCodes } from "widgets/ChessGame/types/enums";
 import { colorBitMask } from "../../Piece/lib/bitMasks";
 import { Square } from "../../Square";
@@ -67,6 +68,7 @@ export const Board: React.FC = () => {
     const piecePlacement: Array<number> = useAppSelector(
         (state) => state.game.piecePlacement,
     );
+    const dispatch = useAppDispatch();
 
     const [selectedSquare, setSelectedSquare] = useState<ISquare | null>(null);
 
@@ -77,6 +79,16 @@ export const Board: React.FC = () => {
 
     const targetMove = (index: number) => {
         console.log(selectedSquare?.name, "to", squares[index].name);
+
+        if (selectedSquare) {
+            dispatch(
+                moveFigure({
+                    startIndex: selectedSquare.index,
+                    targetIndex: index,
+                }),
+            );
+        }
+
         setSelectedSquare(null);
         getAvailable(null);
     };
