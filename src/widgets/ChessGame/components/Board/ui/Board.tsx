@@ -37,6 +37,10 @@ export const Board: React.FC = () => {
             );
         }
 
+        unselectSquare();
+    };
+
+    const unselectSquare = () => {
         setSelectedSquare(null);
         getAvailableSquares(squares, null);
     };
@@ -55,6 +59,7 @@ export const Board: React.FC = () => {
                         isAvailable={square.isAvailable}
                         selectStartSquare={selectStartSquare}
                         selectTargetSquare={selectTargetSquare}
+                        unselectSquare={unselectSquare}
                     />
                 );
             })}

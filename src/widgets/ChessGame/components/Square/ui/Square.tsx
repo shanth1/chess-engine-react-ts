@@ -10,6 +10,7 @@ export const Square: React.FC<ISquareProps> = ({
     isAvailable,
     selectStartSquare,
     selectTargetSquare,
+    unselectSquare,
 }) => {
     const isSelected: boolean = index === selectedSquare?.index && !!pieceCode;
 
@@ -23,7 +24,10 @@ export const Square: React.FC<ISquareProps> = ({
                 isSelected ? styles.selected : "",
             ].join(" ")}
             onClick={() => {
-                if (isSelected) return;
+                if (isSelected) {
+                    unselectSquare();
+                    return;
+                }
                 if (pieceCode) selectStartSquare(index);
                 if (isAvailable && selectedSquare) selectTargetSquare(index);
             }}

@@ -9,4 +9,5 @@ export interface ISquareProps {
     isAvailable: boolean;
     selectStartSquare: (selectedSquareIndex: number) => void;
     selectTargetSquare: (selectedSquareIndex: number) => void;
+    unselectSquare: () => void;
 }
