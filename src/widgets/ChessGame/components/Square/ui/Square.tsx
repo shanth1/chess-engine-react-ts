@@ -1,35 +1,35 @@
 import { Piece } from "../../Piece/ui/Piece";
-import { ISquareProps } from "../types/props";
+import { ISquareProps } from "../types/interfaces";
 import styles from "./styles.module.css";
 
 export const Square: React.FC<ISquareProps> = ({
     index,
     color,
-    piece,
+    pieceCode,
     selectedSquare,
-    available,
-    onClick,
-    targetMove,
-}: ISquareProps) => {
-    const isSelected = index === selectedSquare?.index && !!piece;
+    isAvailable,
+    selectStartSquare,
+    selectTargetSquare,
+}) => {
+    const isSelected: boolean = index === selectedSquare?.index && !!pieceCode;
 
     return (
         <div
             className={[
                 styles.square,
                 styles[color],
-                piece ? styles.clickable : "",
-                available ? styles.clickable : "",
+                pieceCode ? styles.clickable : "",
+                isAvailable ? styles.clickable : "",
                 isSelected ? styles.selected : "",
             ].join(" ")}
             onClick={() => {
                 if (isSelected) return;
-                if (piece) onClick(index);
-                if (available && selectedSquare) targetMove(index);
+                if (pieceCode) selectStartSquare(index);
+                if (isAvailable && selectedSquare) selectTargetSquare(index);
             }}
         >
-            {available && <div className={styles.available} />}
-            {!!piece && <Piece pieceCode={piece} />}
+            {isAvailable && <div className={styles.available} />}
+            {!!pieceCode && <Piece pieceCode={pieceCode} />}
         </div>
     );
 };
