@@ -1,3 +1,5 @@
-export interface IPiece {
-    pieceCode: number;
+import { PieceCodes } from "widgets/ChessGame/types/enums";
+
+export interface IPieceProps {
+    pieceCode: PieceCodes;
 }

@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { RootState } from "app";
-import { Colors, CastlingRightsCodes } from "../../types/enums";
+import { Colors, CastlingRightsCodes, PieceCodes } from "../../types/enums";
 import { getCastlingRights } from "./getCastlingRights";
 import { getPiecePlacementArrayFromFen } from "./getPiecePlacement";
 
@@ -34,10 +34,19 @@ const gameSlice = createSlice({
             state.halfMoveClock = Number(halfMoveClockFen);
             state.fullMoveNumber = Number(fullMoveNumberFen);
         },
+        moveFigure: (state, action) => {
+            const piecePlacement = [...current(state.piecePlacement)];
+            const figure = piecePlacement[action.payload.startIndex];
+
+            piecePlacement[action.payload.startIndex] = PieceCodes.NONE;
+            piecePlacement[action.payload.targetIndex] = figure;
+
+            state.piecePlacement = piecePlacement;
+        },
     },
 });
 
-export const { setFenPosition } = gameSlice.actions;
+export const { setFenPosition, moveFigure } = gameSlice.actions;
 
 export const game = (state: RootState) => state.game;
 

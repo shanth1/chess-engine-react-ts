@@ -1,19 +1,10 @@
-import { colorBitMask, pieceBitMask } from "../lib/bitMasks";
 import styles from "./styles.module.css";
-import { IPiece } from "../types/interfaces";
-import { ColorFileNames, PieceFileNames, PieceStyles } from "../types/enums";
-import { IPieceProps } from "../types/props";
-import { ColorCodes } from "widgets/ChessGame/types/enums";
+import { IPieceProps } from "../types/interfaces";
+import { getIconPath } from "../lib/iconPath";
+import { PieceStyles } from "../types/enums";
 
-const iconStyle: PieceStyles = PieceStyles.PIXEL;
-
-export const Piece: React.FC<IPiece> = ({ pieceCode }: IPieceProps) => {
-    const pieceFileName: string = PieceFileNames[pieceCode & pieceBitMask];
-    const colorFileName: string =
-        (pieceCode & colorBitMask) === ColorCodes.WHITE
-            ? ColorFileNames.WHITE
-            : ColorFileNames.BLACK;
-    const iconPath = require(`../assets/${iconStyle}/${colorFileName}${pieceFileName}.png`);
+export const Piece: React.FC<IPieceProps> = ({ pieceCode }) => {
+    const iconPath = getIconPath(pieceCode, PieceStyles.PIXEL);
 
     return <img className={styles.piece} alt="" src={iconPath} />;
 };
