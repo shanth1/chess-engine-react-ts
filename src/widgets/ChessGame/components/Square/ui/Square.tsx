@@ -1,6 +1,7 @@
-import { useAppSelector } from "app";
+import { useAppDispatch, useAppSelector } from "app";
 import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
 import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
+import { changeActiveColor } from "widgets/ChessGame/model";
 import { ColorCodes } from "widgets/ChessGame/types/enums";
 import { Piece } from "../../Piece/ui/Piece";
 import { ISquareProps } from "../types/interfaces";
@@ -19,6 +20,8 @@ export const Square: React.FC<ISquareProps> = ({
     const activeColor: ColorCodes = useAppSelector(
         (state) => state.game.activeColor,
     );
+
+    const dispatch = useAppDispatch();
 
     const isSelected: boolean = index === selectedSquare?.index && !!pieceCode;
 
@@ -41,8 +44,20 @@ export const Square: React.FC<ISquareProps> = ({
                     unselectSquare();
                     return;
                 }
-                if (pieceCode) selectStartSquare(index);
-                if (isAvailable && selectedSquare) selectTargetSquare(index);
+
+                if (pieceCode) {
+                    selectStartSquare(index);
+                }
+                if (isAvailable && selectedSquare) {
+                    selectTargetSquare(index);
+                    dispatch(
+                        changeActiveColor(
+                            activeColor === ColorCodes.WHITE
+                                ? ColorCodes.BLACK
+                                : ColorCodes.WHITE,
+                        ),
+                    );
+                }
             }}
         >
             {isAvailable && <div className={styles.available} />}

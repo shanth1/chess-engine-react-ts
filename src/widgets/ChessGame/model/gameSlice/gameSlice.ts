@@ -43,10 +43,14 @@ const gameSlice = createSlice({
 
             state.piecePlacement = piecePlacement;
         },
+        changeActiveColor: (state, action) => {
+            state.activeColor = action.payload;
+        },
     },
 });
 
-export const { setFenPosition, moveFigure } = gameSlice.actions;
+export const { setFenPosition, moveFigure, changeActiveColor } =
+    gameSlice.actions;
 
 export const game = (state: RootState) => state.game;
 
