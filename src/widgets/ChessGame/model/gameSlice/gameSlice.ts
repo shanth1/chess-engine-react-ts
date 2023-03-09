@@ -43,8 +43,11 @@ const gameSlice = createSlice({
 
             state.piecePlacement = piecePlacement;
         },
-        changeActiveColor: (state, action) => {
-            state.activeColor = action.payload;
+        changeActiveColor: (state) => {
+            state.activeColor =
+                state.activeColor === ColorCodes.WHITE
+                    ? ColorCodes.BLACK
+                    : ColorCodes.WHITE;
         },
     },
 });

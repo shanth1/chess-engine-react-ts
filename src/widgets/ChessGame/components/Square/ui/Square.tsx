@@ -50,13 +50,7 @@ export const Square: React.FC<ISquareProps> = ({
                 }
                 if (isAvailable && selectedSquare) {
                     selectTargetSquare(index);
-                    dispatch(
-                        changeActiveColor(
-                            activeColor === ColorCodes.WHITE
-                                ? ColorCodes.BLACK
-                                : ColorCodes.WHITE,
-                        ),
-                    );
+                    dispatch(changeActiveColor());
                 }
             }}
         >
