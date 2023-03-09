@@ -1,3 +1,7 @@
+import { useAppSelector } from "app";
+import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
+import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
+import { ColorCodes } from "widgets/ChessGame/types/enums";
 import { Piece } from "../../Piece/ui/Piece";
 import { ISquareProps } from "../types/interfaces";
 import styles from "./styles.module.css";
@@ -12,6 +16,10 @@ export const Square: React.FC<ISquareProps> = ({
     selectTargetSquare,
     unselectSquare,
 }) => {
+    const activeColor: ColorCodes = useAppSelector(
+        (state) => state.game.activeColor,
+    );
+
     const isSelected: boolean = index === selectedSquare?.index && !!pieceCode;
 
     return (
@@ -24,6 +32,11 @@ export const Square: React.FC<ISquareProps> = ({
                 isSelected ? styles.selected : "",
             ].join(" ")}
             onClick={() => {
+                if (
+                    !selectedSquare &&
+                    activeColor !== getConjunction(pieceCode, colorBitMask)
+                )
+                    return;
                 if (isSelected) {
                     unselectSquare();
                     return;
