@@ -12,6 +12,7 @@ export const Board: React.FC = () => {
     const piecePlacement: Array<PieceCodes> = useAppSelector(
         (state) => state.game.piecePlacement,
     );
+
     const dispatch = useAppDispatch();
 
     const [selectedSquare, setSelectedSquare] = useState<ISquare | null>(null);
