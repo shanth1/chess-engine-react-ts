@@ -1,3 +1,4 @@
+import { pieceBitMask } from "./../../lib/bitMasks";
 import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
 import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
 import { PieceCodes } from "widgets/ChessGame/types/enums";
@@ -12,8 +13,20 @@ export const getLegalMoves = (
     if (selectedSquareIndex === null) return legalMoves;
     if (!piecePlacement[selectedSquareIndex]) return legalMoves;
 
-    const selectedPieceCode = piecePlacement[selectedSquareIndex];
-    const selectedColorCode = getConjunction(selectedPieceCode, colorBitMask);
+    const selectedPieceCode = getConjunction(
+        piecePlacement[selectedSquareIndex],
+        pieceBitMask,
+    );
+    const selectedColorCode = getConjunction(
+        piecePlacement[selectedSquareIndex],
+        colorBitMask,
+    );
+
+    if (selectedPieceCode === PieceCodes.QUEEN) {
+        console.log("queen");
+    } else {
+        console.log("not queen");
+    }
 
     for (let index = 0; index < piecePlacement.length; index++) {
         const pieceCode = piecePlacement[index];
