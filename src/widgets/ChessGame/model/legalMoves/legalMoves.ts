@@ -26,10 +26,18 @@ export const getLegalMoves = (
         colorBitMask,
     );
 
-    if (selectedPieceCode === PieceCodes.QUEEN) {
+    if (
+        selectedPieceCode === PieceCodes.QUEEN ||
+        selectedPieceCode === PieceCodes.ROOK ||
+        selectedPieceCode === PieceCodes.BISHOP
+    ) {
+        const startDirectionIndex =
+            selectedPieceCode === PieceCodes.BISHOP ? 4 : 0;
+        const endDirectionIndex = selectedPieceCode === PieceCodes.ROOK ? 4 : 8;
+
         for (
-            let directionIndex: number = 0;
-            directionIndex < 8;
+            let directionIndex: number = startDirectionIndex;
+            directionIndex < endDirectionIndex;
             directionIndex++
         ) {
             const numSquareToEdge =
