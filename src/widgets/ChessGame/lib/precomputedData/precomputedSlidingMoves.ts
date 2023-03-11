@@ -1,15 +1,4 @@
-interface INumSquaresToEdge {
-    numNorth: number;
-    numSouth: number;
-    numWest: number;
-    numEast: number;
-    numNorthWest: number;
-    numNorthEast: number;
-    numSouthWest: number;
-    numSouthEast: number;
-}
-
-const precomputedSlidingMoves: Array<INumSquaresToEdge> = [];
+const precomputedSlidingMoves: Array<ReadonlyArray<number>> = [];
 
 for (let rank: number = 7; rank >= 0; rank--) {
     for (let file: number = 0; file <= 7; file++) {
@@ -23,16 +12,16 @@ for (let rank: number = 7; rank >= 0; rank--) {
         const numSouthWest: number = Math.min(numSouth, numWest);
         const numSouthEast: number = Math.min(numSouth, numEast);
 
-        const numSquaresToEdge: INumSquaresToEdge = {
-            numNorth: numNorth,
-            numSouth: numSouth,
-            numWest: numWest,
-            numEast: numEast,
-            numNorthWest: numNorthWest,
-            numNorthEast: numNorthEast,
-            numSouthWest: numSouthWest,
-            numSouthEast: numSouthEast,
-        };
+        const numSquaresToEdge: ReadonlyArray<number> = [
+            numNorth,
+            numSouth,
+            numWest,
+            numEast,
+            numNorthWest,
+            numNorthEast,
+            numSouthWest,
+            numSouthEast,
+        ];
 
         precomputedSlidingMoves.push(numSquaresToEdge);
     }
