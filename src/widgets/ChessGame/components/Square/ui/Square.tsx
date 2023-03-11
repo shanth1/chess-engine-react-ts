@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "app";
 import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
 import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
-import { changeActiveColor } from "widgets/ChessGame/model";
+import { changeActiveColor, moveFigure } from "widgets/ChessGame/model";
 import { ColorCodes } from "widgets/ChessGame/types/enums";
 import { Piece } from "../../Piece/ui/Piece";
 import { ISquareProps } from "../types/interfaces";
@@ -11,50 +11,48 @@ export const Square: React.FC<ISquareProps> = ({
     index,
     color,
     pieceCode,
-    selectedSquare,
-    isAvailable,
-    selectStartSquare,
-    selectTargetSquare,
-    unselectSquare,
+    isLegalToMove,
+    selectedSquareIndex,
+    setSelectedSquareIndex,
 }) => {
+    const dispatch = useAppDispatch();
+
     const activeColor: ColorCodes = useAppSelector(
         (state) => state.game.activeColor,
     );
 
-    const dispatch = useAppDispatch();
+    const isSelected: boolean = index === selectedSquareIndex;
 
-    const isSelected: boolean = index === selectedSquare?.index && !!pieceCode;
+    const onClickHandler = () => {
+        const pieceColor: ColorCodes = getConjunction(pieceCode, colorBitMask);
+
+        const isPlayerTurn: boolean = activeColor === pieceColor;
+
+        if (!isPlayerTurn && !isLegalToMove) return;
+
+        setSelectedSquareIndex(isSelected || isLegalToMove ? null : index);
+        if (isLegalToMove) {
+            dispatch(
+                moveFigure({
+                    startIndex: selectedSquareIndex,
+                    targetIndex: index,
+                }),
+            );
+            dispatch(changeActiveColor());
+        }
+    };
+
+    const squareStyle: string = [
+        styles.square,
+        styles[color],
+        pieceCode ? styles.clickable : "",
+        isLegalToMove ? styles.clickable : "",
+        isSelected ? styles.selected : "",
+    ].join(" ");
 
     return (
-        <div
-            className={[
-                styles.square,
-                styles[color],
-                pieceCode ? styles.clickable : "",
-                isAvailable ? styles.clickable : "",
-                isSelected ? styles.selected : "",
-            ].join(" ")}
-            onClick={() => {
-                if (
-                    !selectedSquare &&
-                    activeColor !== getConjunction(pieceCode, colorBitMask)
-                )
-                    return;
-                if (isSelected) {
-                    unselectSquare();
-                    return;
-                }
-
-                if (pieceCode) {
-                    selectStartSquare(index);
-                }
-                if (isAvailable && selectedSquare) {
-                    selectTargetSquare(index);
-                    dispatch(changeActiveColor());
-                }
-            }}
-        >
-            {isAvailable && <div className={styles.available} />}
+        <div className={squareStyle} onClick={onClickHandler}>
+            {isLegalToMove && <div className={styles.legal} />}
             {!!pieceCode && <Piece pieceCode={pieceCode} />}
         </div>
     );

@@ -14,7 +14,7 @@ for (let rank: number = 7; rank >= 0; rank--) {
             color: color,
             name: `${fileCoordinates[file]}${rank + 1}`,
             pieceCode: PieceCodes.NONE,
-            isAvailable: false,
+            isLegalToMove: false,
         });
         index++;
     }

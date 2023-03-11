@@ -4,7 +4,7 @@ export interface ISquare {
     readonly index: number;
     readonly color: Colors;
     readonly name: string;
-    isAvailable: boolean;
+    isLegalToMove: boolean;
     pieceCode: PieceCodes;
 }
 

@@ -1,50 +1,38 @@
-import { useAppDispatch, useAppSelector } from "app/model";
+import { useAppSelector } from "app/model";
 import { useState } from "react";
-import { moveFigure } from "widgets/ChessGame/model";
+import { getLegalMoves } from "widgets/ChessGame/model";
 import { PieceCodes } from "widgets/ChessGame/types/enums";
-import { ISquare } from "widgets/ChessGame/types/interfaces";
+import { Index } from "widgets/ChessGame/types/types";
 import { Square } from "../../Square";
 import { squares } from "../lib/squares";
-import { getAvailableSquares } from "../model/availableSquares";
 import styles from "./styles.module.css";
+
+const updateLegalMoves = (
+    piecePlacement: Array<PieceCodes>,
+    selectedSquareIndex: Index | null,
+): void => {
+    squares.forEach((square) => {
+        square.isLegalToMove = false;
+    });
+
+    const legalMoves: Array<Index> = getLegalMoves(
+        piecePlacement,
+        selectedSquareIndex,
+    );
+
+    legalMoves.forEach((index) => {
+        squares[index].isLegalToMove = true;
+    });
+};
 
 export const Board: React.FC = () => {
     const piecePlacement: Array<PieceCodes> = useAppSelector(
         (state) => state.game.piecePlacement,
     );
+    const [selectedSquareIndex, setSelectedSquareIndex] =
+        useState<Index | null>(null);
 
-    const dispatch = useAppDispatch();
-
-    const [selectedSquare, setSelectedSquare] = useState<ISquare | null>(null);
-
-    const selectStartSquare = (selectedSquareIndex: number) => {
-        getAvailableSquares(squares, squares[selectedSquareIndex]);
-        setSelectedSquare(squares[selectedSquareIndex]);
-    };
-
-    const selectTargetSquare = (selectedSquareIndex: number) => {
-        console.log(
-            selectedSquare?.name,
-            "to",
-            squares[selectedSquareIndex].name,
-        );
-
-        if (selectedSquare) {
-            dispatch(
-                moveFigure({
-                    startIndex: selectedSquare.index,
-                    targetIndex: selectedSquareIndex,
-                }),
-            );
-        }
-
-        unselectSquare();
-    };
-
-    const unselectSquare = () => {
-        setSelectedSquare(null);
-        getAvailableSquares(squares, null);
-    };
+    updateLegalMoves(piecePlacement, selectedSquareIndex);
 
     return (
         <div className={styles.board}>
@@ -56,11 +44,9 @@ export const Board: React.FC = () => {
                         index={square.index}
                         color={square.color}
                         pieceCode={square.pieceCode}
-                        selectedSquare={selectedSquare}
-                        isAvailable={square.isAvailable}
-                        selectStartSquare={selectStartSquare}
-                        selectTargetSquare={selectTargetSquare}
-                        unselectSquare={unselectSquare}
+                        isLegalToMove={square.isLegalToMove}
+                        selectedSquareIndex={selectedSquareIndex}
+                        setSelectedSquareIndex={setSelectedSquareIndex}
                     />
                 );
             })}
