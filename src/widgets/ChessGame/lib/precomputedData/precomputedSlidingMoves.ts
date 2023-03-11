@@ -1,3 +1,4 @@
+const directionOffsets: ReadonlyArray<number> = [-8, 8, -1, 1, -9, -7, 7, 9];
 const precomputedSlidingMoves: Array<ReadonlyArray<number>> = [];
 
 for (let rank: number = 7; rank >= 0; rank--) {
@@ -27,4 +28,4 @@ for (let rank: number = 7; rank >= 0; rank--) {
     }
 }
 
-export { precomputedSlidingMoves };
+export { precomputedSlidingMoves, directionOffsets };
