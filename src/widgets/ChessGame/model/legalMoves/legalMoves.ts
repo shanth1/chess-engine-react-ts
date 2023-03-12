@@ -1,7 +1,4 @@
-import {
-    directionOffsets,
-    precomputedSlidingMoves,
-} from "widgets/ChessGame/lib/precomputedData/precomputedSlidingMoves";
+import { getSlidingMoves } from "./slidingMoves";
 import { pieceBitMask } from "./../../lib/bitMasks";
 import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
 import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
@@ -17,59 +14,34 @@ export const getLegalMoves = (
     if (selectedSquareIndex === null) return legalMoves;
     if (!piecePlacement[selectedSquareIndex]) return legalMoves;
 
-    const selectedPieceCode = getConjunction(
+    const selectedPiece = getConjunction(
         piecePlacement[selectedSquareIndex],
         pieceBitMask,
     );
-    const activeColorCode = getConjunction(
+    const activeColor = getConjunction(
         piecePlacement[selectedSquareIndex],
         colorBitMask,
     );
 
     if (
-        selectedPieceCode === PieceCodes.QUEEN ||
-        selectedPieceCode === PieceCodes.ROOK ||
-        selectedPieceCode === PieceCodes.BISHOP
+        selectedPiece === PieceCodes.QUEEN ||
+        selectedPiece === PieceCodes.ROOK ||
+        selectedPiece === PieceCodes.BISHOP
     ) {
-        const startDirectionIndex =
-            selectedPieceCode === PieceCodes.BISHOP ? 4 : 0;
-        const endDirectionIndex = selectedPieceCode === PieceCodes.ROOK ? 4 : 8;
-
-        for (
-            let directionIndex: number = startDirectionIndex;
-            directionIndex < endDirectionIndex;
-            directionIndex++
-        ) {
-            const numSquareToEdge =
-                precomputedSlidingMoves[selectedSquareIndex][directionIndex];
-
-            for (
-                let squareCounter: number = 0;
-                squareCounter < numSquareToEdge;
-                squareCounter++
-            ) {
-                let targetIndex: number =
-                    selectedSquareIndex +
-                    directionOffsets[directionIndex] * (squareCounter + 1);
-
-                if (piecePlacement[targetIndex]) {
-                    const pieceColorCode = getConjunction(
-                        piecePlacement[targetIndex],
-                        colorBitMask,
-                    );
-                    if (pieceColorCode === activeColorCode) break;
-                    legalMoves.push(targetIndex);
-                    break;
-                }
-                legalMoves.push(targetIndex);
-            }
-        }
+        legalMoves.push(
+            ...getSlidingMoves(
+                piecePlacement,
+                selectedSquareIndex,
+                selectedPiece,
+                activeColor,
+            ),
+        );
     } else {
         for (let index = 0; index < piecePlacement.length; index++) {
             const pieceCode = piecePlacement[index];
             if (pieceCode) {
                 const colorCode = getConjunction(pieceCode, colorBitMask);
-                if (activeColorCode === colorCode) continue;
+                if (activeColor === colorCode) continue;
                 legalMoves.push(index);
             } else {
                 legalMoves.push(index);
