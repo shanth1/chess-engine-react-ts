@@ -1,3 +1,5 @@
+import { getSlidingMoves } from "./slidingMoves";
+import { pieceBitMask } from "./../../lib/bitMasks";
 import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
 import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
 import { PieceCodes } from "widgets/ChessGame/types/enums";
@@ -12,17 +14,38 @@ export const getLegalMoves = (
     if (selectedSquareIndex === null) return legalMoves;
     if (!piecePlacement[selectedSquareIndex]) return legalMoves;
 
-    const selectedPieceCode = piecePlacement[selectedSquareIndex];
-    const selectedColorCode = getConjunction(selectedPieceCode, colorBitMask);
+    const selectedPiece = getConjunction(
+        piecePlacement[selectedSquareIndex],
+        pieceBitMask,
+    );
+    const activeColor = getConjunction(
+        piecePlacement[selectedSquareIndex],
+        colorBitMask,
+    );
 
-    for (let index = 0; index < piecePlacement.length; index++) {
-        const pieceCode = piecePlacement[index];
-        if (pieceCode) {
-            const colorCode = getConjunction(pieceCode, colorBitMask);
-            if (selectedColorCode === colorCode) continue;
-            legalMoves.push(index);
-        } else {
-            legalMoves.push(index);
+    if (
+        selectedPiece === PieceCodes.QUEEN ||
+        selectedPiece === PieceCodes.ROOK ||
+        selectedPiece === PieceCodes.BISHOP
+    ) {
+        legalMoves.push(
+            ...getSlidingMoves(
+                piecePlacement,
+                selectedSquareIndex,
+                selectedPiece,
+                activeColor,
+            ),
+        );
+    } else {
+        for (let index = 0; index < piecePlacement.length; index++) {
+            const pieceCode = piecePlacement[index];
+            if (pieceCode) {
+                const colorCode = getConjunction(pieceCode, colorBitMask);
+                if (activeColor === colorCode) continue;
+                legalMoves.push(index);
+            } else {
+                legalMoves.push(index);
+            }
         }
     }
 
