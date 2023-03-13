@@ -1,4 +1,4 @@
-import { precomputedKnightMoves } from "widgets/ChessGame/lib/precomputedData/knightMoves";
+import { getKnightMoves } from "./knightMoves";
 import { getSlidingMoves } from "./slidingMoves";
 import { pieceBitMask } from "./../../lib/bitMasks";
 import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
@@ -38,19 +38,9 @@ export const getLegalMoves = (
             ),
         );
     } else if (selectedPiece === PieceCodes.KNIGHT) {
-        const directionNumber = 8;
-        for (let direction = 0; direction < directionNumber; direction++) {
-            const offset =
-                precomputedKnightMoves[selectedSquareIndex][direction];
-            if (offset === 0) continue;
-            const targetSquareIndex = selectedSquareIndex + offset;
-            if (piecePlacement[targetSquareIndex]) {
-                const piece = piecePlacement[targetSquareIndex];
-                const pieceColor = piece & colorBitMask;
-                if (pieceColor === activeColor) continue;
-                legalMoves.push(targetSquareIndex);
-            } else legalMoves.push(targetSquareIndex);
-        }
+        legalMoves.push(
+            ...getKnightMoves(piecePlacement, selectedSquareIndex, activeColor),
+        );
     } else {
         for (let index = 0; index < piecePlacement.length; index++) {
             const pieceCode = piecePlacement[index];
