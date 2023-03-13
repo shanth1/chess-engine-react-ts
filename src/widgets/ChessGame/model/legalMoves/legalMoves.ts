@@ -25,38 +25,51 @@ export const getLegalMoves = (
         colorBitMask,
     );
 
-    if (
-        selectedPiece === PieceCodes.QUEEN ||
-        selectedPiece === PieceCodes.ROOK ||
-        selectedPiece === PieceCodes.BISHOP
-    ) {
-        legalMoves.push(
-            ...getSlidingMoves(
-                piecePlacement,
-                selectedSquareIndex,
-                selectedPiece,
-                activeColor,
-            ),
-        );
-    } else if (selectedPiece === PieceCodes.KNIGHT) {
-        legalMoves.push(
-            ...getKnightMoves(piecePlacement, selectedSquareIndex, activeColor),
-        );
-    } else if (selectedPiece === PieceCodes.KING) {
-        legalMoves.push(
-            ...getKingMoves(piecePlacement, selectedSquareIndex, activeColor),
-        );
-    } else {
-        for (let index = 0; index < piecePlacement.length; index++) {
-            const pieceCode = piecePlacement[index];
-            if (pieceCode) {
-                const colorCode = getConjunction(pieceCode, colorBitMask);
-                if (activeColor === colorCode) continue;
-                legalMoves.push(index);
-            } else {
-                legalMoves.push(index);
+    switch (selectedPiece) {
+        case PieceCodes.QUEEN:
+        case PieceCodes.ROOK:
+        case PieceCodes.BISHOP:
+            legalMoves.push(
+                ...getSlidingMoves(
+                    piecePlacement,
+                    selectedSquareIndex,
+                    selectedPiece,
+                    activeColor,
+                ),
+            );
+            break;
+        case PieceCodes.KNIGHT:
+            legalMoves.push(
+                ...getKnightMoves(
+                    piecePlacement,
+                    selectedSquareIndex,
+                    activeColor,
+                ),
+            );
+            break;
+        case PieceCodes.KING:
+            legalMoves.push(
+                ...getKingMoves(
+                    piecePlacement,
+                    selectedSquareIndex,
+                    activeColor,
+                ),
+            );
+            break;
+
+        default:
+            for (let index = 0; index < piecePlacement.length; index++) {
+                const pieceCode = piecePlacement[index];
+                if (pieceCode) {
+                    const colorCode = getConjunction(pieceCode, colorBitMask);
+                    if (activeColor === colorCode) continue;
+                    legalMoves.push(index);
+                } else {
+                    legalMoves.push(index);
+                }
             }
-        }
+
+            break;
     }
 
     return legalMoves;
