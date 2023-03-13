@@ -5,7 +5,7 @@ import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
 import {
     directionOffsets,
     precomputedSlidingMoves,
-} from "widgets/ChessGame/lib/precomputedData/precomputedSlidingMoves";
+} from "widgets/ChessGame/lib/precomputedData/slidingMoves";
 import { PieceCodes } from "widgets/ChessGame/types/enums";
 
 export const getSlidingMoves = (
