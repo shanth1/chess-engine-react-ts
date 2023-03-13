@@ -1,3 +1,4 @@
+import { getKnightMoves } from "./knightMoves";
 import { getSlidingMoves } from "./slidingMoves";
 import { pieceBitMask } from "./../../lib/bitMasks";
 import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
@@ -35,6 +36,10 @@ export const getLegalMoves = (
                 selectedPiece,
                 activeColor,
             ),
+        );
+    } else if (selectedPiece === PieceCodes.KNIGHT) {
+        legalMoves.push(
+            ...getKnightMoves(piecePlacement, selectedSquareIndex, activeColor),
         );
     } else {
         for (let index = 0; index < piecePlacement.length; index++) {
