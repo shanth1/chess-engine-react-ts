@@ -5,6 +5,7 @@ import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
 import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
 import { PieceCodes } from "widgets/ChessGame/types/enums";
 import { Index } from "widgets/ChessGame/types/types";
+import { getKingMoves } from "./kingMoves";
 
 export const getLegalMoves = (
     piecePlacement: Array<PieceCodes>,
@@ -40,6 +41,10 @@ export const getLegalMoves = (
     } else if (selectedPiece === PieceCodes.KNIGHT) {
         legalMoves.push(
             ...getKnightMoves(piecePlacement, selectedSquareIndex, activeColor),
+        );
+    } else if (selectedPiece === PieceCodes.KING) {
+        legalMoves.push(
+            ...getKingMoves(piecePlacement, selectedSquareIndex, activeColor),
         );
     } else {
         for (let index = 0; index < piecePlacement.length; index++) {
