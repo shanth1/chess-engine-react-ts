@@ -67,20 +67,6 @@ export const getLegalMoves = (
                 ),
             );
             break;
-
-        default:
-            for (let index = 0; index < piecePlacement.length; index++) {
-                const pieceCode = piecePlacement[index];
-                if (pieceCode) {
-                    const colorCode = getConjunction(pieceCode, colorBitMask);
-                    if (activeColor === colorCode) continue;
-                    legalMoves.push(index);
-                } else {
-                    legalMoves.push(index);
-                }
-            }
-
-            break;
     }
 
     return legalMoves;
