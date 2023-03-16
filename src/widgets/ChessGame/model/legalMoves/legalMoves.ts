@@ -10,7 +10,7 @@ export const getLegalMoves = (
     piecePlacement: Array<PieceCodes>,
     selectedSquareIndex: Index | null,
 ): Array<Index> => {
-    const legalMoves: Array<Index> = [];
+    let legalMoves: Array<Index> = [];
 
     if (selectedSquareIndex === null) return legalMoves;
     if (!piecePlacement[selectedSquareIndex]) return legalMoves;
@@ -21,25 +21,17 @@ export const getLegalMoves = (
         case PieceCodes.QUEEN:
         case PieceCodes.ROOK:
         case PieceCodes.BISHOP:
-            legalMoves.push(
-                ...getSlidingMoves(piecePlacement, selectedSquareIndex),
-            );
+            legalMoves = getSlidingMoves(piecePlacement, selectedSquareIndex);
             break;
         case PieceCodes.KNIGHT:
-            legalMoves.push(
-                ...getKnightMoves(piecePlacement, selectedSquareIndex),
-            );
+            legalMoves = getKnightMoves(piecePlacement, selectedSquareIndex);
             break;
         case PieceCodes.KING:
-            legalMoves.push(
-                ...getKingMoves(piecePlacement, selectedSquareIndex),
-            );
+            legalMoves = getKingMoves(piecePlacement, selectedSquareIndex);
             break;
 
         case PieceCodes.PAWN:
-            legalMoves.push(
-                ...getPawnMoves(piecePlacement, selectedSquareIndex),
-            );
+            legalMoves = getPawnMoves(piecePlacement, selectedSquareIndex);
             break;
     }
 
