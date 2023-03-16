@@ -11,165 +11,63 @@ export const getPawnMoves = (
     selectedSquareIndex: number,
     activeColor: ColorCodes,
 ): Array<number> => {
+    const pawnAttack = (
+        offsetAttack: OffsetsPawnBlack | OffsetsPawnWhite,
+    ): void => {
+        if (!piecePlacement[selectedSquareIndex + offsetAttack]) return;
+        const pieceColor =
+            piecePlacement[selectedSquareIndex + offsetAttack] & colorBitMask;
+        if (pieceColor === activeColor) return;
+        legalMoves.push(selectedSquareIndex + offsetAttack);
+    };
+
     const legalMoves: Array<number> = [];
 
     const file: number = Math.floor(selectedSquareIndex / 8);
     const rank: number = selectedSquareIndex % 8;
 
-    if (activeColor === ColorCodes.BLACK) {
-        if (file === 7) return legalMoves;
+    const isBlack: boolean = activeColor === ColorCodes.BLACK ? true : false;
 
-        // ? double move
+    const fileStart: number = isBlack ? 1 : 6;
+    const fileFinish: number = isBlack ? 7 : 0;
+
+    const rankRightSide: number = isBlack ? 0 : 7;
+    const rankLeftSide: number = isBlack ? 7 : 0;
+
+    const offsetForward: OffsetsPawnBlack.Forward | OffsetsPawnWhite.Forward =
+        isBlack ? OffsetsPawnBlack.Forward : OffsetsPawnWhite.Forward;
+
+    const offsetLeftAttack:
+        | OffsetsPawnBlack.LeftAttack
+        | OffsetsPawnWhite.LeftAttack = isBlack
+        ? OffsetsPawnBlack.LeftAttack
+        : OffsetsPawnWhite.LeftAttack;
+
+    const offsetRightAttack:
+        | OffsetsPawnBlack.RightAttack
+        | OffsetsPawnWhite.RightAttack = isBlack
+        ? OffsetsPawnBlack.RightAttack
+        : OffsetsPawnWhite.RightAttack;
+
+    if (file === fileFinish) return legalMoves;
+
+    if (!piecePlacement[selectedSquareIndex + offsetForward]) {
+        legalMoves.push(selectedSquareIndex + offsetForward);
         if (
-            file === 1 &&
-            !piecePlacement[selectedSquareIndex + OffsetsPawnBlack.Forward]
-        )
-            legalMoves.push(selectedSquareIndex + 2 * OffsetsPawnBlack.Forward);
+            file === fileStart &&
+            !piecePlacement[selectedSquareIndex + 2 * offsetForward]
+        ) {
+            legalMoves.push(selectedSquareIndex + 2 * offsetForward);
+        }
+    }
 
-        // ? standard move
-        if (!piecePlacement[selectedSquareIndex + OffsetsPawnBlack.Forward])
-            legalMoves.push(selectedSquareIndex + OffsetsPawnBlack.Forward);
-
-        // ?
-        if (rank > 0 && rank < 7) {
-            if (
-                piecePlacement[
-                    selectedSquareIndex + OffsetsPawnBlack.LeftAttack
-                ]
-            ) {
-                const pieceColor =
-                    piecePlacement[
-                        selectedSquareIndex + OffsetsPawnBlack.LeftAttack
-                    ] & colorBitMask;
-                if (pieceColor === activeColor) return legalMoves;
-                legalMoves.push(
-                    selectedSquareIndex + OffsetsPawnBlack.LeftAttack,
-                );
-            }
-            if (
-                piecePlacement[
-                    selectedSquareIndex + OffsetsPawnBlack.RightAttack
-                ]
-            ) {
-                const pieceColor =
-                    piecePlacement[
-                        selectedSquareIndex + OffsetsPawnBlack.RightAttack
-                    ] & colorBitMask;
-                if (pieceColor === activeColor) return legalMoves;
-                legalMoves.push(
-                    selectedSquareIndex + OffsetsPawnBlack.RightAttack,
-                );
-            }
-        }
-        if (rank === 0) {
-            if (
-                piecePlacement[
-                    selectedSquareIndex + OffsetsPawnBlack.LeftAttack
-                ]
-            ) {
-                const pieceColor =
-                    piecePlacement[
-                        selectedSquareIndex + OffsetsPawnBlack.LeftAttack
-                    ] & colorBitMask;
-                if (pieceColor === activeColor) return legalMoves;
-                legalMoves.push(
-                    selectedSquareIndex + OffsetsPawnBlack.LeftAttack,
-                );
-            }
-        }
-        if (rank === 7) {
-            if (
-                piecePlacement[
-                    selectedSquareIndex + OffsetsPawnBlack.RightAttack
-                ]
-            ) {
-                const pieceColor =
-                    piecePlacement[
-                        selectedSquareIndex + OffsetsPawnBlack.RightAttack
-                    ] & colorBitMask;
-                if (pieceColor === activeColor) return legalMoves;
-                legalMoves.push(
-                    selectedSquareIndex + OffsetsPawnBlack.RightAttack,
-                );
-            }
-        }
-    } else if (activeColor === ColorCodes.WHITE) {
-        if (file === 0) return legalMoves;
-
-        // ? double move
-        if (
-            file === 6 &&
-            !piecePlacement[selectedSquareIndex + OffsetsPawnWhite.Forward]
-        )
-            legalMoves.push(selectedSquareIndex + 2 * OffsetsPawnWhite.Forward);
-
-        // ? standard move
-        if (!piecePlacement[selectedSquareIndex + OffsetsPawnWhite.Forward])
-            legalMoves.push(selectedSquareIndex + OffsetsPawnWhite.Forward);
-
-        // ?
-        if (rank > 0 && rank < 7) {
-            if (
-                piecePlacement[
-                    selectedSquareIndex + OffsetsPawnWhite.LeftAttack
-                ]
-            ) {
-                const pieceColor =
-                    piecePlacement[
-                        selectedSquareIndex + OffsetsPawnWhite.LeftAttack
-                    ] & colorBitMask;
-                if (pieceColor === activeColor) return legalMoves;
-                legalMoves.push(
-                    selectedSquareIndex + OffsetsPawnWhite.LeftAttack,
-                );
-            }
-            if (
-                piecePlacement[
-                    selectedSquareIndex + OffsetsPawnWhite.RightAttack
-                ]
-            ) {
-                const pieceColor =
-                    piecePlacement[
-                        selectedSquareIndex + OffsetsPawnWhite.RightAttack
-                    ] & colorBitMask;
-                if (pieceColor === activeColor) return legalMoves;
-                legalMoves.push(
-                    selectedSquareIndex + OffsetsPawnWhite.RightAttack,
-                );
-            }
-        }
-        if (rank === 0) {
-            if (
-                piecePlacement[
-                    selectedSquareIndex + OffsetsPawnWhite.RightAttack
-                ]
-            ) {
-                const pieceColor =
-                    piecePlacement[
-                        selectedSquareIndex + OffsetsPawnWhite.RightAttack
-                    ] & colorBitMask;
-                if (pieceColor === activeColor) return legalMoves;
-                legalMoves.push(
-                    selectedSquareIndex + OffsetsPawnWhite.RightAttack,
-                );
-            }
-        }
-        if (rank === 7) {
-            if (
-                piecePlacement[
-                    selectedSquareIndex + OffsetsPawnWhite.LeftAttack
-                ]
-            ) {
-                const pieceColor =
-                    piecePlacement[
-                        selectedSquareIndex + OffsetsPawnWhite.LeftAttack
-                    ] & colorBitMask;
-                if (pieceColor === activeColor) return legalMoves;
-                legalMoves.push(
-                    selectedSquareIndex + OffsetsPawnWhite.LeftAttack,
-                );
-            }
-        }
+    if (rank === rankLeftSide) {
+        pawnAttack(offsetRightAttack);
+    } else if (rank === rankRightSide) {
+        pawnAttack(offsetLeftAttack);
+    } else {
+        pawnAttack(offsetRightAttack);
+        pawnAttack(offsetLeftAttack);
     }
 
     return legalMoves;
