@@ -6,6 +6,7 @@ import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
 import { PieceCodes } from "widgets/ChessGame/types/enums";
 import { Index } from "widgets/ChessGame/types/types";
 import { getKingMoves } from "./kingMoves";
+import { getPawnMoves } from "./pawnMoves";
 
 export const getLegalMoves = (
     piecePlacement: Array<PieceCodes>,
@@ -57,18 +58,14 @@ export const getLegalMoves = (
             );
             break;
 
-        default:
-            for (let index = 0; index < piecePlacement.length; index++) {
-                const pieceCode = piecePlacement[index];
-                if (pieceCode) {
-                    const colorCode = getConjunction(pieceCode, colorBitMask);
-                    if (activeColor === colorCode) continue;
-                    legalMoves.push(index);
-                } else {
-                    legalMoves.push(index);
-                }
-            }
-
+        case PieceCodes.PAWN:
+            legalMoves.push(
+                ...getPawnMoves(
+                    piecePlacement,
+                    selectedSquareIndex,
+                    activeColor,
+                ),
+            );
             break;
     }
 
