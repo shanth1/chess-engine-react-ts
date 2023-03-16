@@ -25,3 +25,15 @@ export enum CastlingRightsCodes {
     BlackKingNearRookSide = 0b0010,
     BlackKingQueenSide = 0b0001,
 }
+
+export enum OffsetsPawnBlack {
+    LeftAttack = 9,
+    Forward = 8,
+    RightAttack = 7,
+}
+
+export enum OffsetsPawnWhite {
+    LeftAttack = -9,
+    Forward = -8,
+    RightAttack = -7,
+}
