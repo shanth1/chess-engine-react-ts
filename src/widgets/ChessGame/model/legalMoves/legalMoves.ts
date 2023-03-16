@@ -1,8 +1,6 @@
+import { getPieceType } from "./../../lib/gettingPieceInfo/PieceType";
 import { getKnightMoves } from "./knightMoves";
 import { getSlidingMoves } from "./slidingMoves";
-import { pieceBitMask } from "./../../lib/bitMasks";
-import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
-import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
 import { PieceCodes } from "widgets/ChessGame/types/enums";
 import { Index } from "widgets/ChessGame/types/types";
 import { getKingMoves } from "./kingMoves";
@@ -17,54 +15,30 @@ export const getLegalMoves = (
     if (selectedSquareIndex === null) return legalMoves;
     if (!piecePlacement[selectedSquareIndex]) return legalMoves;
 
-    const selectedPiece = getConjunction(
-        piecePlacement[selectedSquareIndex],
-        pieceBitMask,
-    );
-    const activeColor = getConjunction(
-        piecePlacement[selectedSquareIndex],
-        colorBitMask,
-    );
+    const selectedPieceType = getPieceType(piecePlacement[selectedSquareIndex]);
 
-    switch (selectedPiece) {
+    switch (selectedPieceType) {
         case PieceCodes.QUEEN:
         case PieceCodes.ROOK:
         case PieceCodes.BISHOP:
             legalMoves.push(
-                ...getSlidingMoves(
-                    piecePlacement,
-                    selectedSquareIndex,
-                    selectedPiece,
-                    activeColor,
-                ),
+                ...getSlidingMoves(piecePlacement, selectedSquareIndex),
             );
             break;
         case PieceCodes.KNIGHT:
             legalMoves.push(
-                ...getKnightMoves(
-                    piecePlacement,
-                    selectedSquareIndex,
-                    activeColor,
-                ),
+                ...getKnightMoves(piecePlacement, selectedSquareIndex),
             );
             break;
         case PieceCodes.KING:
             legalMoves.push(
-                ...getKingMoves(
-                    piecePlacement,
-                    selectedSquareIndex,
-                    activeColor,
-                ),
+                ...getKingMoves(piecePlacement, selectedSquareIndex),
             );
             break;
 
         case PieceCodes.PAWN:
             legalMoves.push(
-                ...getPawnMoves(
-                    piecePlacement,
-                    selectedSquareIndex,
-                    activeColor,
-                ),
+                ...getPawnMoves(piecePlacement, selectedSquareIndex),
             );
             break;
     }

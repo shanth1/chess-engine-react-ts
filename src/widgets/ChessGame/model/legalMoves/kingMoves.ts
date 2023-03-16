@@ -1,14 +1,15 @@
 import { precomputedKingMoves } from "widgets/ChessGame/lib/precomputedData/kingMoves";
 import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
-import { ColorCodes, PieceCodes } from "widgets/ChessGame/types/enums";
+import { PieceCodes } from "widgets/ChessGame/types/enums";
+import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 
 export const getKingMoves = (
     piecePlacement: Array<PieceCodes>,
     selectedSquareIndex: number,
-    activeColor: ColorCodes,
 ) => {
     const legalMoves: Array<number> = [];
 
+    const activeColor = getPieceColor(piecePlacement[selectedSquareIndex]);
     const directionNumber = 8;
     for (let direction = 0; direction < directionNumber; direction++) {
         const offset = precomputedKingMoves[selectedSquareIndex][direction];

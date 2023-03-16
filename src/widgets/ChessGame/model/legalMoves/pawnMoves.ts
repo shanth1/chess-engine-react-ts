@@ -1,3 +1,4 @@
+import { getPieceColor } from "./../../lib/gettingPieceInfo/PieceColor";
 import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
 import {
     ColorCodes,
@@ -9,7 +10,6 @@ import {
 export const getPawnMoves = (
     piecePlacement: Array<PieceCodes>,
     selectedSquareIndex: number,
-    activeColor: ColorCodes,
 ): Array<number> => {
     const pawnAttack = (
         offsetAttack: OffsetsPawnBlack | OffsetsPawnWhite,
@@ -21,6 +21,7 @@ export const getPawnMoves = (
         legalMoves.push(selectedSquareIndex + offsetAttack);
     };
 
+    const activeColor = getPieceColor(piecePlacement[selectedSquareIndex]);
     const legalMoves: Array<number> = [];
 
     const file: number = Math.floor(selectedSquareIndex / 8);
