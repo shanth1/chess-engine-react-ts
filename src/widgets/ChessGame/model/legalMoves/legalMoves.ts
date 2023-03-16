@@ -1,29 +1,38 @@
-import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
-import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
+import { getPieceType } from "./../../lib/gettingPieceInfo/PieceType";
+import { getKnightMoves } from "./knightMoves";
+import { getSlidingMoves } from "./slidingMoves";
 import { PieceCodes } from "widgets/ChessGame/types/enums";
 import { Index } from "widgets/ChessGame/types/types";
+import { getKingMoves } from "./kingMoves";
+import { getPawnMoves } from "./pawnMoves";
 
 export const getLegalMoves = (
     piecePlacement: Array<PieceCodes>,
     selectedSquareIndex: Index | null,
 ): Array<Index> => {
-    const legalMoves: Array<Index> = [];
+    let legalMoves: Array<Index> = [];
 
     if (selectedSquareIndex === null) return legalMoves;
     if (!piecePlacement[selectedSquareIndex]) return legalMoves;
 
-    const selectedPieceCode = piecePlacement[selectedSquareIndex];
-    const selectedColorCode = getConjunction(selectedPieceCode, colorBitMask);
+    const selectedPieceType = getPieceType(piecePlacement[selectedSquareIndex]);
 
-    for (let index = 0; index < piecePlacement.length; index++) {
-        const pieceCode = piecePlacement[index];
-        if (pieceCode) {
-            const colorCode = getConjunction(pieceCode, colorBitMask);
-            if (selectedColorCode === colorCode) continue;
-            legalMoves.push(index);
-        } else {
-            legalMoves.push(index);
-        }
+    switch (selectedPieceType) {
+        case PieceCodes.QUEEN:
+        case PieceCodes.ROOK:
+        case PieceCodes.BISHOP:
+            legalMoves = getSlidingMoves(piecePlacement, selectedSquareIndex);
+            break;
+        case PieceCodes.KNIGHT:
+            legalMoves = getKnightMoves(piecePlacement, selectedSquareIndex);
+            break;
+        case PieceCodes.KING:
+            legalMoves = getKingMoves(piecePlacement, selectedSquareIndex);
+            break;
+
+        case PieceCodes.PAWN:
+            legalMoves = getPawnMoves(piecePlacement, selectedSquareIndex);
+            break;
     }
 
     return legalMoves;
