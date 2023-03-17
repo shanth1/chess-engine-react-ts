@@ -4,4 +4,6 @@
     align-items: center;
     height: 200px;
     background-color: antiquewhite;
+
+    gap: 20px;
 }
