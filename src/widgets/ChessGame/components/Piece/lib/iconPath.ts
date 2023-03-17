@@ -1,13 +1,12 @@
-import { colorBitMask, pieceBitMask } from "widgets/ChessGame/lib/bitMasks";
-import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
-import { ColorCodes, PieceCodes } from "widgets/ChessGame/types/enums";
+import { PieceColors } from "widgets/ChessGame/types/enums";
+import { getPieceColor } from "./../../../lib/gettingPieceInfo/PieceColor";
+import { getPieceType } from "./../../../lib/gettingPieceInfo/PieceType";
 import { ColorFileNames, PieceFileNames, PieceStyles } from "../types/enums";
 
-export const getIconPath = (pieceCode: PieceCodes, iconStyle: PieceStyles) => {
-    const pieceFileName: string =
-        PieceFileNames[getConjunction(pieceCode, pieceBitMask)];
+export const getIconPath = (pieceCode: number, iconStyle: PieceStyles) => {
+    const pieceFileName: string = PieceFileNames[getPieceType(pieceCode)];
     const colorFileName: string =
-        getConjunction(pieceCode, colorBitMask) === ColorCodes.WHITE
+        getPieceColor(pieceCode) === PieceColors.WHITE
             ? ColorFileNames.WHITE
             : ColorFileNames.BLACK;
 

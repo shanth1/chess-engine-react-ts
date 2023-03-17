@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from "app";
-import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
-import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
+import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import { changeActiveColor, moveFigure } from "widgets/ChessGame/model";
-import { ColorCodes } from "widgets/ChessGame/types/enums";
+import { PieceColors } from "widgets/ChessGame/types/enums";
 import { Piece } from "../../Piece/ui/Piece";
 import { ISquareProps } from "../types/interfaces";
 import styles from "./styles.module.css";
@@ -17,14 +16,14 @@ export const Square: React.FC<ISquareProps> = ({
 }) => {
     const dispatch = useAppDispatch();
 
-    const activeColor: ColorCodes = useAppSelector(
+    const activeColor: PieceColors = useAppSelector(
         (state) => state.game.activeColor,
     );
 
     const isSelected: boolean = index === selectedSquareIndex;
 
     const onClickHandler = () => {
-        const pieceColor: ColorCodes = getConjunction(pieceCode, colorBitMask);
+        const pieceColor: PieceColors = getPieceColor(pieceCode);
 
         const isPlayerTurn: boolean = activeColor === pieceColor;
 

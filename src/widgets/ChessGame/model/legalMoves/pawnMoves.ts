@@ -1,22 +1,21 @@
-import { getPieceColor } from "./../../lib/gettingPieceInfo/PieceColor";
-import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
+import { PieceColors } from "./../../types/enums";
+import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import {
-    ColorCodes,
     OffsetsPawnBlack,
     OffsetsPawnWhite,
-    PieceCodes,
 } from "widgets/ChessGame/types/enums";
 
 export const getPawnMoves = (
-    piecePlacement: Array<PieceCodes>,
+    piecePlacement: Array<number>,
     selectedSquareIndex: number,
 ): Array<number> => {
     const pawnAttack = (
         offsetAttack: OffsetsPawnBlack | OffsetsPawnWhite,
     ): void => {
         if (!piecePlacement[selectedSquareIndex + offsetAttack]) return;
-        const pieceColor =
-            piecePlacement[selectedSquareIndex + offsetAttack] & colorBitMask;
+        const pieceColor = getPieceColor(
+            piecePlacement[selectedSquareIndex + offsetAttack],
+        );
         if (pieceColor === activeColor) return;
         legalMoves.push(selectedSquareIndex + offsetAttack);
     };
@@ -27,7 +26,7 @@ export const getPawnMoves = (
     const file: number = Math.floor(selectedSquareIndex / 8);
     const rank: number = selectedSquareIndex % 8;
 
-    const isBlack: boolean = activeColor === ColorCodes.BLACK ? true : false;
+    const isBlack: boolean = activeColor === PieceColors.BLACK ? true : false;
 
     const fileStart: number = isBlack ? 1 : 6;
     const fileFinish: number = isBlack ? 7 : 0;

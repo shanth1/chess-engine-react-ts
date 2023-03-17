@@ -1,25 +1,22 @@
+import { PieceTypes } from "./../../types/enums";
 import { getPieceType } from "./../../lib/gettingPieceInfo/PieceType";
-import { Index } from "widgets/ChessGame/types/types";
-import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
-import { getConjunction } from "widgets/ChessGame/lib/booleanOperations";
 import {
     directionOffsets,
     precomputedSlidingMoves,
 } from "widgets/ChessGame/lib/precomputedData/slidingMoves";
-import { PieceCodes } from "widgets/ChessGame/types/enums";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 
 export const getSlidingMoves = (
-    piecePlacement: Array<PieceCodes>,
+    piecePlacement: Array<number>,
     selectedSquareIndex: number,
-): Array<Index> => {
+): Array<number> => {
     const legalMoves: Array<number> = [];
 
     const selectedPiece = getPieceType(piecePlacement[selectedSquareIndex]);
     const activeColor = getPieceColor(piecePlacement[selectedSquareIndex]);
 
-    const startDirectionIndex = selectedPiece === PieceCodes.BISHOP ? 4 : 0;
-    const endDirectionIndex = selectedPiece === PieceCodes.ROOK ? 4 : 8;
+    const startDirectionIndex = selectedPiece === PieceTypes.BISHOP ? 4 : 0;
+    const endDirectionIndex = selectedPiece === PieceTypes.ROOK ? 4 : 8;
 
     for (
         let directionIndex: number = startDirectionIndex;
@@ -39,11 +36,8 @@ export const getSlidingMoves = (
                 directionOffsets[directionIndex] * (squareCounter + 1);
 
             if (piecePlacement[targetIndex]) {
-                const pieceColorCode = getConjunction(
-                    piecePlacement[targetIndex],
-                    colorBitMask,
-                );
-                if (pieceColorCode === activeColor) break;
+                const pieceColor = getPieceColor(piecePlacement[targetIndex]);
+                if (pieceColor === activeColor) break;
                 legalMoves.push(targetIndex);
                 break;
             }

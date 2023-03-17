@@ -1,20 +1,20 @@
-import { ColorCodes, PieceCodes } from "widgets/ChessGame/types/enums";
+import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
 
 function getPieceBinaryCodeFromFenSymbol(symbol: string): number {
     const pieceBinaryCode =
         symbol === "k"
-            ? PieceCodes.KING
+            ? PieceTypes.KING
             : symbol === "q"
-            ? PieceCodes.QUEEN
+            ? PieceTypes.QUEEN
             : symbol === "r"
-            ? PieceCodes.ROOK
+            ? PieceTypes.ROOK
             : symbol === "b"
-            ? PieceCodes.BISHOP
+            ? PieceTypes.BISHOP
             : symbol === "n"
-            ? PieceCodes.KNIGHT
+            ? PieceTypes.KNIGHT
             : symbol === "p"
-            ? PieceCodes.PAWN
-            : PieceCodes.NONE;
+            ? PieceTypes.PAWN
+            : PieceTypes.NONE;
     return pieceBinaryCode;
 }
 
@@ -36,8 +36,8 @@ export function getPiecePlacementArrayFromFen(fen: string): Array<number> {
             } else {
                 const pieceColor =
                     symbol === symbol.toUpperCase()
-                        ? ColorCodes.WHITE
-                        : ColorCodes.BLACK;
+                        ? PieceColors.WHITE
+                        : PieceColors.BLACK;
 
                 const pieceType = getPieceBinaryCodeFromFenSymbol(
                     symbol.toLowerCase(),

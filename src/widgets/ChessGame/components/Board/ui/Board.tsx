@@ -1,21 +1,19 @@
 import { useAppSelector } from "app/model";
 import { useState } from "react";
 import { getLegalMoves } from "widgets/ChessGame/model";
-import { PieceCodes } from "widgets/ChessGame/types/enums";
-import { Index } from "widgets/ChessGame/types/types";
 import { Square } from "../../Square";
-import { squares } from "../lib/squares";
+import { squares } from "../model/squares";
 import styles from "./styles.module.css";
 
 const updateLegalMoves = (
-    piecePlacement: Array<PieceCodes>,
-    selectedSquareIndex: Index | null,
+    piecePlacement: Array<number>,
+    selectedSquareIndex: number | null,
 ): void => {
     squares.forEach((square) => {
         square.isLegalToMove = false;
     });
 
-    const legalMoves: Array<Index> = getLegalMoves(
+    const legalMoves: Array<number> = getLegalMoves(
         piecePlacement,
         selectedSquareIndex,
     );
@@ -26,11 +24,12 @@ const updateLegalMoves = (
 };
 
 export const Board: React.FC = () => {
-    const piecePlacement: Array<PieceCodes> = useAppSelector(
+    const piecePlacement: Array<number> = useAppSelector(
         (state) => state.game.piecePlacement,
     );
-    const [selectedSquareIndex, setSelectedSquareIndex] =
-        useState<Index | null>(null);
+    const [selectedSquareIndex, setSelectedSquareIndex] = useState<
+        number | null
+    >(null);
 
     updateLegalMoves(piecePlacement, selectedSquareIndex);
 

@@ -1,11 +1,10 @@
-import { Index } from "./../../../types/types";
-import { Colors, PieceCodes } from "widgets/ChessGame/types/enums";
+import { Colors } from "widgets/ChessGame/types/enums";
 
 export interface ISquareProps {
     index: number;
     color: Colors;
-    pieceCode: PieceCodes;
-    selectedSquareIndex: Index | null;
+    pieceCode: number;
+    selectedSquareIndex: number | null;
     isLegalToMove: boolean;
-    setSelectedSquareIndex: (selectedSquareIndex: Index | null) => void;
+    setSelectedSquareIndex: (selectedSquareIndex: number | null) => void;
 }

@@ -3,7 +3,7 @@ export enum Colors {
     WHITE = "white",
 }
 
-export enum PieceCodes {
+export enum PieceTypes {
     NONE = 0,
     KING = 0b00001,
     QUEEN = 0b00010,
@@ -13,7 +13,7 @@ export enum PieceCodes {
     PAWN = 0b00110,
 }
 
-export enum ColorCodes {
+export enum PieceColors {
     BLACK = 0b01000,
     WHITE = 0b10000,
 }

@@ -1,6 +1,6 @@
-import { Colors, PieceCodes } from "widgets/ChessGame/types/enums";
+import { Colors, PieceTypes } from "widgets/ChessGame/types/enums";
 import { ISquare } from "widgets/ChessGame/types/interfaces";
-import { fileCoordinates } from "./fileCoordinates";
+import { fileCoordinates } from "../lib/fileCoordinates";
 
 const squares: Array<ISquare> = [];
 let index: number = 0;
@@ -13,7 +13,7 @@ for (let rank: number = 7; rank >= 0; rank--) {
             index: index,
             color: color,
             name: `${fileCoordinates[file]}${rank + 1}`,
-            pieceCode: PieceCodes.NONE,
+            pieceCode: PieceTypes.NONE,
             isLegalToMove: false,
         });
         index++;

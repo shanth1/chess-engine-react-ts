@@ -1,16 +1,15 @@
+import { PieceTypes } from "./../../types/enums";
 import { getPieceType } from "./../../lib/gettingPieceInfo/PieceType";
 import { getKnightMoves } from "./knightMoves";
 import { getSlidingMoves } from "./slidingMoves";
-import { PieceCodes } from "widgets/ChessGame/types/enums";
-import { Index } from "widgets/ChessGame/types/types";
 import { getKingMoves } from "./kingMoves";
 import { getPawnMoves } from "./pawnMoves";
 
 export const getLegalMoves = (
-    piecePlacement: Array<PieceCodes>,
-    selectedSquareIndex: Index | null,
-): Array<Index> => {
-    let legalMoves: Array<Index> = [];
+    piecePlacement: Array<number>,
+    selectedSquareIndex: number | null,
+): Array<number> => {
+    let legalMoves: Array<number> = [];
 
     if (selectedSquareIndex === null) return legalMoves;
     if (!piecePlacement[selectedSquareIndex]) return legalMoves;
@@ -18,19 +17,19 @@ export const getLegalMoves = (
     const selectedPieceType = getPieceType(piecePlacement[selectedSquareIndex]);
 
     switch (selectedPieceType) {
-        case PieceCodes.QUEEN:
-        case PieceCodes.ROOK:
-        case PieceCodes.BISHOP:
+        case PieceTypes.QUEEN:
+        case PieceTypes.ROOK:
+        case PieceTypes.BISHOP:
             legalMoves = getSlidingMoves(piecePlacement, selectedSquareIndex);
             break;
-        case PieceCodes.KNIGHT:
+        case PieceTypes.KNIGHT:
             legalMoves = getKnightMoves(piecePlacement, selectedSquareIndex);
             break;
-        case PieceCodes.KING:
+        case PieceTypes.KING:
             legalMoves = getKingMoves(piecePlacement, selectedSquareIndex);
             break;
 
-        case PieceCodes.PAWN:
+        case PieceTypes.PAWN:
             legalMoves = getPawnMoves(piecePlacement, selectedSquareIndex);
             break;
     }
