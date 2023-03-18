@@ -10,13 +10,18 @@ const playerSlice = createSlice({
     name: "player",
     initialState,
     reducers: {
-        setPlayerColor: (state, action) => {},
-        setColorView: (state, action) => {},
-        changeColorView: (state, action) => {},
+        setPlayerColor: (state, action) => {
+            state.playerColor = action.payload.playerColor;
+        },
+        changeColorView: (state) => {
+            state.colorView =
+                state.colorView === PieceColors.WHITE
+                    ? PieceColors.BLACK
+                    : PieceColors.WHITE;
+        },
     },
 });
 
-export const { setPlayerColor, setColorView, changeColorView } =
-    playerSlice.actions;
+export const { setPlayerColor, changeColorView } = playerSlice.actions;
 
 export const playerSliceReducer = playerSlice.reducer;
