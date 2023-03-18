@@ -35,20 +35,23 @@ export const Board: React.FC = () => {
 
     return (
         <div className={styles.board}>
-            {squares.map((square, index) => {
-                square.pieceCode = piecePlacement[index];
-                return (
-                    <Square
-                        key={square.index}
-                        index={square.index}
-                        color={square.color}
-                        pieceCode={square.pieceCode}
-                        isLegalToMove={square.isLegalToMove}
-                        selectedSquareIndex={selectedSquareIndex}
-                        setSelectedSquareIndex={setSelectedSquareIndex}
-                    />
-                );
-            })}
+            {squares
+                .slice()
+                .reverse()
+                .map((square) => {
+                    square.pieceCode = piecePlacement[square.index];
+                    return (
+                        <Square
+                            key={square.index}
+                            index={square.index}
+                            color={square.color}
+                            pieceCode={square.pieceCode}
+                            isLegalToMove={square.isLegalToMove}
+                            selectedSquareIndex={selectedSquareIndex}
+                            setSelectedSquareIndex={setSelectedSquareIndex}
+                        />
+                    );
+                })}
         </div>
     );
 };
