@@ -1,6 +1,5 @@
 import { PieceColors, PieceTypes } from "./../../types/enums";
 import { createSlice, current } from "@reduxjs/toolkit";
-import { RootState } from "app";
 import { CastlingRightsCodes } from "../../types/enums";
 import { getCastlingRights } from "./getCastlingRights";
 import { getPiecePlacementArrayFromFen } from "./getPiecePlacement";
@@ -15,7 +14,7 @@ const initialState = {
 };
 
 const gameSlice = createSlice({
-    name: "piecePlacement",
+    name: "game",
     initialState,
     reducers: {
         setFenPosition: (state, action) => {
@@ -55,7 +54,5 @@ const gameSlice = createSlice({
 
 export const { setFenPosition, moveFigure, changeActiveColor } =
     gameSlice.actions;
-
-export const game = (state: RootState) => state.game;
 
 export const gameSliceReducer = gameSlice.reducer;
