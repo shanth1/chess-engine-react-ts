@@ -38,6 +38,10 @@ export const getSlidingMoves = (
             if (piecePlacement[targetIndex]) {
                 const pieceColor = getPieceColor(piecePlacement[targetIndex]);
                 if (pieceColor === activeColor) break;
+                const enemyPieceType = getPieceType(
+                    piecePlacement[targetIndex],
+                );
+                if (enemyPieceType === PieceTypes.KING) continue;
                 legalMoves.push(targetIndex);
                 break;
             }

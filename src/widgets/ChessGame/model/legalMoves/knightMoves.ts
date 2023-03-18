@@ -1,5 +1,7 @@
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
+import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
 import { precomputedKnightMoves } from "widgets/ChessGame/lib/precomputedData/knightMoves";
+import { PieceTypes } from "widgets/ChessGame/types/enums";
 
 export const getKnightMoves = (
     piecePlacement: Array<number>,
@@ -16,7 +18,10 @@ export const getKnightMoves = (
         if (piecePlacement[targetSquareIndex]) {
             const pieceColor = getPieceColor(piecePlacement[targetSquareIndex]);
             if (pieceColor === activeColor) continue;
-            legalMoves.push(targetSquareIndex);
+            const enemyPieceType = getPieceType(
+                piecePlacement[targetSquareIndex],
+            );
+            if (enemyPieceType === PieceTypes.KING) continue;
         } else legalMoves.push(targetSquareIndex);
     }
 
