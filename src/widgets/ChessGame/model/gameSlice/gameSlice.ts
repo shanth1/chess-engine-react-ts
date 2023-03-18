@@ -5,7 +5,9 @@ import { getCastlingRights } from "./getCastlingRights";
 import { getPiecePlacementArrayFromFen } from "./getPiecePlacement";
 
 const initialState = {
-    piecePlacement: new Array(64),
+    piecePlacement: getPiecePlacementArrayFromFen(
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+    ),
     activeColor: PieceColors.WHITE,
     castlingRights: CastlingRightsCodes.NeitherSide,
     enPassant: "-",
