@@ -1,3 +1,3 @@
 export * from "./gameSlice/gameSlice";
-export * from "./legalMoves/legalMoves";
+export * from "./pseudoLegalMoves/pseudoLegalMoves";
 export * from "./playerSlice/playerSlice";

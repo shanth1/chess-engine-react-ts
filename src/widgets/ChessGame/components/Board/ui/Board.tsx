@@ -1,6 +1,6 @@
 import { useAppSelector } from "app/model";
 import { useState } from "react";
-import { getLegalMoves } from "widgets/ChessGame/model";
+import { getLegalMoves } from "widgets/ChessGame/model/legalMoves/legalMoves";
 import { PieceColors } from "widgets/ChessGame/types/enums";
 import { Square } from "../../Square";
 import { squares } from "../model/squares";
@@ -13,6 +13,9 @@ const updateLegalMoves = (
     squares.forEach((square) => {
         square.isLegalToMove = false;
     });
+
+    if (selectedSquareIndex === null) return;
+    if (!piecePlacement[selectedSquareIndex]) return;
 
     const legalMoves: Array<number> = getLegalMoves(
         piecePlacement,

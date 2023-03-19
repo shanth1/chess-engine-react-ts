@@ -1,4 +1,4 @@
-import { PieceColors } from "./../../types/enums";
+import { PieceColors } from "../../types/enums";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import {
     OffsetsPawnBlack,

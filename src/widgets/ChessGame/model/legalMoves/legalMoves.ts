@@ -1,38 +1,61 @@
-import { PieceTypes } from "./../../types/enums";
-import { getPieceType } from "./../../lib/gettingPieceInfo/PieceType";
-import { getKnightMoves } from "./knightMoves";
-import { getSlidingMoves } from "./slidingMoves";
-import { getKingMoves } from "./kingMoves";
-import { getPawnMoves } from "./pawnMoves";
+import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
+import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
+import { PieceTypes } from "widgets/ChessGame/types/enums";
+import { getPseudoLegalMoves } from "../pseudoLegalMoves/pseudoLegalMoves";
 
 export const getLegalMoves = (
     piecePlacement: Array<number>,
-    selectedSquareIndex: number | null,
+    selectedSquareIndex: number,
 ): Array<number> => {
-    let legalMoves: Array<number> = [];
+    const legalMoves: Array<number> = [];
 
-    if (selectedSquareIndex === null) return legalMoves;
-    if (!piecePlacement[selectedSquareIndex]) return legalMoves;
+    const pseudoLegalMoves: Array<number> = getPseudoLegalMoves(
+        piecePlacement,
+        selectedSquareIndex,
+    );
 
-    const selectedPieceType = getPieceType(piecePlacement[selectedSquareIndex]);
+    pseudoLegalMoves.forEach((targetIndex) => {
+        const activeColor = getPieceColor(piecePlacement[selectedSquareIndex]);
+        const piecePlacementAfterMove = piecePlacement.slice();
+        const selectedPiece = piecePlacement[selectedSquareIndex];
+        piecePlacementAfterMove[selectedSquareIndex] = PieceTypes.NONE;
+        piecePlacementAfterMove[targetIndex] = selectedPiece;
 
-    switch (selectedPieceType) {
-        case PieceTypes.QUEEN:
-        case PieceTypes.ROOK:
-        case PieceTypes.BISHOP:
-            legalMoves = getSlidingMoves(piecePlacement, selectedSquareIndex);
-            break;
-        case PieceTypes.KNIGHT:
-            legalMoves = getKnightMoves(piecePlacement, selectedSquareIndex);
-            break;
-        case PieceTypes.KING:
-            legalMoves = getKingMoves(piecePlacement, selectedSquareIndex);
-            break;
+        let isLegal = true;
 
-        case PieceTypes.PAWN:
-            legalMoves = getPawnMoves(piecePlacement, selectedSquareIndex);
-            break;
-    }
+        for (let squareIndex = 0; squareIndex < 64; squareIndex++) {
+            if (!piecePlacementAfterMove[squareIndex]) continue;
+            const pieceColor = getPieceColor(
+                piecePlacementAfterMove[squareIndex],
+            );
+            if (pieceColor === activeColor) continue;
+            const enemyPseudoLegalMoves = getPseudoLegalMoves(
+                piecePlacementAfterMove,
+                squareIndex,
+            );
+            for (let index = 0; index < enemyPseudoLegalMoves.length; index++) {
+                const enemyTargetIndex = enemyPseudoLegalMoves[index];
+
+                if (!piecePlacementAfterMove[enemyTargetIndex]) continue;
+                const pieceType = getPieceType(
+                    piecePlacementAfterMove[enemyTargetIndex],
+                );
+                const pieceColor = getPieceColor(
+                    piecePlacementAfterMove[enemyTargetIndex],
+                );
+
+                if (
+                    pieceColor === activeColor &&
+                    pieceType === PieceTypes.KING
+                ) {
+                    isLegal = false;
+                    break;
+                }
+            }
+        }
+
+        if (isLegal) legalMoves.push(targetIndex);
+    });
 
     return legalMoves;
 };
