@@ -15,7 +15,6 @@ const updateLegalMoves = (
     });
 
     if (selectedSquareIndex === null) return;
-    if (!piecePlacement[selectedSquareIndex]) return;
 
     const legalMoves: Array<number> = getLegalMoves(
         piecePlacement,
