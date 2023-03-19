@@ -1,5 +1,5 @@
-import { PieceTypes } from "./../../types/enums";
-import { getPieceType } from "./../../lib/gettingPieceInfo/PieceType";
+import { PieceTypes } from "../../types/enums";
+import { getPieceType } from "../../lib/gettingPieceInfo/PieceType";
 import {
     directionOffsets,
     precomputedSlidingMoves,
