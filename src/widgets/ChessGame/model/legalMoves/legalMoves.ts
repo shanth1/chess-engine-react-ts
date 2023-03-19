@@ -15,8 +15,8 @@ export const getLegalMoves = (
     );
 
     pseudoLegalMoves.forEach((targetIndex) => {
-        const activeColor = getPieceColor(piecePlacement[selectedSquareIndex]);
         const piecePlacementAfterMove = piecePlacement.slice();
+
         const selectedPiece = piecePlacement[selectedSquareIndex];
         piecePlacementAfterMove[selectedSquareIndex] = PieceTypes.NONE;
         piecePlacementAfterMove[targetIndex] = selectedPiece;
@@ -25,10 +25,14 @@ export const getLegalMoves = (
 
         for (let squareIndex = 0; squareIndex < 64; squareIndex++) {
             if (!piecePlacementAfterMove[squareIndex]) continue;
+
+            const friendlyColor = getPieceColor(
+                piecePlacement[selectedSquareIndex],
+            );
             const pieceColor = getPieceColor(
                 piecePlacementAfterMove[squareIndex],
             );
-            if (pieceColor === activeColor) continue;
+            if (pieceColor === friendlyColor) continue;
             const enemyPseudoLegalMoves = getPseudoLegalMoves(
                 piecePlacementAfterMove,
                 squareIndex,
@@ -37,16 +41,12 @@ export const getLegalMoves = (
                 const enemyTargetIndex = enemyPseudoLegalMoves[index];
 
                 if (!piecePlacementAfterMove[enemyTargetIndex]) continue;
-                const pieceType = getPieceType(
-                    piecePlacementAfterMove[enemyTargetIndex],
-                );
-                const pieceColor = getPieceColor(
-                    piecePlacementAfterMove[enemyTargetIndex],
-                );
+                const pieceUnderAttack =
+                    piecePlacementAfterMove[enemyTargetIndex];
 
                 if (
-                    pieceColor === activeColor &&
-                    pieceType === PieceTypes.KING
+                    getPieceColor(pieceUnderAttack) === friendlyColor &&
+                    getPieceType(pieceUnderAttack) === PieceTypes.KING
                 ) {
                     isLegal = false;
                     break;
