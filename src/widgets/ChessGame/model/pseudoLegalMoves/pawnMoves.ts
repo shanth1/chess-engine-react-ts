@@ -1,10 +1,9 @@
-import { PieceColors, PieceTypes } from "./../../types/enums";
+import { PieceColors } from "../../types/enums";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import {
     OffsetsPawnBlack,
     OffsetsPawnWhite,
 } from "widgets/ChessGame/types/enums";
-import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
 
 export const getPawnMoves = (
     piecePlacement: Array<number>,
@@ -18,10 +17,6 @@ export const getPawnMoves = (
             piecePlacement[selectedSquareIndex + offsetAttack],
         );
         if (pieceColor === activeColor) return;
-        const enemyPieceType = getPieceType(
-            piecePlacement[selectedSquareIndex + offsetAttack],
-        );
-        if (enemyPieceType === PieceTypes.KING) return;
         legalMoves.push(selectedSquareIndex + offsetAttack);
     };
 
