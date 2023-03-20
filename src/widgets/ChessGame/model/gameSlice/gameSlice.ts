@@ -1,3 +1,4 @@
+import { getPieceColor } from "./../../lib/gettingPieceInfo/PieceColor";
 import { PieceColors, PieceTypes } from "./../../types/enums";
 import { createSlice, current } from "@reduxjs/toolkit";
 import { CastlingRightsCodes } from "../../types/enums";
@@ -44,6 +45,9 @@ const gameSlice = createSlice({
             piecePlacement[action.payload.targetIndex] = figure;
 
             state.piecePlacement = piecePlacement;
+
+            if (getPieceColor(figure) === PieceColors.BLACK)
+                state.fullMoveNumber++;
         },
         changeActiveColor: (state) => {
             state.activeColor =
