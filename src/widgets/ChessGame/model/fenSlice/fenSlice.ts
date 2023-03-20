@@ -1,7 +1,7 @@
 import { getPieceColor } from "../../lib/gettingPieceInfo/PieceColor";
 import { PieceColors, PieceTypes } from "../../types/enums";
 import { createSlice, current } from "@reduxjs/toolkit";
-import { CastlingRightsCodes } from "../../types/enums";
+import { CastlingRights } from "../../types/enums";
 import { getCastlingRights } from "./getCastlingRights";
 import { getPiecePlacementArrayFromFen } from "./getPiecePlacement";
 
@@ -10,7 +10,7 @@ const initialState = {
         "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
     ),
     activeColor: PieceColors.WHITE,
-    castlingRights: CastlingRightsCodes.NeitherSide,
+    castlingRights: getCastlingRights("KQkq"),
     enPassant: "-",
     halfMoveClock: 0,
     fullMoveNumber: 0,

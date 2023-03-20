@@ -18,11 +18,11 @@ export enum PieceColors {
     WHITE = 0b10000,
 }
 
-export enum CastlingRightsCodes {
+export enum CastlingRights {
     NeitherSide = 0b0000,
-    WhiteKingNearRookSide = 0b1000,
+    WhiteKingRookSide = 0b1000,
     WitheKingQueenSide = 0b0100,
-    BlackKingNearRookSide = 0b0010,
+    BlackKingRookSide = 0b0010,
     BlackKingQueenSide = 0b0001,
 }
 
