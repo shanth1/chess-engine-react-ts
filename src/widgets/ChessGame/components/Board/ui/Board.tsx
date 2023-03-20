@@ -28,7 +28,7 @@ const updateLegalMoves = (
 
 export const Board: React.FC = () => {
     const piecePlacement: Array<number> = useAppSelector(
-        (state) => state.game.piecePlacement,
+        (state) => state.fen.piecePlacement,
     );
 
     const colorView = useAppSelector((state) => state.player.colorView);

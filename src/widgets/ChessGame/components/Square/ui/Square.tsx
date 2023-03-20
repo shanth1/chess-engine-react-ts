@@ -17,7 +17,7 @@ export const Square: React.FC<ISquareProps> = ({
     const dispatch = useAppDispatch();
 
     const activeColor: PieceColors = useAppSelector(
-        (state) => state.game.activeColor,
+        (state) => state.fen.activeColor,
     );
 
     const isSelected: boolean = index === selectedSquareIndex;
