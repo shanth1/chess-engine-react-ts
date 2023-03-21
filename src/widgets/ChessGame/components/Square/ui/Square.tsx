@@ -42,7 +42,8 @@ export const Square: React.FC<ISquareProps> = ({
             );
             if (
                 getPieceType(squares[selectedSquareIndex].pieceCode) ===
-                PieceTypes.KING
+                    PieceTypes.KING &&
+                Math.abs(selectedSquareIndex - index) === 2
             ) {
                 const rookStartIndex = index % 8 === 6 ? index + 1 : index - 2;
                 const rookTargetIndex = index % 8 === 6 ? index - 1 : index + 1;
