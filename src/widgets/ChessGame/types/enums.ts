@@ -20,10 +20,10 @@ export enum PieceColors {
 
 export enum CastlingRights {
     NeitherSide = 0b0000,
-    WhiteKingRookSide = 0b1000,
-    WitheKingQueenSide = 0b0100,
-    BlackKingRookSide = 0b0010,
-    BlackKingQueenSide = 0b0001,
+    WhiteKingSide = 0b1000,
+    WitheQueenSide = 0b0100,
+    BlackKingSide = 0b0010,
+    BlackQueenSide = 0b0001,
 }
 
 export enum OffsetsPawnBlack {
