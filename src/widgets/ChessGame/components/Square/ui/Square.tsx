@@ -31,13 +31,10 @@ export const Square: React.FC<ISquareProps> = ({
 
     const onClickHandler = () => {
         const pieceColor: PieceColors = getPieceColor(pieceCode);
-
         const isPlayerTurn: boolean = activeColor === pieceColor;
 
         if (!isPlayerTurn && !isLegalToMove) return;
-
-        setSelectedSquareIndex(isSelected || isLegalToMove ? null : index);
-        if (isLegalToMove) {
+        if (isLegalToMove && selectedSquareIndex !== null) {
             dispatch(
                 moveFigure({
                     startIndex: selectedSquareIndex,
@@ -45,13 +42,14 @@ export const Square: React.FC<ISquareProps> = ({
                 }),
             );
             dispatch(changeActiveColor());
-            if (selectedSquareIndex !== null)
-                dispatch(
-                    updateCastlingRights({
-                        squareName: squares[selectedSquareIndex].name,
-                    }),
-                );
+            dispatch(
+                updateCastlingRights({
+                    squareName: squares[selectedSquareIndex].name,
+                }),
+            );
         }
+
+        setSelectedSquareIndex(isSelected || isLegalToMove ? null : index);
     };
 
     const squareStyle: string = [
