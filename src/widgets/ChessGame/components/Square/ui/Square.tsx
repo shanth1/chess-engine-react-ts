@@ -1,11 +1,12 @@
 import { useAppDispatch, useAppSelector } from "app";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
+import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
 import {
     changeActiveColor,
     moveFigure,
     updateCastlingRights,
 } from "widgets/ChessGame/model";
-import { PieceColors } from "widgets/ChessGame/types/enums";
+import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 import { Piece } from "../../Piece/ui/Piece";
 import { ISquareProps } from "../types/interfaces";
@@ -25,7 +26,7 @@ export const Square: React.FC<ISquareProps> = ({
         (state) => state.fen.activeColor,
     );
     const castlingRights = useAppSelector((state) => state.fen.castlingRights);
-    console.log(castlingRights);
+    // console.log(castlingRights);
 
     const isSelected: boolean = index === selectedSquareIndex;
 
@@ -41,6 +42,19 @@ export const Square: React.FC<ISquareProps> = ({
                     targetIndex: index,
                 }),
             );
+            if (
+                getPieceType(squares[selectedSquareIndex].pieceCode) ===
+                PieceTypes.KING
+            ) {
+                const rookStartIndex = index % 8 === 6 ? index + 1 : index - 2;
+                const rookTargetIndex = index % 8 === 6 ? index - 1 : index + 1;
+                dispatch(
+                    moveFigure({
+                        startIndex: rookStartIndex,
+                        targetIndex: rookTargetIndex,
+                    }),
+                );
+            }
             dispatch(changeActiveColor());
             dispatch(
                 updateCastlingRights({
