@@ -1,10 +1,11 @@
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import { precomputedKingMoves } from "widgets/ChessGame/lib/precomputedData/kingMoves";
-import { PieceColors } from "widgets/ChessGame/types/enums";
+import { CastlingRights, PieceColors } from "widgets/ChessGame/types/enums";
 
 export const getCastlingMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number,
+    castlingRights: number,
 ): Array<number> => {
     const pseudoLegalMoves: Array<number> = [];
 
@@ -23,7 +24,38 @@ export const getCastlingMoves = (
                 if (piecePlacement[targetSquareIndex]) continue direction;
                 targetSquareIndex += offset;
             }
-            pseudoLegalMoves.push(selectedSquareIndex + 2 * offset);
+
+            const castlingSide =
+                (selectedSquareIndex + offset * 2) % 8 === 6 ? "king" : "queen";
+
+            let castling = false;
+            if (
+                friendlyColor === PieceColors.WHITE &&
+                castlingSide === "king"
+            ) {
+                if (castlingRights & CastlingRights.WhiteKingSide)
+                    castling = true;
+            } else if (
+                friendlyColor === PieceColors.WHITE &&
+                castlingSide === "queen"
+            ) {
+                if (castlingRights & CastlingRights.WitheQueenSide)
+                    castling = true;
+            } else if (
+                friendlyColor === PieceColors.BLACK &&
+                castlingSide === "queen"
+            ) {
+                if (castlingRights & CastlingRights.BlackQueenSide)
+                    castling = true;
+            } else if (
+                friendlyColor === PieceColors.BLACK &&
+                castlingSide === "king"
+            ) {
+                if (castlingRights & CastlingRights.BlackKingSide)
+                    castling = true;
+            }
+            if (castling)
+                pseudoLegalMoves.push(selectedSquareIndex + 2 * offset);
         }
     }
     return pseudoLegalMoves;

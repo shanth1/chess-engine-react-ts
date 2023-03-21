@@ -9,6 +9,7 @@ import { getCastlingMoves } from "./castlingMoves";
 export const getPseudoLegalMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number,
+    castlingRights: number,
 ): Array<number> => {
     let pseudoLegalMoves: Array<number> = [];
 
@@ -35,7 +36,11 @@ export const getPseudoLegalMoves = (
                 selectedSquareIndex,
             );
             pseudoLegalMoves.push(
-                ...getCastlingMoves(piecePlacement, selectedSquareIndex),
+                ...getCastlingMoves(
+                    piecePlacement,
+                    selectedSquareIndex,
+                    castlingRights,
+                ),
             );
             break;
 

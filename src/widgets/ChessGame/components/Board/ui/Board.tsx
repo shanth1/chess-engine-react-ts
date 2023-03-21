@@ -9,6 +9,7 @@ import styles from "./styles.module.css";
 const updateLegalMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number | null,
+    castlingRights: number,
 ): void => {
     squares.forEach((square) => {
         square.isLegalToMove = false;
@@ -19,6 +20,7 @@ const updateLegalMoves = (
     const legalMoves: Array<number> = getLegalMoves(
         piecePlacement,
         selectedSquareIndex,
+        castlingRights,
     );
 
     legalMoves.forEach((index) => {
@@ -30,6 +32,8 @@ export const Board: React.FC = () => {
     const piecePlacement: Array<number> = useAppSelector(
         (state) => state.fen.piecePlacement,
     );
+    const castlingRights = useAppSelector((state) => state.fen.castlingRights);
+    console.log(castlingRights);
 
     const colorView = useAppSelector((state) => state.player.colorView);
 
@@ -37,7 +41,7 @@ export const Board: React.FC = () => {
         number | null
     >(null);
 
-    updateLegalMoves(piecePlacement, selectedSquareIndex);
+    updateLegalMoves(piecePlacement, selectedSquareIndex, castlingRights);
 
     const boardView =
         colorView === PieceColors.WHITE ? squares : squares.slice().reverse();

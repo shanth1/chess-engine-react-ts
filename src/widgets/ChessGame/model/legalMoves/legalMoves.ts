@@ -6,12 +6,14 @@ import { getPseudoLegalMoves } from "../pseudoLegalMoves/pseudoLegalMoves";
 export const getLegalMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number,
+    castlingRights: number,
 ): Array<number> => {
     const legalMoves: Array<number> = [];
 
     const pseudoLegalMoves: Array<number> = getPseudoLegalMoves(
         piecePlacement,
         selectedSquareIndex,
+        castlingRights,
     );
 
     pseudoLegalMoves.forEach((targetIndex) => {
@@ -36,7 +38,9 @@ export const getLegalMoves = (
             const enemyPseudoLegalMoves = getPseudoLegalMoves(
                 piecePlacementAfterMove,
                 squareIndex,
+                castlingRights,
             );
+
             for (let index = 0; index < enemyPseudoLegalMoves.length; index++) {
                 const enemyTargetIndex = enemyPseudoLegalMoves[index];
 

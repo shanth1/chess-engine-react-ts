@@ -25,8 +25,6 @@ export const Square: React.FC<ISquareProps> = ({
     const activeColor: PieceColors = useAppSelector(
         (state) => state.fen.activeColor,
     );
-    const castlingRights = useAppSelector((state) => state.fen.castlingRights);
-    // console.log(castlingRights);
 
     const isSelected: boolean = index === selectedSquareIndex;
 
@@ -48,6 +46,7 @@ export const Square: React.FC<ISquareProps> = ({
             ) {
                 const rookStartIndex = index % 8 === 6 ? index + 1 : index - 2;
                 const rookTargetIndex = index % 8 === 6 ? index - 1 : index + 1;
+
                 dispatch(
                     moveFigure({
                         startIndex: rookStartIndex,
