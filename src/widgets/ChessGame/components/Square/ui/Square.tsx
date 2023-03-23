@@ -32,21 +32,33 @@ export const Square: React.FC<ISquareProps> = ({
         const pieceColor: PieceColors = getPieceColor(pieceCode);
         const isPlayerTurn: boolean = activeColor === pieceColor;
 
+        let targetIndex = index;
+
         if (!isPlayerTurn && !isLegalToMove) return;
+        if (getPieceType(squares[index].pieceCode) === PieceTypes.ROOK) {
+            targetIndex = index % 8 === 7 ? index - 1 : index + 2;
+        }
         if (isLegalToMove && selectedSquareIndex !== null) {
             dispatch(
                 moveFigure({
                     startIndex: selectedSquareIndex,
-                    targetIndex: index,
+                    targetIndex: targetIndex,
                 }),
             );
             if (
                 getPieceType(squares[selectedSquareIndex].pieceCode) ===
                     PieceTypes.KING &&
-                Math.abs(selectedSquareIndex - index) === 2
+                Math.abs(selectedSquareIndex - targetIndex) >= 2 &&
+                Math.abs(selectedSquareIndex - targetIndex) <= 4
             ) {
-                const rookStartIndex = index % 8 === 6 ? index + 1 : index - 2;
-                const rookTargetIndex = index % 8 === 6 ? index - 1 : index + 1;
+                const rookStartIndex =
+                    index % 8 >= 6
+                        ? selectedSquareIndex + 3
+                        : selectedSquareIndex - 4;
+                const rookTargetIndex =
+                    index % 8 >= 6
+                        ? selectedSquareIndex + 1
+                        : selectedSquareIndex - 1;
 
                 dispatch(
                     moveFigure({
