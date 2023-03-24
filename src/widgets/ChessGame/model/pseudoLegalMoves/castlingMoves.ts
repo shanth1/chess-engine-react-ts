@@ -1,6 +1,11 @@
+import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import { precomputedKingMoves } from "widgets/ChessGame/lib/precomputedData/kingMoves";
-import { CastlingRights, PieceColors } from "widgets/ChessGame/types/enums";
+import {
+    CastlingRights,
+    PieceColors,
+    PieceTypes,
+} from "widgets/ChessGame/types/enums";
 
 export const getCastlingMoves = (
     piecePlacement: Array<number>,
@@ -24,6 +29,12 @@ export const getCastlingMoves = (
                 if (piecePlacement[targetSquareIndex]) continue direction;
                 targetSquareIndex += offset;
             }
+
+            if (
+                getPieceType(piecePlacement[targetSquareIndex]) !==
+                PieceTypes.ROOK
+            )
+                continue;
 
             const castlingSide =
                 (selectedSquareIndex + offset * 2) % 8 === 6 ? "king" : "queen";
