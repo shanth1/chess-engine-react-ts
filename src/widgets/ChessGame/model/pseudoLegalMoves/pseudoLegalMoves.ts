@@ -4,10 +4,12 @@ import { getKnightMoves } from "./knightMoves";
 import { getSlidingMoves } from "./slidingMoves";
 import { getKingMoves } from "./kingMoves";
 import { getPawnMoves } from "./pawnMoves";
+import { getCastlingMoves } from "./castlingMoves";
 
 export const getPseudoLegalMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number,
+    castlingRights: number,
 ): Array<number> => {
     let pseudoLegalMoves: Array<number> = [];
 
@@ -32,6 +34,13 @@ export const getPseudoLegalMoves = (
             pseudoLegalMoves = getKingMoves(
                 piecePlacement,
                 selectedSquareIndex,
+            );
+            pseudoLegalMoves.push(
+                ...getCastlingMoves(
+                    piecePlacement,
+                    selectedSquareIndex,
+                    castlingRights,
+                ),
             );
             break;
 

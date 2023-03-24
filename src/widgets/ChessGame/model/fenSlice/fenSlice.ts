@@ -1,7 +1,6 @@
-import { getPieceColor } from "../../lib/gettingPieceInfo/PieceColor";
+import { CastlingRights } from "../../types/enums";
 import { PieceColors, PieceTypes } from "../../types/enums";
 import { createSlice, current } from "@reduxjs/toolkit";
-import { CastlingRightsCodes } from "../../types/enums";
 import { getCastlingRights } from "./getCastlingRights";
 import { getPiecePlacementArrayFromFen } from "./getPiecePlacement";
 
@@ -10,7 +9,7 @@ const initialState = {
         "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
     ),
     activeColor: PieceColors.WHITE,
-    castlingRights: CastlingRightsCodes.NeitherSide,
+    castlingRights: getCastlingRights("KQkq"),
     enPassant: "-",
     halfMoveClock: 0,
     fullMoveNumber: 0,
@@ -45,9 +44,32 @@ const fenSlice = createSlice({
             piecePlacement[action.payload.targetIndex] = figure;
 
             state.piecePlacement = piecePlacement;
-
-            if (getPieceColor(figure) === PieceColors.BLACK)
-                state.fullMoveNumber++;
+        },
+        updateCastlingRights: (state, action) => {
+            const squareName = action.payload.squareName;
+            if (squareName === "e1") {
+                state.castlingRights =
+                    state.castlingRights &
+                    ~CastlingRights.WhiteKingSide &
+                    ~CastlingRights.WitheQueenSide;
+            } else if (squareName === "h1") {
+                state.castlingRights =
+                    state.castlingRights & ~CastlingRights.WhiteKingSide;
+            } else if (squareName === "a1") {
+                state.castlingRights =
+                    state.castlingRights & ~CastlingRights.WitheQueenSide;
+            } else if (squareName === "e8") {
+                state.castlingRights =
+                    state.castlingRights &
+                    ~CastlingRights.BlackKingSide &
+                    ~CastlingRights.BlackQueenSide;
+            } else if (squareName === "h8") {
+                state.castlingRights =
+                    state.castlingRights & ~CastlingRights.BlackKingSide;
+            } else if (squareName === "a8") {
+                state.castlingRights =
+                    state.castlingRights & ~CastlingRights.BlackQueenSide;
+            }
         },
         changeActiveColor: (state) => {
             state.activeColor =
@@ -58,7 +80,11 @@ const fenSlice = createSlice({
     },
 });
 
-export const { setFenPosition, moveFigure, changeActiveColor } =
-    fenSlice.actions;
+export const {
+    setFenPosition,
+    moveFigure,
+    changeActiveColor,
+    updateCastlingRights,
+} = fenSlice.actions;
 
 export const fenSliceReducer = fenSlice.reducer;

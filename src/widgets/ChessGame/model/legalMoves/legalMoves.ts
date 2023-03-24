@@ -6,17 +6,35 @@ import { getPseudoLegalMoves } from "../pseudoLegalMoves/pseudoLegalMoves";
 export const getLegalMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number,
+    castlingRights: number,
 ): Array<number> => {
     const legalMoves: Array<number> = [];
 
     const pseudoLegalMoves: Array<number> = getPseudoLegalMoves(
         piecePlacement,
         selectedSquareIndex,
+        castlingRights,
     );
 
-    pseudoLegalMoves.forEach((targetIndex) => {
+    for (
+        let pseudoLegalMove = 0;
+        pseudoLegalMove < pseudoLegalMoves.length;
+        pseudoLegalMove++
+    ) {
+        const targetIndex = pseudoLegalMoves[pseudoLegalMove];
         const piecePlacementAfterMove = piecePlacement.slice();
 
+        if (
+            getPieceType(piecePlacement[selectedSquareIndex]) ===
+                PieceTypes.KING &&
+            Math.abs(targetIndex - selectedSquareIndex) === 2
+        ) {
+            const intermediateCastlingMove =
+                targetIndex - selectedSquareIndex > 0
+                    ? targetIndex - 1
+                    : targetIndex + 1;
+            if (!legalMoves.includes(intermediateCastlingMove)) break;
+        }
         const selectedPiece = piecePlacement[selectedSquareIndex];
         piecePlacementAfterMove[selectedSquareIndex] = PieceTypes.NONE;
         piecePlacementAfterMove[targetIndex] = selectedPiece;
@@ -36,7 +54,9 @@ export const getLegalMoves = (
             const enemyPseudoLegalMoves = getPseudoLegalMoves(
                 piecePlacementAfterMove,
                 squareIndex,
+                castlingRights,
             );
+
             for (let index = 0; index < enemyPseudoLegalMoves.length; index++) {
                 const enemyTargetIndex = enemyPseudoLegalMoves[index];
 
@@ -55,7 +75,7 @@ export const getLegalMoves = (
         }
 
         if (isLegal) legalMoves.push(targetIndex);
-    });
+    }
 
     return legalMoves;
 };
