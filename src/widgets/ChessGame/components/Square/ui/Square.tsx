@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "app";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
+import { getFileName } from "widgets/ChessGame/lib/indexToNameConverter/fileNames";
 import {
     changeActiveColor,
     moveFigure,
@@ -8,7 +9,6 @@ import {
     updateEnPassant,
 } from "widgets/ChessGame/model";
 import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
-import { fileCoordinates } from "../../Board/lib/fileCoordinates";
 import { squares } from "../../Board/model/squares";
 import { Piece } from "../../Piece/ui/Piece";
 import { ISquareProps } from "../types/interfaces";
@@ -52,7 +52,7 @@ export const Square: React.FC<ISquareProps> = ({
                     PieceTypes.PAWN &&
                 Math.abs(selectedSquareIndex - index) === 16
             ) {
-                const fileName = fileCoordinates[index % 8];
+                const fileName = getFileName(index);
                 dispatch(updateEnPassant({ enPassant: fileName }));
             } else {
                 dispatch(updateEnPassant({ enPassant: "-" }));
