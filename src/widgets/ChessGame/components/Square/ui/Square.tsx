@@ -5,8 +5,10 @@ import {
     changeActiveColor,
     moveFigure,
     updateCastlingRights,
+    updateEnPassant,
 } from "widgets/ChessGame/model";
 import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
+import { fileCoordinates } from "../../Board/lib/fileCoordinates";
 import { squares } from "../../Board/model/squares";
 import { Piece } from "../../Piece/ui/Piece";
 import { ISquareProps } from "../types/interfaces";
@@ -45,6 +47,16 @@ export const Square: React.FC<ISquareProps> = ({
                     targetIndex: targetIndex,
                 }),
             );
+            if (
+                getPieceType(squares[selectedSquareIndex].pieceCode) ===
+                    PieceTypes.PAWN &&
+                Math.abs(selectedSquareIndex - index) === 16
+            ) {
+                const fileName = fileCoordinates[index % 8];
+                dispatch(updateEnPassant({ enPassant: fileName }));
+            } else {
+                dispatch(updateEnPassant({ enPassant: "-" }));
+            }
             if (
                 getPieceType(squares[selectedSquareIndex].pieceCode) ===
                     PieceTypes.KING &&
