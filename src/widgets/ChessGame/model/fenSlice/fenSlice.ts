@@ -71,6 +71,9 @@ const fenSlice = createSlice({
                     state.castlingRights & ~CastlingRights.BlackQueenSide;
             }
         },
+        updateEnPassant: (state, action) => {
+            state.enPassant = action.payload.enPassant;
+        },
         changeActiveColor: (state) => {
             state.activeColor =
                 state.activeColor === PieceColors.WHITE
@@ -85,6 +88,7 @@ export const {
     moveFigure,
     changeActiveColor,
     updateCastlingRights,
+    updateEnPassant,
 } = fenSlice.actions;
 
 export const fenSliceReducer = fenSlice.reducer;
