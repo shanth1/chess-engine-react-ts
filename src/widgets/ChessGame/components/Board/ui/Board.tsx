@@ -11,6 +11,7 @@ const updateLegalMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number | null,
     castlingRights: number,
+    enPassant: string,
 ): void => {
     squares.forEach((square) => {
         square.isLegalToMove = false;
@@ -22,6 +23,7 @@ const updateLegalMoves = (
         piecePlacement,
         selectedSquareIndex,
         castlingRights,
+        enPassant,
     );
 
     if (getPieceType(piecePlacement[selectedSquareIndex]) === PieceTypes.KING) {
@@ -59,12 +61,18 @@ export const Board: React.FC = () => {
     );
     const castlingRights = useAppSelector((state) => state.fen.castlingRights);
     const colorView = useAppSelector((state) => state.player.colorView);
+    const enPassant = useAppSelector((state) => state.fen.enPassant);
 
     const [selectedSquareIndex, setSelectedSquareIndex] = useState<
         number | null
     >(null);
 
-    updateLegalMoves(piecePlacement, selectedSquareIndex, castlingRights);
+    updateLegalMoves(
+        piecePlacement,
+        selectedSquareIndex,
+        castlingRights,
+        enPassant,
+    );
 
     const boardView =
         colorView === PieceColors.WHITE ? squares : squares.slice().reverse();

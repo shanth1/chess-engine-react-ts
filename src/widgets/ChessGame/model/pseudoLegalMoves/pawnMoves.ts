@@ -8,6 +8,7 @@ import {
 export const getPawnMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number,
+    enPassant: string,
 ): Array<number> => {
     const pawnAttack = (
         offsetAttack: OffsetsPawnBlack | OffsetsPawnWhite,
@@ -58,6 +59,19 @@ export const getPawnMoves = (
             !piecePlacement[selectedSquareIndex + 2 * offsetForward]
         ) {
             legalMoves.push(selectedSquareIndex + 2 * offsetForward);
+        }
+    }
+
+    if (
+        (Math.floor(selectedSquareIndex / 8) === 3 &&
+            getPieceColor(piecePlacement[selectedSquareIndex]) ===
+                PieceColors.WHITE) ||
+        (Math.floor(selectedSquareIndex / 8) === 4 &&
+            getPieceColor(piecePlacement[selectedSquareIndex]) ===
+                PieceColors.BLACK)
+    ) {
+        if (enPassant !== "-") {
+            console.log("enPassant opportunity");
         }
     }
 

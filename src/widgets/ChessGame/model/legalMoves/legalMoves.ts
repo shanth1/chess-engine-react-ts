@@ -7,6 +7,7 @@ export const getLegalMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number,
     castlingRights: number,
+    enPassant: string,
 ): Array<number> => {
     const legalMoves: Array<number> = [];
 
@@ -14,6 +15,7 @@ export const getLegalMoves = (
         piecePlacement,
         selectedSquareIndex,
         castlingRights,
+        enPassant,
     );
 
     for (
@@ -55,6 +57,7 @@ export const getLegalMoves = (
                 piecePlacementAfterMove,
                 squareIndex,
                 castlingRights,
+                enPassant,
             );
 
             for (let index = 0; index < enemyPseudoLegalMoves.length; index++) {
