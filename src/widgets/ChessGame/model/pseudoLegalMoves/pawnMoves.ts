@@ -1,3 +1,4 @@
+import { getFileName } from "widgets/ChessGame/lib/indexToNameConverter/fileNames";
 import { PieceColors } from "../../types/enums";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import {
@@ -71,7 +72,15 @@ export const getPawnMoves = (
                 PieceColors.BLACK)
     ) {
         if (enPassant !== "-") {
-            console.log("enPassant opportunity");
+            const leftAttackFile = getFileName(
+                selectedSquareIndex + offsetLeftAttack,
+            );
+
+            if (leftAttackFile === enPassant) {
+                legalMoves.push(selectedSquareIndex + offsetLeftAttack);
+            } else {
+                legalMoves.push(selectedSquareIndex + offsetRightAttack);
+            }
         }
     }
 
