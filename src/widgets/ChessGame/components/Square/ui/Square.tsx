@@ -39,7 +39,10 @@ export const Square: React.FC<ISquareProps> = ({
         let targetIndex = index;
 
         if (!isPlayerTurn && !isLegalToMove) return;
-        if (getPieceType(squares[index].pieceCode) === PieceTypes.ROOK) {
+        if (
+            getPieceType(squares[index].pieceCode) === PieceTypes.ROOK &&
+            getPieceColor(squares[index].pieceCode) === activeColor
+        ) {
             targetIndex = index % 8 === 7 ? index - 1 : index + 2;
         }
         if (isLegalToMove && selectedSquareIndex !== null) {
