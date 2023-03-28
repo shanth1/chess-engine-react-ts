@@ -87,6 +87,7 @@ export const Board: React.FC = () => {
                         index={square.index}
                         color={square.color}
                         pieceCode={square.pieceCode}
+                        enPassant={enPassant}
                         isLegalToMove={square.isLegalToMove}
                         selectedSquareIndex={selectedSquareIndex}
                         setSelectedSquareIndex={setSelectedSquareIndex}
