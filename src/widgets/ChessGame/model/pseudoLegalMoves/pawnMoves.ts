@@ -1,3 +1,4 @@
+import { getFileName } from "widgets/ChessGame/lib/indexToNameConverter/fileNames";
 import { PieceColors } from "../../types/enums";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import {
@@ -8,6 +9,7 @@ import {
 export const getPawnMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number,
+    enPassant: string,
 ): Array<number> => {
     const pawnAttack = (
         offsetAttack: OffsetsPawnBlack | OffsetsPawnWhite,
@@ -58,6 +60,27 @@ export const getPawnMoves = (
             !piecePlacement[selectedSquareIndex + 2 * offsetForward]
         ) {
             legalMoves.push(selectedSquareIndex + 2 * offsetForward);
+        }
+    }
+
+    if (
+        (Math.floor(selectedSquareIndex / 8) === 3 &&
+            getPieceColor(piecePlacement[selectedSquareIndex]) ===
+                PieceColors.WHITE) ||
+        (Math.floor(selectedSquareIndex / 8) === 4 &&
+            getPieceColor(piecePlacement[selectedSquareIndex]) ===
+                PieceColors.BLACK)
+    ) {
+        if (enPassant !== "-") {
+            const leftAttackFile = getFileName(
+                selectedSquareIndex + offsetLeftAttack,
+            );
+
+            if (leftAttackFile === enPassant) {
+                legalMoves.push(selectedSquareIndex + offsetLeftAttack);
+            } else {
+                legalMoves.push(selectedSquareIndex + offsetRightAttack);
+            }
         }
     }
 

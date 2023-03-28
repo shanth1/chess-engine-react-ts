@@ -1,10 +1,13 @@
 import { useAppDispatch, useAppSelector } from "app";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
+import { getFileName } from "widgets/ChessGame/lib/indexToNameConverter/fileNames";
 import {
     changeActiveColor,
+    deletePiece,
     moveFigure,
     updateCastlingRights,
+    updateEnPassant,
 } from "widgets/ChessGame/model";
 import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
@@ -17,6 +20,7 @@ export const Square: React.FC<ISquareProps> = ({
     color,
     pieceCode,
     isLegalToMove,
+    enPassant,
     selectedSquareIndex,
     setSelectedSquareIndex,
 }) => {
@@ -45,6 +49,29 @@ export const Square: React.FC<ISquareProps> = ({
                     targetIndex: targetIndex,
                 }),
             );
+            if (
+                getPieceType(squares[selectedSquareIndex].pieceCode) ===
+                    PieceTypes.PAWN &&
+                Math.abs(selectedSquareIndex - index) % 8 !== 0 &&
+                !squares[targetIndex].pieceCode
+            ) {
+                const captureIndex =
+                    getPieceColor(squares[selectedSquareIndex].pieceCode) ===
+                    PieceColors.WHITE
+                        ? targetIndex + 8
+                        : targetIndex - 8;
+                dispatch(deletePiece({ index: captureIndex }));
+            }
+            if (
+                getPieceType(squares[selectedSquareIndex].pieceCode) ===
+                    PieceTypes.PAWN &&
+                Math.abs(selectedSquareIndex - index) === 16
+            ) {
+                const fileName = getFileName(index);
+                dispatch(updateEnPassant({ enPassant: fileName }));
+            } else {
+                dispatch(updateEnPassant({ enPassant: "-" }));
+            }
             if (
                 getPieceType(squares[selectedSquareIndex].pieceCode) ===
                     PieceTypes.KING &&

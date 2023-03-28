@@ -10,6 +10,7 @@ export const getPseudoLegalMoves = (
     piecePlacement: Array<number>,
     selectedSquareIndex: number,
     castlingRights: number,
+    enPassant: string,
 ): Array<number> => {
     let pseudoLegalMoves: Array<number> = [];
 
@@ -48,6 +49,7 @@ export const getPseudoLegalMoves = (
             pseudoLegalMoves = getPawnMoves(
                 piecePlacement,
                 selectedSquareIndex,
+                enPassant,
             );
             break;
     }

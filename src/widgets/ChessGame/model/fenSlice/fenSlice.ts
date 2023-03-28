@@ -45,6 +45,11 @@ const fenSlice = createSlice({
 
             state.piecePlacement = piecePlacement;
         },
+        deletePiece: (state, action) => {
+            const piecePlacement = [...current(state.piecePlacement)];
+            piecePlacement[action.payload.index] = PieceTypes.NONE;
+            state.piecePlacement = piecePlacement;
+        },
         updateCastlingRights: (state, action) => {
             const squareName = action.payload.squareName;
             if (squareName === "e1") {
@@ -71,6 +76,9 @@ const fenSlice = createSlice({
                     state.castlingRights & ~CastlingRights.BlackQueenSide;
             }
         },
+        updateEnPassant: (state, action) => {
+            state.enPassant = action.payload.enPassant;
+        },
         changeActiveColor: (state) => {
             state.activeColor =
                 state.activeColor === PieceColors.WHITE
@@ -85,6 +93,8 @@ export const {
     moveFigure,
     changeActiveColor,
     updateCastlingRights,
+    updateEnPassant,
+    deletePiece,
 } = fenSlice.actions;
 
 export const fenSliceReducer = fenSlice.reducer;
