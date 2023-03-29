@@ -1,3 +1,4 @@
+import { getPieceCode } from "./../../lib/gettingPieceInfo/pieceCode";
 import { CastlingRights } from "../../types/enums";
 import { PieceColors, PieceTypes } from "../../types/enums";
 import { createSlice, current } from "@reduxjs/toolkit";
@@ -79,6 +80,10 @@ const fenSlice = createSlice({
         updateEnPassant: (state, action) => {
             state.enPassant = action.payload.enPassant;
         },
+        promotesPawn: (state, action) => {
+            const pieceCode = getPieceCode(PieceTypes.QUEEN, state.activeColor);
+            state.piecePlacement[action.payload.index] = pieceCode;
+        },
         changeActiveColor: (state) => {
             state.activeColor =
                 state.activeColor === PieceColors.WHITE
@@ -95,6 +100,7 @@ export const {
     updateCastlingRights,
     updateEnPassant,
     deletePiece,
+    promotesPawn,
 } = fenSlice.actions;
 
 export const fenSliceReducer = fenSlice.reducer;
