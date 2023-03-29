@@ -75,10 +75,13 @@ export const getPawnMoves = (
             const leftAttackFile = getFileName(
                 selectedSquareIndex + offsetLeftAttack,
             );
+            const rightAttackFile = getFileName(
+                selectedSquareIndex + offsetRightAttack,
+            );
 
             if (leftAttackFile === enPassant) {
                 legalMoves.push(selectedSquareIndex + offsetLeftAttack);
-            } else {
+            } else if (rightAttackFile === enPassant) {
                 legalMoves.push(selectedSquareIndex + offsetRightAttack);
             }
         }
