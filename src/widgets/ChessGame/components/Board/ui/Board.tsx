@@ -28,24 +28,26 @@ const updateLegalMoves = (
 
     if (getPieceType(piecePlacement[selectedSquareIndex]) === PieceTypes.KING) {
         legalMoves.forEach((legalMove) => {
-            //? King side castling
-            if (legalMove === 62 || legalMove === 6) {
-                const kingSideRookIndex = selectedSquareIndex + 3;
-                if (
-                    getPieceType(piecePlacement[kingSideRookIndex]) ===
-                    PieceTypes.ROOK
-                ) {
-                    squares[kingSideRookIndex].isLegalToMove = true;
+            if (Math.abs(selectedSquareIndex - legalMove) === 2) {
+                //? King side castling
+                if (legalMove === 62 || legalMove === 6) {
+                    const kingSideRookIndex = selectedSquareIndex + 3;
+                    if (
+                        getPieceType(piecePlacement[kingSideRookIndex]) ===
+                        PieceTypes.ROOK
+                    ) {
+                        squares[kingSideRookIndex].isLegalToMove = true;
+                    }
                 }
-            }
-            //? Queen side castling
-            if (legalMove === 2 || legalMove === 58) {
-                const queenSideRookIndex = selectedSquareIndex - 4;
-                if (
-                    getPieceType(piecePlacement[queenSideRookIndex]) ===
-                    PieceTypes.ROOK
-                )
-                    squares[queenSideRookIndex].isLegalToMove = true;
+                //? Queen side castling
+                if (legalMove === 2 || legalMove === 58) {
+                    const queenSideRookIndex = selectedSquareIndex - 4;
+                    if (
+                        getPieceType(piecePlacement[queenSideRookIndex]) ===
+                        PieceTypes.ROOK
+                    )
+                        squares[queenSideRookIndex].isLegalToMove = true;
+                }
             }
         });
     }
