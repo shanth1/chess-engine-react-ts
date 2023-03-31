@@ -13,6 +13,7 @@ import {
 import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 import { Piece } from "../../Piece/ui/Piece";
+import { getTargetIndex } from "../lib/targetIndex";
 import { ISquareProps } from "../types/interfaces";
 import styles from "./styles.module.css";
 
@@ -37,15 +38,9 @@ export const Square: React.FC<ISquareProps> = ({
         const pieceColor: PieceColors = getPieceColor(pieceCode);
         const isPlayerTurn: boolean = activeColor === pieceColor;
 
-        let targetIndex = index;
-
         if (!isPlayerTurn && !isLegalToMove) return;
-        if (
-            getPieceType(squares[index].pieceCode) === PieceTypes.ROOK &&
-            getPieceColor(squares[index].pieceCode) === activeColor
-        ) {
-            targetIndex = index % 8 === 7 ? index - 1 : index + 2;
-        }
+        const targetIndex = getTargetIndex(squares, index, activeColor);
+
         if (isLegalToMove && selectedSquareIndex !== null) {
             dispatch(
                 moveFigure({
