@@ -1,12 +1,13 @@
 import { AppDispatch } from "app";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
+import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
 import {
     changeActiveColor,
     moveFigure,
     promotesPawn,
     updateCastlingRights,
 } from "widgets/ChessGame/model";
-import { PieceColors } from "widgets/ChessGame/types/enums";
+import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 import { isPawnPromote } from "../model/checkPawnPromote";
 import { enPassantCapture } from "../model/enPassantCapture";
@@ -33,6 +34,27 @@ export const getClickHandler = (
 
         if (!isLegalToMove || selectedSquareIndex === null) return;
         const targetIndex = getTargetIndex(squares, index, activeColor);
+
+        const selectedPiece = squares[selectedSquareIndex].pieceCode;
+
+        switch (getPieceType(selectedPiece)) {
+            case PieceTypes.PAWN:
+                console.log("pawn");
+                break;
+            case PieceTypes.KING:
+                console.log("king");
+                break;
+            case PieceTypes.ROOK:
+                console.log("rook");
+                break;
+            case PieceTypes.BISHOP:
+            case PieceTypes.KNIGHT:
+            case PieceTypes.QUEEN:
+                console.log("other");
+                break;
+            default:
+                alert("wrong piece");
+        }
 
         dispatch(
             moveFigure({
