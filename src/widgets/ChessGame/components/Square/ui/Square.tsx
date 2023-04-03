@@ -6,14 +6,11 @@ import { ISquareProps } from "../types/interfaces";
 import styles from "./styles.module.css";
 
 export const Square: React.FC<ISquareProps> = ({
-    index,
-    color,
-    pieceCode,
-    isLegalToMove,
-    enPassant,
+    square,
     selectedSquareIndex,
     setSelectedSquareIndex,
 }) => {
+    const { index, color, pieceCode, isLegalToMove } = square;
     const dispatch: AppDispatch = useAppDispatch();
     const activeColor: PieceColors = useAppSelector(
         (state) => state.fen.activeColor,
