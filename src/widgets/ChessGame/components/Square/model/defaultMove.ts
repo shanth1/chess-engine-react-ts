@@ -1,9 +1,11 @@
 import { AppDispatch } from "app";
+import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
 import {
     changeActiveColor,
     moveFigure,
     updateCastlingRights,
 } from "widgets/ChessGame/model";
+import { PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 
 export const makeDefaultMove = (
@@ -18,9 +20,16 @@ export const makeDefaultMove = (
         }),
     );
     dispatch(changeActiveColor());
-    dispatch(
-        updateCastlingRights({
-            squareName: squares[selectedSquareIndex].name,
-        }),
-    );
+
+    const selectedPiece = getPieceType(squares[selectedSquareIndex].pieceCode);
+    if (
+        selectedPiece === PieceTypes.KING ||
+        selectedPiece === PieceTypes.ROOK
+    ) {
+        dispatch(
+            updateCastlingRights({
+                squareName: squares[selectedSquareIndex].name,
+            }),
+        );
+    }
 };

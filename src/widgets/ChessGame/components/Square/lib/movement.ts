@@ -24,7 +24,6 @@ export const makeMove = (
             makeKingMove(dispatch, selectedSquareIndex, targetIndex);
             break;
         case PieceTypes.ROOK:
-            break;
         case PieceTypes.BISHOP:
         case PieceTypes.KNIGHT:
         case PieceTypes.QUEEN:

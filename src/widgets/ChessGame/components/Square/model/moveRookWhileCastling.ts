@@ -4,7 +4,7 @@ import { moveFigure } from "widgets/ChessGame/model";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 
-export const moveRook = (
+export const moveRookWhileCastling = (
     dispatch: AppDispatch,
     selectedSquareIndex: number,
     targetIndex: number,
