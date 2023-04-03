@@ -39,8 +39,8 @@ export const Square: React.FC<ISquareProps> = ({
                 isLegalToMove,
                 isSelected,
                 selectedSquareIndex,
-                setSelectedSquareIndex,
                 index,
+                setSelectedSquareIndex,
             )}
         >
             {isLegalToMove && <div className={styles.legal} />}
