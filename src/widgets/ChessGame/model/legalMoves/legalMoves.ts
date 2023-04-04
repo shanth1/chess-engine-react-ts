@@ -18,6 +18,7 @@ export const getLegalMoves = (
 
     for (let moveIndex = 0; moveIndex < pseudoLegalMoves.length; moveIndex++) {
         const pseudoLegalMove = pseudoLegalMoves[moveIndex];
+
         if (
             checkPseudoLegalMove(
                 piecePlacement,
