@@ -4,7 +4,21 @@ import { moveFigure } from "widgets/ChessGame/model";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 
-export const moveRookWhileCastling = (
+export const resolveCastling = (
+    dispatch: AppDispatch,
+    selectedSquareIndex: number,
+    targetIndex: number,
+) => {
+    if (isCastling(selectedSquareIndex, targetIndex)) {
+        moveRookWhileCastling(dispatch, selectedSquareIndex, targetIndex);
+    }
+};
+
+const isCastling = (selectedIndex: number, targetIndex: number): boolean => {
+    return Math.abs(selectedIndex - targetIndex) === 2 ? true : false;
+};
+
+const moveRookWhileCastling = (
     dispatch: AppDispatch,
     selectedSquareIndex: number,
     targetIndex: number,

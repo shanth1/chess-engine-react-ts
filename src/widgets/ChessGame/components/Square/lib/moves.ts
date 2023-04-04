@@ -3,8 +3,8 @@ import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 import { makeDefaultMove } from "../model/defaultMove";
-import { makeKingMove } from "./kingLogic";
-import { makePawnMove } from "./pawnLogic";
+import { makeKingMove } from "./kingMove";
+import { makePawnMove } from "./pawnMove";
 import { getTargetIndex } from "./targetIndex";
 
 export const makeMove = (

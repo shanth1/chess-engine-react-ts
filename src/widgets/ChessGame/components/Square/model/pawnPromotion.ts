@@ -1,9 +1,21 @@
+import { AppDispatch } from "app";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
+import { promotesPawn } from "widgets/ChessGame/model";
 import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 
-export const isPawnPromote = (
+export const resolvePawnPromotion = (
+    dispatch: AppDispatch,
+    selectedSquareIndex: number,
+    targetIndex: number,
+) => {
+    if (checkPawnPromotion(selectedSquareIndex, targetIndex)) {
+        dispatch(promotesPawn({ index: targetIndex }));
+    }
+};
+
+const checkPawnPromotion = (
     selectedSquareIndex: number,
     targetIndex: number,
 ): boolean => {
