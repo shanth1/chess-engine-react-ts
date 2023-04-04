@@ -1,5 +1,5 @@
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
-import { checkCastlingType } from "../moveTypes/castlingType";
+import { checkCastlingType } from "../../lib/gettingMoveInfo/castlingType";
 import { getPseudoLegalMoves } from "../pseudoLegalMoves/pseudoLegalMoves";
 import { checkAttackOnKing } from "./kingUnderAttack";
 import { getPassedKingMove } from "./passedKingMove";
