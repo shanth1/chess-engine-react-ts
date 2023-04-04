@@ -3,17 +3,17 @@ import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor
 
 export const getKingMoves = (
     piecePlacement: Array<number>,
-    selectedSquareIndex: number,
+    selectedIndex: number,
 ): Array<number> => {
     const pseudoLegalMoves: Array<number> = [];
 
-    const friendlyColor = getPieceColor(piecePlacement[selectedSquareIndex]);
+    const friendlyColor = getPieceColor(piecePlacement[selectedIndex]);
 
     const directionNumber = 8;
     for (let direction = 0; direction < directionNumber; direction++) {
-        const offset = precomputedKingMoves[selectedSquareIndex][direction];
+        const offset = precomputedKingMoves[selectedIndex][direction];
         if (offset === 0) continue;
-        const targetSquareIndex = selectedSquareIndex + offset;
+        const targetSquareIndex = selectedIndex + offset;
         if (piecePlacement[targetSquareIndex]) {
             const targetPieceColor = getPieceColor(
                 piecePlacement[targetSquareIndex],

@@ -1,11 +1,7 @@
-import { Colors } from "widgets/ChessGame/types/enums";
+import { ISquare } from "widgets/ChessGame/types/interfaces";
 
 export interface ISquareProps {
-    index: number;
-    color: Colors;
-    pieceCode: number;
-    enPassant: string;
-    selectedSquareIndex: number | null;
-    isLegalToMove: boolean;
-    setSelectedSquareIndex: (selectedSquareIndex: number | null) => void;
+    square: ISquare;
+    selectedIndex: number | null;
+    setSelectedIndex: (selectedSquareIndex: number | null) => void;
 }
