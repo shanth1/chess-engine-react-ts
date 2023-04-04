@@ -1,6 +1,5 @@
-import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
 import { getLegalMoves } from "widgets/ChessGame/model/legalMoves/legalMoves";
-import { PieceTypes } from "widgets/ChessGame/types/enums";
+import { addAlternativeCastlingMoves } from "./alternativeCastlingMove";
 import { squares } from "./squares";
 
 export const updateLegalMoves = (
@@ -22,17 +21,11 @@ export const updateLegalMoves = (
         enPassant,
     );
 
-    if (getPieceType(piecePlacement[selectedSquareIndex]) === PieceTypes.KING) {
-        legalMoves.forEach((legalMove) => {
-            if (legalMove - selectedSquareIndex === 2) {
-                const kingSideRookIndex = selectedSquareIndex + 3;
-                squares[kingSideRookIndex].isLegalToMove = true;
-            } else if (legalMove - selectedSquareIndex === -2) {
-                const queenSideRookIndex = selectedSquareIndex - 4;
-                squares[queenSideRookIndex].isLegalToMove = true;
-            }
-        });
-    }
+    addAlternativeCastlingMoves(
+        piecePlacement,
+        legalMoves,
+        selectedSquareIndex,
+    );
 
     legalMoves.forEach((index) => {
         squares[index].isLegalToMove = true;
