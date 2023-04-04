@@ -1,10 +1,9 @@
 import { useAppSelector } from "app/model";
 import { useState } from "react";
-import { PieceColors } from "widgets/ChessGame/types/enums";
 import { Square } from "../../Square";
 import { updateLegalMoves } from "../model/updateLegalMoves";
-import { squares } from "../model/squares";
 import styles from "./styles.module.css";
+import { getBoardView } from "../lib/boardView";
 
 export const Board: React.FC = () => {
     const piecePlacement: Array<number> = useAppSelector(
@@ -25,9 +24,7 @@ export const Board: React.FC = () => {
         enPassant,
     );
 
-    const boardView =
-        colorView === PieceColors.WHITE ? squares : squares.slice().reverse();
-
+    const boardView = getBoardView(colorView);
     return (
         <div className={styles.board}>
             {boardView.map((square) => {
