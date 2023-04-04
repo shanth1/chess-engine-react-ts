@@ -3,6 +3,7 @@ import { PieceColors } from "widgets/ChessGame/types/enums";
 import { Piece } from "../../Piece/ui/Piece";
 import { getClickHandler } from "../lib/clickHandler";
 import { ISquareProps } from "../types/interfaces";
+import { getSquareStyle } from "./lib/squareStyle";
 import styles from "./styles.module.css";
 
 export const Square: React.FC<ISquareProps> = ({
@@ -10,21 +11,14 @@ export const Square: React.FC<ISquareProps> = ({
     selectedSquareIndex,
     setSelectedSquareIndex,
 }) => {
-    const { index, color, pieceCode, isLegalToMove } = square;
+    const { index, pieceCode, isLegalToMove } = square;
     const dispatch: AppDispatch = useAppDispatch();
     const activeColor: PieceColors = useAppSelector(
         (state) => state.fen.activeColor,
     );
 
     const isSelected: boolean = index === selectedSquareIndex;
-
-    const squareStyle: string = [
-        styles.square,
-        styles[color],
-        pieceCode ? styles.clickable : "",
-        isLegalToMove ? styles.clickable : "",
-        isSelected ? styles.selected : "",
-    ].join(" ");
+    const squareStyle: string = getSquareStyle(square, isSelected);
 
     return (
         <div
