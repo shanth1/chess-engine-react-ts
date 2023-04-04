@@ -13,16 +13,9 @@ export const Board: React.FC = () => {
     const colorView = useAppSelector((state) => state.player.colorView);
     const enPassant = useAppSelector((state) => state.fen.enPassant);
 
-    const [selectedSquareIndex, setSelectedSquareIndex] = useState<
-        number | null
-    >(null);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-    updateLegalMoves(
-        piecePlacement,
-        selectedSquareIndex,
-        castlingRights,
-        enPassant,
-    );
+    updateLegalMoves(piecePlacement, selectedIndex, castlingRights, enPassant);
 
     const boardView = getBoardView(colorView);
     return (
@@ -33,8 +26,8 @@ export const Board: React.FC = () => {
                     <Square
                         key={square.index}
                         square={square}
-                        selectedSquareIndex={selectedSquareIndex}
-                        setSelectedSquareIndex={setSelectedSquareIndex}
+                        selectedIndex={selectedIndex}
+                        setSelectedIndex={setSelectedIndex}
                     />
                 );
             })}

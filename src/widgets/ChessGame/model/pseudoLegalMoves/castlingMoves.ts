@@ -9,20 +9,20 @@ import {
 
 export const getCastlingMoves = (
     piecePlacement: Array<number>,
-    selectedSquareIndex: number,
+    selectedIndex: number,
     castlingRights: number,
 ): Array<number> => {
     const pseudoLegalMoves: Array<number> = [];
 
-    const friendlyColor = getPieceColor(piecePlacement[selectedSquareIndex]);
+    const friendlyColor = getPieceColor(piecePlacement[selectedIndex]);
 
     if (
-        (selectedSquareIndex === 60 && friendlyColor === PieceColors.WHITE) ||
-        (selectedSquareIndex === 4 && friendlyColor === PieceColors.BLACK)
+        (selectedIndex === 60 && friendlyColor === PieceColors.WHITE) ||
+        (selectedIndex === 4 && friendlyColor === PieceColors.BLACK)
     ) {
         direction: for (let direction = 2; direction <= 3; direction++) {
-            const offset = precomputedKingMoves[selectedSquareIndex][direction];
-            let targetSquareIndex = selectedSquareIndex + offset;
+            const offset = precomputedKingMoves[selectedIndex][direction];
+            let targetSquareIndex = selectedIndex + offset;
             while (
                 !(targetSquareIndex % 8 === 0 || targetSquareIndex % 8 === 7)
             ) {
@@ -37,7 +37,7 @@ export const getCastlingMoves = (
                 continue;
 
             const castlingSide =
-                (selectedSquareIndex + offset * 2) % 8 === 6 ? "king" : "queen";
+                (selectedIndex + offset * 2) % 8 === 6 ? "king" : "queen";
 
             let castling = false;
             if (
@@ -65,8 +65,7 @@ export const getCastlingMoves = (
                 if (castlingRights & CastlingRights.BlackKingSide)
                     castling = true;
             }
-            if (castling)
-                pseudoLegalMoves.push(selectedSquareIndex + 2 * offset);
+            if (castling) pseudoLegalMoves.push(selectedIndex + 2 * offset);
         }
     }
     return pseudoLegalMoves;

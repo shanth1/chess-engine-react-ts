@@ -8,25 +8,25 @@ import {
 
 export const getPawnMoves = (
     piecePlacement: Array<number>,
-    selectedSquareIndex: number,
+    selectedIndex: number,
     enPassant: string,
 ): Array<number> => {
     const pawnAttack = (
         offsetAttack: OffsetsPawnBlack | OffsetsPawnWhite,
     ): void => {
-        if (!piecePlacement[selectedSquareIndex + offsetAttack]) return;
+        if (!piecePlacement[selectedIndex + offsetAttack]) return;
         const pieceColor = getPieceColor(
-            piecePlacement[selectedSquareIndex + offsetAttack],
+            piecePlacement[selectedIndex + offsetAttack],
         );
         if (pieceColor === activeColor) return;
-        legalMoves.push(selectedSquareIndex + offsetAttack);
+        legalMoves.push(selectedIndex + offsetAttack);
     };
 
-    const activeColor = getPieceColor(piecePlacement[selectedSquareIndex]);
+    const activeColor = getPieceColor(piecePlacement[selectedIndex]);
     const legalMoves: Array<number> = [];
 
-    const file: number = Math.floor(selectedSquareIndex / 8);
-    const rank: number = selectedSquareIndex % 8;
+    const file: number = Math.floor(selectedIndex / 8);
+    const rank: number = selectedIndex % 8;
 
     const isBlack: boolean = activeColor === PieceColors.BLACK ? true : false;
 
@@ -53,36 +53,35 @@ export const getPawnMoves = (
 
     if (file === fileFinish) return legalMoves;
 
-    if (!piecePlacement[selectedSquareIndex + offsetForward]) {
-        legalMoves.push(selectedSquareIndex + offsetForward);
+    if (!piecePlacement[selectedIndex + offsetForward]) {
+        legalMoves.push(selectedIndex + offsetForward);
         if (
             file === fileStart &&
-            !piecePlacement[selectedSquareIndex + 2 * offsetForward]
+            !piecePlacement[selectedIndex + 2 * offsetForward]
         ) {
-            legalMoves.push(selectedSquareIndex + 2 * offsetForward);
+            legalMoves.push(selectedIndex + 2 * offsetForward);
         }
     }
 
     if (
-        (Math.floor(selectedSquareIndex / 8) === 3 &&
-            getPieceColor(piecePlacement[selectedSquareIndex]) ===
+        (Math.floor(selectedIndex / 8) === 3 &&
+            getPieceColor(piecePlacement[selectedIndex]) ===
                 PieceColors.WHITE) ||
-        (Math.floor(selectedSquareIndex / 8) === 4 &&
-            getPieceColor(piecePlacement[selectedSquareIndex]) ===
-                PieceColors.BLACK)
+        (Math.floor(selectedIndex / 8) === 4 &&
+            getPieceColor(piecePlacement[selectedIndex]) === PieceColors.BLACK)
     ) {
         if (enPassant !== "-") {
             const leftAttackFile = getFileName(
-                selectedSquareIndex + offsetLeftAttack,
+                selectedIndex + offsetLeftAttack,
             );
             const rightAttackFile = getFileName(
-                selectedSquareIndex + offsetRightAttack,
+                selectedIndex + offsetRightAttack,
             );
 
             if (leftAttackFile === enPassant) {
-                legalMoves.push(selectedSquareIndex + offsetLeftAttack);
+                legalMoves.push(selectedIndex + offsetLeftAttack);
             } else if (rightAttackFile === enPassant) {
-                legalMoves.push(selectedSquareIndex + offsetRightAttack);
+                legalMoves.push(selectedIndex + offsetRightAttack);
             }
         }
     }

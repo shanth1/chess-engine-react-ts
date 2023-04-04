@@ -9,17 +9,17 @@ export const getClickHandler = (
     { index, pieceCode, isLegalToMove }: ISquare,
     activeColor: number,
     isSelected: boolean,
-    selectedSquareIndex: number | null,
-    setSelectedSquareIndex: (selectedSquareIndex: number | null) => void,
+    selectedIndex: number | null,
+    setSelectedIndex: (selectedSquareIndex: number | null) => void,
 ) => {
     return function onClickHandler() {
         const pieceColor: PieceColors = getPieceColor(pieceCode);
         const isPlayerTurn: boolean = activeColor === pieceColor;
 
         if (!isPlayerTurn && !isLegalToMove) return;
-        setSelectedSquareIndex(isSelected || isLegalToMove ? null : index);
+        setSelectedIndex(isSelected || isLegalToMove ? null : index);
 
-        if (!isLegalToMove || selectedSquareIndex === null) return;
-        makeMove(dispatch, selectedSquareIndex, index, activeColor);
+        if (!isLegalToMove || selectedIndex === null) return;
+        makeMove(dispatch, selectedIndex, index, activeColor);
     };
 };

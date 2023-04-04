@@ -4,7 +4,7 @@ import { squares } from "./squares";
 
 export const updateLegalMoves = (
     piecePlacement: Array<number>,
-    selectedSquareIndex: number | null,
+    selectedIndex: number | null,
     castlingRights: number,
     enPassant: string,
 ): void => {
@@ -12,20 +12,16 @@ export const updateLegalMoves = (
         square.isLegalToMove = false;
     });
 
-    if (selectedSquareIndex === null) return;
+    if (selectedIndex === null) return;
 
     const legalMoves: Array<number> = getLegalMoves(
         piecePlacement,
-        selectedSquareIndex,
+        selectedIndex,
         castlingRights,
         enPassant,
     );
 
-    addAlternativeCastlingMoves(
-        piecePlacement,
-        legalMoves,
-        selectedSquareIndex,
-    );
+    addAlternativeCastlingMoves(piecePlacement, legalMoves, selectedIndex);
 
     legalMoves.forEach((index) => {
         squares[index].isLegalToMove = true;

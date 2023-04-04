@@ -5,7 +5,7 @@ import { getPseudoLegalMoves } from "../pseudoLegalMoves/pseudoLegalMoves";
 
 export const getLegalMoves = (
     piecePlacement: Array<number>,
-    selectedSquareIndex: number,
+    selectedIndex: number,
     castlingRights: number,
     enPassant: string,
 ): Array<number> => {
@@ -13,7 +13,7 @@ export const getLegalMoves = (
 
     const pseudoLegalMoves: Array<number> = getPseudoLegalMoves(
         piecePlacement,
-        selectedSquareIndex,
+        selectedIndex,
         castlingRights,
         enPassant,
     );
@@ -27,18 +27,17 @@ export const getLegalMoves = (
         const piecePlacementAfterMove = piecePlacement.slice();
 
         if (
-            getPieceType(piecePlacement[selectedSquareIndex]) ===
-                PieceTypes.KING &&
-            Math.abs(targetIndex - selectedSquareIndex) === 2
+            getPieceType(piecePlacement[selectedIndex]) === PieceTypes.KING &&
+            Math.abs(targetIndex - selectedIndex) === 2
         ) {
             const intermediateCastlingMove =
-                targetIndex - selectedSquareIndex > 0
+                targetIndex - selectedIndex > 0
                     ? targetIndex - 1
                     : targetIndex + 1;
             if (!legalMoves.includes(intermediateCastlingMove)) break;
         }
-        const selectedPiece = piecePlacement[selectedSquareIndex];
-        piecePlacementAfterMove[selectedSquareIndex] = PieceTypes.NONE;
+        const selectedPiece = piecePlacement[selectedIndex];
+        piecePlacementAfterMove[selectedIndex] = PieceTypes.NONE;
         piecePlacementAfterMove[targetIndex] = selectedPiece;
 
         let isLegal = true;
@@ -46,9 +45,7 @@ export const getLegalMoves = (
         for (let squareIndex = 0; squareIndex < 64; squareIndex++) {
             if (!piecePlacementAfterMove[squareIndex]) continue;
 
-            const friendlyColor = getPieceColor(
-                piecePlacement[selectedSquareIndex],
-            );
+            const friendlyColor = getPieceColor(piecePlacement[selectedIndex]);
             const pieceColor = getPieceColor(
                 piecePlacementAfterMove[squareIndex],
             );

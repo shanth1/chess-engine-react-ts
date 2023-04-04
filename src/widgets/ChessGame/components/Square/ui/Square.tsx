@@ -8,8 +8,8 @@ import styles from "./styles.module.css";
 
 export const Square: React.FC<ISquareProps> = ({
     square,
-    selectedSquareIndex,
-    setSelectedSquareIndex,
+    selectedIndex,
+    setSelectedIndex,
 }) => {
     const { index, pieceCode, isLegalToMove } = square;
     const dispatch: AppDispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export const Square: React.FC<ISquareProps> = ({
         (state) => state.fen.activeColor,
     );
 
-    const isSelected: boolean = index === selectedSquareIndex;
+    const isSelected: boolean = index === selectedIndex;
     const squareStyle: string = getSquareStyle(square, isSelected);
 
     return (
@@ -28,8 +28,8 @@ export const Square: React.FC<ISquareProps> = ({
                 square,
                 activeColor,
                 isSelected,
-                selectedSquareIndex,
-                setSelectedSquareIndex,
+                selectedIndex,
+                setSelectedIndex,
             )}
         >
             {isLegalToMove && <div className={styles.legal} />}

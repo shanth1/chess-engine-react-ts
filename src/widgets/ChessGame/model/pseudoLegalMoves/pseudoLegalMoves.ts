@@ -8,38 +8,29 @@ import { getCastlingMoves } from "./castlingMoves";
 
 export const getPseudoLegalMoves = (
     piecePlacement: Array<number>,
-    selectedSquareIndex: number,
+    selectedIndex: number,
     castlingRights: number,
     enPassant: string,
 ): Array<number> => {
     let pseudoLegalMoves: Array<number> = [];
 
-    const selectedPieceType = getPieceType(piecePlacement[selectedSquareIndex]);
+    const selectedPieceType = getPieceType(piecePlacement[selectedIndex]);
 
     switch (selectedPieceType) {
         case PieceTypes.QUEEN:
         case PieceTypes.ROOK:
         case PieceTypes.BISHOP:
-            pseudoLegalMoves = getSlidingMoves(
-                piecePlacement,
-                selectedSquareIndex,
-            );
+            pseudoLegalMoves = getSlidingMoves(piecePlacement, selectedIndex);
             break;
         case PieceTypes.KNIGHT:
-            pseudoLegalMoves = getKnightMoves(
-                piecePlacement,
-                selectedSquareIndex,
-            );
+            pseudoLegalMoves = getKnightMoves(piecePlacement, selectedIndex);
             break;
         case PieceTypes.KING:
-            pseudoLegalMoves = getKingMoves(
-                piecePlacement,
-                selectedSquareIndex,
-            );
+            pseudoLegalMoves = getKingMoves(piecePlacement, selectedIndex);
             pseudoLegalMoves.push(
                 ...getCastlingMoves(
                     piecePlacement,
-                    selectedSquareIndex,
+                    selectedIndex,
                     castlingRights,
                 ),
             );
@@ -48,7 +39,7 @@ export const getPseudoLegalMoves = (
         case PieceTypes.PAWN:
             pseudoLegalMoves = getPawnMoves(
                 piecePlacement,
-                selectedSquareIndex,
+                selectedIndex,
                 enPassant,
             );
             break;
