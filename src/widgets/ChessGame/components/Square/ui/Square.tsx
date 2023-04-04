@@ -25,12 +25,10 @@ export const Square: React.FC<ISquareProps> = ({
             className={squareStyle}
             onClick={getClickHandler(
                 dispatch,
+                square,
                 activeColor,
-                pieceCode,
-                isLegalToMove,
                 isSelected,
                 selectedSquareIndex,
-                index,
                 setSelectedSquareIndex,
             )}
         >

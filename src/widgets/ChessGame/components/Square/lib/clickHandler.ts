@@ -1,16 +1,15 @@
 import { AppDispatch } from "app";
 import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
 import { PieceColors } from "widgets/ChessGame/types/enums";
+import { ISquare } from "widgets/ChessGame/types/interfaces";
 import { makeMove } from "./moves";
 
 export const getClickHandler = (
     dispatch: AppDispatch,
-    activeColor: PieceColors,
-    pieceCode: number,
-    isLegalToMove: boolean,
+    { index, pieceCode, isLegalToMove }: ISquare,
+    activeColor: number,
     isSelected: boolean,
     selectedSquareIndex: number | null,
-    index: number,
     setSelectedSquareIndex: (selectedSquareIndex: number | null) => void,
 ) => {
     return function onClickHandler() {
