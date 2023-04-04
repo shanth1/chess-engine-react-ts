@@ -2,6 +2,7 @@ import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor
 import { checkCastlingType } from "../moveTypes/castlingType";
 import { getPseudoLegalMoves } from "../pseudoLegalMoves/pseudoLegalMoves";
 import { checkAttackOnKing } from "./kingUnderAttack";
+import { getPassedKingMove } from "./passedKingMove";
 import { makeTestMove } from "./testMove";
 
 export const checkPseudoLegalMove = (
@@ -21,11 +22,9 @@ export const checkPseudoLegalMove = (
         selectedIndex,
     );
 
-    // is intermediate castling move legal
     if (isCastlingMove) {
-        const intermediateCastlingMove =
-            targetIndex - selectedIndex > 0 ? targetIndex - 1 : targetIndex + 1;
-        if (!legalMoves.includes(intermediateCastlingMove)) return false;
+        const passedKingMove = getPassedKingMove(selectedIndex, targetIndex);
+        if (!legalMoves.includes(passedKingMove)) return false;
     }
 
     let isLegal = true;
