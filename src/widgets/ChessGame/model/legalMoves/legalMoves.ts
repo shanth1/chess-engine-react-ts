@@ -1,7 +1,5 @@
-import { checkCastlingType } from "../moveTypes/castlingType";
 import { getPseudoLegalMoves } from "../pseudoLegalMoves/pseudoLegalMoves";
 import { checkPseudoLegalMove } from "./checkPseudoLegalMove";
-import { getPassedKingMove } from "./passedKingMove";
 
 export const getLegalMoves = (
     piecePlacement: Array<number>,
@@ -19,31 +17,19 @@ export const getLegalMoves = (
     );
 
     for (let moveIndex = 0; moveIndex < pseudoLegalMoves.length; moveIndex++) {
-        const targetIndex = pseudoLegalMoves[moveIndex];
-        const selectedPiece = piecePlacement[selectedIndex];
-        const isCastlingMove = checkCastlingType(
-            selectedPiece,
-            targetIndex,
-            selectedIndex,
-        );
+        const pseudoLegalMove = pseudoLegalMoves[moveIndex];
 
-        if (isCastlingMove) {
-            const passedKingMove = getPassedKingMove(
-                targetIndex,
-                selectedIndex,
-            );
-            if (!legalMoves.includes(passedKingMove)) break;
-        }
         if (
             checkPseudoLegalMove(
                 piecePlacement,
-                targetIndex,
+                pseudoLegalMove,
+                legalMoves,
                 selectedIndex,
                 castlingRights,
                 enPassant,
             )
         ) {
-            legalMoves.push(targetIndex);
+            legalMoves.push(pseudoLegalMove);
         }
     }
 
