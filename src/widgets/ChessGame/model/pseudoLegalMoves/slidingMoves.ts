@@ -8,12 +8,12 @@ import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor
 
 export const getSlidingMoves = (
     piecePlacement: Array<number>,
-    selectedSquareIndex: number,
+    selectedIndex: number,
 ): Array<number> => {
     const legalMoves: Array<number> = [];
 
-    const selectedPiece = getPieceType(piecePlacement[selectedSquareIndex]);
-    const activeColor = getPieceColor(piecePlacement[selectedSquareIndex]);
+    const selectedPiece = getPieceType(piecePlacement[selectedIndex]);
+    const activeColor = getPieceColor(piecePlacement[selectedIndex]);
 
     const startDirectionIndex = selectedPiece === PieceTypes.BISHOP ? 4 : 0;
     const endDirectionIndex = selectedPiece === PieceTypes.ROOK ? 4 : 8;
@@ -24,7 +24,7 @@ export const getSlidingMoves = (
         directionIndex++
     ) {
         const numSquareToEdge =
-            precomputedSlidingMoves[selectedSquareIndex][directionIndex];
+            precomputedSlidingMoves[selectedIndex][directionIndex];
 
         for (
             let squareCounter: number = 0;
@@ -32,7 +32,7 @@ export const getSlidingMoves = (
             squareCounter++
         ) {
             let targetIndex: number =
-                selectedSquareIndex +
+                selectedIndex +
                 directionOffsets[directionIndex] * (squareCounter + 1);
 
             if (piecePlacement[targetIndex]) {
