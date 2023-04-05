@@ -1,10 +1,6 @@
 import { AppDispatch } from "app";
-import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
-import {
-    changeActiveColor,
-    moveFigure,
-    updateCastlingRights,
-} from "widgets/ChessGame/model";
+import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
+import { changeActiveColor, moveFigure, updateCastlingRights } from "api/model";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 

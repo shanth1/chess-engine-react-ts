@@ -1,6 +1,6 @@
-import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
-import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
-import { precomputedKingMoves } from "widgets/ChessGame/lib/precomputedData/kingMoves";
+import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
+import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
+import { precomputedKingMoves } from "api/lib/precomputedData/kingMoves";
 import {
     CastlingRights,
     PieceColors,

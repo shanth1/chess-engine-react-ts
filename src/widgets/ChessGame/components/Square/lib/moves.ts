@@ -1,5 +1,5 @@
 import { AppDispatch } from "app";
-import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
+import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 import { makeDefaultMove } from "../model/defaultMove";

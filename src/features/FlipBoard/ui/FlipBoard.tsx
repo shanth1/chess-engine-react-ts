@@ -1,6 +1,6 @@
 import { useAppDispatch } from "app";
 import { Button } from "shared";
-import { changeColorView } from "widgets/ChessGame/model";
+import { changeColorView } from "api/model";
 
 export const FlipBoard = () => {
     const dispatch = useAppDispatch();
