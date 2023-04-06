@@ -1,6 +1,6 @@
-import { getFileName } from "widgets/ChessGame/lib/indexToNameConverter/fileNames";
-import { PieceColors } from "../../types/enums";
-import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
+import { getFileName } from "api/lib/indexToNameConverter/fileNames";
+import { PieceColors } from "../../../widgets/ChessGame/types/enums";
+import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
 import {
     OffsetsPawnBlack,
     OffsetsPawnWhite,

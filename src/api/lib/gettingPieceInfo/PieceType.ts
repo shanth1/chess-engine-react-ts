@@ -1,3 +1,3 @@
-import { pieceBitMask } from "widgets/ChessGame/lib/bitMasks";
+import { pieceBitMask } from "./bitMasks";
 
 export const getPieceType = (pieceCode: number) => pieceCode & pieceBitMask;

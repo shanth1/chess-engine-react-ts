@@ -1,7 +1,7 @@
 import { AppDispatch } from "app";
-import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
-import { getPieceType } from "widgets/ChessGame/lib/gettingPieceInfo/PieceType";
-import { promotesPawn } from "widgets/ChessGame/model";
+import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
+import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
+import { promotesPawn } from "api/model";
 import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "../../Board/model/squares";
 

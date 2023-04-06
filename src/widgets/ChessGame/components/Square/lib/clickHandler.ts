@@ -1,5 +1,5 @@
 import { AppDispatch } from "app";
-import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
+import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
 import { PieceColors } from "widgets/ChessGame/types/enums";
 import { ISquare } from "widgets/ChessGame/types/interfaces";
 import { makeMove } from "./moves";

@@ -1,5 +1,5 @@
-import { precomputedKingMoves } from "widgets/ChessGame/lib/precomputedData/kingMoves";
-import { getPieceColor } from "widgets/ChessGame/lib/gettingPieceInfo/PieceColor";
+import { precomputedKingMoves } from "api/lib/precomputedData/kingMoves";
+import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
 
 export const getKingMoves = (
     piecePlacement: Array<number>,

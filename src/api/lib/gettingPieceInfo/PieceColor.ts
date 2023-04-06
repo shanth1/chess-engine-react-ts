@@ -1,3 +1,3 @@
-import { colorBitMask } from "widgets/ChessGame/lib/bitMasks";
+import { colorBitMask } from "./bitMasks";
 
 export const getPieceColor = (pieceCode: number) => pieceCode & colorBitMask;

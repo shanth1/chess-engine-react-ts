@@ -1,5 +1,5 @@
-import { getPieceType } from "../../lib/gettingPieceInfo/PieceType";
-import { PieceTypes } from "../../types/enums";
+import { getPieceType } from "../gettingPieceInfo/PieceType";
+import { PieceTypes } from "../../../widgets/ChessGame/types/enums";
 
 export const checkCastlingType = (
     selectedPiece: number,

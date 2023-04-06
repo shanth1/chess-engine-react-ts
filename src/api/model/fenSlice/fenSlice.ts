@@ -1,6 +1,9 @@
-import { getPieceCode } from "./../../lib/gettingPieceInfo/pieceCode";
-import { CastlingRights } from "../../types/enums";
-import { PieceColors, PieceTypes } from "../../types/enums";
+import { getPieceCode } from "../../lib/gettingPieceInfo/pieceCode";
+import { CastlingRights } from "../../../widgets/ChessGame/types/enums";
+import {
+    PieceColors,
+    PieceTypes,
+} from "../../../widgets/ChessGame/types/enums";
 import { createSlice, current } from "@reduxjs/toolkit";
 import { getCastlingRights } from "./getCastlingRights";
 import { getPiecePlacementArrayFromFen } from "./getPiecePlacement";
