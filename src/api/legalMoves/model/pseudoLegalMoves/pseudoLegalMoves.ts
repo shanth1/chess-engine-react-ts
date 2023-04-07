@@ -1,5 +1,5 @@
-import { PieceTypes } from "../../../widgets/ChessGame/types/enums";
-import { getPieceType } from "../../lib/gettingPieceInfo/PieceType";
+import { PieceTypes } from "../../../../widgets/ChessGame/types/enums";
+import { getPieceType } from "../../../lib/gettingPieceInfo/PieceType";
 import { getKnightMoves } from "./knightMoves";
 import { getSlidingMoves } from "./slidingMoves";
 import { getKingMoves } from "./kingMoves";

@@ -1,5 +1,5 @@
 import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
-import { getPseudoLegalMoves } from "../pseudoLegalMoves/pseudoLegalMoves";
+import { getPseudoLegalMoves } from "../model/pseudoLegalMoves/pseudoLegalMoves";
 import { checkCastlingType } from "./castlingType";
 import { checkAttackOnKing } from "./kingUnderAttack";
 import { getPassedKingMove } from "./passedKingMove";
