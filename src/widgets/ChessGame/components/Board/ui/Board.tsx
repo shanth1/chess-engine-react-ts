@@ -28,6 +28,7 @@ export const Board: React.FC = () => {
                         square={square}
                         selectedIndex={selectedIndex}
                         setSelectedIndex={setSelectedIndex}
+                        piecePlacement={piecePlacement}
                     />
                 );
             })}

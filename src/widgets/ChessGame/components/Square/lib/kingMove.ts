@@ -4,9 +4,10 @@ import { makeDefaultMove } from "../model/defaultMove";
 
 export const makeKingMove = (
     dispatch: AppDispatch,
-    selectedSquareIndex: number,
+    piecePlacement: Array<number>,
+    selectedIndex: number,
     targetIndex: number,
 ) => {
-    resolveCastling(dispatch, selectedSquareIndex, targetIndex);
-    makeDefaultMove(dispatch, selectedSquareIndex, targetIndex);
+    resolveCastling(dispatch, piecePlacement, selectedIndex, targetIndex);
+    makeDefaultMove(dispatch, piecePlacement, selectedIndex, targetIndex);
 };

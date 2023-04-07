@@ -2,15 +2,20 @@ import { AppDispatch } from "app";
 import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
 import { moveFigure } from "api/model";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
-import { squares } from "../../Board/model/squares";
 
 export const resolveCastling = (
     dispatch: AppDispatch,
-    selectedSquareIndex: number,
+    piecePlacement: Array<number>,
+    selectedIndex: number,
     targetIndex: number,
 ) => {
-    if (isCastling(selectedSquareIndex, targetIndex)) {
-        moveRookWhileCastling(dispatch, selectedSquareIndex, targetIndex);
+    if (isCastling(selectedIndex, targetIndex)) {
+        moveRookWhileCastling(
+            dispatch,
+            piecePlacement,
+            selectedIndex,
+            targetIndex,
+        );
     }
 };
 
@@ -20,23 +25,19 @@ const isCastling = (selectedIndex: number, targetIndex: number): boolean => {
 
 const moveRookWhileCastling = (
     dispatch: AppDispatch,
-    selectedSquareIndex: number,
+    piecePlacement: Array<number>,
+    selectedIndex: number,
     targetIndex: number,
 ): void => {
     if (
-        getPieceType(squares[selectedSquareIndex].pieceCode) ===
-            PieceTypes.KING &&
-        Math.abs(selectedSquareIndex - targetIndex) >= 2 &&
-        Math.abs(selectedSquareIndex - targetIndex) <= 4
+        getPieceType(piecePlacement[selectedIndex]) === PieceTypes.KING &&
+        Math.abs(selectedIndex - targetIndex) >= 2 &&
+        Math.abs(selectedIndex - targetIndex) <= 4
     ) {
         const rookStartIndex =
-            targetIndex % 8 >= 6
-                ? selectedSquareIndex + 3
-                : selectedSquareIndex - 4;
+            targetIndex % 8 >= 6 ? selectedIndex + 3 : selectedIndex - 4;
         const rookTargetIndex =
-            targetIndex % 8 >= 6
-                ? selectedSquareIndex + 1
-                : selectedSquareIndex - 1;
+            targetIndex % 8 >= 6 ? selectedIndex + 1 : selectedIndex - 1;
 
         dispatch(
             moveFigure({

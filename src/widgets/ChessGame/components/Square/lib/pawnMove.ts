@@ -5,10 +5,11 @@ import { resolvePawnPromotion } from "../model/pawnPromotion";
 
 export const makePawnMove = (
     dispatch: AppDispatch,
-    selectedSquareIndex: number,
+    piecePlacement: Array<number>,
+    selectedIndex: number,
     targetIndex: number,
 ) => {
-    resolveEnPassant(dispatch, selectedSquareIndex, targetIndex);
-    resolvePawnPromotion(dispatch, selectedSquareIndex, targetIndex);
-    makeDefaultMove(dispatch, selectedSquareIndex, targetIndex);
+    resolveEnPassant(dispatch, piecePlacement, selectedIndex, targetIndex);
+    resolvePawnPromotion(dispatch, piecePlacement, selectedIndex, targetIndex);
+    makeDefaultMove(dispatch, piecePlacement, selectedIndex, targetIndex);
 };

@@ -3,30 +3,28 @@ import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
 import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
 import { promotesPawn } from "api/model";
 import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
-import { squares } from "../../Board/model/squares";
 
 export const resolvePawnPromotion = (
     dispatch: AppDispatch,
-    selectedSquareIndex: number,
+    piecePlacement: Array<number>,
+    selectedIndex: number,
     targetIndex: number,
 ) => {
-    if (checkPawnPromotion(selectedSquareIndex, targetIndex)) {
-        dispatch(promotesPawn({ index: targetIndex }));
+    if (checkPawnPromotion(piecePlacement, selectedIndex, targetIndex)) {
+        dispatch(promotesPawn({ index: selectedIndex }));
     }
 };
 
 const checkPawnPromotion = (
-    selectedSquareIndex: number,
+    piecePlacement: Array<number>,
+    selectedIndex: number,
     targetIndex: number,
 ): boolean => {
-    return (getPieceType(squares[selectedSquareIndex].pieceCode) ===
-        PieceTypes.PAWN &&
-        getPieceColor(squares[selectedSquareIndex].pieceCode) ===
-            PieceColors.WHITE &&
+    return (getPieceType(piecePlacement[selectedIndex]) === PieceTypes.PAWN &&
+        getPieceColor(piecePlacement[selectedIndex]) === PieceColors.WHITE &&
         Math.floor(targetIndex / 8) === 0) ||
-        (getPieceType(squares[selectedSquareIndex].pieceCode) ===
-            PieceTypes.PAWN &&
-            getPieceColor(squares[selectedSquareIndex].pieceCode) ===
+        (getPieceType(piecePlacement[selectedIndex]) === PieceTypes.PAWN &&
+            getPieceColor(piecePlacement[selectedIndex]) ===
                 PieceColors.BLACK &&
             Math.floor(targetIndex / 8) === 7)
         ? true

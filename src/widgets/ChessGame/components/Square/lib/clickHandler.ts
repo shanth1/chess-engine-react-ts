@@ -7,12 +7,13 @@ import { makeMove } from "./moves";
 export const getClickHandler = (
     dispatch: AppDispatch,
     { index, pieceCode, isLegalToMove }: ISquare,
+    piecePlacement: Array<number>,
     activeColor: number,
     isSelected: boolean,
     selectedIndex: number | null,
     setSelectedIndex: (selectedSquareIndex: number | null) => void,
-) => {
-    return function onClickHandler() {
+): (() => void) => {
+    return function onClickHandler(): void {
         const pieceColor: PieceColors = getPieceColor(pieceCode);
         const isPlayerTurn: boolean = activeColor === pieceColor;
 
@@ -20,6 +21,6 @@ export const getClickHandler = (
         setSelectedIndex(isSelected || isLegalToMove ? null : index);
 
         if (!isLegalToMove || selectedIndex === null) return;
-        makeMove(dispatch, selectedIndex, index, activeColor);
+        makeMove(dispatch, piecePlacement, selectedIndex, index, activeColor);
     };
 };
