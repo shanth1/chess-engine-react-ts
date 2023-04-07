@@ -1,12 +1,12 @@
-import { getPieceCode } from "../../lib/gettingPieceInfo/pieceCode";
-import { CastlingRights } from "../../../widgets/ChessGame/types/enums";
+import { createSlice, current } from "@reduxjs/toolkit";
+import { getPiecePlacementArrayFromFen } from "../lib/piecePlacement";
+import { getCastlingRights } from "../lib/castlingRights";
 import {
+    CastlingRights,
     PieceColors,
     PieceTypes,
-} from "../../../widgets/ChessGame/types/enums";
-import { createSlice, current } from "@reduxjs/toolkit";
-import { getCastlingRights } from "./getCastlingRights";
-import { getPiecePlacementArrayFromFen } from "./getPiecePlacement";
+} from "widgets/ChessGame/types/enums";
+import { getPieceCode } from "api/lib/gettingPieceInfo/pieceCode";
 
 const initialState = {
     piecePlacement: getPiecePlacementArrayFromFen(
