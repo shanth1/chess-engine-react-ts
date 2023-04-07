@@ -1,7 +1,6 @@
 import { AppDispatch } from "app";
 import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
-import { squares } from "../../Board/model/squares";
 import { makeDefaultMove } from "../model/defaultMove";
 import { makeKingMove } from "./kingMove";
 import { makePawnMove } from "./pawnMove";
@@ -9,25 +8,31 @@ import { getTargetIndex } from "./targetIndex";
 
 export const makeMove = (
     dispatch: AppDispatch,
-    selectedSquareIndex: number,
+    piecePlacement: Array<number>,
+    selectedIndex: number,
     index: number,
     activeColor: number,
 ) => {
-    const targetIndex = getTargetIndex(squares, index, activeColor);
-    const selectedPiece = squares[selectedSquareIndex].pieceCode;
+    const targetIndex = getTargetIndex(piecePlacement, index, activeColor);
+    const selectedPiece = piecePlacement[selectedIndex];
 
     switch (getPieceType(selectedPiece)) {
         case PieceTypes.PAWN:
-            makePawnMove(dispatch, selectedSquareIndex, targetIndex);
+            makePawnMove(dispatch, piecePlacement, selectedIndex, targetIndex);
             break;
         case PieceTypes.KING:
-            makeKingMove(dispatch, selectedSquareIndex, targetIndex);
+            makeKingMove(dispatch, piecePlacement, selectedIndex, targetIndex);
             break;
         case PieceTypes.ROOK:
         case PieceTypes.BISHOP:
         case PieceTypes.KNIGHT:
         case PieceTypes.QUEEN:
-            makeDefaultMove(dispatch, selectedSquareIndex, targetIndex);
+            makeDefaultMove(
+                dispatch,
+                piecePlacement,
+                selectedIndex,
+                targetIndex,
+            );
             break;
         default:
             alert("wrong piece");

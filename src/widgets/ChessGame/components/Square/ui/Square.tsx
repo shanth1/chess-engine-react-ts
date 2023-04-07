@@ -10,6 +10,7 @@ export const Square: React.FC<ISquareProps> = ({
     square,
     selectedIndex,
     setSelectedIndex,
+    piecePlacement,
 }) => {
     const { index, pieceCode, isLegalToMove } = square;
     const dispatch: AppDispatch = useAppDispatch();
@@ -26,6 +27,7 @@ export const Square: React.FC<ISquareProps> = ({
             onClick={getClickHandler(
                 dispatch,
                 square,
+                piecePlacement,
                 activeColor,
                 isSelected,
                 selectedIndex,

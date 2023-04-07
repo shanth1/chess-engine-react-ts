@@ -6,25 +6,26 @@ import { squares } from "../../Board/model/squares";
 
 export const makeDefaultMove = (
     dispatch: AppDispatch,
-    selectedSquareIndex: number,
+    piecePlacement: Array<number>,
+    selectedIndex: number,
     targetIndex: number,
 ) => {
     dispatch(
         moveFigure({
-            startIndex: selectedSquareIndex,
+            startIndex: selectedIndex,
             targetIndex: targetIndex,
         }),
     );
     dispatch(changeActiveColor());
 
-    const selectedPiece = getPieceType(squares[selectedSquareIndex].pieceCode);
+    const selectedPiece = getPieceType(piecePlacement[selectedIndex]);
     if (
         selectedPiece === PieceTypes.KING ||
         selectedPiece === PieceTypes.ROOK
     ) {
         dispatch(
             updateCastlingRights({
-                squareName: squares[selectedSquareIndex].name,
+                squareName: squares[selectedIndex].name,
             }),
         );
     }

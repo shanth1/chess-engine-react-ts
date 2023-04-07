@@ -40,12 +40,19 @@ export const Analysis: React.FC = () => {
                 legalMoves.push([selectedIndex, targetIndex]);
             });
         }
-        const randomMove =
-            legalMoves[Math.floor(Math.random() * legalMoves.length)];
-        const selectedIndex: number = randomMove[0];
-        const targetIndex: number = randomMove[1];
-
-        makeMove(dispatch, selectedIndex, targetIndex, activeColor);
+        if (legalMoves.length !== 0) {
+            const randomMove =
+                legalMoves[Math.floor(Math.random() * legalMoves.length)];
+            const selectedIndex: number = randomMove[0];
+            const targetIndex: number = randomMove[1];
+            makeMove(
+                dispatch,
+                piecePlacement,
+                selectedIndex,
+                targetIndex,
+                activeColor,
+            );
+        }
     }
 
     return <div className={styles.analysis}>Analysis</div>;
