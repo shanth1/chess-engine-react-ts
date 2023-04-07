@@ -1,7 +1,6 @@
 import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
-import { getLegalMoves } from "api/model";
+import { getLegalMoves, makeMove } from "api/model";
 import { AppDispatch, useAppDispatch, useAppSelector } from "app";
-import { makeMove } from "widgets/ChessGame/components/Square/lib/moves";
 import styles from "./styles.module.css";
 
 export const Analysis: React.FC = () => {

@@ -2,7 +2,7 @@ import { AppDispatch } from "app";
 import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
 import { changeActiveColor, moveFigure, updateCastlingRights } from "api/model";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
-import { squares } from "../../Board/model/squares";
+import { squares } from "widgets/ChessGame/components/Board/model/squares";
 
 export const makeDefaultMove = (
     dispatch: AppDispatch,

@@ -1,7 +1,7 @@
 import { AppDispatch } from "app";
 import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
-import { makeDefaultMove } from "../model/defaultMove";
+import { makeDefaultMove } from "./defaultMove";
 import { makeKingMove } from "./kingMove";
 import { makePawnMove } from "./pawnMove";
 import { getTargetIndex } from "./targetIndex";

@@ -1,7 +1,7 @@
 import { AppDispatch } from "app";
-import { makeDefaultMove } from "../model/defaultMove";
-import { resolveEnPassant } from "../model/enPassant";
-import { resolvePawnPromotion } from "../model/pawnPromotion";
+import { makeDefaultMove } from "./defaultMove";
+import { resolveEnPassant } from "./enPassant";
+import { resolvePawnPromotion } from "./pawnPromotion";
 
 export const makePawnMove = (
     dispatch: AppDispatch,

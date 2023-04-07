@@ -1,6 +1,6 @@
 import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
-import { checkCastlingType } from "../../lib/gettingMoveInfo/castlingType";
 import { getPseudoLegalMoves } from "../pseudoLegalMoves/pseudoLegalMoves";
+import { checkCastlingType } from "./castlingType";
 import { checkAttackOnKing } from "./kingUnderAttack";
 import { getPassedKingMove } from "./passedKingMove";
 import { makeTestMove } from "./testMove";

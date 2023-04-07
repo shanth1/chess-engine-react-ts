@@ -1,6 +1,6 @@
 import { AppDispatch } from "app";
-import { resolveCastling } from "../model/castling";
-import { makeDefaultMove } from "../model/defaultMove";
+import { resolveCastling } from "./castling";
+import { makeDefaultMove } from "./defaultMove";
 
 export const makeKingMove = (
     dispatch: AppDispatch,
