@@ -1,4 +1,4 @@
-import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
+import { getPieceType } from "api/pieceInfo";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
 import { squares } from "./squares";
 

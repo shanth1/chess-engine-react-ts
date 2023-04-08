@@ -1,4 +1,4 @@
-import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
+import { getPieceColor } from "api/pieceInfo";
 import { precomputedKingMoves } from "api/precomputedData";
 
 export const getKingMoves = (

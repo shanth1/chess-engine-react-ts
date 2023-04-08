@@ -6,7 +6,7 @@ import {
     PieceColors,
     PieceTypes,
 } from "widgets/ChessGame/types/enums";
-import { getPieceCode } from "api/lib/gettingPieceInfo/pieceCode";
+import { getPieceCode } from "api/pieceInfo/model/pieceCode";
 
 const initialState = {
     piecePlacement: getPiecePlacementArrayFromFen(

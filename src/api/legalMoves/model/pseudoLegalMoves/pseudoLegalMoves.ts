@@ -1,10 +1,10 @@
 import { PieceTypes } from "../../../../widgets/ChessGame/types/enums";
-import { getPieceType } from "../../../lib/gettingPieceInfo/PieceType";
 import { getKnightMoves } from "./knightMoves";
 import { getSlidingMoves } from "./slidingMoves";
 import { getKingMoves } from "./kingMoves";
 import { getPawnMoves } from "./pawnMoves";
 import { getCastlingMoves } from "./castlingMoves";
+import { getPieceType } from "api/pieceInfo";
 
 export const getPseudoLegalMoves = (
     piecePlacement: Array<number>,

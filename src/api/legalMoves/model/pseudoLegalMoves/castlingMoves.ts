@@ -1,5 +1,4 @@
-import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
-import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
+import { getPieceColor, getPieceType } from "api/pieceInfo";
 import { precomputedKingMoves } from "api/precomputedData";
 import {
     CastlingRights,

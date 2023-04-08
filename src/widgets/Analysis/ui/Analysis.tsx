@@ -1,6 +1,6 @@
 import { getLegalMoves } from "api/legalMoves";
-import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
 import { makeMove } from "api/movement";
+import { getPieceColor } from "api/pieceInfo";
 import { AppDispatch, useAppDispatch, useAppSelector } from "app";
 import styles from "./styles.module.css";
 

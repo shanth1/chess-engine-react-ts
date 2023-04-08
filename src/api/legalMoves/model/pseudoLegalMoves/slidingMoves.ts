@@ -1,8 +1,6 @@
 import { PieceTypes } from "../../../../widgets/ChessGame/types/enums";
-import { getPieceType } from "../../../lib/gettingPieceInfo/PieceType";
-
-import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
 import { directionOffsets, precomputedSlidingMoves } from "api/precomputedData";
+import { getPieceColor, getPieceType } from "api/pieceInfo";
 
 export const getSlidingMoves = (
     piecePlacement: Array<number>,
