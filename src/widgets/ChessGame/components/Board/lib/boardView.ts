@@ -1,4 +1,4 @@
-import { PieceColors } from "widgets/ChessGame/types/enums";
+import { PieceColors } from "api/pieceInfo";
 import { squares } from "../model/squares";
 
 export const getBoardView = (colorView: number) =>

@@ -1,7 +1,11 @@
 import { AppDispatch } from "app";
-import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
 import { deletePiece, updateEnPassant } from "api/fenSlice";
-import { getPieceColor, getPieceType } from "api/pieceInfo";
+import {
+    getPieceColor,
+    getPieceType,
+    PieceColors,
+    PieceTypes,
+} from "api/pieceInfo";
 import { getFileName } from "api/boardInfo";
 
 export const resolveEnPassant = (

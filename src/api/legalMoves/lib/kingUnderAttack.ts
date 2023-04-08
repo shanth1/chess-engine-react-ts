@@ -1,5 +1,4 @@
-import { getPieceColor, getPieceType } from "api/pieceInfo";
-import { PieceTypes } from "widgets/ChessGame/types/enums";
+import { getPieceColor, getPieceType, PieceTypes } from "api/pieceInfo";
 
 export const checkAttackOnKing = (
     piecePlacement: Array<number>,

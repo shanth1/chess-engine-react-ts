@@ -1,10 +1,11 @@
-import { getPieceColor, getPieceType } from "api/pieceInfo";
-import { precomputedKingMoves } from "api/precomputedData";
+import { CastlingRights } from "api/boardInfo";
 import {
-    CastlingRights,
+    getPieceColor,
+    getPieceType,
     PieceColors,
     PieceTypes,
-} from "widgets/ChessGame/types/enums";
+} from "api/pieceInfo";
+import { precomputedKingMoves } from "api/precomputedData";
 
 export const getCastlingMoves = (
     piecePlacement: Array<number>,

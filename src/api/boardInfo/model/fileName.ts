@@ -1,4 +1,4 @@
-import { FileNames } from "widgets/ChessGame/types/enums";
+import { FileNames } from "../types/enums";
 
 const fileNames: Array<FileNames> = [
     FileNames.A,

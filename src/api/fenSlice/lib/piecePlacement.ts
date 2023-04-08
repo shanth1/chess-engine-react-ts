@@ -1,4 +1,4 @@
-import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
+import { PieceColors, PieceTypes } from "api/pieceInfo";
 
 function getPieceBinaryCodeFromFenSymbol(symbol: string): number {
     const pieceBinaryCode =

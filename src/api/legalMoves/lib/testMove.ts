@@ -1,4 +1,4 @@
-import { PieceTypes } from "widgets/ChessGame/types/enums";
+import { PieceTypes } from "api/pieceInfo";
 
 export const makeTestMove = (
     piecePlacement: Array<number>,

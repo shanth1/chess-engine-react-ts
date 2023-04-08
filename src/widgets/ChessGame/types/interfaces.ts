@@ -1,4 +1,4 @@
-import { CastlingRights, PieceColors, Colors } from "./enums";
+import { Colors } from "./enums";
 
 export interface ISquare {
     readonly index: number;
@@ -6,13 +6,4 @@ export interface ISquare {
     readonly name: string;
     isLegalToMove: boolean;
     pieceCode: number;
-}
-
-export interface IGameSlice {
-    piecePlacement: Array<number>;
-    activeColor: PieceColors;
-    castlingRights: CastlingRights;
-    enPassant: string;
-    halfMoveClock: number;
-    fullMoveNumber: number;
 }
