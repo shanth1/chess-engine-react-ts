@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { fenSliceReducer, playerSliceReducer } from "widgets/ChessGame/model";
+import { fenSliceReducer } from "api/fenSlice";
+import { playerSliceReducer } from "api/playerSlice";
 
 const store = configureStore({
     reducer: {
