@@ -1,5 +1,5 @@
-import { precomputedKingMoves } from "api/lib/precomputedData/kingMoves";
 import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
+import { precomputedKingMoves } from "api/precomputedData";
 
 export const getKingMoves = (
     piecePlacement: Array<number>,
