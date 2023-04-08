@@ -96,14 +96,5 @@ const fenSlice = createSlice({
     },
 });
 
-export const {
-    setFenPosition,
-    moveFigure,
-    changeActiveColor,
-    updateCastlingRights,
-    updateEnPassant,
-    deletePiece,
-    promotesPawn,
-} = fenSlice.actions;
-
+export const fenSliceActions = fenSlice.actions;
 export const fenSliceReducer = fenSlice.reducer;

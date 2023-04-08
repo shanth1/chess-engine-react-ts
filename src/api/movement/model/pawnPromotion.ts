@@ -1,8 +1,8 @@
 import { AppDispatch } from "app";
 import { getPieceColor } from "api/lib/gettingPieceInfo/PieceColor";
 import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
-import { promotesPawn } from "api/model";
 import { PieceColors, PieceTypes } from "widgets/ChessGame/types/enums";
+import { promotesPawn } from "api/fenSlice";
 
 export const resolvePawnPromotion = (
     dispatch: AppDispatch,

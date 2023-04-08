@@ -4,7 +4,7 @@ import { PieceTypes } from "widgets/ChessGame/types/enums";
 import { makeDefaultMove } from "./defaultMove";
 import { makeKingMove } from "./kingMove";
 import { makePawnMove } from "./pawnMove";
-import { getTargetIndex } from "./targetIndex";
+import { getTargetIndex } from "../lib/targetIndex";
 
 export const makeMove = (
     dispatch: AppDispatch,

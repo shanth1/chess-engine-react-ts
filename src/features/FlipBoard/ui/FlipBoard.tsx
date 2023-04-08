@@ -1,6 +1,6 @@
+import { changeColorView } from "api/model/playerSlice/playerSlice";
 import { useAppDispatch } from "app";
 import { Button } from "shared";
-import { changeColorView } from "api/model";
 
 export const FlipBoard = () => {
     const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
 import { AppDispatch } from "app";
 import { getPieceType } from "api/lib/gettingPieceInfo/PieceType";
-import { moveFigure } from "api/model";
 import { PieceTypes } from "widgets/ChessGame/types/enums";
+import { moveFigure } from "api/fenSlice";
 
 export const resolveCastling = (
     dispatch: AppDispatch,
