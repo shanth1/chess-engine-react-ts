@@ -1,4 +1,4 @@
-import { FileNames } from "../types/enums";
+import { FileNames } from "./enums";
 
 const fileNames: Array<FileNames> = [
     FileNames.A,

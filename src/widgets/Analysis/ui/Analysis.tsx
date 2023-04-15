@@ -1,7 +1,7 @@
 import { getLegalMoves } from "api/legalMoves";
 import { makeMove } from "api/movement";
-import { getPieceColor } from "api/pieceInfo";
 import { AppDispatch, useAppDispatch, useAppSelector } from "app";
+import { getPieceColor } from "shared";
 import styles from "./styles.module.css";
 
 export const Analysis: React.FC = () => {

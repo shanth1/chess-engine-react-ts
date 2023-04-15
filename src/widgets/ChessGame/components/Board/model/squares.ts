@@ -1,5 +1,4 @@
-import { getFileName } from "api/boardInfo";
-import { PieceTypes } from "types/Piece";
+import { getFileName, PieceTypes } from "shared";
 import { Colors } from "widgets/ChessGame/types/enums";
 import { ISquare } from "widgets/ChessGame/types/interfaces";
 

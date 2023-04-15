@@ -1,5 +1,5 @@
 import { AppDispatch, useAppDispatch, useAppSelector } from "app";
-import { PieceColors } from "types/Piece";
+import { PieceColors } from "shared";
 import { Piece } from "../../Piece/ui/Piece";
 import { getClickHandler } from "../lib/clickHandler";
 import { ISquareProps } from "../types/interfaces";
