@@ -1,1 +1,1 @@
-export { getLegalMoves } from "./model/legalMoves";
+export { getLegalMoves } from "./legalMoves";
