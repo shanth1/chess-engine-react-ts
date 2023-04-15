@@ -1,4 +1,4 @@
-import { PieceTypes } from "api/pieceInfo";
+import { PieceTypes } from "types/Piece";
 
 export const makeTestMove = (
     piecePlacement: Array<number>,

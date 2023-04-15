@@ -1,4 +1,4 @@
-import { CastlingRights } from "api/boardInfo";
+import { CastlingRights } from "api/types/enums";
 
 export function getCastlingRights(fenCastlingRights: string): number {
     let castlingRights: number = Number();

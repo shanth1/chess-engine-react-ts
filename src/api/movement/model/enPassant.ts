@@ -1,12 +1,8 @@
 import { AppDispatch } from "app";
 import { deletePiece, updateEnPassant } from "api/fenSlice";
-import {
-    getPieceColor,
-    getPieceType,
-    PieceColors,
-    PieceTypes,
-} from "api/pieceInfo";
+import { getPieceColor, getPieceType } from "api/pieceInfo";
 import { getFileName } from "api/boardInfo";
+import { PieceColors, PieceTypes } from "types/Piece";
 
 export const resolveEnPassant = (
     dispatch: AppDispatch,

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PieceColors } from "api/pieceInfo";
+import { PieceColors } from "types/Piece";
 
 const initialState = {
     playerColor: PieceColors.WHITE,

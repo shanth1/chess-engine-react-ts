@@ -1,7 +1,8 @@
 import { AppDispatch } from "app";
 import { ISquare } from "widgets/ChessGame/types/interfaces";
 import { makeMove } from "api/movement";
-import { getPieceColor, PieceColors } from "api/pieceInfo";
+import { getPieceColor } from "api/pieceInfo";
+import { PieceColors } from "types/Piece";
 
 export const getClickHandler = (
     dispatch: AppDispatch,

@@ -1,4 +1,4 @@
-import { PieceColors } from "api/pieceInfo";
+import { PieceColors } from "types/Piece";
 import { squares } from "../model/squares";
 
 export const getBoardView = (colorView: number) =>

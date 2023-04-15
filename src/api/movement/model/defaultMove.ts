@@ -5,7 +5,8 @@ import {
     moveFigure,
     updateCastlingRights,
 } from "api/fenSlice";
-import { getPieceType, PieceTypes } from "api/pieceInfo";
+import { getPieceType } from "api/pieceInfo";
+import { PieceTypes } from "types/Piece";
 
 export const makeDefaultMove = (
     dispatch: AppDispatch,

@@ -1,5 +1,6 @@
 import { directionOffsets, precomputedSlidingMoves } from "api/precomputedData";
-import { getPieceColor, getPieceType, PieceTypes } from "api/pieceInfo";
+import { getPieceColor, getPieceType } from "api/pieceInfo";
+import { PieceTypes } from "types/Piece";
 
 export const getSlidingMoves = (
     piecePlacement: Array<number>,

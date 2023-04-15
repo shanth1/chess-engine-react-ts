@@ -1,4 +1,5 @@
-import { getPieceType, PieceTypes } from "api/pieceInfo";
+import { getPieceType } from "api/pieceInfo";
+import { PieceTypes } from "types/Piece";
 
 export const checkCastlingType = (
     selectedPiece: number,

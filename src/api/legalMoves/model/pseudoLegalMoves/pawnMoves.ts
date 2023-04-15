@@ -1,6 +1,7 @@
-import { getPieceColor, PieceColors } from "api/pieceInfo";
+import { getPieceColor } from "api/pieceInfo";
 import { getFileName } from "api/boardInfo";
 import { OffsetsPawnBlack, OffsetsPawnWhite } from "api/legalMoves/types/enums";
+import { PieceColors } from "types/Piece";
 
 export const getPawnMoves = (
     piecePlacement: Array<number>,

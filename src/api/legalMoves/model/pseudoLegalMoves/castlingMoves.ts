@@ -1,11 +1,7 @@
-import { CastlingRights } from "api/boardInfo";
-import {
-    getPieceColor,
-    getPieceType,
-    PieceColors,
-    PieceTypes,
-} from "api/pieceInfo";
+import { getPieceColor, getPieceType } from "api/pieceInfo";
 import { precomputedKingMoves } from "api/precomputedData";
+import { CastlingRights } from "api/types/enums";
+import { PieceColors, PieceTypes } from "types/Piece";
 
 export const getCastlingMoves = (
     piecePlacement: Array<number>,
