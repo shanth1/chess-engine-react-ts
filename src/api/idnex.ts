@@ -1,1 +1,1 @@
-export * from "./precomputedData";
+export * from "../entities/legalMoves/lib/precomputedData";

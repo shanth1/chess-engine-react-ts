@@ -1,4 +1,7 @@
-import { directionOffsets, precomputedSlidingMoves } from "api/precomputedData";
+import {
+    directionOffsets,
+    precomputedSlidingMoves,
+} from "entities/legalMoves/lib/precomputedData";
 import { getPieceColor, getPieceType, PieceTypes } from "shared";
 
 export const getSlidingMoves = (

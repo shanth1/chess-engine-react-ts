@@ -1,4 +1,4 @@
-import { ISquare } from "widgets/ChessGame/types/interfaces";
+import { ISquare } from "features/Board/types/interfaces";
 
 export interface ISquareProps {
     square: ISquare;

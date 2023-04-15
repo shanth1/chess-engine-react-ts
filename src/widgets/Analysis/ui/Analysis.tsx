@@ -1,5 +1,5 @@
-import { getLegalMoves } from "api/legalMoves";
-import { makeMove } from "api/movement";
+import { getLegalMoves } from "entities/legalMoves";
+import { makeMove } from "entities/movement";
 import { AppDispatch, useAppDispatch, useAppSelector } from "app";
 import { getPieceColor } from "shared";
 import styles from "./styles.module.css";

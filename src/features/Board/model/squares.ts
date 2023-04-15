@@ -1,6 +1,6 @@
 import { getFileName, PieceTypes } from "shared";
-import { Colors } from "widgets/ChessGame/types/enums";
-import { ISquare } from "widgets/ChessGame/types/interfaces";
+import { Colors } from "features/Board/types/enums";
+import { ISquare } from "features/Board/types/interfaces";
 
 const squares: Array<ISquare> = [];
 let index: number = 0;

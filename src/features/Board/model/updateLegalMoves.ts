@@ -1,4 +1,4 @@
-import { getLegalMoves } from "api/legalMoves/model/legalMoves";
+import { getLegalMoves } from "entities/legalMoves/model/legalMoves";
 import { addAlternativeCastlingMoves } from "./alternativeCastlingMove";
 import { squares } from "./squares";
 

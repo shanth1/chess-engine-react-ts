@@ -1,4 +1,7 @@
-import { OffsetsPawnBlack, OffsetsPawnWhite } from "api/legalMoves/types/enums";
+import {
+    OffsetsPawnBlack,
+    OffsetsPawnWhite,
+} from "entities/legalMoves/types/enums";
 import { getFileName, getPieceColor, PieceColors } from "shared";
 
 export const getPawnMoves = (

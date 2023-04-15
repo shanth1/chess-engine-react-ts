@@ -1,5 +1,5 @@
 import { AppDispatch } from "app";
-import { squares } from "widgets/ChessGame/components/Board/model/squares";
+import { squares } from "features/Board/model/squares";
 import {
     changeActiveColor,
     moveFigure,

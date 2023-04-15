@@ -1,4 +1,4 @@
-import { precomputedKingMoves } from "api/precomputedData";
+import { precomputedKingMoves } from "entities/legalMoves/lib/precomputedData";
 import { getPieceColor } from "shared";
 
 export const getKingMoves = (

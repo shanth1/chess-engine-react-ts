@@ -1,4 +1,4 @@
-import { ISquare } from "widgets/ChessGame/types/interfaces";
+import { ISquare } from "features/Board/types/interfaces";
 import styles from "../styles.module.css";
 
 export const getSquareStyle = (

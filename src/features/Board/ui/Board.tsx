@@ -1,6 +1,6 @@
 import { useAppSelector } from "app/model";
 import { useState } from "react";
-import { Square } from "../../Square";
+import { Square } from "../components/Square";
 import { updateLegalMoves } from "../model/updateLegalMoves";
 import styles from "./styles.module.css";
 import { getBoardView } from "../lib/boardView";

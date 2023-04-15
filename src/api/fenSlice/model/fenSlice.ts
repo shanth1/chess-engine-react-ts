@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { getPiecePlacementArrayFromFen } from "../lib/piecePlacement";
 import { getCastlingRights } from "../lib/castlingRights";
-import { CastlingRights } from "api/types/enums";
+import { CastlingRights } from "shared/types/Castling";
 import { getPieceCode, PieceColors, PieceTypes } from "shared";
 
 const initialState = {
