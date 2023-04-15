@@ -1,5 +1,5 @@
 import { precomputedKnightMoves } from "entities/legalMoves/lib/precomputedData";
-import { getPieceColor } from "shared";
+import { getPieceColor } from "shared/pieceInfo";
 
 export const getKnightMoves = (
     piecePlacement: Array<number>,

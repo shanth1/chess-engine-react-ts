@@ -1,4 +1,4 @@
-import { getPieceColor } from "shared";
+import { getPieceColor } from "shared/pieceInfo";
 import { getPseudoLegalMoves } from "../model/pseudoLegalMoves/pseudoLegalMoves";
 import { checkCastlingType } from "./castlingType";
 import { checkAttackOnKing } from "./kingUnderAttack";

@@ -1,4 +1,5 @@
-import { getPieceColor, getPieceType, PieceTypes } from "shared";
+import { getPieceColor, getPieceType } from "shared/pieceInfo";
+import { PieceTypes } from "shared/types";
 
 export const getTargetIndex = (
     piecePlacement: Array<number>,

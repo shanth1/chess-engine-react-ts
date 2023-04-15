@@ -1,6 +1,7 @@
 import { AppDispatch } from "app";
 import { promotesPawn } from "api/fenSlice";
-import { getPieceColor, getPieceType, PieceColors, PieceTypes } from "shared";
+import { PieceColors, PieceTypes } from "shared/types";
+import { getPieceColor, getPieceType } from "shared/pieceInfo";
 
 export const resolvePawnPromotion = (
     dispatch: AppDispatch,

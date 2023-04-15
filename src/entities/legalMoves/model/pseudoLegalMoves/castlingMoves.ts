@@ -1,12 +1,6 @@
 import { precomputedKingMoves } from "entities/legalMoves/lib/precomputedData";
-
-import {
-    CastlingRights,
-    getPieceColor,
-    getPieceType,
-    PieceColors,
-    PieceTypes,
-} from "shared";
+import { getPieceColor, getPieceType } from "shared/pieceInfo";
+import { CastlingRights, PieceColors, PieceTypes } from "shared/types";
 
 export const getCastlingMoves = (
     piecePlacement: Array<number>,

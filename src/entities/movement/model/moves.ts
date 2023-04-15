@@ -3,7 +3,8 @@ import { makeDefaultMove } from "./defaultMove";
 import { makeKingMove } from "./kingMove";
 import { makePawnMove } from "./pawnMove";
 import { getTargetIndex } from "../lib/targetIndex";
-import { getPieceType, PieceTypes } from "shared";
+import { getPieceType } from "shared/pieceInfo";
+import { PieceTypes } from "shared/types";
 
 export const makeMove = (
     dispatch: AppDispatch,

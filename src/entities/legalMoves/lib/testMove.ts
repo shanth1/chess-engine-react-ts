@@ -1,4 +1,4 @@
-import { PieceTypes } from "shared";
+import { PieceTypes } from "shared/types";
 
 export const makeTestMove = (
     piecePlacement: Array<number>,

@@ -2,7 +2,8 @@ import {
     directionOffsets,
     precomputedSlidingMoves,
 } from "entities/legalMoves/lib/precomputedData";
-import { getPieceColor, getPieceType, PieceTypes } from "shared";
+import { getPieceColor, getPieceType } from "shared/pieceInfo";
+import { PieceTypes } from "shared/types";
 
 export const getSlidingMoves = (
     piecePlacement: Array<number>,

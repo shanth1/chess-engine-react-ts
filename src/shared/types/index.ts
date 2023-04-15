@@ -1,2 +1,2 @@
-export * from "./Piece";
-export * from "./Castling";
+export { PieceColors, PieceTypes } from "./Piece";
+export { CastlingRights } from "./Castling";
