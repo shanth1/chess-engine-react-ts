@@ -1,5 +1,4 @@
-import { getPieceType } from "api/pieceInfo";
-import { PieceTypes } from "types/Piece";
+import { getPieceType, PieceTypes } from "shared";
 import { squares } from "./squares";
 
 export const addAlternativeCastlingMoves = (
