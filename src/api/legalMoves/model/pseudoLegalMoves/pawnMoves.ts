@@ -1,10 +1,7 @@
-import { PieceColors } from "../../../../widgets/ChessGame/types/enums";
-import {
-    OffsetsPawnBlack,
-    OffsetsPawnWhite,
-} from "widgets/ChessGame/types/enums";
 import { getPieceColor } from "api/pieceInfo";
 import { getFileName } from "api/boardInfo";
+import { OffsetsPawnBlack, OffsetsPawnWhite } from "api/legalMoves/types/enums";
+import { PieceColors } from "types/Piece";
 
 export const getPawnMoves = (
     piecePlacement: Array<number>,

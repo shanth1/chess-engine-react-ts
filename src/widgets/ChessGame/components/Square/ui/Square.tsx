@@ -1,5 +1,5 @@
 import { AppDispatch, useAppDispatch, useAppSelector } from "app";
-import { PieceColors } from "widgets/ChessGame/types/enums";
+import { PieceColors } from "types/Piece";
 import { Piece } from "../../Piece/ui/Piece";
 import { getClickHandler } from "../lib/clickHandler";
 import { ISquareProps } from "../types/interfaces";

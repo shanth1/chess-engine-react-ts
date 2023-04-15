@@ -1,5 +1,5 @@
 import { getPieceColor, getPieceType } from "api/pieceInfo";
-import { PieceColors } from "widgets/ChessGame/types/enums";
+import { PieceColors } from "types/Piece";
 import { ColorFileNames, PieceFileNames, PieceStyles } from "../types/enums";
 
 export const getIconPath = (pieceCode: number, iconStyle: PieceStyles) => {

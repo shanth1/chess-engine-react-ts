@@ -1,12 +1,9 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { getPiecePlacementArrayFromFen } from "../lib/piecePlacement";
 import { getCastlingRights } from "../lib/castlingRights";
-import {
-    CastlingRights,
-    PieceColors,
-    PieceTypes,
-} from "widgets/ChessGame/types/enums";
 import { getPieceCode } from "api/pieceInfo/model/pieceCode";
+import { CastlingRights } from "api/types/enums";
+import { PieceColors, PieceTypes } from "types/Piece";
 
 const initialState = {
     piecePlacement: getPiecePlacementArrayFromFen(

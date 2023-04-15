@@ -1,5 +1,5 @@
-import { PieceColors } from "widgets/ChessGame/types/enums";
 import { createSlice } from "@reduxjs/toolkit";
+import { PieceColors } from "types/Piece";
 
 const initialState = {
     playerColor: PieceColors.WHITE,

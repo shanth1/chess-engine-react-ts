@@ -1,5 +1,6 @@
 import { getFileName } from "api/boardInfo";
-import { Colors, PieceTypes } from "widgets/ChessGame/types/enums";
+import { PieceTypes } from "types/Piece";
+import { Colors } from "widgets/ChessGame/types/enums";
 import { ISquare } from "widgets/ChessGame/types/interfaces";
 
 const squares: Array<ISquare> = [];

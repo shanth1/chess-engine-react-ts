@@ -1,5 +1,5 @@
 import { getPieceType } from "api/pieceInfo";
-import { PieceTypes } from "widgets/ChessGame/types/enums";
+import { PieceTypes } from "types/Piece";
 import { squares } from "./squares";
 
 export const addAlternativeCastlingMoves = (

@@ -1,10 +1,10 @@
 import { AppDispatch } from "app";
-import { PieceTypes } from "widgets/ChessGame/types/enums";
 import { makeDefaultMove } from "./defaultMove";
 import { makeKingMove } from "./kingMove";
 import { makePawnMove } from "./pawnMove";
 import { getTargetIndex } from "../lib/targetIndex";
 import { getPieceType } from "api/pieceInfo";
+import { PieceTypes } from "types/Piece";
 
 export const makeMove = (
     dispatch: AppDispatch,

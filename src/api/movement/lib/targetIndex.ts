@@ -1,5 +1,5 @@
 import { getPieceColor, getPieceType } from "api/pieceInfo";
-import { PieceTypes } from "widgets/ChessGame/types/enums";
+import { PieceTypes } from "types/Piece";
 
 export const getTargetIndex = (
     piecePlacement: Array<number>,
