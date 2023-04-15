@@ -1,1 +1,1 @@
-export * from "./ui/Analysis";
+export { Analysis } from "./ui/Analysis";
