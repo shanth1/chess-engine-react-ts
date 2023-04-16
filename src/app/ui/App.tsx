@@ -1,4 +1,4 @@
-import { withProviders } from "app/providers";
+import { withProviders } from "app/providers/compose";
 import { GamePage } from "pages/GamePage";
 
 const AppComponent = () => {
