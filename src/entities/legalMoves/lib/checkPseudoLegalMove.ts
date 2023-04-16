@@ -1,8 +1,8 @@
-import { getPieceColor } from "shared";
+import { getPieceColor } from "shared/pieceInfo";
+import { getPassedKingMove } from "../model/passedKingMove";
 import { getPseudoLegalMoves } from "../model/pseudoLegalMoves/pseudoLegalMoves";
 import { checkCastlingType } from "./castlingType";
 import { checkAttackOnKing } from "./kingUnderAttack";
-import { getPassedKingMove } from "./passedKingMove";
 import { makeTestMove } from "./testMove";
 
 export const checkPseudoLegalMove = (

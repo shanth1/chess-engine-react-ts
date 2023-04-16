@@ -1,1 +1,1 @@
-export { makeMove } from "./model/moves";
+export { makeMove } from "./moves";

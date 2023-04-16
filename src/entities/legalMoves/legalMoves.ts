@@ -1,5 +1,5 @@
-import { checkPseudoLegalMove } from "../lib/checkPseudoLegalMove";
-import { getPseudoLegalMoves } from "./pseudoLegalMoves/pseudoLegalMoves";
+import { checkPseudoLegalMove } from "./lib/checkPseudoLegalMove";
+import { getPseudoLegalMoves } from "./model/pseudoLegalMoves/pseudoLegalMoves";
 
 export const getLegalMoves = (
     piecePlacement: Array<number>,

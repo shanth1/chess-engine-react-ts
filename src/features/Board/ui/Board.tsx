@@ -1,9 +1,9 @@
-import { useAppSelector } from "app/model";
 import { useState } from "react";
 import { Square } from "../components/Square";
 import { updateLegalMoves } from "../model/updateLegalMoves";
 import styles from "./styles.module.css";
 import { getBoardView } from "../lib/boardView";
+import { useAppSelector } from "shared/hooks";
 
 export const Board: React.FC = () => {
     const piecePlacement: Array<number> = useAppSelector(

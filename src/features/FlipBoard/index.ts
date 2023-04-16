@@ -1,1 +1,1 @@
-export * from "./ui/FlipBoard";
+export { FlipBoard } from "./ui/FlipBoard";

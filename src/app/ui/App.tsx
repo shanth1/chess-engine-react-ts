@@ -1,5 +1,5 @@
 import { withProviders } from "app/providers";
-import { GamePage } from "pages";
+import { GamePage } from "pages/GamePage";
 
 const AppComponent = () => {
     return (

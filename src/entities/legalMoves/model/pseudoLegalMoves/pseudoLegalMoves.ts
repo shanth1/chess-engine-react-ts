@@ -3,7 +3,8 @@ import { getSlidingMoves } from "./slidingMoves";
 import { getKingMoves } from "./kingMoves";
 import { getPawnMoves } from "./pawnMoves";
 import { getCastlingMoves } from "./castlingMoves";
-import { getPieceType, PieceTypes } from "shared";
+import { getPieceType } from "shared/pieceInfo";
+import { PieceTypes } from "shared/types";
 
 export const getPseudoLegalMoves = (
     piecePlacement: Array<number>,

@@ -1,8 +1,8 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import { getPiecePlacementArrayFromFen } from "../lib/piecePlacement";
 import { getCastlingRights } from "../lib/castlingRights";
-import { CastlingRights } from "shared/types/Castling";
-import { getPieceCode, PieceColors, PieceTypes } from "shared";
+import { CastlingRights, PieceColors, PieceTypes } from "shared/types";
+import { getPieceCode } from "shared/pieceInfo";
 
 const initialState = {
     piecePlacement: getPiecePlacementArrayFromFen(

@@ -1,1 +1,1 @@
-export * from "./ui/BoardManager";
+export { BoardManager } from "./ui/BoardManager";

@@ -1,9 +1,9 @@
-import { AppDispatch } from "app";
-import { makeDefaultMove } from "./defaultMove";
-import { makeKingMove } from "./kingMove";
-import { makePawnMove } from "./pawnMove";
-import { getTargetIndex } from "../lib/targetIndex";
-import { getPieceType, PieceTypes } from "shared";
+import { makeDefaultMove } from "./model/defaultMove";
+import { makeKingMove } from "./model/kingMove";
+import { makePawnMove } from "./model/pawnMove";
+import { getTargetIndex } from "./lib/targetIndex";
+import { getPieceType } from "shared/pieceInfo";
+import { PieceTypes } from "shared/types";
 
 export const makeMove = (
     dispatch: AppDispatch,

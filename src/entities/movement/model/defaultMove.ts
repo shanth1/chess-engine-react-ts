@@ -1,11 +1,11 @@
-import { AppDispatch } from "app";
 import { squares } from "features/Board/model/squares";
 import {
     changeActiveColor,
     moveFigure,
     updateCastlingRights,
 } from "api/fenSlice";
-import { getPieceType, PieceTypes } from "shared";
+import { getPieceType } from "shared/pieceInfo";
+import { PieceTypes } from "shared/types";
 
 export const makeDefaultMove = (
     dispatch: AppDispatch,

@@ -1,4 +1,4 @@
-import { CastlingRights } from "shared";
+import { CastlingRights } from "shared/types";
 
 export function getCastlingRights(fenCastlingRights: string): number {
     let castlingRights: number = Number();
