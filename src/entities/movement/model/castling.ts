@@ -1,4 +1,3 @@
-import { AppDispatch } from "app";
 import { moveFigure } from "api/fenSlice";
 import { getPieceType } from "shared/pieceInfo";
 import { PieceTypes } from "shared/types";

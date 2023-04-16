@@ -1,4 +1,3 @@
-import { AppDispatch } from "app";
 import { promotesPawn } from "api/fenSlice";
 import { PieceColors, PieceTypes } from "shared/types";
 import { getPieceColor, getPieceType } from "shared/pieceInfo";

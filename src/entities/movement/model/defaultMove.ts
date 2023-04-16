@@ -1,4 +1,3 @@
-import { AppDispatch } from "app";
 import { squares } from "features/Board/model/squares";
 import {
     changeActiveColor,

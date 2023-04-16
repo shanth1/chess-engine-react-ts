@@ -1,4 +1,3 @@
-import { AppDispatch } from "app";
 import { makeDefaultMove } from "./model/defaultMove";
 import { makeKingMove } from "./model/kingMove";
 import { makePawnMove } from "./model/pawnMove";

@@ -1,4 +1,3 @@
-import { AppDispatch } from "app";
 import { ISquare } from "features/Board/types/interfaces";
 import { makeMove } from "entities/movement";
 import { getPieceColor } from "shared/pieceInfo";

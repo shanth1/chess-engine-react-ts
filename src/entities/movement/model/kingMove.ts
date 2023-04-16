@@ -1,4 +1,3 @@
-import { AppDispatch } from "app";
 import { resolveCastling } from "./castling";
 import { makeDefaultMove } from "./defaultMove";
 

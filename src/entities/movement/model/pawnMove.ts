@@ -1,4 +1,3 @@
-import { AppDispatch } from "app";
 import { makeDefaultMove } from "./defaultMove";
 import { resolveEnPassant } from "./enPassant";
 import { resolvePawnPromotion } from "./pawnPromotion";

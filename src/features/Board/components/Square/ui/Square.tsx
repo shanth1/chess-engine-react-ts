@@ -1,4 +1,4 @@
-import { AppDispatch, useAppDispatch, useAppSelector } from "app";
+import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { PieceColors } from "shared/types";
 import { Piece } from "../../Piece/ui/Piece";
 import { getClickHandler } from "../lib/clickHandler";

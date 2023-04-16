@@ -1,4 +1,3 @@
-import { AppDispatch } from "app";
 import { deletePiece, updateEnPassant } from "api/fenSlice";
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import { PieceColors, PieceTypes } from "shared/types";
