@@ -1,8 +1,8 @@
-import { getLegalMoves } from "api/legalMoves";
-import { makeMove } from "api/movement";
-import { getPieceColor } from "api/pieceInfo";
-import { AppDispatch, useAppDispatch, useAppSelector } from "app";
+import { getLegalMoves } from "entities/legalMoves";
+import { makeMove } from "entities/movement";
 import styles from "./styles.module.css";
+import { getPieceColor } from "shared/pieceInfo";
+import { useAppDispatch, useAppSelector } from "shared/hooks";
 
 export const Analysis: React.FC = () => {
     const dispatch: AppDispatch = useAppDispatch();

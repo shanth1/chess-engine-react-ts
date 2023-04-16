@@ -1,1 +1,1 @@
-export * from "./ui/LoadFen";
+export { LoadFen } from "./ui/LoadFen";

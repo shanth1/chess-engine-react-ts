@@ -1,4 +1,8 @@
-import { Analysis, BoardManager, ChessGame, Header, History } from "widgets";
+import { Analysis } from "widgets/Analysis";
+import { BoardManager } from "widgets/BoardManager";
+import { ChessGame } from "widgets/ChessGame";
+import { Header } from "widgets/Header";
+import { History } from "widgets/History";
 import styles from "./style.module.css";
 
 export const GamePage: React.FC = () => {
