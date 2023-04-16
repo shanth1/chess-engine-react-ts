@@ -1,7 +1,7 @@
 import { ISquare } from "features/Board/types/interfaces";
 import { makeMove } from "entities/movement";
 import { getPieceColor } from "shared/pieceInfo";
-import { PieceColors } from "shared/types";
+import { PieceColors } from "shared/enums";
 
 export const getClickHandler = (
     dispatch: AppDispatch,

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "shared/hooks";
-import { PieceColors } from "shared/types";
+import { PieceColors } from "shared/enums";
 import { Piece } from "../../Piece/ui/Piece";
 import { getClickHandler } from "../lib/clickHandler";
 import { ISquareProps } from "../types/interfaces";

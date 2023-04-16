@@ -1,4 +1,4 @@
-import { PieceTypes } from "shared/types";
+import { PieceTypes } from "shared/enums";
 
 export const makeTestMove = (
     piecePlacement: Array<number>,

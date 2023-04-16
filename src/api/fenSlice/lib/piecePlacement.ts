@@ -1,4 +1,4 @@
-import { PieceColors, PieceTypes } from "shared/types";
+import { PieceColors, PieceTypes } from "shared/enums";
 
 function getPieceBinaryCodeFromFenSymbol(symbol: string): number {
     const pieceBinaryCode =

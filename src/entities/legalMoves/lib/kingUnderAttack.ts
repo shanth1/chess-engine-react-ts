@@ -1,5 +1,5 @@
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
-import { PieceTypes } from "shared/types";
+import { PieceTypes } from "shared/enums";
 
 export const checkAttackOnKing = (
     piecePlacement: Array<number>,

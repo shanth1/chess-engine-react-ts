@@ -4,7 +4,7 @@ import { getKingMoves } from "./kingMoves";
 import { getPawnMoves } from "./pawnMoves";
 import { getCastlingMoves } from "./castlingMoves";
 import { getPieceType } from "shared/pieceInfo";
-import { PieceTypes } from "shared/types";
+import { PieceTypes } from "shared/enums";
 
 export const getPseudoLegalMoves = (
     piecePlacement: Array<number>,

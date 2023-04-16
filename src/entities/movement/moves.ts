@@ -3,7 +3,7 @@ import { makeKingMove } from "./model/kingMove";
 import { makePawnMove } from "./model/pawnMove";
 import { getTargetIndex } from "./lib/targetIndex";
 import { getPieceType } from "shared/pieceInfo";
-import { PieceTypes } from "shared/types";
+import { PieceTypes } from "shared/enums";
 
 export const makeMove = (
     dispatch: AppDispatch,

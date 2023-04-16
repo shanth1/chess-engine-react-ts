@@ -1,7 +1,7 @@
 import { Colors } from "features/Board/types/enums";
 import { ISquare } from "features/Board/types/interfaces";
 import { getFileName } from "shared/boardInfo";
-import { PieceTypes } from "shared/types";
+import { PieceTypes } from "shared/enums";
 
 const squares: Array<ISquare> = [];
 let index: number = 0;

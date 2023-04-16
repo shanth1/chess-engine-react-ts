@@ -1,5 +1,5 @@
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
-import { PieceColors } from "shared/types";
+import { PieceColors } from "shared/enums";
 import { ColorFileNames, PieceFileNames, PieceStyles } from "../types/enums";
 
 export const getIconPath = (pieceCode: number, iconStyle: PieceStyles) => {

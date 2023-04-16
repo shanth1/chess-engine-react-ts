@@ -1,4 +1,4 @@
-import { CastlingRights } from "shared/types";
+import { CastlingRights } from "shared/enums";
 
 export function getCastlingRights(fenCastlingRights: string): number {
     let castlingRights: number = Number();

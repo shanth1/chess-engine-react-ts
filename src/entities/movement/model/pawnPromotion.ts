@@ -1,5 +1,5 @@
 import { promotesPawn } from "api/fenSlice";
-import { PieceColors, PieceTypes } from "shared/types";
+import { PieceColors, PieceTypes } from "shared/enums";
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
 
 export const resolvePawnPromotion = (

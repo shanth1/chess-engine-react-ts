@@ -4,7 +4,7 @@ import {
 } from "entities/legalMoves/types/enums";
 import { getFileName } from "shared/boardInfo";
 import { getPieceColor } from "shared/pieceInfo";
-import { PieceColors } from "shared/types";
+import { PieceColors } from "shared/enums";
 
 export const getPawnMoves = (
     piecePlacement: Array<number>,

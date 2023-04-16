@@ -1,6 +1,6 @@
 import { moveFigure } from "api/fenSlice";
 import { getPieceType } from "shared/pieceInfo";
-import { PieceTypes } from "shared/types";
+import { PieceTypes } from "shared/enums";
 
 export const resolveCastling = (
     dispatch: AppDispatch,

@@ -1,6 +1,6 @@
 import { deletePiece, updateEnPassant } from "api/fenSlice";
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
-import { PieceColors, PieceTypes } from "shared/types";
+import { PieceColors, PieceTypes } from "shared/enums";
 import { getFileName } from "shared/boardInfo";
 
 export const resolveEnPassant = (
