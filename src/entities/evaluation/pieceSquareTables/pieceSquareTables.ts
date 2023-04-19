@@ -1,10 +1,3 @@
-//? NONE: 0 index
-//? KING: 1 index
-//? QUEEN: 2 index
-//? ROOK: 3 index
-//? BISHOP: 4 index
-//? KNIGHT: 5 index
-//? PAWN: 6 index
 import { PieceColors } from "shared/enums";
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import {
@@ -22,8 +15,16 @@ import {
     rookWhiteEvaluation,
 } from "./colorConsideration";
 
-const pieceValues: Array<Array<Array<number>>> = [
-    [],
+//? NONE: 0 index
+//? KING: 1 index
+//? QUEEN: 2 index
+//? ROOK: 3 index
+//? BISHOP: 4 index
+//? KNIGHT: 5 index
+//? PAWN: 6 index
+type PieceSquareTable = Array<number>;
+const pieceValues: Array<Array<PieceSquareTable>> = [
+    [], // for NONE piece type
     [kingWhiteEvaluation, kingBlackEvaluation],
     [queenWhiteEvaluation, queenBlackEvaluation],
     [rookWhiteEvaluation, rookBlackEvaluation],
@@ -32,19 +33,22 @@ const pieceValues: Array<Array<Array<number>>> = [
     [pawnWhiteEvaluation, pawnBlackEvaluation],
 ];
 
-export const getPieceEvaluation = (piecePlacement: Array<number>): number => {
-    let pieceEvaluation: number = 0;
-    for (let index in piecePlacement) {
-        const piece = piecePlacement[index];
-        if (!piece) continue;
-        const colorIndex: number =
-            getPieceColor(piece) === PieceColors.WHITE ? 0 : 1;
-        const colorConsideration =
-            getPieceColor(piece) === PieceColors.WHITE ? 1 : -1;
-        pieceEvaluation +=
-            pieceValues[getPieceType(piece)][colorIndex][index] *
-            colorConsideration;
-    }
+export const getPieceSquareEvaluation = (
+    piecePlacement: Array<number>,
+): number => {
+    let pieceSquareEvaluation: number = 0;
+    for (let squareIndex in piecePlacement) {
+        if (!piecePlacement[squareIndex]) continue;
+        const pieceType: number = getPieceType(piecePlacement[squareIndex]);
+        const pieceColor: number = getPieceColor(piecePlacement[squareIndex]);
 
-    return pieceEvaluation;
+        if (pieceColor === PieceColors.WHITE) {
+            pieceSquareEvaluation += pieceValues[pieceType][0][squareIndex];
+        } else if (pieceColor === PieceColors.BLACK) {
+            pieceSquareEvaluation -= pieceValues[pieceType][1][squareIndex];
+        } else {
+            alert("unknown piece color");
+        }
+    }
+    return pieceSquareEvaluation;
 };
