@@ -1,5 +1,9 @@
-import { getMaterialCounting } from "./materialCounting";
+import { getMaterialCounting } from "./materialCounting/materialCounting";
+import { getPieceSquareEvaluation } from "./pieceSquareTables/pieceSquareTables";
 
 export const getEvaluation = (piecePlacement: Array<number>): number => {
-    return getMaterialCounting(piecePlacement);
+    const evaluation: number =
+        getMaterialCounting(piecePlacement) +
+        getPieceSquareEvaluation(piecePlacement);
+    return evaluation;
 };
