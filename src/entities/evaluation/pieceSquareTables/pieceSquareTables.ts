@@ -50,5 +50,5 @@ export const getPieceSquareEvaluation = (
             alert("unknown piece color");
         }
     }
-    return pieceSquareEvaluation;
+    return pieceSquareEvaluation / 10;
 };
