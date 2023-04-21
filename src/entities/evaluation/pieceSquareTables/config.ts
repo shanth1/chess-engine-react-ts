@@ -1,77 +1,65 @@
-const PA = 50; // positive A
-const PB = 30; // positive B
-const PC = 30; // positive C
-const PD = 20; // positive C
-const PE = 10; // positive C
-const ZZ = 0; // zero
-const NE = -10; // negative C
-const ND = -20; // negative B
-const NC = -30; // negative A
-const NB = -40; // negative A
-const NA = -50; // negative A
-
 export const pawnEvaluation: Array<Array<number>> = [
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [PA, PA, PA, PA, PA, PA, PA, PA],
-    [PB, PB, PB, PB, PB, PB, PB, PB],
-    [PC, PC, PC, PB, PA, PC, PC, PC],
-    [PD, PE, PC, PB, PA, PD, PE, PD],
-    [PE, PE, PE, PC, PD, PD, PD, PD],
-    [PD, PD, PE, NE, ND, PD, PC, PD],
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [9, 9, 9, 9, 9, 9, 9, 9],
+    [8, 8, 8, 8, 8, 8, 8, 8],
+    [7, 7, 7, 8, 9, 7, 7, 7],
+    [5, 5, 6, 7, 8, 7, 7, 7],
+    [6, 6, 7, 7, 6, 6, 6, 6],
+    [6, 7, 6, 4, 3, 6, 7, 6],
+    [5, 5, 5, 5, 5, 5, 5, 5],
 ];
 
 export const knightEvaluation: Array<Array<number>> = [
-    [NA, NB, NC, ND, ND, NC, NB, NA],
-    [NB, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, NB],
-    [NC, ZZ, ZZ, PD, PD, ZZ, ZZ, NC],
-    [ND, ZZ, PC, PA, PB, PD, ZZ, ND],
-    [ND, ZZ, PC, PB, PB, PD, ZZ, ND],
-    [NC, ZZ, PB, PD, PD, PA, ZZ, NC],
-    [NB, NC, ND, PC, PD, NA, NC, NB],
-    [NA, NB, NC, ND, ND, NC, NB, NA],
+    [0, 1, 2, 3, 3, 2, 1, 0],
+    [1, 5, 5, 5, 5, 5, 5, 1],
+    [2, 5, 5, 6, 6, 5, 5, 2],
+    [3, 5, 7, 9, 8, 6, 5, 3],
+    [3, 5, 7, 8, 8, 6, 5, 3],
+    [2, 5, 8, 6, 6, 9, 5, 2],
+    [1, 2, 3, 7, 6, 3, 2, 1],
+    [0, 1, 2, 3, 3, 2, 1, 0],
 ];
 
 export const bishopEvaluation: Array<Array<number>> = [
-    [NA, NB, ND, ND, ND, ND, ND, NA],
-    [NC, PC, ZZ, ZZ, ZZ, ZZ, ZZ, ND],
-    [PE, ZZ, ZZ, PE, ZZ, PE, ZZ, NE],
-    [NE, PD, PE, PE, PE, ZZ, PB, NE],
-    [PE, ZZ, PC, PC, PC, PE, ZZ, NE],
-    [NE, ZZ, PE, PD, PC, PE, ZZ, NE],
-    [NB, ZZ, ZZ, PE, PD, ZZ, PE, NE],
-    [NA, NB, NC, ND, NE, NC, NB, NA],
+    [0, 1, 3, 3, 3, 3, 3, 0],
+    [3, 7, 0, 0, 0, 0, 0, 4],
+    [6, 0, 0, 6, 0, 6, 0, 4],
+    [4, 6, 6, 6, 6, 0, 8, 4],
+    [6, 0, 6, 7, 7, 6, 0, 4],
+    [4, 0, 6, 6, 7, 6, 0, 4],
+    [1, 0, 0, 6, 6, 0, 6, 4],
+    [0, 1, 2, 3, 4, 3, 2, 0],
 ];
 
 export const rookEvaluation: Array<Array<number>> = [
-    [PA, PA, PA, PA, PA, PA, PA, PA],
-    [PA, PB, PB, PB, PB, PB, PB, PB],
-    [PC, PC, PC, PC, PC, PC, PC, PC],
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [ZZ, ZZ, PB, PC, PC, PB, ZZ, ZZ],
-    [ND, NA, NC, PA, PA, PA, NA, NC],
+    [9, 9, 9, 9, 9, 9, 9, 9],
+    [9, 8, 8, 8, 8, 8, 8, 8],
+    [7, 7, 7, 7, 7, 7, 7, 7],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [5, 5, 8, 7, 7, 8, 5, 5],
+    [4, 0, 3, 9, 9, 9, 0, 3],
 ];
 
 export const queenEvaluation: Array<Array<number>> = [
-    [NC, ZZ, ZZ, ZZ, ZZ, NE, NB, NA],
-    [NE, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ND],
-    [NE, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [NE, ZZ, ZZ, ZZ, PE, ZZ, ZZ, ZZ],
-    [NE, ZZ, ZZ, PE, PD, PD, ZZ, ZZ],
-    [NE, ZZ, ZZ, PE, PD, PC, ZZ, ZZ],
-    [NE, ZZ, PD, PD, PB, PE, ZZ, NE],
-    [NA, NC, ND, NE, ZZ, ND, NC, NA],
+    [2, 5, 5, 5, 5, 4, 1, 0],
+    [4, 5, 5, 5, 5, 5, 5, 3],
+    [4, 5, 5, 5, 5, 5, 5, 5],
+    [4, 5, 5, 5, 6, 5, 5, 5],
+    [4, 5, 5, 6, 7, 7, 5, 5],
+    [4, 5, 5, 6, 7, 8, 5, 5],
+    [4, 5, 7, 7, 8, 6, 5, 4],
+    [0, 2, 3, 4, 5, 3, 2, 0],
 ];
 
 export const kingEvaluation: Array<Array<number>> = [
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ, ZZ],
-    [ZZ, PE, NE, ND, ND, ND, PD, ZZ],
-    [ZZ, PB, PB, NC, NE, NC, PA, ZZ],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [5, 5, 5, 5, 5, 5, 5, 5],
+    [5, 6, 4, 3, 3, 3, 6, 5],
+    [5, 8, 8, 2, 4, 3, 9, 5],
 ];
