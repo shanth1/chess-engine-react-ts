@@ -6,10 +6,10 @@ export const getLegalMoves = (
     selectedIndex: number,
     castlingRights: number,
     enPassant: string,
-): Array<number> => {
-    const legalMoves: Array<number> = [];
+): number[][] => {
+    const legalMoves: number[][] = [];
 
-    const pseudoLegalMoves: Array<number> = getPseudoLegalMoves(
+    const pseudoLegalMoves: number[][] = getPseudoLegalMoves(
         piecePlacement,
         selectedIndex,
         castlingRights,
@@ -17,14 +17,13 @@ export const getLegalMoves = (
     );
 
     for (let moveIndex = 0; moveIndex < pseudoLegalMoves.length; moveIndex++) {
-        const pseudoLegalMove = pseudoLegalMoves[moveIndex];
+        const pseudoLegalMove: number[] = pseudoLegalMoves[moveIndex];
 
         if (
             checkPseudoLegalMove(
                 piecePlacement,
                 pseudoLegalMove,
                 legalMoves,
-                selectedIndex,
                 castlingRights,
                 enPassant,
             )

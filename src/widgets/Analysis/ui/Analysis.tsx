@@ -18,7 +18,7 @@ export const Analysis: React.FC = () => {
         (state) => state.fen.activeColor,
     );
 
-    const legalMoves: Array<Array<number>> = [];
+    const legalMoves: number[][] = [];
 
     if (activeColor !== playerColor) {
         for (
@@ -29,16 +29,14 @@ export const Analysis: React.FC = () => {
             const piece = piecePlacement[selectedIndex];
             if (!piece) continue;
             if (getPieceColor(piece) === playerColor) continue;
-            const targetsForSelected: Array<number> = getLegalMoves(
+            const legalMovesForPiece: number[][] = getLegalMoves(
                 piecePlacement,
                 selectedIndex,
                 castlingRights,
                 enPassant,
             );
 
-            targetsForSelected.forEach((targetIndex) => {
-                legalMoves.push([selectedIndex, targetIndex]);
-            });
+            legalMoves.push(...legalMovesForPiece);
         }
         if (legalMoves.length !== 0) {
             const randomMove =

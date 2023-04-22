@@ -4,8 +4,8 @@ import { precomputedKingMoves } from "../../lib/precomputedData/kingMoves";
 export const getKingMoves = (
     piecePlacement: Array<number>,
     selectedIndex: number,
-): Array<number> => {
-    const pseudoLegalMoves: Array<number> = [];
+): Array<Array<number>> => {
+    const pseudoLegalMoves: Array<Array<number>> = [];
 
     const friendlyColor = getPieceColor(piecePlacement[selectedIndex]);
 
@@ -13,14 +13,12 @@ export const getKingMoves = (
     for (let direction = 0; direction < directionNumber; direction++) {
         const offset = precomputedKingMoves[selectedIndex][direction];
         if (offset === 0) continue;
-        const targetSquareIndex = selectedIndex + offset;
-        if (piecePlacement[targetSquareIndex]) {
-            const targetPieceColor = getPieceColor(
-                piecePlacement[targetSquareIndex],
-            );
+        const targetIndex = selectedIndex + offset;
+        if (piecePlacement[targetIndex]) {
+            const targetPieceColor = getPieceColor(piecePlacement[targetIndex]);
             if (targetPieceColor === friendlyColor) continue;
-            pseudoLegalMoves.push(targetSquareIndex);
-        } else pseudoLegalMoves.push(targetSquareIndex);
+            pseudoLegalMoves.push([selectedIndex, targetIndex]);
+        } else pseudoLegalMoves.push([selectedIndex, targetIndex]);
     }
 
     return pseudoLegalMoves;

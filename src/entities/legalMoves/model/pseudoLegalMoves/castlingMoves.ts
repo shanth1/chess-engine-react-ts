@@ -6,8 +6,8 @@ export const getCastlingMoves = (
     piecePlacement: Array<number>,
     selectedIndex: number,
     castlingRights: number,
-): Array<number> => {
-    const pseudoLegalMoves: Array<number> = [];
+): number[][] => {
+    const pseudoLegalMoves: number[][] = [];
 
     const friendlyColor = getPieceColor(piecePlacement[selectedIndex]);
 
@@ -60,7 +60,12 @@ export const getCastlingMoves = (
                 if (castlingRights & CastlingRights.BlackKingSide)
                     castling = true;
             }
-            if (castling) pseudoLegalMoves.push(selectedIndex + 2 * offset);
+
+            if (castling) {
+                const targetIndex = selectedIndex + 2 * offset;
+                pseudoLegalMoves.push([selectedIndex, targetIndex]);
+                console.log(selectedIndex, targetIndex);
+            }
         }
     }
     return pseudoLegalMoves;

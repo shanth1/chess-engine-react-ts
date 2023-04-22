@@ -11,8 +11,8 @@ export const getPseudoLegalMoves = (
     selectedIndex: number,
     castlingRights: number,
     enPassant: string,
-): Array<number> => {
-    let pseudoLegalMoves: Array<number> = [];
+): number[][] => {
+    let pseudoLegalMoves: Array<Array<number>> = [];
 
     const selectedPieceType = getPieceType(piecePlacement[selectedIndex]);
 

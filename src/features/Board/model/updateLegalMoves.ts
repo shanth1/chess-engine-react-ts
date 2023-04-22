@@ -14,7 +14,7 @@ export const updateLegalMoves = (
 
     if (selectedIndex === null) return;
 
-    const legalMoves: Array<number> = getLegalMoves(
+    const legalMoves: number[][] = getLegalMoves(
         piecePlacement,
         selectedIndex,
         castlingRights,
@@ -23,7 +23,7 @@ export const updateLegalMoves = (
 
     addAlternativeCastlingMoves(piecePlacement, legalMoves, selectedIndex);
 
-    legalMoves.forEach((index) => {
-        squares[index].isLegalToMove = true;
+    legalMoves.forEach((move) => {
+        squares[move[1]].isLegalToMove = true;
     });
 };

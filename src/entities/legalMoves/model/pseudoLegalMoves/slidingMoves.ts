@@ -8,8 +8,8 @@ import {
 export const getSlidingMoves = (
     piecePlacement: Array<number>,
     selectedIndex: number,
-): Array<number> => {
-    const legalMoves: Array<number> = [];
+): Array<Array<number>> => {
+    const legalMoves: Array<Array<number>> = [];
 
     const selectedPiece = getPieceType(piecePlacement[selectedIndex]);
     const activeColor = getPieceColor(piecePlacement[selectedIndex]);
@@ -37,10 +37,10 @@ export const getSlidingMoves = (
             if (piecePlacement[targetIndex]) {
                 const pieceColor = getPieceColor(piecePlacement[targetIndex]);
                 if (pieceColor === activeColor) break;
-                legalMoves.push(targetIndex);
+                legalMoves.push([selectedIndex, targetIndex]);
                 break;
             }
-            legalMoves.push(targetIndex);
+            legalMoves.push([selectedIndex, targetIndex]);
         }
     }
     return legalMoves;

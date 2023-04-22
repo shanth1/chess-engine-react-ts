@@ -7,13 +7,12 @@ import { makeTestMove } from "./testMove";
 
 export const checkPseudoLegalMove = (
     piecePlacement: Array<number>,
-    pseudoLegalMove: number,
-    legalMoves: Array<number>,
-    selectedIndex: number,
+    pseudoLegalMove: number[],
+    legalMoves: number[][],
     castlingRights: number,
     enPassant: string,
 ): boolean => {
-    const targetIndex = pseudoLegalMove;
+    const [selectedIndex, targetIndex] = pseudoLegalMove;
     const selectedPiece = piecePlacement[selectedIndex];
 
     const isCastlingMove = checkCastlingType(
@@ -24,7 +23,13 @@ export const checkPseudoLegalMove = (
 
     if (isCastlingMove) {
         const passedKingMove = getPassedKingMove(selectedIndex, targetIndex);
-        if (!legalMoves.includes(passedKingMove)) return false;
+        let isLegal = false;
+        legalMoves.forEach((legalMove) => {
+            if (legalMove[1] === passedKingMove) {
+                isLegal = true;
+            }
+        });
+        if (!isLegal) return false;
     }
 
     let isLegal = true;
@@ -41,7 +46,7 @@ export const checkPseudoLegalMove = (
         const pieceColor = getPieceColor(piecePlacementAfterMove[squareIndex]);
         if (pieceColor === friendlyColor) continue;
 
-        const enemyPseudoLegalMoves = getPseudoLegalMoves(
+        const enemyPseudoLegalMoves: number[][] = getPseudoLegalMoves(
             piecePlacementAfterMove,
             squareIndex,
             castlingRights,
