@@ -1,6 +1,6 @@
 import { CastlingRights } from "shared/enums";
 
-interface IBoard {
+export interface IBoard {
     position: Array<number>;
     activeColor: "white" | "black";
     castlingRights:
