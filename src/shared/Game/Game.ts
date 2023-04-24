@@ -1,4 +1,5 @@
-import { CastlingRights, PieceTypes } from "shared/enums";
+import { CastlingRights, PieceColors, PieceTypes } from "shared/enums";
+import { getPieceColor } from "shared/pieceInfo";
 import { IBoard } from "./board";
 
 interface IHistorySlice {
@@ -19,6 +20,8 @@ interface IHistorySlice {
 export class Game {
     board: IBoard;
     history: Array<IHistorySlice>;
+    blackPieceIndices: Array<number>;
+    whitePieceIndices: Array<number>;
 
     constructor(board: IBoard) {
         this.board = board;
@@ -31,6 +34,16 @@ export class Game {
             halfMoveClock: this.board.halfMoveClock,
             fullMoveNumber: this.board.fullMoveNumber,
         });
+        this.whitePieceIndices = [];
+        this.blackPieceIndices = [];
+        for (let index = 0; index < board.position.length; index++) {
+            if (!board.position[index]) continue;
+            if (getPieceColor(board.position[index]) === PieceColors.WHITE) {
+                this.whitePieceIndices.push(index);
+            } else {
+                this.blackPieceIndices.push(index);
+            }
+        }
     }
 
     public makeMove(
