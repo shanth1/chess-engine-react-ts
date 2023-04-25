@@ -11,16 +11,8 @@ const root = ReactDOM.createRoot(
 
 console.log(board.castlingRights);
 const game1 = new Game(board);
-
-game1.makeMove(60, 62);
-game1.makeMove(0, 1);
-console.log(...game1.history);
-console.log(game1.board.position);
-game1.unmakeMove();
-game1.unmakeMove();
-console.log("unmake");
-console.log(game1.board.position);
-console.log(game1.history);
+console.log(game1.whitePieceIndices);
+console.log(game1.blackPieceIndices);
 
 root.render(
     <React.StrictMode>
