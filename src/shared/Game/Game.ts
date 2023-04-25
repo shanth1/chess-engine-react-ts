@@ -20,8 +20,8 @@ interface IHistorySlice {
 export class Game {
     board: IBoard;
     history: Array<IHistorySlice>;
-    blackPieceIndices: Array<number>;
-    whitePieceIndices: Array<number>;
+    blackPieces: Array<number>;
+    whitePieces: Array<number>;
 
     constructor(board: IBoard) {
         this.board = board;
@@ -34,14 +34,14 @@ export class Game {
             halfMoveClock: this.board.halfMoveClock,
             fullMoveNumber: this.board.fullMoveNumber,
         });
-        this.whitePieceIndices = [];
-        this.blackPieceIndices = [];
+        this.whitePieces = [];
+        this.blackPieces = [];
         for (let index = 0; index < board.position.length; index++) {
             if (!board.position[index]) continue;
             if (getPieceColor(board.position[index]) === PieceColors.WHITE) {
-                this.whitePieceIndices.push(index);
+                this.whitePieces.push(index);
             } else {
-                this.blackPieceIndices.push(index);
+                this.blackPieces.push(index);
             }
         }
     }
@@ -52,8 +52,19 @@ export class Game {
         ...castlingKingMove: Array<number>
     ): void {
         const piece = this.board.position[startIndex];
+        const targetPiece = this.board.position[targetIndex];
+        if (targetPiece) {
+            if (getPieceColor(targetPiece) === PieceColors.WHITE) {
+                const index = this.whitePieces.indexOf(targetIndex);
+                if (index > 0) this.whitePieces.splice(index, 1);
+            } else {
+                const index = this.blackPieces.indexOf(targetIndex);
+                if (index > 0) this.blackPieces.splice(index, 1);
+            }
+        }
         this.board.position[startIndex] = PieceTypes.NONE;
         this.board.position[targetIndex] = piece;
+
         const isCastlingMove: boolean =
             this.getPieceType(piece) === PieceTypes.KING &&
             Math.abs(startIndex - targetIndex) === 2;
