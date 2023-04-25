@@ -11,8 +11,6 @@ const root = ReactDOM.createRoot(
 
 console.log(board.castlingRights);
 const game1 = new Game(board);
-console.log(game1.whitePieceIndices);
-console.log(game1.blackPieceIndices);
 
 root.render(
     <React.StrictMode>

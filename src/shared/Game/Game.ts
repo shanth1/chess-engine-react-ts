@@ -15,6 +15,7 @@ interface IHistorySlice {
     enPassant: "-" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h";
     halfMoveClock: number;
     fullMoveNumber: number;
+    capturedPiece: number;
 }
 
 export class Game {
@@ -33,6 +34,7 @@ export class Game {
             enPassant: this.board.enPassant,
             halfMoveClock: this.board.halfMoveClock,
             fullMoveNumber: this.board.fullMoveNumber,
+            capturedPiece: PieceTypes.NONE,
         });
         this.whitePieces = [];
         this.blackPieces = [];
@@ -77,6 +79,7 @@ export class Game {
                 enPassant: this.board.enPassant,
                 halfMoveClock: this.board.halfMoveClock,
                 fullMoveNumber: this.board.fullMoveNumber,
+                capturedPiece: targetPiece,
             });
             return;
         }
@@ -89,10 +92,10 @@ export class Game {
     public unmakeMove() {
         const currentSlice = this.history.at(-1);
         const previousSlice = this.history.at(-2);
+
         if (!currentSlice || !previousSlice) return;
-        const previousPosition: Array<number> = this.getPreviousPosition(
-            currentSlice.move,
-        );
+        const previousPosition: Array<number> =
+            this.getPreviousPosition(currentSlice);
         this.board = {
             position: previousPosition,
             activeColor: previousSlice.activeColor,
@@ -104,16 +107,19 @@ export class Game {
         this.history.pop();
     }
 
-    private getPreviousPosition(move: Array<number>): Array<number> {
+    private getPreviousPosition(slice: IHistorySlice): Array<number> {
         const previousPosition: Array<number> = [...this.board.position];
-        const startIndex: number = move[0];
-        const targetIndex: number = move[1];
+        const startIndex: number = slice.move[0];
+        const targetIndex: number = slice.move[1];
         const piece = this.board.position[targetIndex];
         previousPosition[targetIndex] = PieceTypes.NONE;
         previousPosition[startIndex] = piece;
-        if (move.length > 2) {
-            const rookStartIndex: number = move[2];
-            const rookTargetIndex: number = move[3];
+        if (slice.capturedPiece) {
+            previousPosition[targetIndex] = slice.capturedPiece;
+        }
+        if (slice.move.length > 2) {
+            const rookStartIndex: number = slice.move[2];
+            const rookTargetIndex: number = slice.move[3];
             const rook = this.board.position[rookTargetIndex];
             previousPosition[rookTargetIndex] = PieceTypes.NONE;
             previousPosition[rookStartIndex] = rook;
