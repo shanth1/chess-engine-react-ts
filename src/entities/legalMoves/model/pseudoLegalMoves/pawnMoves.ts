@@ -7,23 +7,23 @@ import { getPieceColor } from "shared/pieceInfo";
 import { PieceColors } from "shared/enums";
 
 export const getPawnMoves = (
-    piecePlacement: Array<number>,
-    selectedIndex: number,
+    position: Array<number>,
     enPassant: string,
+    selectedIndex: number,
 ): number[][] => {
     const pawnAttack = (
         offsetAttack: OffsetsPawnBlack | OffsetsPawnWhite,
     ): void => {
-        if (!piecePlacement[selectedIndex + offsetAttack]) return;
+        if (!position[selectedIndex + offsetAttack]) return;
         const pieceColor = getPieceColor(
-            piecePlacement[selectedIndex + offsetAttack],
+            position[selectedIndex + offsetAttack],
         );
         if (pieceColor === activeColor) return;
         const targetIndex = selectedIndex + offsetAttack;
         legalMoves.push([selectedIndex, targetIndex]);
     };
 
-    const activeColor = getPieceColor(piecePlacement[selectedIndex]);
+    const activeColor = getPieceColor(position[selectedIndex]);
     const legalMoves: number[][] = [];
 
     const file: number = Math.floor(selectedIndex / 8);
@@ -54,12 +54,12 @@ export const getPawnMoves = (
 
     if (file === fileFinish) return legalMoves;
 
-    if (!piecePlacement[selectedIndex + offsetForward]) {
+    if (!position[selectedIndex + offsetForward]) {
         const targetIndex = selectedIndex + offsetForward;
         legalMoves.push([selectedIndex, targetIndex]);
         if (
             file === fileStart &&
-            !piecePlacement[selectedIndex + 2 * offsetForward]
+            !position[selectedIndex + 2 * offsetForward]
         ) {
             const targetIndex = selectedIndex + 2 * offsetForward;
             legalMoves.push([selectedIndex, targetIndex]);
@@ -68,10 +68,9 @@ export const getPawnMoves = (
 
     if (
         (Math.floor(selectedIndex / 8) === 3 &&
-            getPieceColor(piecePlacement[selectedIndex]) ===
-                PieceColors.WHITE) ||
+            getPieceColor(position[selectedIndex]) === PieceColors.WHITE) ||
         (Math.floor(selectedIndex / 8) === 4 &&
-            getPieceColor(piecePlacement[selectedIndex]) === PieceColors.BLACK)
+            getPieceColor(position[selectedIndex]) === PieceColors.BLACK)
     ) {
         if (enPassant !== "-") {
             const leftAttackFile = getFileName(

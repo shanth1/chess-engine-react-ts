@@ -14,8 +14,9 @@ for (let rank: number = 7; rank >= 0; rank--) {
             index: index,
             color: color,
             name: `${getFileName(index)}${rank + 1}`,
-            pieceCode: PieceTypes.NONE,
-            isLegalToMove: false,
+            piece: PieceTypes.NONE,
+            isLegal: false,
+            isSelected: false,
         });
         index++;
     }

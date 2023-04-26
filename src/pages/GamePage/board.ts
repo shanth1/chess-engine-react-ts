@@ -1,8 +1,8 @@
-import { CastlingRights } from "shared/enums";
+import { CastlingRights, PieceColors } from "shared/enums";
 
 export interface IBoard {
     position: Array<number>;
-    activeColor: "white" | "black";
+    activeColor: PieceColors;
     castlingRights:
         | CastlingRights.BlackKingSide
         | CastlingRights.BlackQueenSide
@@ -10,19 +10,14 @@ export interface IBoard {
         | CastlingRights.NeitherSide
         | CastlingRights.WhiteKingSide
         | CastlingRights.WitheQueenSide;
-    enPassant: "-" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h";
+    enPassant: string;
     halfMoveClock: number;
     fullMoveNumber: number;
 }
 
 export const board: IBoard = {
-    position: [
-        11, 0, 12, 10, 9, 12, 13, 11, 14, 14, 14, 0, 14, 14, 14, 14, 0, 0, 13,
-        0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 22, 21, 0, 0, 22, 22, 22, 22, 20, 22, 22, 22, 19, 21, 20, 18, 17, 0,
-        0, 19,
-    ],
-    activeColor: "white",
+    position: Array(64),
+    activeColor: PieceColors.WHITE,
     castlingRights: CastlingRights.BothSides,
     enPassant: "-",
     halfMoveClock: 0,

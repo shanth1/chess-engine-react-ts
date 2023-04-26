@@ -6,13 +6,13 @@ import {
 } from "../../lib/precomputedData/slidingMoves";
 
 export const getSlidingMoves = (
-    piecePlacement: Array<number>,
+    position: Array<number>,
     selectedIndex: number,
 ): Array<Array<number>> => {
     const legalMoves: Array<Array<number>> = [];
 
-    const selectedPiece = getPieceType(piecePlacement[selectedIndex]);
-    const activeColor = getPieceColor(piecePlacement[selectedIndex]);
+    const selectedPiece = getPieceType(position[selectedIndex]);
+    const activeColor = getPieceColor(position[selectedIndex]);
 
     const startDirectionIndex = selectedPiece === PieceTypes.BISHOP ? 4 : 0;
     const endDirectionIndex = selectedPiece === PieceTypes.ROOK ? 4 : 8;
@@ -34,8 +34,8 @@ export const getSlidingMoves = (
                 selectedIndex +
                 directionOffsets[directionIndex] * (squareCounter + 1);
 
-            if (piecePlacement[targetIndex]) {
-                const pieceColor = getPieceColor(piecePlacement[targetIndex]);
+            if (position[targetIndex]) {
+                const pieceColor = getPieceColor(position[targetIndex]);
                 if (pieceColor === activeColor) break;
                 legalMoves.push([selectedIndex, targetIndex]);
                 break;

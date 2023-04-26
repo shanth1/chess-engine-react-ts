@@ -1,15 +1,17 @@
 import { ISquare } from "features/Board/types/interfaces";
 import styles from "../styles.module.css";
 
-export const getSquareStyle = (
-    { color, pieceCode, isLegalToMove }: ISquare,
-    isSelected: boolean,
-) => {
+export const getSquareStyle = ({
+    color,
+    piece,
+    isLegal,
+    isSelected,
+}: ISquare) => {
     return [
         styles.square,
         styles[color],
-        pieceCode ? styles.clickable : "",
-        isLegalToMove ? styles.clickable : "",
+        piece ? styles.clickable : "",
+        isLegal ? styles.clickable : "",
         isSelected ? styles.selected : "",
     ].join(" ");
 };

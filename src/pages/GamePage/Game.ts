@@ -4,7 +4,7 @@ import { IBoard } from "./board";
 
 interface IHistorySlice {
     move: Array<number>;
-    activeColor: "white" | "black";
+    activeColor: PieceColors;
     castlingRights:
         | CastlingRights.BlackKingSide
         | CastlingRights.BlackQueenSide
@@ -12,38 +12,62 @@ interface IHistorySlice {
         | CastlingRights.NeitherSide
         | CastlingRights.WhiteKingSide
         | CastlingRights.WitheQueenSide;
-    enPassant: "-" | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h";
+    enPassant: string;
     halfMoveClock: number;
     fullMoveNumber: number;
     capturedPiece: number;
 }
 
 export class Game {
-    board: IBoard;
+    private _board: IBoard;
     history: Array<IHistorySlice>;
-    blackPieces: Array<number>;
-    whitePieces: Array<number>;
+    private _blackPieces: Array<number>;
+    private _whitePieces: Array<number>;
 
     constructor(board: IBoard) {
-        this.board = board;
+        this._board = board;
         this.history = [];
         this.history.push({
             move: [],
-            activeColor: this.board.activeColor,
-            castlingRights: this.board.castlingRights,
-            enPassant: this.board.enPassant,
-            halfMoveClock: this.board.halfMoveClock,
-            fullMoveNumber: this.board.fullMoveNumber,
+            activeColor: this._board.activeColor,
+            castlingRights: this._board.castlingRights,
+            enPassant: this._board.enPassant,
+            halfMoveClock: this._board.halfMoveClock,
+            fullMoveNumber: this._board.fullMoveNumber,
             capturedPiece: PieceTypes.NONE,
         });
-        this.whitePieces = [];
-        this.blackPieces = [];
+        this._whitePieces = [];
+        this._blackPieces = [];
         for (let index = 0; index < board.position.length; index++) {
             if (!board.position[index]) continue;
             if (getPieceColor(board.position[index]) === PieceColors.WHITE) {
-                this.whitePieces.push(index);
+                this._whitePieces.push(index);
             } else {
-                this.blackPieces.push(index);
+                this._blackPieces.push(index);
+            }
+        }
+    }
+
+    public get board() {
+        return this._board;
+    }
+    public get whitePieces() {
+        return this._whitePieces;
+    }
+    public get blackPieces() {
+        return this._blackPieces;
+    }
+
+    public set board(board: IBoard) {
+        this._board = board;
+        this._whitePieces = [];
+        this._blackPieces = [];
+        for (let index = 0; index < board.position.length; index++) {
+            if (!board.position[index]) continue;
+            if (getPieceColor(board.position[index]) === PieceColors.WHITE) {
+                this._whitePieces.push(index);
+            } else {
+                this._blackPieces.push(index);
             }
         }
     }
@@ -53,19 +77,19 @@ export class Game {
         targetIndex: number,
         ...castlingKingMove: Array<number>
     ): void {
-        const piece = this.board.position[startIndex];
-        const targetPiece = this.board.position[targetIndex];
+        const piece = this._board.position[startIndex];
+        const targetPiece = this._board.position[targetIndex];
         if (targetPiece) {
             if (getPieceColor(targetPiece) === PieceColors.WHITE) {
-                const index = this.whitePieces.indexOf(targetIndex);
-                if (index > 0) this.whitePieces.splice(index, 1);
+                const index = this._whitePieces.indexOf(targetIndex);
+                if (index > 0) this._whitePieces.splice(index, 1);
             } else {
-                const index = this.blackPieces.indexOf(targetIndex);
-                if (index > 0) this.blackPieces.splice(index, 1);
+                const index = this._blackPieces.indexOf(targetIndex);
+                if (index > 0) this._blackPieces.splice(index, 1);
             }
         }
-        this.board.position[startIndex] = PieceTypes.NONE;
-        this.board.position[targetIndex] = piece;
+        this._board.position[startIndex] = PieceTypes.NONE;
+        this._board.position[targetIndex] = piece;
 
         const isCastlingMove: boolean =
             this.getPieceType(piece) === PieceTypes.KING &&
@@ -74,11 +98,11 @@ export class Game {
         if (!isCastlingMove) {
             this.history.push({
                 move: [...castlingKingMove, startIndex, targetIndex],
-                activeColor: this.board.activeColor,
-                castlingRights: this.board.castlingRights,
-                enPassant: this.board.enPassant,
-                halfMoveClock: this.board.halfMoveClock,
-                fullMoveNumber: this.board.fullMoveNumber,
+                activeColor: this._board.activeColor,
+                castlingRights: this._board.castlingRights,
+                enPassant: this._board.enPassant,
+                halfMoveClock: this._board.halfMoveClock,
+                fullMoveNumber: this._board.fullMoveNumber,
                 capturedPiece: targetPiece,
             });
             return;
@@ -96,7 +120,7 @@ export class Game {
         if (!currentSlice || !previousSlice) return;
         const previousPosition: Array<number> =
             this.getPreviousPosition(currentSlice);
-        this.board = {
+        this._board = {
             position: previousPosition,
             activeColor: previousSlice.activeColor,
             castlingRights: previousSlice.castlingRights,
@@ -108,10 +132,10 @@ export class Game {
     }
 
     private getPreviousPosition(slice: IHistorySlice): Array<number> {
-        const previousPosition: Array<number> = [...this.board.position];
+        const previousPosition: Array<number> = [...this._board.position];
         const startIndex: number = slice.move[0];
         const targetIndex: number = slice.move[1];
-        const piece = this.board.position[targetIndex];
+        const piece = this._board.position[targetIndex];
         previousPosition[targetIndex] = PieceTypes.NONE;
         previousPosition[startIndex] = piece;
         if (slice.capturedPiece) {
@@ -120,7 +144,7 @@ export class Game {
         if (slice.move.length > 2) {
             const rookStartIndex: number = slice.move[2];
             const rookTargetIndex: number = slice.move[3];
-            const rook = this.board.position[rookTargetIndex];
+            const rook = this._board.position[rookTargetIndex];
             previousPosition[rookTargetIndex] = PieceTypes.NONE;
             previousPosition[rookStartIndex] = rook;
         }

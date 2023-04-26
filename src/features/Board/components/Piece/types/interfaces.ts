@@ -1,3 +1,3 @@
 export interface IPieceProps {
-    pieceCode: number;
+    piece: number;
 }

@@ -1,33 +1,22 @@
+import { IBoard } from "pages/GamePage/board";
 import { checkPseudoLegalMove } from "./lib/checkPseudoLegalMove";
 import { getPseudoLegalMoves } from "./model/pseudoLegalMoves/pseudoLegalMoves";
 
 export const getLegalMoves = (
-    piecePlacement: Array<number>,
+    board: IBoard,
     selectedIndex: number,
-    castlingRights: number,
-    enPassant: string,
 ): number[][] => {
     const legalMoves: number[][] = [];
 
     const pseudoLegalMoves: number[][] = getPseudoLegalMoves(
-        piecePlacement,
+        board,
         selectedIndex,
-        castlingRights,
-        enPassant,
     );
 
-    for (let moveIndex = 0; moveIndex < pseudoLegalMoves.length; moveIndex++) {
+    for (let moveIndex in pseudoLegalMoves) {
         const pseudoLegalMove: number[] = pseudoLegalMoves[moveIndex];
 
-        if (
-            checkPseudoLegalMove(
-                piecePlacement,
-                pseudoLegalMove,
-                legalMoves,
-                castlingRights,
-                enPassant,
-            )
-        ) {
+        if (checkPseudoLegalMove(board, pseudoLegalMove, legalMoves)) {
             legalMoves.push(pseudoLegalMove);
         }
     }
