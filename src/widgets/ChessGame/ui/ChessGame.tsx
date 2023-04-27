@@ -1,5 +1,9 @@
 import { Board } from "features/Board";
 
-export const ChessGame: React.FC = () => {
-    return <Board />;
+interface IGameProps {
+    game: TGame;
+}
+
+export const ChessGame: React.FC<IGameProps> = ({ game }) => {
+    return <Board game={game} />;
 };

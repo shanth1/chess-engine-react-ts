@@ -4,4 +4,5 @@ export enum CastlingRights {
     WitheQueenSide = 0b0100,
     BlackKingSide = 0b0010,
     BlackQueenSide = 0b0001,
+    BothSides = 0b1111,
 }

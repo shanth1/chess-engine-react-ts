@@ -5,42 +5,41 @@ import { getPawnMoves } from "./pawnMoves";
 import { getCastlingMoves } from "./castlingMoves";
 import { getPieceType } from "shared/pieceInfo";
 import { PieceTypes } from "shared/enums";
+import { IBoard } from "pages/GamePage/board";
 
 export const getPseudoLegalMoves = (
-    piecePlacement: Array<number>,
+    board: IBoard,
     selectedIndex: number,
-    castlingRights: number,
-    enPassant: string,
 ): number[][] => {
     let pseudoLegalMoves: Array<Array<number>> = [];
 
-    const selectedPieceType = getPieceType(piecePlacement[selectedIndex]);
+    const selectedPieceType = getPieceType(board.position[selectedIndex]);
 
     switch (selectedPieceType) {
         case PieceTypes.QUEEN:
         case PieceTypes.ROOK:
         case PieceTypes.BISHOP:
-            pseudoLegalMoves = getSlidingMoves(piecePlacement, selectedIndex);
+            pseudoLegalMoves = getSlidingMoves(board.position, selectedIndex);
             break;
         case PieceTypes.KNIGHT:
-            pseudoLegalMoves = getKnightMoves(piecePlacement, selectedIndex);
+            pseudoLegalMoves = getKnightMoves(board.position, selectedIndex);
             break;
         case PieceTypes.KING:
-            pseudoLegalMoves = getKingMoves(piecePlacement, selectedIndex);
+            pseudoLegalMoves = getKingMoves(board.position, selectedIndex);
             pseudoLegalMoves.push(
                 ...getCastlingMoves(
-                    piecePlacement,
+                    board.position,
+                    board.castlingRights,
                     selectedIndex,
-                    castlingRights,
                 ),
             );
             break;
 
         case PieceTypes.PAWN:
             pseudoLegalMoves = getPawnMoves(
-                piecePlacement,
+                board.position,
+                board.enPassant,
                 selectedIndex,
-                enPassant,
             );
             break;
     }

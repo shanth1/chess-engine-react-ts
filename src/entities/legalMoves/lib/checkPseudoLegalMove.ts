@@ -1,3 +1,4 @@
+import { IBoard } from "pages/GamePage/board";
 import { getPieceColor } from "shared/pieceInfo";
 import { getPassedKingMove } from "../model/passedKingMove";
 import { getPseudoLegalMoves } from "../model/pseudoLegalMoves/pseudoLegalMoves";
@@ -6,14 +7,12 @@ import { checkAttackOnKing } from "./kingUnderAttack";
 import { makeTestMove } from "./testMove";
 
 export const checkPseudoLegalMove = (
-    piecePlacement: Array<number>,
+    board: IBoard,
     pseudoLegalMove: number[],
     legalMoves: number[][],
-    castlingRights: number,
-    enPassant: string,
 ): boolean => {
     const [selectedIndex, targetIndex] = pseudoLegalMove;
-    const selectedPiece = piecePlacement[selectedIndex];
+    const selectedPiece = board.position[selectedIndex];
 
     const isCastlingMove = checkCastlingType(
         selectedPiece,
@@ -34,7 +33,7 @@ export const checkPseudoLegalMove = (
 
     let isLegal = true;
     const piecePlacementAfterMove = makeTestMove(
-        piecePlacement,
+        board.position,
         selectedIndex,
         targetIndex,
     );
@@ -42,15 +41,13 @@ export const checkPseudoLegalMove = (
     for (let squareIndex = 0; squareIndex < 64; squareIndex++) {
         if (!piecePlacementAfterMove[squareIndex]) continue;
 
-        const friendlyColor = getPieceColor(piecePlacement[selectedIndex]);
+        const friendlyColor = getPieceColor(board.position[selectedIndex]);
         const pieceColor = getPieceColor(piecePlacementAfterMove[squareIndex]);
         if (pieceColor === friendlyColor) continue;
 
         const enemyPseudoLegalMoves: number[][] = getPseudoLegalMoves(
-            piecePlacementAfterMove,
+            board,
             squareIndex,
-            castlingRights,
-            enPassant,
         );
 
         const isKingUnderAttack: boolean = checkAttackOnKing(

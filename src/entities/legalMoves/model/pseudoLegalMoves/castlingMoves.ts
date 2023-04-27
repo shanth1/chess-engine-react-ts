@@ -3,13 +3,13 @@ import { CastlingRights, PieceColors, PieceTypes } from "shared/enums";
 import { precomputedKingMoves } from "../../lib/precomputedData/kingMoves";
 
 export const getCastlingMoves = (
-    piecePlacement: Array<number>,
-    selectedIndex: number,
+    position: Array<number>,
     castlingRights: number,
+    selectedIndex: number,
 ): number[][] => {
     const pseudoLegalMoves: number[][] = [];
 
-    const friendlyColor = getPieceColor(piecePlacement[selectedIndex]);
+    const friendlyColor = getPieceColor(position[selectedIndex]);
 
     if (
         (selectedIndex === 60 && friendlyColor === PieceColors.WHITE) ||
@@ -21,14 +21,11 @@ export const getCastlingMoves = (
             while (
                 !(targetSquareIndex % 8 === 0 || targetSquareIndex % 8 === 7)
             ) {
-                if (piecePlacement[targetSquareIndex]) continue direction;
+                if (position[targetSquareIndex]) continue direction;
                 targetSquareIndex += offset;
             }
 
-            if (
-                getPieceType(piecePlacement[targetSquareIndex]) !==
-                PieceTypes.ROOK
-            )
+            if (getPieceType(position[targetSquareIndex]) !== PieceTypes.ROOK)
                 continue;
 
             const castlingSide =

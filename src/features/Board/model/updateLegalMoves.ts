@@ -1,29 +1,23 @@
 import { getLegalMoves } from "entities/legalMoves";
 import { addAlternativeCastlingMoves } from "./alternativeCastlingMove";
+import { IBoard } from "../../../pages/GamePage/board";
 import { squares } from "./squares";
 
 export const updateLegalMoves = (
-    piecePlacement: Array<number>,
     selectedIndex: number | null,
-    castlingRights: number,
-    enPassant: string,
+    board: IBoard,
 ): void => {
     squares.forEach((square) => {
-        square.isLegalToMove = false;
+        square.isLegal = false;
     });
 
     if (selectedIndex === null) return;
 
-    const legalMoves: number[][] = getLegalMoves(
-        piecePlacement,
-        selectedIndex,
-        castlingRights,
-        enPassant,
-    );
+    const legalMoves: number[][] = getLegalMoves(board, selectedIndex);
 
-    addAlternativeCastlingMoves(piecePlacement, legalMoves, selectedIndex);
+    addAlternativeCastlingMoves(board.position[selectedIndex], legalMoves);
 
     legalMoves.forEach((move) => {
-        squares[move[1]].isLegalToMove = true;
+        squares[move[1]].isLegal = true;
     });
 };
