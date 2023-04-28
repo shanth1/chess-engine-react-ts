@@ -29,19 +29,19 @@ export const Analysis: React.FC = () => {
             });
         }
 
+        console.log(legalMoves);
         if (legalMoves.length !== 0) {
             const randomMove =
                 legalMoves[Math.floor(Math.random() * legalMoves.length)];
             const selectedIndex: number = randomMove[0];
             const targetIndex: number = randomMove[1];
             const boardAfterMove = makeMove(board, selectedIndex, targetIndex);
+            console.log("!!", selectedIndex, targetIndex);
             dispatch(updateBoard({ board: boardAfterMove }));
         } else {
             alert("checkmate");
         }
     }
-    console.log(board.whitePiecePositions);
-    console.log(board.blackPiecePositions);
 
     return <div className={styles.analysis}>Analysis</div>;
 };

@@ -1,10 +1,11 @@
+import { makeMove } from "entities/movement";
 import { IBoard } from "pages/GamePage/model/gameSlice";
+import { PieceColors } from "shared/enums";
 import { getPieceColor } from "shared/pieceInfo";
 import { getPassedKingMove } from "../model/passedKingMove";
 import { getPseudoLegalMoves } from "../model/pseudoLegalMoves/pseudoLegalMoves";
 import { checkCastlingType } from "./castlingType";
 import { checkAttackOnKing } from "./kingUnderAttack";
-import { makeTestMove } from "./testMove";
 
 export const checkPseudoLegalMove = (
     board: IBoard,
@@ -22,45 +23,53 @@ export const checkPseudoLegalMove = (
 
     if (isCastlingMove) {
         const passedKingMove = getPassedKingMove(selectedIndex, targetIndex);
-        let isLegal = false;
+        let isPassedMoveLegal = false;
         legalMoves.forEach((legalMove) => {
             if (legalMove[1] === passedKingMove) {
-                isLegal = true;
+                isPassedMoveLegal = true;
             }
         });
-        if (!isLegal) return false;
+        if (!isPassedMoveLegal) return false;
     }
 
     let isLegal = true;
-    const piecePlacementAfterMove = makeTestMove(
-        board.position,
-        selectedIndex,
-        targetIndex,
-    );
+    const boardAfterMove: IBoard = makeMove(board, selectedIndex, targetIndex);
 
-    for (let squareIndex = 0; squareIndex < 64; squareIndex++) {
-        if (!piecePlacementAfterMove[squareIndex]) continue;
-
-        const friendlyColor = getPieceColor(board.position[selectedIndex]);
-        const pieceColor = getPieceColor(piecePlacementAfterMove[squareIndex]);
-        if (pieceColor === friendlyColor) continue;
-
-        const enemyPseudoLegalMoves: number[][] = getPseudoLegalMoves(
-            board,
-            squareIndex,
-        );
-
-        const isKingUnderAttack: boolean = checkAttackOnKing(
-            piecePlacementAfterMove,
-            piecePlacementAfterMove[squareIndex],
-            enemyPseudoLegalMoves,
-        );
-
-        if (isKingUnderAttack) {
-            isLegal = false;
-            break;
+    if (getPieceColor(selectedPiece) === PieceColors.WHITE) {
+        for (let index in board.blackPiecePositions) {
+            const enemyIndex = boardAfterMove.blackPiecePositions[index];
+            const enemyMoves: number[][] = getPseudoLegalMoves(
+                boardAfterMove,
+                enemyIndex,
+            );
+            const enemyPiece = boardAfterMove.position[enemyIndex];
+            const isKingUnderAttack: boolean = checkAttackOnKing(
+                boardAfterMove.position,
+                enemyPiece,
+                enemyMoves,
+            );
+            if (isKingUnderAttack) {
+                isLegal = false;
+                break;
+            }
+        }
+    } else {
+        for (let index in board.whitePiecePositions) {
+            const enemyIndex = boardAfterMove.whitePiecePositions[index];
+            const enemyMoves: number[][] = getPseudoLegalMoves(
+                boardAfterMove,
+                enemyIndex,
+            );
+            const isKingUnderAttack: boolean = checkAttackOnKing(
+                boardAfterMove.position,
+                enemyIndex,
+                enemyMoves,
+            );
+            if (isKingUnderAttack) {
+                isLegal = false;
+                break;
+            }
         }
     }
-
     return isLegal ? true : false;
 };

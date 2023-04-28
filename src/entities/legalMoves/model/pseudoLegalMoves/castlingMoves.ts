@@ -61,7 +61,6 @@ export const getCastlingMoves = (
             if (castling) {
                 const targetIndex = selectedIndex + 2 * offset;
                 pseudoLegalMoves.push([selectedIndex, targetIndex]);
-                console.log(selectedIndex, targetIndex);
             }
         }
     }
