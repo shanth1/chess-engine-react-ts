@@ -1,27 +1,36 @@
-import { deletePiece, updateEnPassant } from "api/fenSlice";
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import { PieceColors, PieceTypes } from "shared/enums";
 import { getFileName } from "shared/boardInfo";
+import { IBoard } from "pages/GamePage/model/gameSlice";
 
 export const resolveEnPassant = (
-    dispatch: AppDispatch,
-    piecePlacement: Array<number>,
+    board: IBoard,
     selectedIndex: number,
     targetIndex: number,
 ) => {
-    if (checkEnPassantCapture(piecePlacement, selectedIndex, targetIndex)) {
+    if (checkEnPassantCapture(board.position, selectedIndex, targetIndex)) {
         const captureIndex =
-            getPieceColor(piecePlacement[selectedIndex]) === PieceColors.WHITE
+            getPieceColor(board.position[selectedIndex]) === PieceColors.WHITE
                 ? targetIndex + 8
                 : targetIndex - 8;
-        dispatch(deletePiece({ index: captureIndex }));
+
+        if (getPieceColor(board.position[captureIndex]) === PieceColors.WHITE) {
+            const index = board.whitePiecePositions.indexOf(targetIndex);
+            if (index > 0) board.whitePiecePositions.splice(index, 1);
+            board.capturedWhitePieces.push(board.position[captureIndex]);
+        } else {
+            const index = board.blackPiecePositions.indexOf(targetIndex);
+            if (index > 0) board.blackPiecePositions.splice(index, 1);
+            board.capturedBlackPieces.push(board.position[captureIndex]);
+        }
+        board.position[captureIndex] = PieceTypes.NONE;
     }
 
-    if (checkDoubleMove(piecePlacement, selectedIndex, targetIndex)) {
+    if (checkDoubleMove(board.position, selectedIndex, targetIndex)) {
         const fileName = getFileName(targetIndex);
-        dispatch(updateEnPassant({ enPassant: fileName }));
+        board.enPassant = fileName;
     } else {
-        dispatch(updateEnPassant({ enPassant: "-" }));
+        board.enPassant = "-";
     }
 };
 

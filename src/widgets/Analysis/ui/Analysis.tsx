@@ -3,36 +3,26 @@ import { makeMove } from "entities/movement";
 import styles from "./styles.module.css";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { PieceColors } from "shared/enums";
+import { IBoard, updateBoard } from "pages/GamePage/model/gameSlice";
 
-interface IAnalysisProps {
-    game: TGame;
-}
-export const Analysis: React.FC<IAnalysisProps> = ({ game }) => {
+export const Analysis: React.FC = () => {
     const dispatch: AppDispatch = useAppDispatch();
-    game.board = {
-        position: useAppSelector((state) => state.fen.piecePlacement),
-        castlingRights: useAppSelector((state) => state.fen.castlingRights),
-        enPassant: useAppSelector((state) => state.fen.enPassant),
-        halfMoveClock: 0,
-        fullMoveNumber: 0,
-        activeColor: useAppSelector((state) => state.fen.activeColor),
-    };
-
+    const board: IBoard = useAppSelector((state) => state.game.board);
     const playerColor = useAppSelector((state) => state.player.playerColor);
     const legalMoves: number[][] = [];
-    if (game.board.activeColor !== playerColor) {
-        if (game.board.activeColor === PieceColors.WHITE) {
-            game.whitePieces.forEach((pieceIndex) => {
+    if (board.activeColor !== playerColor) {
+        if (board.activeColor === PieceColors.WHITE) {
+            board.whitePiecePositions.forEach((pieceIndex) => {
                 const legalMovesForPiece: number[][] = getLegalMoves(
-                    game.board,
+                    board,
                     pieceIndex,
                 );
                 legalMoves.push(...legalMovesForPiece);
             });
         } else {
-            game.blackPieces.forEach((pieceIndex) => {
+            board.blackPiecePositions.forEach((pieceIndex) => {
                 const legalMovesForPiece: number[][] = getLegalMoves(
-                    game.board,
+                    board,
                     pieceIndex,
                 );
                 legalMoves.push(...legalMovesForPiece);
@@ -44,9 +34,14 @@ export const Analysis: React.FC<IAnalysisProps> = ({ game }) => {
                 legalMoves[Math.floor(Math.random() * legalMoves.length)];
             const selectedIndex: number = randomMove[0];
             const targetIndex: number = randomMove[1];
-            makeMove(dispatch, game.board.position, selectedIndex, targetIndex);
+            const boardAfterMove = makeMove(board, selectedIndex, targetIndex);
+            dispatch(updateBoard({ board: boardAfterMove }));
+        } else {
+            alert("checkmate");
         }
     }
+    console.log(board.whitePiecePositions);
+    console.log(board.blackPiecePositions);
 
     return <div className={styles.analysis}>Analysis</div>;
 };

@@ -1,16 +1,15 @@
-import { promotesPawn } from "api/fenSlice";
+import { IBoard } from "pages/GamePage/model/gameSlice";
 import { PieceColors, PieceTypes } from "shared/enums";
-import { getPieceColor, getPieceType } from "shared/pieceInfo";
+import { getPieceCode, getPieceColor, getPieceType } from "shared/pieceInfo";
 
 export const resolvePawnPromotion = (
-    dispatch: AppDispatch,
-    piecePlacement: Array<number>,
+    board: IBoard,
     selectedIndex: number,
     targetIndex: number,
 ) => {
-    if (checkPawnPromotion(piecePlacement, selectedIndex, targetIndex)) {
-        dispatch(promotesPawn({ index: selectedIndex }));
-    }
+    if (!checkPawnPromotion(board.position, selectedIndex, targetIndex)) return;
+    const newQueen = getPieceCode(PieceTypes.QUEEN, board.activeColor);
+    board.position[selectedIndex] = newQueen;
 };
 
 const checkPawnPromotion = (
