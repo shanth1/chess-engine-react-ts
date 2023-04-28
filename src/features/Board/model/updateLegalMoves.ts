@@ -1,6 +1,6 @@
 import { getLegalMoves } from "entities/legalMoves";
+import { IBoard } from "pages/GamePage/model/gameSlice";
 import { addAlternativeCastlingMoves } from "./alternativeCastlingMove";
-import { IBoard } from "../../../pages/GamePage/board";
 import { squares } from "./squares";
 
 export const updateLegalMoves = (

@@ -1,6 +1,6 @@
 import { PieceColors, PieceTypes } from "shared/enums";
 
-function getPieceBinaryCodeFromFenSymbol(symbol: string): number {
+function getPieceFromSymbol(symbol: string): number {
     const pieceBinaryCode =
         symbol === "k"
             ? PieceTypes.KING
@@ -18,7 +18,7 @@ function getPieceBinaryCodeFromFenSymbol(symbol: string): number {
     return pieceBinaryCode;
 }
 
-export function getPiecePlacementArrayFromFen(fen: string): Array<number> {
+export function getPositionFromFen(fen: string): Array<number> {
     const piecePlacement: Array<number> = new Array(64);
 
     const fenPiecePlacement = fen.split(" ")[0];
@@ -39,9 +39,7 @@ export function getPiecePlacementArrayFromFen(fen: string): Array<number> {
                         ? PieceColors.WHITE
                         : PieceColors.BLACK;
 
-                const pieceType = getPieceBinaryCodeFromFenSymbol(
-                    symbol.toLowerCase(),
-                );
+                const pieceType = getPieceFromSymbol(symbol.toLowerCase());
                 piecePlacement[rank * 8 + file] = pieceColor | pieceType;
                 file++;
             }

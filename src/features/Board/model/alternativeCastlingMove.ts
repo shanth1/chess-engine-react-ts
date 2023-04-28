@@ -1,11 +1,13 @@
 import { PieceTypes } from "shared/enums";
+import { getPieceType } from "shared/pieceInfo";
 import { squares } from "./squares";
 
 export const addAlternativeCastlingMoves = (
     selectedPiece: number,
     legalMoves: number[][],
 ) => {
-    if (selectedPiece !== PieceTypes.KING) return;
+    const pieceType = getPieceType(selectedPiece);
+    if (pieceType !== PieceTypes.KING) return;
     legalMoves.forEach((legalMove) => {
         const [selectedIndex, targetIndex] = legalMove;
         if (targetIndex - selectedIndex === 2) {

@@ -1,4 +1,4 @@
-import { IBoard } from "pages/GamePage/board";
+import { IBoard } from "pages/GamePage/model/gameSlice";
 import { getPieceColor } from "shared/pieceInfo";
 import { getPassedKingMove } from "../model/passedKingMove";
 import { getPseudoLegalMoves } from "../model/pseudoLegalMoves/pseudoLegalMoves";

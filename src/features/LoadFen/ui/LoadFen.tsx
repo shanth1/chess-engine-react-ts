@@ -1,4 +1,4 @@
-import { setFenPosition } from "api/fenSlice";
+import { loafFen } from "pages/GamePage/model/gameSlice";
 import { useState } from "react";
 import { Button } from "shared/Button";
 import { useAppDispatch } from "shared/hooks";
@@ -16,7 +16,7 @@ export const LoadFen: React.FC = () => {
     };
 
     const onClick = () => {
-        dispatch(setFenPosition({ fen: value }));
+        dispatch(loafFen({ fen: value }));
         setText("");
     };
 
