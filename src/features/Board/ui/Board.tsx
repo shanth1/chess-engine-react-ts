@@ -16,15 +16,26 @@ export const Board: React.FC = () => {
     const colorView = useAppSelector((state) => state.player.colorView);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     updateLegalMoves(selectedIndex, board);
+
     const resolveSquareClick = (square: ISquare) => {
-        const { index, isLegal, isSelected, piece }: ISquare = square;
+        const {
+            index,
+            isLegal,
+            isSelected,
+            isAlternativeCastling,
+            piece,
+        }: ISquare = square;
         const pieceColor: PieceColors = getPieceColor(piece);
         const isPlayerTurn: boolean = board.activeColor === pieceColor;
         if (!isPlayerTurn && !isLegal) return;
         setSelectedIndex(isSelected || isLegal ? null : index);
 
         if (!isLegal || selectedIndex === null) return;
-        const boardAfterMove = makeMove(board, selectedIndex, index);
+        let targetIndex = index;
+        if (isAlternativeCastling) {
+            targetIndex = index % 8 === 7 ? index - 1 : index + 2;
+        }
+        const boardAfterMove = makeMove(board, selectedIndex, targetIndex);
         dispatch(updateBoard({ board: boardAfterMove }));
     };
 

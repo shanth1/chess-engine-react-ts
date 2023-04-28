@@ -17,6 +17,7 @@ for (let rank: number = 7; rank >= 0; rank--) {
             piece: PieceTypes.NONE,
             isLegal: false,
             isSelected: false,
+            isAlternativeCastling: false,
         });
         index++;
     }

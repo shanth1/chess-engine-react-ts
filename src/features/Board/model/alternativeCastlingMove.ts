@@ -13,9 +13,11 @@ export const addAlternativeCastlingMoves = (
         if (targetIndex - selectedIndex === 2) {
             const kingSideRookIndex = selectedIndex + 3;
             squares[kingSideRookIndex].isLegal = true;
+            squares[kingSideRookIndex].isAlternativeCastling = true;
         } else if (targetIndex - selectedIndex === -2) {
             const queenSideRookIndex = selectedIndex - 4;
             squares[queenSideRookIndex].isLegal = true;
+            squares[queenSideRookIndex].isAlternativeCastling = true;
         }
     });
 };

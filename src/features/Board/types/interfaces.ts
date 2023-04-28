@@ -5,6 +5,7 @@ export interface ISquare {
     readonly color: Colors;
     readonly name: string;
     isLegal: boolean;
+    isAlternativeCastling: boolean;
     isSelected: boolean;
     piece: number;
 }
