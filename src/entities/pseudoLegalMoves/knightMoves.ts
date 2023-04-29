@@ -1,5 +1,5 @@
 import { getPieceColor } from "shared/pieceInfo";
-import { precomputedKnightMoves } from "../../lib/precomputedData/knightMoves";
+import { precomputedKnightMoves } from "./precomputedData/knightMoves";
 
 export const getKnightMoves = (
     piecePlacement: Array<number>,

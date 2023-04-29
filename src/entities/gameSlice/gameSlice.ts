@@ -6,6 +6,12 @@ import { getPositionFromFen } from "./position";
 import { IGameState } from "./types/interfaces";
 
 const initialBoard: IBoard = {
+    move: null,
+    moveType: null,
+    isPromotion: null,
+    isCheck: null,
+    isCheckmate: null,
+    isStalemate: null,
     position: Array(64),
     activeColor: PieceColors.WHITE,
     castlingRights: CastlingRights.BothSides,
@@ -21,8 +27,6 @@ const initialBoard: IBoard = {
 const initialState: IGameState = {
     board: initialBoard,
     history: [],
-    capturedWhitePieces: [],
-    capturedBlackPieces: [],
 };
 
 const gameSlice = createSlice({
@@ -61,6 +65,7 @@ const gameSlice = createSlice({
         },
         updateBoard: (state, action) => {
             state.board = action.payload.board;
+            state.history.push(action.payload.board);
         },
     },
 });

@@ -2,23 +2,26 @@ import { squares } from "widgets/ChessGame/components/Board/model/squares";
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import { CastlingRights, PieceColors, PieceTypes } from "shared/enums";
 
-export const makeDefaultMove = (
+export const movePiece = (
     board: IBoard,
     selectedIndex: number,
     targetIndex: number,
-): IBoard => {
+) => {
+    board.moveType = "movement";
     const piece = board.position[selectedIndex];
     const pieceType = getPieceType(piece);
     const targetPiece = board.position[targetIndex];
     if (targetPiece) {
         if (getPieceColor(targetPiece) === PieceColors.WHITE) {
             const index = board.whitePiecePositions.indexOf(targetIndex);
-            if (index > 0) board.whitePiecePositions.splice(index, 1);
+            if (index >= 0) board.whitePiecePositions.splice(index, 1);
             board.capturedWhitePieces.push(targetPiece);
+            board.moveType = "capture";
         } else {
             const index = board.blackPiecePositions.indexOf(targetIndex);
-            if (index > 0) board.blackPiecePositions.splice(index, 1);
+            if (index >= 0) board.blackPiecePositions.splice(index, 1);
             board.capturedBlackPieces.push(targetPiece);
+            board.moveType = "capture";
         }
     }
 
@@ -63,6 +66,4 @@ export const makeDefaultMove = (
                 board.castlingRights & ~CastlingRights.BlackQueenSide;
         }
     }
-
-    return board;
 };

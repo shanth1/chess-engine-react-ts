@@ -1,0 +1,1 @@
+export { checkAttackOnKing } from "./kingUnderAttack";

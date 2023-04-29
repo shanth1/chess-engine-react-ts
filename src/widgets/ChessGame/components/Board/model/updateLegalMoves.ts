@@ -3,8 +3,8 @@ import { addAlternativeCastlingMoves } from "./alternativeCastlingMove";
 import { squares } from "./squares";
 
 export const updateLegalMoves = (
-    selectedIndex: number | null,
     board: IBoard,
+    selectedIndex: number | null,
 ): void => {
     squares.forEach((square) => {
         square.isLegal = false;

@@ -1,0 +1,1 @@
+export { makeMove } from "./makeMove";

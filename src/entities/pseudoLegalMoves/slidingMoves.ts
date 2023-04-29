@@ -3,7 +3,7 @@ import { PieceTypes } from "shared/enums";
 import {
     directionOffsets,
     precomputedSlidingMoves,
-} from "../../lib/precomputedData/slidingMoves";
+} from "./precomputedData/slidingMoves";
 
 export const getSlidingMoves = (
     position: Array<number>,
