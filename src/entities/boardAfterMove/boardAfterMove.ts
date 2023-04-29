@@ -30,7 +30,6 @@ export const getBoardAfterMove = (
         capturedBlackPieces: board.capturedBlackPieces.slice(),
     };
     const selectedPiece = board.position[startIndex];
-    if (selectedPiece === 0) debugger;
     switch (getPieceType(selectedPiece)) {
         case PieceTypes.PAWN:
             movePiece(newBoard, startIndex, targetIndex);

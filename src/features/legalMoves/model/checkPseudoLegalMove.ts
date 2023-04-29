@@ -43,7 +43,6 @@ export const checkPseudoLegalMove = (
                 enemyMoves,
             );
             if (isKingUnderAttack) {
-                debugger;
                 isLegal = false;
                 break;
             }
