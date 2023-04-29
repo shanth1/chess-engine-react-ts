@@ -1,8 +1,8 @@
 import { getLegalMoves } from "features/legalMoves";
-import { makeMove } from "entities/movement";
 import styles from "./styles.module.css";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { PieceColors } from "shared/enums";
+import { makeMove } from "featuresComplex/makeMove";
 import { updateBoard } from "entities/gameSlice";
 
 export const Analysis: React.FC = () => {
@@ -29,14 +29,12 @@ export const Analysis: React.FC = () => {
             });
         }
 
-        console.log(legalMoves);
         if (legalMoves.length !== 0) {
             const randomMove =
                 legalMoves[Math.floor(Math.random() * legalMoves.length)];
             const selectedIndex: number = randomMove[0];
             const targetIndex: number = randomMove[1];
             const boardAfterMove = makeMove(board, selectedIndex, targetIndex);
-            console.log("!!", selectedIndex, targetIndex);
             dispatch(updateBoard({ board: boardAfterMove }));
         } else {
             alert("checkmate");

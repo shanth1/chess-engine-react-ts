@@ -1,5 +1,8 @@
-export const getPassedKingMove = (
-    selectedIndex: number,
-    targetIndex: number,
-): number =>
-    targetIndex - selectedIndex > 0 ? targetIndex - 1 : targetIndex + 1;
+export const getPassedKingMove = ([
+    startIndex,
+    targetIndex,
+]: Array<number>): Array<number> => {
+    return targetIndex - startIndex > 0
+        ? [startIndex, targetIndex - 1]
+        : [startIndex, targetIndex + 1];
+};

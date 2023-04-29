@@ -1,41 +1,36 @@
-import { makeMove } from "entities/movement";
 import { PieceColors } from "shared/enums";
 import { getPieceColor } from "shared/pieceInfo";
-import { getPassedKingMove } from "../model/passedKingMove";
-import { getPseudoLegalMoves } from "../model/pseudoLegalMoves/pseudoLegalMoves";
-import { checkCastlingType } from "./castlingType";
-import { checkAttackOnKing } from "./kingUnderAttack";
+import { getPassedKingMove } from "./passedKingMove";
+import { getPseudoLegalMoves } from "../../../entities/pseudoLegalMoves/pseudoLegalMoves";
+import { getBoardAfterMove } from "entities/boardAfterMove";
+import { checkAttackOnKing } from "entities/checkAttackOnKing";
 
 export const checkPseudoLegalMove = (
     board: IBoard,
     pseudoLegalMove: number[],
     legalMoves: number[][],
 ): boolean => {
-    const [selectedIndex, targetIndex] = pseudoLegalMove;
-    const selectedPiece = board.position[selectedIndex];
+    if (pseudoLegalMove[1] === 0) debugger;
+    const selectedPiece = board.position[pseudoLegalMove[0]];
 
-    const isCastlingMove = checkCastlingType(
-        selectedPiece,
-        targetIndex,
-        selectedIndex,
-    );
+    let isLegal = true;
+    const boardAfterMove: IBoard = getBoardAfterMove(board, pseudoLegalMove);
 
-    if (isCastlingMove) {
-        const passedKingMove = getPassedKingMove(selectedIndex, targetIndex);
+    if (
+        boardAfterMove.moveType === "O-O" ||
+        boardAfterMove.moveType === "O-O-O"
+    ) {
+        const passedKingMove = getPassedKingMove(pseudoLegalMove);
         let isPassedMoveLegal = false;
         legalMoves.forEach((legalMove) => {
-            if (legalMove[1] === passedKingMove) {
+            if (legalMove[1] === passedKingMove[1]) {
                 isPassedMoveLegal = true;
             }
         });
         if (!isPassedMoveLegal) return false;
     }
-
-    let isLegal = true;
-    const boardAfterMove: IBoard = makeMove(board, selectedIndex, targetIndex);
-
     if (getPieceColor(selectedPiece) === PieceColors.WHITE) {
-        for (let index in board.blackPiecePositions) {
+        for (let index in boardAfterMove.blackPiecePositions) {
             const enemyIndex = boardAfterMove.blackPiecePositions[index];
             const enemyMoves: number[][] = getPseudoLegalMoves(
                 boardAfterMove,
@@ -53,7 +48,7 @@ export const checkPseudoLegalMove = (
             }
         }
     } else {
-        for (let index in board.whitePiecePositions) {
+        for (let index in boardAfterMove.whitePiecePositions) {
             const enemyIndex = boardAfterMove.whitePiecePositions[index];
             const enemyMoves: number[][] = getPseudoLegalMoves(
                 boardAfterMove,

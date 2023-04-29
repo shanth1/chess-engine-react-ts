@@ -8,6 +8,12 @@ declare global {
     type TColor = "white" | "black";
 
     interface IBoard {
+        move: Array<number> | null;
+        moveType: "movement" | "O-O" | "O-O-O" | "capture" | null;
+        isPromotion: boolean | null;
+        isCheck: boolean | null;
+        isCheckmate: boolean | null;
+        isStalemate: boolean | null;
         position: Array<number>;
         activeColor: PieceColors;
         castlingRights:

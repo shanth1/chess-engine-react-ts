@@ -1,0 +1,1 @@
+export { getBoardAfterMove } from "./boardAfterMove";

@@ -4,18 +4,18 @@ import { updateLegalMoves } from "../model/updateLegalMoves";
 import styles from "./styles.module.css";
 import { getBoardView } from "../lib/boardView";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
-import { makeMove } from "entities/movement";
 import { PieceColors } from "shared/enums";
 import { getPieceColor } from "shared/pieceInfo";
-import { updateBoard } from "entities/gameSlice";
 import { ISquare } from "../types/interfaces";
+import { makeMove } from "featuresComplex/makeMove";
+import { updateBoard } from "entities/gameSlice";
 
 export const Board: React.FC = () => {
     const dispatch = useAppDispatch();
     const board: IBoard = useAppSelector((state) => state.game.board);
     const colorView = useAppSelector((state) => state.player.colorView);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-    updateLegalMoves(selectedIndex, board);
+    updateLegalMoves(board, selectedIndex);
 
     const resolveSquareClick = (square: ISquare) => {
         const {

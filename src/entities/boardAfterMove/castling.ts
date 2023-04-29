@@ -21,10 +21,11 @@ const moveRookWhileCastling = (
     targetIndex: number,
 ): void => {
     if (
-        getPieceType(board.position[selectedIndex]) === PieceTypes.KING &&
+        getPieceType(board.position[targetIndex]) === PieceTypes.KING &&
         Math.abs(selectedIndex - targetIndex) >= 2 &&
         Math.abs(selectedIndex - targetIndex) <= 4
     ) {
+        const castlingType = targetIndex % 8 >= 6 ? "O-O" : "O-O-O";
         const rookStartIndex =
             targetIndex % 8 >= 6 ? selectedIndex + 3 : selectedIndex - 4;
         const rookTargetIndex =
@@ -42,5 +43,6 @@ const moveRookWhileCastling = (
 
         board.position[rookStartIndex] = PieceTypes.NONE;
         board.position[rookTargetIndex] = rook;
+        board.moveType = castlingType;
     }
 };

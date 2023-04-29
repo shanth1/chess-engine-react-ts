@@ -8,6 +8,7 @@ export const resolveEnPassant = (
     targetIndex: number,
 ) => {
     if (checkEnPassantCapture(board.position, selectedIndex, targetIndex)) {
+        board.moveType = "capture";
         const captureIndex =
             getPieceColor(board.position[selectedIndex]) === PieceColors.WHITE
                 ? targetIndex + 8

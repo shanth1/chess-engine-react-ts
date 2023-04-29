@@ -1,6 +1,6 @@
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import { CastlingRights, PieceColors, PieceTypes } from "shared/enums";
-import { precomputedKingMoves } from "../../lib/precomputedData/kingMoves";
+import { precomputedKingMoves } from "./precomputedData/kingMoves";
 
 export const getCastlingMoves = (
     position: Array<number>,
