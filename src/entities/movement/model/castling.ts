@@ -1,20 +1,13 @@
-import { moveFigure } from "api/fenSlice";
-import { getPieceType } from "shared/pieceInfo";
-import { PieceTypes } from "shared/enums";
+import { getPieceColor, getPieceType } from "shared/pieceInfo";
+import { PieceColors, PieceTypes } from "shared/enums";
 
 export const resolveCastling = (
-    dispatch: AppDispatch,
-    piecePlacement: Array<number>,
+    board: IBoard,
     selectedIndex: number,
     targetIndex: number,
 ) => {
     if (isCastling(selectedIndex, targetIndex)) {
-        moveRookWhileCastling(
-            dispatch,
-            piecePlacement,
-            selectedIndex,
-            targetIndex,
-        );
+        moveRookWhileCastling(board, selectedIndex, targetIndex);
     }
 };
 
@@ -23,13 +16,12 @@ const isCastling = (selectedIndex: number, targetIndex: number): boolean => {
 };
 
 const moveRookWhileCastling = (
-    dispatch: AppDispatch,
-    piecePlacement: Array<number>,
+    board: IBoard,
     selectedIndex: number,
     targetIndex: number,
 ): void => {
     if (
-        getPieceType(piecePlacement[selectedIndex]) === PieceTypes.KING &&
+        getPieceType(board.position[selectedIndex]) === PieceTypes.KING &&
         Math.abs(selectedIndex - targetIndex) >= 2 &&
         Math.abs(selectedIndex - targetIndex) <= 4
     ) {
@@ -38,11 +30,17 @@ const moveRookWhileCastling = (
         const rookTargetIndex =
             targetIndex % 8 >= 6 ? selectedIndex + 1 : selectedIndex - 1;
 
-        dispatch(
-            moveFigure({
-                startIndex: rookStartIndex,
-                targetIndex: rookTargetIndex,
-            }),
-        );
+        const rook = board.position[rookStartIndex];
+
+        if (getPieceColor(rook) === PieceColors.WHITE) {
+            const index = board.whitePiecePositions.indexOf(rookStartIndex);
+            board.whitePiecePositions[index] = rookTargetIndex;
+        } else {
+            const index = board.blackPiecePositions.indexOf(rookStartIndex);
+            board.blackPiecePositions[index] = rookTargetIndex;
+        }
+
+        board.position[rookStartIndex] = PieceTypes.NONE;
+        board.position[rookTargetIndex] = rook;
     }
 };
