@@ -1,4 +1,3 @@
-import { IBoard } from "pages/GamePage/model/gameSlice";
 import { PieceColors, PieceTypes } from "shared/enums";
 import { getPieceCode, getPieceColor, getPieceType } from "shared/pieceInfo";
 

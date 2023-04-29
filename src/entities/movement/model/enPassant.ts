@@ -1,7 +1,6 @@
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import { PieceColors, PieceTypes } from "shared/enums";
 import { getFileName } from "shared/boardInfo";
-import { IBoard } from "pages/GamePage/model/gameSlice";
 
 export const resolveEnPassant = (
     board: IBoard,

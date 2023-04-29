@@ -1,4 +1,3 @@
-import { IBoard } from "pages/GamePage/model/gameSlice";
 import { checkPseudoLegalMove } from "./lib/checkPseudoLegalMove";
 import { getPseudoLegalMoves } from "./model/pseudoLegalMoves/pseudoLegalMoves";
 

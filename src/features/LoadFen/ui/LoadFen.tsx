@@ -1,4 +1,4 @@
-import { loafFen } from "pages/GamePage/model/gameSlice";
+import { loafFen } from "entities/gameSlice";
 import { useState } from "react";
 import { Button } from "shared/Button";
 import { useAppDispatch } from "shared/hooks";

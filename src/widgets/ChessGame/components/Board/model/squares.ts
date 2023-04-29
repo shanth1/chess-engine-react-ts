@@ -1,5 +1,5 @@
-import { Colors } from "features/Board/types/enums";
-import { ISquare } from "features/Board/types/interfaces";
+import { Colors } from "widgets/ChessGame/components/Board/types/enums";
+import { ISquare } from "widgets/ChessGame/components/Board/types/interfaces";
 import { getFileName } from "shared/boardInfo";
 import { PieceTypes } from "shared/enums";
 

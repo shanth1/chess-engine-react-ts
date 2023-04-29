@@ -1,7 +1,7 @@
 import {
     OffsetsPawnBlack,
     OffsetsPawnWhite,
-} from "entities/legalMoves/types/enums";
+} from "features/legalMoves/types/enums";
 import { getFileName } from "shared/boardInfo";
 import { getPieceColor } from "shared/pieceInfo";
 import { PieceColors } from "shared/enums";

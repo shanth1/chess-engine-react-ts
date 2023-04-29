@@ -1,6 +1,5 @@
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import { PieceColors, PieceTypes } from "shared/enums";
-import { IBoard } from "pages/GamePage/model/gameSlice";
 
 export const resolveCastling = (
     board: IBoard,

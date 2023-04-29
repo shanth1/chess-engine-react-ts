@@ -4,11 +4,11 @@ import { updateLegalMoves } from "../model/updateLegalMoves";
 import styles from "./styles.module.css";
 import { getBoardView } from "../lib/boardView";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
-import { ISquare } from "../types/interfaces";
 import { makeMove } from "entities/movement";
 import { PieceColors } from "shared/enums";
 import { getPieceColor } from "shared/pieceInfo";
-import { IBoard, updateBoard } from "pages/GamePage/model/gameSlice";
+import { updateBoard } from "entities/gameSlice";
+import { ISquare } from "../types/interfaces";
 
 export const Board: React.FC = () => {
     const dispatch = useAppDispatch();

@@ -1,7 +1,6 @@
-import { squares } from "features/Board/model/squares";
+import { squares } from "widgets/ChessGame/components/Board/model/squares";
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import { CastlingRights, PieceColors, PieceTypes } from "shared/enums";
-import { IBoard } from "pages/GamePage/model/gameSlice";
 
 export const makeDefaultMove = (
     board: IBoard,

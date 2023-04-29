@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { playerSliceReducer } from "api/playerSlice";
-import { engineReducer } from "features/Engine/engineSlice";
-import { gameSliceReducers } from "pages/GamePage/model/gameSlice";
+import { gameSliceReducers } from "entities/gameSlice";
+import { playerSliceReducer } from "entities/playerSlice";
 
 const store = configureStore({
     reducer: {
         player: playerSliceReducer,
-        engine: engineReducer,
         game: gameSliceReducers,
     },
 });

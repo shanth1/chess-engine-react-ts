@@ -1,5 +1,4 @@
-import { getLegalMoves } from "entities/legalMoves";
-import { IBoard } from "pages/GamePage/model/gameSlice";
+import { getLegalMoves } from "features/legalMoves";
 import { addAlternativeCastlingMoves } from "./alternativeCastlingMove";
 import { squares } from "./squares";
 

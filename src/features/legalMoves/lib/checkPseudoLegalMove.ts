@@ -1,5 +1,4 @@
 import { makeMove } from "entities/movement";
-import { IBoard } from "pages/GamePage/model/gameSlice";
 import { PieceColors } from "shared/enums";
 import { getPieceColor } from "shared/pieceInfo";
 import { getPassedKingMove } from "../model/passedKingMove";

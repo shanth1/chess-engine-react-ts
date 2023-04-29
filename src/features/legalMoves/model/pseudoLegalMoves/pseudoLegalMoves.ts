@@ -5,7 +5,6 @@ import { getPawnMoves } from "./pawnMoves";
 import { getCastlingMoves } from "./castlingMoves";
 import { getPieceType } from "shared/pieceInfo";
 import { PieceTypes } from "shared/enums";
-import { IBoard } from "pages/GamePage/model/gameSlice";
 
 export const getPseudoLegalMoves = (
     board: IBoard,

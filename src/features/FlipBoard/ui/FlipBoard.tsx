@@ -1,4 +1,4 @@
-import { changeColorView } from "api/playerSlice";
+import { changeColorView } from "entities/playerSlice";
 import { Button } from "shared/Button";
 import { useAppDispatch } from "shared/hooks";
 

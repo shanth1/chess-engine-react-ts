@@ -1,7 +1,6 @@
 import { makeDefaultMove } from "./model/defaultMove";
 import { getPieceType } from "shared/pieceInfo";
 import { PieceTypes } from "shared/enums";
-import { IBoard } from "pages/GamePage/model/gameSlice";
 import { resolveCastling } from "./model/castling";
 import { resolveEnPassant } from "./model/enPassant";
 import { resolvePawnPromotion } from "./model/pawnPromotion";

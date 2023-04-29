@@ -1,9 +1,9 @@
-import { getLegalMoves } from "entities/legalMoves";
+import { getLegalMoves } from "features/legalMoves";
 import { makeMove } from "entities/movement";
 import styles from "./styles.module.css";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { PieceColors } from "shared/enums";
-import { IBoard, updateBoard } from "pages/GamePage/model/gameSlice";
+import { updateBoard } from "entities/gameSlice";
 
 export const Analysis: React.FC = () => {
     const dispatch: AppDispatch = useAppDispatch();

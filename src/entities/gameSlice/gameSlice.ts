@@ -3,43 +3,9 @@ import { CastlingRights, PieceColors } from "shared/enums";
 import { getPieceColor } from "shared/pieceInfo";
 import { getCastlingRights } from "./castlingRights";
 import { getPositionFromFen } from "./position";
+import { IGameState } from "./types/interfaces";
 
-export interface IBoard {
-    position: Array<number>;
-    activeColor: PieceColors;
-    castlingRights:
-        | CastlingRights.BlackKingSide
-        | CastlingRights.BlackQueenSide
-        | CastlingRights.BothSides
-        | CastlingRights.NeitherSide
-        | CastlingRights.WhiteKingSide
-        | CastlingRights.WitheQueenSide;
-    enPassant: string;
-    halfMoveClock: number;
-    fullMoveNumber: number;
-    whitePiecePositions: Array<number>;
-    blackPiecePositions: Array<number>;
-    capturedWhitePieces: Array<number>;
-    capturedBlackPieces: Array<number>;
-}
-
-interface IHistorySlice {
-    move: Array<number>;
-    activeColor: PieceColors;
-    castlingRights:
-        | CastlingRights.BlackKingSide
-        | CastlingRights.BlackQueenSide
-        | CastlingRights.BothSides
-        | CastlingRights.NeitherSide
-        | CastlingRights.WhiteKingSide
-        | CastlingRights.WitheQueenSide;
-    enPassant: string;
-    halfMoveClock: number;
-    fullMoveNumber: number;
-    capturedPiece: number;
-}
-
-const board: IBoard = {
+const initialBoard: IBoard = {
     position: Array(64),
     activeColor: PieceColors.WHITE,
     castlingRights: CastlingRights.BothSides,
@@ -52,15 +18,8 @@ const board: IBoard = {
     capturedBlackPieces: [],
 };
 
-interface IGameState {
-    board: IBoard;
-    history: Array<IHistorySlice>;
-    capturedWhitePieces: Array<number>;
-    capturedBlackPieces: Array<number>;
-}
-
 const initialState: IGameState = {
-    board: board,
+    board: initialBoard,
     history: [],
     capturedWhitePieces: [],
     capturedBlackPieces: [],
