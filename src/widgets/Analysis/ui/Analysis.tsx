@@ -12,6 +12,8 @@ export const Analysis: React.FC = () => {
     const board: IBoard = useAppSelector((state) => state.game.board);
     const playerColor = useAppSelector((state) => state.player.playerColor);
 
+    window.searchCount = 0;
+
     if (board.activeColor !== playerColor) {
         const allLegalMoves: number[][] = getAllLegalMoves(
             board,
@@ -34,13 +36,13 @@ export const Analysis: React.FC = () => {
                     bestMove = move;
                 }
             }
+            console.log("search count:", window.searchCount);
             const selectedIndex: number = bestMove[0];
             const targetIndex: number = bestMove[1];
             const boardAfterMove = makeMove(board, selectedIndex, targetIndex);
             dispatch(updateBoard({ board: boardAfterMove }));
         }
     }
-
     return <div className={styles.analysis}>Analysis</div>;
 };
 
@@ -66,6 +68,7 @@ const search = (
     depth: number,
 ): number => {
     if (depth === 0) {
+        window.searchCount += 1;
         return getEvaluation(board.position);
     }
 

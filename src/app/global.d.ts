@@ -31,4 +31,8 @@ declare global {
         capturedWhitePieces: Array<number>;
         capturedBlackPieces: Array<number>;
     }
+
+    interface Window {
+        searchCount: number;
+    }
 }

@@ -10,7 +10,6 @@ export const checkPseudoLegalMove = (
     pseudoLegalMove: number[],
     legalMoves: number[][],
 ): boolean => {
-    if (pseudoLegalMove[1] === 0) debugger;
     const selectedPiece = board.position[pseudoLegalMove[0]];
 
     let isLegal = true;
