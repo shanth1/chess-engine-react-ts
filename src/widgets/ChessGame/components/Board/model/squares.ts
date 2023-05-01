@@ -18,6 +18,8 @@ for (let rank: number = 7; rank >= 0; rank--) {
             isLegal: false,
             isSelected: false,
             isAlternativeCastling: false,
+            isStart: false,
+            isTarget: false,
         });
         index++;
     }

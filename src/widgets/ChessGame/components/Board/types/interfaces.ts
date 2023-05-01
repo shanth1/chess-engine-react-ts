@@ -8,6 +8,8 @@ export interface ISquare {
     isAlternativeCastling: boolean;
     isSelected: boolean;
     piece: number;
+    isStart: boolean;
+    isTarget: boolean;
 }
 
 export interface IBoardProps {

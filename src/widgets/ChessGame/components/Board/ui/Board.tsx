@@ -69,6 +69,10 @@ export const Board: React.FC = () => {
             {boardView.map((square) => {
                 square.piece = board.position[square.index];
                 square.isSelected = selectedIndex === square.index;
+                if (board.move) {
+                    square.isStart = square.index === board.move[0];
+                    square.isTarget = square.index === board.move[1];
+                }
                 return (
                     <Square
                         key={square.index}

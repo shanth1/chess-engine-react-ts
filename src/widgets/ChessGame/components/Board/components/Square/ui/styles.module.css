@@ -29,3 +29,11 @@
     border-radius: 90%;
     background-color: gray;
 }
+
+.start {
+    background-color: rgb(196, 222, 126);
+}
+
+.target {
+    background-color: rgb(162, 189, 88);
+}

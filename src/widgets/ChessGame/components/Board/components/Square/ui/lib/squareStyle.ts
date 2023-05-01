@@ -6,6 +6,8 @@ export const getSquareStyle = ({
     piece,
     isLegal,
     isSelected,
+    isStart,
+    isTarget,
 }: ISquare) => {
     return [
         styles.square,
@@ -13,5 +15,7 @@ export const getSquareStyle = ({
         piece ? styles.clickable : "",
         isLegal ? styles.clickable : "",
         isSelected ? styles.selected : "",
+        isStart ? styles.start : "",
+        isTarget ? styles.target : "",
     ].join(" ");
 };
