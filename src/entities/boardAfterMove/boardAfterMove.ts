@@ -32,8 +32,8 @@ export const getBoardAfterMove = (
     const selectedPiece = board.position[startIndex];
     switch (getPieceType(selectedPiece)) {
         case PieceTypes.PAWN:
-            movePiece(newBoard, startIndex, targetIndex);
             resolveEnPassant(newBoard, startIndex, targetIndex);
+            movePiece(newBoard, startIndex, targetIndex);
             resolvePawnPromotion(newBoard, targetIndex);
             break;
         case PieceTypes.KING:

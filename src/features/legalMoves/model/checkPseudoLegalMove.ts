@@ -88,6 +88,5 @@ export const checkPseudoLegalMove = (
             }
         }
     }
-    debugger;
     return isLegal ? true : false;
 };
