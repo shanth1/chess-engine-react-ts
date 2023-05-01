@@ -1,1 +1,2 @@
-export { getLegalMoves } from "./legalMoves";
+export { getLegalMoves } from "./pieceLegalMoves";
+export { getAllLegalMoves } from "./boardLegalMoves";

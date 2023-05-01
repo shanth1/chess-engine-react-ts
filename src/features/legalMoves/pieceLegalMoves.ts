@@ -1,5 +1,5 @@
+import { getPseudoLegalMoves } from "entities/pseudoLegalMoves";
 import { checkPseudoLegalMove } from "./model/checkPseudoLegalMove";
-import { getPseudoLegalMoves } from "../../entities/pseudoLegalMoves/pseudoLegalMoves";
 
 export const getLegalMoves = (
     board: IBoard,
