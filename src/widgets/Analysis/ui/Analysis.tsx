@@ -22,7 +22,8 @@ export const Analysis: React.FC = () => {
 
         if (allLegalMoves.length !== 0) {
             let bestMove = allLegalMoves[0];
-            let bestEvaluation = Infinity;
+            const bestEvaluation = Infinity;
+            let beta = bestEvaluation;
             for (let index in allLegalMoves) {
                 const move = allLegalMoves[index];
                 const newBoard = getBoardAfterMove(board, move);
@@ -30,9 +31,15 @@ export const Analysis: React.FC = () => {
                     newBoard,
                     PieceColors.WHITE,
                 );
-                const evaluation = minimax(newBoard, newLegalMoves, 2);
-                if (evaluation < bestEvaluation) {
-                    bestEvaluation = evaluation;
+                const evaluation = minimax_ab(
+                    newBoard,
+                    newLegalMoves,
+                    2,
+                    -Infinity,
+                    beta,
+                );
+                if (evaluation < beta) {
+                    beta = evaluation;
                     bestMove = move;
                 }
             }
@@ -62,10 +69,12 @@ const getAllLegalMoves = (
     return allLegalMoves;
 };
 
-const minimax = (
+const minimax_ab = (
     board: IBoard,
     legalMoves: number[][],
     depth: number,
+    alpha: number,
+    beta: number,
 ): number => {
     if (depth === 0) {
         window.searchCount += 1;
@@ -81,8 +90,16 @@ const minimax = (
                 newBoard,
                 newBoard.activeColor,
             );
-            const evaluation = minimax(newBoard, newLegalMoves, depth - 1);
+            const evaluation = minimax_ab(
+                newBoard,
+                newLegalMoves,
+                depth - 1,
+                alpha,
+                beta,
+            );
             bestEvaluation = Math.max(evaluation, bestEvaluation);
+            alpha = Math.max(alpha, evaluation);
+            if (beta <= alpha) break;
         }
         return bestEvaluation;
     } else {
@@ -94,8 +111,16 @@ const minimax = (
                 newBoard,
                 newBoard.activeColor,
             );
-            const evaluation = minimax(newBoard, newLegalMoves, depth - 1);
+            const evaluation = minimax_ab(
+                newBoard,
+                newLegalMoves,
+                depth - 1,
+                alpha,
+                beta,
+            );
             bestEvaluation = Math.min(evaluation, bestEvaluation);
+            beta = Math.min(beta, evaluation);
+            if (beta <= alpha) break;
         }
         return bestEvaluation;
     }
