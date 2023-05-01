@@ -22,7 +22,7 @@ export const Analysis: React.FC = () => {
 
         if (allLegalMoves.length !== 0) {
             let bestMove = allLegalMoves[0];
-            let bestEvaluation = -1000;
+            let bestEvaluation = Infinity;
             for (let index in allLegalMoves) {
                 const move = allLegalMoves[index];
                 const newBoard = getBoardAfterMove(board, move);
@@ -30,8 +30,8 @@ export const Analysis: React.FC = () => {
                     newBoard,
                     PieceColors.WHITE,
                 );
-                const evaluation = -search(newBoard, newLegalMoves, 2);
-                if (evaluation > bestEvaluation) {
+                const evaluation = minimax(newBoard, newLegalMoves, 2);
+                if (evaluation < bestEvaluation) {
                     bestEvaluation = evaluation;
                     bestMove = move;
                 }
@@ -62,7 +62,7 @@ const getAllLegalMoves = (
     return allLegalMoves;
 };
 
-const search = (
+const minimax = (
     board: IBoard,
     legalMoves: number[][],
     depth: number,
@@ -72,13 +72,31 @@ const search = (
         return getEvaluation(board.position);
     }
 
-    let bestEvaluation = -1000;
-    for (let index in legalMoves) {
-        const move = legalMoves[index];
-        const newBoard = getBoardAfterMove(board, move);
-        const newLegalMoves = getAllLegalMoves(newBoard, newBoard.activeColor);
-        const evaluation = search(newBoard, newLegalMoves, depth - 1);
-        bestEvaluation = Math.max(evaluation, bestEvaluation);
+    if (board.activeColor === PieceColors.WHITE) {
+        let bestEvaluation = -Infinity;
+        for (let index in legalMoves) {
+            const move = legalMoves[index];
+            const newBoard = getBoardAfterMove(board, move);
+            const newLegalMoves = getAllLegalMoves(
+                newBoard,
+                newBoard.activeColor,
+            );
+            const evaluation = minimax(newBoard, newLegalMoves, depth - 1);
+            bestEvaluation = Math.max(evaluation, bestEvaluation);
+        }
+        return bestEvaluation;
+    } else {
+        let bestEvaluation = Infinity;
+        for (let index in legalMoves) {
+            const move = legalMoves[index];
+            const newBoard = getBoardAfterMove(board, move);
+            const newLegalMoves = getAllLegalMoves(
+                newBoard,
+                newBoard.activeColor,
+            );
+            const evaluation = minimax(newBoard, newLegalMoves, depth - 1);
+            bestEvaluation = Math.min(evaluation, bestEvaluation);
+        }
+        return bestEvaluation;
     }
-    return bestEvaluation;
 };
