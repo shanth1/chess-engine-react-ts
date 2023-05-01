@@ -1,3 +1,4 @@
 .piece {
     height: 90%;
+    z-index: 100;
 }

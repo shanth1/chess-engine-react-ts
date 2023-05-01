@@ -4,6 +4,8 @@
     height: 64px;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .white {
@@ -36,4 +38,26 @@
 
 .target {
     background-color: rgb(162, 189, 88);
+}
+
+.legalPiece {
+    background-color: gray;
+}
+
+.black.legalPiece::before {
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 112%;
+    height: 112%;
+    background-color: darkslategray;
+}
+
+.white.legalPiece::before {
+    content: "";
+    border-radius: 50%;
+    position: absolute;
+    width: 112%;
+    height: 112%;
+    background-color: antiquewhite;
 }
