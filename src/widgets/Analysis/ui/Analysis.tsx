@@ -4,42 +4,124 @@ import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { PieceColors } from "shared/enums";
 import { makeMove } from "featuresComplex/makeMove";
 import { updateBoard } from "entities/gameSlice";
+import { getEvaluation } from "features/evaluation";
+import { getBoardAfterMove } from "entities/boardAfterMove";
 
 export const Analysis: React.FC = () => {
     const dispatch: AppDispatch = useAppDispatch();
     const board: IBoard = useAppSelector((state) => state.game.board);
     const playerColor = useAppSelector((state) => state.player.playerColor);
-    const legalMoves: number[][] = [];
-    if (board.activeColor !== playerColor) {
-        if (board.activeColor === PieceColors.WHITE) {
-            board.whitePiecePositions.forEach((pieceIndex) => {
-                const legalMovesForPiece: number[][] = getLegalMoves(
-                    board,
-                    pieceIndex,
-                );
-                legalMoves.push(...legalMovesForPiece);
-            });
-        } else {
-            board.blackPiecePositions.forEach((pieceIndex) => {
-                const legalMovesForPiece: number[][] = getLegalMoves(
-                    board,
-                    pieceIndex,
-                );
-                legalMoves.push(...legalMovesForPiece);
-            });
-        }
 
-        if (legalMoves.length !== 0) {
-            const randomMove =
-                legalMoves[Math.floor(Math.random() * legalMoves.length)];
-            const selectedIndex: number = randomMove[0];
-            const targetIndex: number = randomMove[1];
+    window.searchCount = 0;
+
+    if (board.activeColor !== playerColor) {
+        const allLegalMoves: number[][] = getAllLegalMoves(
+            board,
+            board.activeColor,
+        );
+
+        if (allLegalMoves.length !== 0) {
+            let bestMove = allLegalMoves[0];
+            const bestEvaluation = Infinity;
+            let beta = bestEvaluation;
+            for (let index in allLegalMoves) {
+                const move = allLegalMoves[index];
+                const newBoard = getBoardAfterMove(board, move);
+                const newLegalMoves = getAllLegalMoves(
+                    newBoard,
+                    PieceColors.WHITE,
+                );
+                const evaluation = minimax_ab(
+                    newBoard,
+                    newLegalMoves,
+                    2,
+                    -Infinity,
+                    beta,
+                );
+                if (evaluation < beta) {
+                    beta = evaluation;
+                    bestMove = move;
+                }
+            }
+            console.log("search count:", window.searchCount);
+            const selectedIndex: number = bestMove[0];
+            const targetIndex: number = bestMove[1];
             const boardAfterMove = makeMove(board, selectedIndex, targetIndex);
             dispatch(updateBoard({ board: boardAfterMove }));
-        } else {
-            alert("checkmate");
         }
     }
-
     return <div className={styles.analysis}>Analysis</div>;
+};
+
+const getAllLegalMoves = (
+    board: IBoard,
+    color: PieceColors,
+): Array<number[]> => {
+    const allLegalMoves: Array<number[]> = [];
+    const pieces =
+        color === PieceColors.WHITE
+            ? board.whitePiecePositions
+            : board.blackPiecePositions;
+
+    pieces.forEach((pieceIndex) => {
+        allLegalMoves.push(...getLegalMoves(board, pieceIndex));
+    });
+    return allLegalMoves;
+};
+
+const minimax_ab = (
+    board: IBoard,
+    legalMoves: number[][],
+    depth: number,
+    alpha: number,
+    beta: number,
+): number => {
+    if (depth === 0) {
+        window.searchCount += 1;
+        return getEvaluation(board.position);
+    }
+
+    if (board.activeColor === PieceColors.WHITE) {
+        let bestEvaluation = -Infinity;
+        for (let index in legalMoves) {
+            const move = legalMoves[index];
+            const newBoard = getBoardAfterMove(board, move);
+            const newLegalMoves = getAllLegalMoves(
+                newBoard,
+                newBoard.activeColor,
+            );
+            const evaluation = minimax_ab(
+                newBoard,
+                newLegalMoves,
+                depth - 1,
+                alpha,
+                beta,
+            );
+            bestEvaluation = Math.max(evaluation, bestEvaluation);
+            alpha = Math.max(alpha, evaluation);
+            if (beta <= alpha) break;
+        }
+        return bestEvaluation;
+    } else {
+        let bestEvaluation = Infinity;
+        for (let index in legalMoves) {
+            const move = legalMoves[index];
+            const newBoard = getBoardAfterMove(board, move);
+            const newLegalMoves = getAllLegalMoves(
+                newBoard,
+                newBoard.activeColor,
+            );
+            const evaluation = minimax_ab(
+                newBoard,
+                newLegalMoves,
+                depth - 1,
+                alpha,
+                beta,
+            );
+            bestEvaluation = Math.min(evaluation, bestEvaluation);
+            beta = Math.min(beta, evaluation);
+            if (beta <= alpha) break;
+        }
+        return bestEvaluation;
+    }
 };
