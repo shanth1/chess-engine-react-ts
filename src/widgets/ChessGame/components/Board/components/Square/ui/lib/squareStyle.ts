@@ -8,11 +8,12 @@ export const getSquareStyle = ({
     isSelected,
     isStart,
     isTarget,
+    isFriendly,
 }: ISquare) => {
     return [
         styles.square,
         styles[color],
-        piece ? styles.clickable : "",
+        piece && isFriendly ? styles.clickable : "",
         isLegal ? styles.clickable : "",
         isLegal ? styles.legal : "",
         isSelected ? styles.selected : "",

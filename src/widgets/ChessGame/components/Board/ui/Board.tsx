@@ -68,9 +68,10 @@ export const Board: React.FC = () => {
     return (
         <div className={styles.board}>
             {boardView.map((square) => {
+                const piece = board.position[square.index];
                 square.renderIndex = renderIndex;
-
-                square.piece = board.position[square.index];
+                square.piece = piece;
+                square.isFriendly = getPieceColor(piece) === board.activeColor;
                 square.isSelected = selectedIndex === square.index;
                 if (board.move) {
                     square.isStart = square.index === board.move[0];

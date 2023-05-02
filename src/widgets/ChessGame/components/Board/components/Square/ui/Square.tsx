@@ -8,7 +8,7 @@ export const Square: React.FC<ISquareProps> = ({
     square,
     resolveSquareClick,
 }) => {
-    const { index, renderIndex, color, piece } = square;
+    const { index, renderIndex, color, piece, isFriendly } = square;
     const squareStyle: string = getSquareStyle(square);
     const fileName =
         Math.floor(renderIndex / 8) === 7 ? getFileName(index) : "";
@@ -29,7 +29,7 @@ export const Square: React.FC<ISquareProps> = ({
                     {rankName}
                 </div>
             )}
-            {!!piece && <Piece piece={piece} />}
+            {!!piece && <Piece piece={piece} isFriendly={isFriendly} />}
         </div>
     );
 };

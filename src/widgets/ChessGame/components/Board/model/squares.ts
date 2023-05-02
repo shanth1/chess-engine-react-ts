@@ -21,6 +21,7 @@ for (let rank: number = 7; rank >= 0; rank--) {
             isAlternativeCastling: false,
             isStart: false,
             isTarget: false,
+            isFriendly: false,
         });
         index++;
     }

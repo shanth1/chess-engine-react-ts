@@ -11,6 +11,7 @@ export interface ISquare {
     piece: number;
     isStart: boolean;
     isTarget: boolean;
+    isFriendly: boolean;
 }
 
 export interface IBoardProps {
