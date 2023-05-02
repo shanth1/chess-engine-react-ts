@@ -64,11 +64,20 @@ export const Board: React.FC = () => {
     };
 
     const boardView = getBoardView(colorView);
+    let renderIndex = 0;
     return (
         <div className={styles.board}>
             {boardView.map((square) => {
-                square.piece = board.position[square.index];
+                const piece = board.position[square.index];
+                square.renderIndex = renderIndex;
+                square.piece = piece;
+                square.isFriendly = getPieceColor(piece) === board.activeColor;
                 square.isSelected = selectedIndex === square.index;
+                if (board.move) {
+                    square.isStart = square.index === board.move[0];
+                    square.isTarget = square.index === board.move[1];
+                }
+                renderIndex++;
                 return (
                     <Square
                         key={square.index}

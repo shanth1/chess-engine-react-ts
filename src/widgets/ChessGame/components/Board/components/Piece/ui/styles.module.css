@@ -1,3 +1,7 @@
 .piece {
     height: 90%;
+    z-index: 100;
+}
+.isFriendly:hover {
+    scale: 108%;
 }
