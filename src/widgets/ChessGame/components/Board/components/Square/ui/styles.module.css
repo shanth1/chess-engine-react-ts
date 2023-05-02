@@ -6,42 +6,61 @@
     align-items: center;
     position: relative;
     overflow: hidden;
-}
 
-.white {
-    background-color: antiquewhite;
-}
-
-.black {
-    background-color: darkslategray;
+    --white-color: #f3e9d2;
+    --black-color: #3b4754;
+    --start-white-color: #c3c3d5;
+    --target-white-color: #9f9fbc;
+    --start-black-color: #7c7ca2;
+    --target-black-color: #5c5c84;
+    --selected-white-color: #80a465;
+    --selected-black-color: #62814b;
+    --legal-color: #6c8d53;
 }
 
 .clickable {
     cursor: pointer;
 }
 
-.selected {
-    background-color: red;
+.white {
+    background-color: var(--white-color);
+}
+
+.black {
+    background-color: var(--black-color);
+}
+
+.white.selected {
+    background-color: var(--selected-white-color);
+}
+.black.selected {
+    background-color: var(--selected-black-color);
 }
 
 .legal {
     position: absolute;
-    height: 12px;
-    width: 12px;
-    border-radius: 90%;
-    background-color: gray;
+    height: 10px;
+    width: 10px;
+    border-radius: 40%;
+    background-color: var(--legal-color);
 }
 
-.start {
-    background-color: rgb(196, 222, 126);
+.white.start:not(.legalPiece) {
+    background-color: var(--start-white-color);
+}
+.white.target:not(.legalPiece) {
+    background-color: var(--target-white-color);
 }
 
-.target {
-    background-color: rgb(162, 189, 88);
+.black.start:not(.legalPiece) {
+    background-color: var(--start-black-color);
+}
+.black.target:not(.legalPiece) {
+    background-color: var(--target-black-color);
 }
 
 .legalPiece {
-    background-color: gray;
+    background-color: var(--legal-color);
 }
 
 .black.legalPiece::before {
@@ -50,7 +69,10 @@
     position: absolute;
     width: 112%;
     height: 112%;
-    background-color: darkslategray;
+    background-color: var(--black-color);
+}
+.black.legalPiece.target::before {
+    background-color: var(--target-black-color);
 }
 
 .white.legalPiece::before {
@@ -59,5 +81,8 @@
     position: absolute;
     width: 112%;
     height: 112%;
-    background-color: antiquewhite;
+    background-color: var(--white-color);
+}
+.white.legalPiece.target::before {
+    background-color: var(--target-white-color);
 }

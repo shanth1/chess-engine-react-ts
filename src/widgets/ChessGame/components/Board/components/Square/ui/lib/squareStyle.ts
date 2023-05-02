@@ -13,10 +13,10 @@ export const getSquareStyle = ({
         styles.square,
         styles[color],
         piece ? styles.clickable : "",
-        piece && isLegal ? styles.legalPiece : "",
         isLegal ? styles.clickable : "",
         isSelected ? styles.selected : "",
-        isStart ? styles.start : "",
+        isStart && !isLegal ? styles.start : "",
         isTarget ? styles.target : "",
+        piece && isLegal ? styles.legalPiece : "",
     ].join(" ");
 };

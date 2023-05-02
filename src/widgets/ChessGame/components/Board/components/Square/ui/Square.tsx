@@ -11,7 +11,7 @@ export const Square: React.FC<ISquareProps> = ({
     const squareStyle: string = getSquareStyle(square);
     return (
         <div className={squareStyle} onClick={() => resolveSquareClick(square)}>
-            {isLegal && <div className={styles.legal} />}
+            {isLegal && !piece && <div className={styles.legal} />}
             {!!piece && <Piece piece={piece} />}
         </div>
     );
