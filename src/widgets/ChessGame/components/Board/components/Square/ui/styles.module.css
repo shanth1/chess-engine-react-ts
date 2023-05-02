@@ -86,3 +86,35 @@
 .white.legalPiece.target::before {
     background-color: var(--target-white-color);
 }
+
+.file {
+    position: absolute;
+    bottom: 1px;
+    left: 3px;
+    font-size: small;
+    background-color: transparent;
+}
+
+.black.file {
+    color: var(--white-color);
+}
+
+.white.file {
+    color: var(--black-color);
+}
+
+.rank {
+    position: absolute;
+    top: 1px;
+    right: 3px;
+    font-size: small;
+    background-color: transparent;
+}
+
+.black.rank {
+    color: var(--white-color);
+}
+
+.white.rank {
+    color: var(--black-color);
+}

@@ -12,6 +12,7 @@ for (let rank: number = 7; rank >= 0; rank--) {
             (file + rank) % 2 !== 0 ? Colors.WHITE : Colors.BLACK;
         squares.push({
             index: index,
+            renderIndex: index,
             color: color,
             name: `${getFileName(index)}${rank + 1}`,
             piece: PieceTypes.NONE,
