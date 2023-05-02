@@ -8,7 +8,7 @@ export const Square: React.FC<ISquareProps> = ({
     square,
     resolveSquareClick,
 }) => {
-    const { index, renderIndex, color, piece, isLegal } = square;
+    const { index, renderIndex, color, piece } = square;
     const squareStyle: string = getSquareStyle(square);
     const fileName =
         Math.floor(renderIndex / 8) === 7 ? getFileName(index) : "";
@@ -19,8 +19,6 @@ export const Square: React.FC<ISquareProps> = ({
 
     return (
         <div className={squareStyle} onClick={() => resolveSquareClick(square)}>
-            {isLegal && !piece && <div className={styles.legal} />}
-
             {fileName && (
                 <div className={[styles.file, styles[color]].join(" ")}>
                     {fileName}

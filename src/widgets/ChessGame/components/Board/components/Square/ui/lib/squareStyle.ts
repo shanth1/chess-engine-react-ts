@@ -14,6 +14,7 @@ export const getSquareStyle = ({
         styles[color],
         piece ? styles.clickable : "",
         isLegal ? styles.clickable : "",
+        isLegal ? styles.legal : "",
         isSelected ? styles.selected : "",
         isStart && !isLegal ? styles.start : "",
         isTarget ? styles.target : "",
