@@ -21,5 +21,7 @@
 }
 
 .navigation > div:not(.inactive):hover {
-    font-size: x-large;
+    font-size: large;
+    color: var(--white-primary-color);
+    background-color: var(--black-primary-color);
 }
