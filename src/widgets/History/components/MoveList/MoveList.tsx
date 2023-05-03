@@ -10,7 +10,11 @@ export const MoveList: React.FC<IHistoryListProps> = ({ history }) => {
     const historyList = [];
 
     for (let index = 1; index < history.length; index += 2) {
-        historyList.push(<div className={styles.number}>1</div>);
+        historyList.push(
+            <div className={styles.number}>
+                {history[index].fullMoveNumber}
+            </div>,
+        );
         historyList.push(<Move board={history[index]} />);
         if (history[index + 1]) {
             historyList.push(<Move board={history[index + 1]} />);

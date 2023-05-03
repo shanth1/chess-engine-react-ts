@@ -1,4 +1,4 @@
-import { PieceTypes } from "shared/enums";
+import { PieceColors, PieceTypes } from "shared/enums";
 import { getPieceType } from "shared/pieceInfo";
 import { resolveCastling } from "./castling";
 import { resolveEnPassant } from "./enPassant";
@@ -23,7 +23,10 @@ export const getBoardAfterMove = (
         castlingRights: board.castlingRights,
         enPassant: board.enPassant,
         halfMoveClock: board.halfMoveClock,
-        fullMoveNumber: board.fullMoveNumber,
+        fullMoveNumber:
+            board.activeColor === PieceColors.BLACK
+                ? board.fullMoveNumber + 1
+                : board.fullMoveNumber,
         whitePiecePositions: board.whitePiecePositions.slice(),
         blackPiecePositions: board.blackPiecePositions.slice(),
         capturedWhitePieces: board.capturedWhitePieces.slice(),
