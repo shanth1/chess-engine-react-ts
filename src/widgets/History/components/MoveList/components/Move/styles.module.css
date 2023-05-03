@@ -1,0 +1,17 @@
+.move_container {
+    height: 64px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.white_move {
+    color: var(--black-primary-color);
+    background-color: var(--white-primary-color);
+}
+
+.black_move {
+    color: var(--white-primary-color);
+    background-color: var(--black-primary-color);
+}

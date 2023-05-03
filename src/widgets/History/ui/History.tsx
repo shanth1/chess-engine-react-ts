@@ -1,20 +1,16 @@
-import { previousMove } from "entities/gameSlice";
-import { useAppDispatch } from "shared/hooks";
+import { useAppSelector } from "shared/hooks";
+import { Header } from "../components/Header/Header";
+import { MoveList } from "../components/MoveList/MoveList";
+import { Navigation } from "../components/Navigation/Navigation";
 import styles from "./styles.module.css";
 
 export const History: React.FC = () => {
-    const dispatch: AppDispatch = useAppDispatch();
-
+    const history = useAppSelector((state) => state.game.history);
     return (
         <div className={styles.history}>
-            History
-            <button
-                onClick={() => {
-                    dispatch(previousMove());
-                }}
-            >
-                {"<<"}
-            </button>
+            <Header />
+            <MoveList history={history} />
+            <Navigation />
         </div>
     );
 };

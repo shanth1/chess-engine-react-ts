@@ -1,0 +1,27 @@
+.navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-top: 2px solid var(--black-primary-color);
+}
+
+.inactive {
+    background-color: var(--white-secondary-color);
+}
+
+.navigation > div {
+    color: var(--black-primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation > div:not(.inactive) {
+    cursor: pointer;
+    background-color: var(--white-primary-color);
+}
+
+.navigation > div:not(.inactive):hover {
+    font-size: large;
+    color: var(--white-primary-color);
+    background-color: var(--black-primary-color);
+}
