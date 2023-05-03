@@ -9,13 +9,37 @@ import { getPieceColor } from "shared/pieceInfo";
 import { ISquare } from "../types/interfaces";
 import { makeMove } from "featuresComplex/makeMove";
 import { updateBoard } from "entities/gameSlice";
+import { getAllLegalMoves } from "features/legalMoves";
+import { getBestMove } from "featuresComplex/engine";
 
 export const Board: React.FC = () => {
     const dispatch = useAppDispatch();
     const board: IBoard = useAppSelector((state) => state.game.board);
+    const playerColor = useAppSelector((state) => state.player.playerColor);
     const colorView = useAppSelector((state) => state.player.colorView);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     updateLegalMoves(board, selectedIndex);
+
+    if (board.activeColor !== playerColor) {
+        setTimeout(() => {
+            const allLegalMoves: number[][] = getAllLegalMoves(
+                board,
+                board.activeColor,
+            );
+
+            if (allLegalMoves.length !== 0) {
+                const bestMove = getBestMove(board, allLegalMoves);
+                const selectedIndex: number = bestMove[0];
+                const targetIndex: number = bestMove[1];
+                const boardAfterMove = makeMove(
+                    board,
+                    selectedIndex,
+                    targetIndex,
+                );
+                dispatch(updateBoard({ board: boardAfterMove }));
+            }
+        });
+    }
 
     const resolveSquareClick = (square: ISquare) => {
         const {
@@ -40,11 +64,20 @@ export const Board: React.FC = () => {
     };
 
     const boardView = getBoardView(colorView);
+    let renderIndex = 0;
     return (
         <div className={styles.board}>
             {boardView.map((square) => {
-                square.piece = board.position[square.index];
+                const piece = board.position[square.index];
+                square.renderIndex = renderIndex;
+                square.piece = piece;
+                square.isFriendly = getPieceColor(piece) === board.activeColor;
                 square.isSelected = selectedIndex === square.index;
+                if (board.move) {
+                    square.isStart = square.index === board.move[0];
+                    square.isTarget = square.index === board.move[1];
+                }
+                renderIndex++;
                 return (
                     <Square
                         key={square.index}

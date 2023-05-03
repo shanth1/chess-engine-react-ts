@@ -7,3 +7,12 @@ body {
     position: fixed;
     background-color: rgb(227, 212, 192);
 }
+
+:root {
+    --white-primary-color: #f3e9d2;
+    --black-primary-color: #3b4754;
+    --white-secondary-color: #dcd3be;
+    --black-secondary-color: #2d3641;
+
+    font-family: "Courier New", Courier, monospace;
+}

@@ -1,3 +1,6 @@
 .history {
-    background-color: antiquewhite;
+    display: grid;
+    height: 100%;
+    grid-template-rows: 64px 384px 64px;
+    grid-template-columns: 1fr;
 }

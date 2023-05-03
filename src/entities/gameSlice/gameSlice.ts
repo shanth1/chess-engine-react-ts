@@ -38,15 +38,20 @@ const gameSlice = createSlice({
             state.board = action.payload.board;
             state.history.push(action.payload.board);
         },
-        previousMove: (state) => {
+        getPreviousMove: (state) => {
             if (state.history.length >= 2) {
                 state.board = state.history[state.history.length - 3];
                 state.history.pop();
                 state.history.pop();
             }
         },
+        getFirstPosition: (state) => {
+            state.board = state.history[0];
+            state.history = [state.history[0]];
+        },
     },
 });
 
-export const { loafFen, updateBoard, previousMove } = gameSlice.actions;
+export const { loafFen, updateBoard, getPreviousMove, getFirstPosition } =
+    gameSlice.actions;
 export const gameSliceReducers = gameSlice.reducer;
