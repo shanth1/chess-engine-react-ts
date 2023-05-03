@@ -7,10 +7,6 @@
     position: relative;
     overflow: hidden;
 
-    --white-primary-color: #f3e9d2;
-    --black-primary-color: #3b4754;
-    --white-secondary-color: #dcd3be;
-    --black-secondary-color: #2d3641;
     --start-white-color: #c3c3d5;
     --target-white-color: #9f9fbc;
     --start-black-color: #7c7ca2;

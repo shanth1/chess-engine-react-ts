@@ -1,0 +1,28 @@
+.moveItems {
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: 64px 1fr 1fr;
+    width: 100%;
+    max-height: 100%;
+}
+
+.moveItems::-webkit-scrollbar {
+    width: 0;
+}
+
+.number {
+    height: 64px;
+    width: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white-primary-color);
+    border-right: 2px solid var(--black-primary-color);
+    box-sizing: border-box;
+}
+
+.number:hover {
+    color: var(--black-primary-color);
+    background-color: var(--white-secondary-color);
+    border-right: 2px solid var(--black-secondary-color);
+}
