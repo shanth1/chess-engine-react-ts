@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Move } from "./components/Move/Move";
 import styles from "./styles.module.css";
 
@@ -15,6 +16,13 @@ export const MoveList: React.FC<IHistoryListProps> = ({ history }) => {
             historyList.push(<Move board={history[index + 1]} />);
         }
     }
+
+    useEffect(() => {
+        const elements = document.getElementsByClassName(styles.moveItems);
+        if (elements.length === 0) return;
+        const scrollElement = elements[0];
+        scrollElement.scrollTop = scrollElement.scrollHeight;
+    });
 
     return (
         <div>
