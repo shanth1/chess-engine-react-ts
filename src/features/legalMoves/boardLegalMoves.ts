@@ -1,10 +1,8 @@
 import { getLegalMoves } from "features/legalMoves";
 import { PieceColors } from "shared/enums";
 
-export const getAllLegalMoves = (
-    board: IBoard,
-    color: PieceColors,
-): Array<number[]> => {
+export const getAllLegalMoves = (board: IBoard): Array<number[]> => {
+    const color = board.activeColor;
     const allLegalMoves: Array<number[]> = [];
     const pieces =
         color === PieceColors.WHITE

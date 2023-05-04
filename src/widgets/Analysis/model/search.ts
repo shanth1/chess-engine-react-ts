@@ -20,10 +20,7 @@ export const minimax_ab = (
         for (let index in legalMoves) {
             const move = legalMoves[index];
             const newBoard = getBoardAfterMove(board, move);
-            const newLegalMoves = getAllLegalMoves(
-                newBoard,
-                newBoard.activeColor,
-            );
+            const newLegalMoves = getAllLegalMoves(newBoard);
             const evaluation = minimax_ab(
                 newBoard,
                 newLegalMoves,
@@ -41,10 +38,7 @@ export const minimax_ab = (
         for (let index in legalMoves) {
             const move = legalMoves[index];
             const newBoard = getBoardAfterMove(board, move);
-            const newLegalMoves = getAllLegalMoves(
-                newBoard,
-                newBoard.activeColor,
-            );
+            const newLegalMoves = getAllLegalMoves(newBoard);
             const evaluation = minimax_ab(
                 newBoard,
                 newLegalMoves,
