@@ -1,13 +1,17 @@
 import { getBoardAfterMove } from "entities/boardAfterMove";
 import { getAllLegalMoves } from "features/legalMoves";
 import { PieceColors } from "shared/enums";
-import { minimax_ab } from "./model/search";
+import { minimax_ab } from "./search";
 
-export const getBestMove = (
-    board: IBoard,
-    allLegalMoves: Array<number[]>,
-): number[] => {
+export const getBestMove = (board: IBoard): number[] | null => {
     window.searchCount = 0;
+
+    const allLegalMoves: number[][] = getAllLegalMoves(
+        board,
+        board.activeColor,
+    );
+
+    if (!allLegalMoves.length) return null;
 
     let bestMove = allLegalMoves[0];
     const bestEvaluation = Infinity;

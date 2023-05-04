@@ -1,7 +1,7 @@
 import { getBoardAfterMove } from "entities/boardAfterMove";
-import { getEvaluation } from "featuresComplex/engine/model/evaluation";
 import { getAllLegalMoves } from "features/legalMoves";
 import { PieceColors } from "shared/enums";
+import { getEvaluation } from "./evaluation";
 
 export const minimax_ab = (
     board: IBoard,
