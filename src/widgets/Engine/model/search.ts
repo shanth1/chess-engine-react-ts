@@ -1,7 +1,7 @@
 import { getBoardAfterMove } from "entities/boardAfterMove";
 import { getAllLegalMoves } from "features/legalMoves";
 import { PieceColors } from "shared/enums";
-import { getEvaluation } from "./evaluation";
+import { getEvaluation } from "./evaluation/evaluation";
 
 export const minimax_ab = (
     board: IBoard,
