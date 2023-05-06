@@ -1,0 +1,21 @@
+.evaluationBar {
+    position: relative;
+    width: 32px;
+    height: 100%;
+}
+.evaluationBlack {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    background-color: var(--black-primary-color);
+}
+.evaluationWhite {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background-color: var(--white-primary-color);
+}

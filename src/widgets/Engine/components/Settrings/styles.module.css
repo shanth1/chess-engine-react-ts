@@ -1,0 +1,32 @@
+.settings {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-top: 2px solid var(--black-secondary-color);
+}
+
+.settings > div {
+    appearance: none;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.active {
+    font-size: x-large;
+    color: var(--white-primary-color);
+    background-color: var(--black-primary-color);
+}
+
+.inactive {
+    font-size: large;
+    color: var(--black-primary-color);
+    background-color: var(--white-primary-color);
+}
+
+.settings > div:not(.active):hover {
+    font-size: x-large;
+    color: var(--white-primary-color);
+    background-color: var(--black-primary-color);
+}

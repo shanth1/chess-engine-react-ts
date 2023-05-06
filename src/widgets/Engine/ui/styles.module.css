@@ -1,3 +1,11 @@
-.analysis {
-    background-color: antiquewhite;
+.engine {
+    display: flex;
+    background-color: var(--white-secondary-color);
+    gap: 8px;
+}
+
+.contentWrapper {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 64px 128px 1fr 128px 64px;
 }

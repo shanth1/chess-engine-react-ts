@@ -1,50 +1,65 @@
 import { updateBoard } from "entities/gameSlice";
 import { makeMove } from "featuresComplex/makeMove";
+import { useState } from "react";
 import { PieceColors } from "shared/enums";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
+import { EvaluationBar } from "../components/EvaluationBar/EvaluationBar";
+import { Header } from "../components/Header/Header";
+import { Info } from "../components/Info/Info";
+import { Player } from "../components/Player/Player";
+import { Settings } from "../components/Settrings/Settings";
 import { getEngineData } from "../model/engineData";
-import { getEvaluation } from "../model/evaluation/evaluation";
 import styles from "./styles.module.css";
-
-let depthEvaluation = 0;
-let evaluationNumber = 0;
 
 export const Engine: React.FC = () => {
     const dispatch: AppDispatch = useAppDispatch();
     const board = useAppSelector((state) => state.game.board);
-    const staticEvaluation = getEvaluation(board.position);
-    // const playerColor = useAppSelector((state) => state.player.playerColor);
-    const isEngineWhite = true;
-    const isEngineBlack = true;
+    const [depth, setDepth] = useState(2);
+    const playerColor = useAppSelector((state) => state.player.playerColor);
+    const playerView = useAppSelector((state) => state.player.colorView);
+    const isWhiteView = playerView === PieceColors.WHITE;
 
     const startEngine = (depth: number) => {
-        const { bestMove, bestEvaluation, searchCount } = getEngineData(
-            board,
-            depth,
-        );
-        depthEvaluation = bestEvaluation;
-        evaluationNumber = searchCount;
+        const { bestMove } = getEngineData(board, depth);
         if (!bestMove) return;
         const boardAfterMove = makeMove(board, bestMove[0], bestMove[1]);
         dispatch(updateBoard({ board: boardAfterMove }));
     };
 
-    if (board.fullMoveNumber < 10) {
-        if (board.activeColor === PieceColors.WHITE && isEngineWhite) {
-            setTimeout(() => {
-                startEngine(2);
-            });
-        } else if (board.activeColor === PieceColors.BLACK && isEngineBlack) {
-            setTimeout(() => {
-                startEngine(2);
-            });
-        }
+    if (board.activeColor !== playerColor) {
+        setTimeout(() => {
+            startEngine(depth);
+        });
     }
+
     return (
-        <div className={styles.analysis}>
-            <div>Static evaluation: {staticEvaluation.toFixed(1)}</div>
-            <div>Depth evaluation: {depthEvaluation.toFixed(1)}</div>
-            <div>Search count: {evaluationNumber}</div>
+        <div className={styles.engine}>
+            <div className={styles.contentWrapper}>
+                <Header level={depth + 1} />
+                <Player
+                    isUp={true}
+                    color={isWhiteView ? PieceColors.BLACK : PieceColors.WHITE}
+                    name={"Engine"}
+                    captureList={
+                        isWhiteView
+                            ? board.capturedWhitePieces
+                            : board.capturedBlackPieces
+                    }
+                />
+                <Info />
+                <Player
+                    isUp={false}
+                    color={isWhiteView ? PieceColors.WHITE : PieceColors.BLACK}
+                    name={"Player"}
+                    captureList={
+                        isWhiteView
+                            ? board.capturedBlackPieces
+                            : board.capturedWhitePieces
+                    }
+                />
+                <Settings depth={depth} setDepth={setDepth} />
+            </div>
+            <EvaluationBar />
         </div>
     );
 };
