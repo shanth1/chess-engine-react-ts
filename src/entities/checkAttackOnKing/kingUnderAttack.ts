@@ -3,10 +3,10 @@ import { PieceTypes } from "shared/enums";
 
 export const checkAttackOnKing = (
     position: Array<number>,
-    selectedIndex: number,
+    selectedPiece: number,
     moves: number[][],
 ): boolean => {
-    const pieceColor = getPieceColor(position[selectedIndex]);
+    const pieceColor = getPieceColor(selectedPiece);
     let isAttackOnKing = false;
     for (let index = 0; index < moves.length; index++) {
         const targetIndex = moves[index][1];
