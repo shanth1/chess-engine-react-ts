@@ -40,10 +40,15 @@ export const Engine: React.FC = () => {
                     isUp={true}
                     color={isWhiteView ? PieceColors.BLACK : PieceColors.WHITE}
                     name={"Engine"}
-                    captureList={
+                    enemyCaptureList={
                         isWhiteView
-                            ? board.capturedWhitePieces
-                            : board.capturedBlackPieces
+                            ? board.capturedBlackPieces.slice()
+                            : board.capturedWhitePieces.slice()
+                    }
+                    playerCaptureList={
+                        isWhiteView
+                            ? board.capturedWhitePieces.slice()
+                            : board.capturedBlackPieces.slice()
                     }
                 />
                 <Info />
@@ -51,10 +56,15 @@ export const Engine: React.FC = () => {
                     isUp={false}
                     color={isWhiteView ? PieceColors.WHITE : PieceColors.BLACK}
                     name={"Player"}
-                    captureList={
+                    enemyCaptureList={
                         isWhiteView
-                            ? board.capturedBlackPieces
-                            : board.capturedWhitePieces
+                            ? board.capturedWhitePieces.slice()
+                            : board.capturedBlackPieces.slice()
+                    }
+                    playerCaptureList={
+                        isWhiteView
+                            ? board.capturedBlackPieces.slice()
+                            : board.capturedWhitePieces.slice()
                     }
                 />
                 <Settings depth={depth} setDepth={setDepth} />
