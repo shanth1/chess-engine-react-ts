@@ -1,6 +1,35 @@
 import React from "react";
-import { PieceColors } from "shared/enums";
+import { PieceColors, PieceTypes } from "shared/enums";
+import { getPieceType } from "shared/pieceInfo";
 import styles from "./styles.module.css";
+
+const getCaptureText = (captureList: number[]): string => {
+    let captureListText: string = "";
+    captureList.forEach((piece) => {
+        switch (getPieceType(piece)) {
+            case PieceTypes.QUEEN:
+                captureListText += "♛ ";
+                break;
+            case PieceTypes.ROOK:
+                captureListText += "♜ ";
+                break;
+            case PieceTypes.KNIGHT:
+                captureListText += "♞ ";
+                break;
+            case PieceTypes.BISHOP:
+                captureListText += "♝ ";
+                break;
+            case PieceTypes.PAWN:
+                captureListText += "♟︎ ";
+                break;
+            default:
+                alert("unknown piece type in getCaptureText");
+                break;
+        }
+    });
+
+    return captureListText;
+};
 
 interface IPlayerProps {
     captureList: number[];
@@ -27,7 +56,9 @@ export const Player: React.FC<IPlayerProps> = ({
                 className={[styles.content, isUp ? styles.isUp : ""].join(" ")}
             >
                 <div className={styles.element}>{name}</div>
-                <div className={styles.element}>{captureList.join(" ")}</div>
+                <div className={styles.element}>
+                    {getCaptureText(captureList)}
+                </div>
             </div>
         </div>
     );
