@@ -3,47 +3,50 @@ import { PieceColors, PieceTypes } from "shared/enums";
 import { getPieceType } from "shared/pieceInfo";
 import styles from "./styles.module.css";
 
-const getCaptureText = (
-    playerCaptureList: number[],
-    enemyCaptureList: number[],
-): string => {
-    let captureListText: string = "";
-    playerCaptureList.forEach((playerPiece) => {
-        const index = enemyCaptureList
+const getRelativeCaptures = (
+    playerCaptures: number[],
+    enemyCaptures: number[],
+): number[] => {
+    const enemyCapturesCopy = enemyCaptures.slice();
+    let relativeCaptures: number[] = [];
+    playerCaptures.forEach((playerPiece) => {
+        const index = enemyCapturesCopy
             .map((piece) => getPieceType(piece))
             .indexOf(getPieceType(playerPiece));
 
         if (index >= 0) {
-            enemyCaptureList.splice(index, 1);
+            enemyCapturesCopy.splice(index, 1);
         } else {
-            switch (getPieceType(playerPiece)) {
-                case PieceTypes.QUEEN:
-                    captureListText += "♛ ";
-                    break;
-                case PieceTypes.ROOK:
-                    captureListText += "♜ ";
-                    break;
-                case PieceTypes.KNIGHT:
-                    captureListText += "♞ ";
-                    break;
-                case PieceTypes.BISHOP:
-                    captureListText += "♝ ";
-                    break;
-                case PieceTypes.PAWN:
-                    captureListText += "♟︎ ";
-                    break;
-                default:
-                    alert("unknown piece type in getCaptureText");
-                    break;
-            }
+            relativeCaptures.push(playerPiece);
         }
     });
-    return captureListText;
+    return relativeCaptures;
+};
+
+const getCaptureSymbols = (relativeCaptures: number[]) => {
+    return relativeCaptures.reduce((previousValue, currentValue) => {
+        switch (getPieceType(currentValue)) {
+            case PieceTypes.QUEEN:
+                return previousValue + "♛ ";
+            case PieceTypes.ROOK:
+                return previousValue + "♜ ";
+            case PieceTypes.KNIGHT:
+                return previousValue + "♞ ";
+            case PieceTypes.BISHOP:
+                return previousValue + "♝ ";
+            case PieceTypes.PAWN:
+                return previousValue + "♟︎ ";
+            default:
+                alert("unknown piece type in getCaptureText");
+                return previousValue + "";
+        }
+    }, "");
 };
 
 interface IPlayerProps {
-    enemyCaptureList: number[];
-    playerCaptureList: number[];
+    enemyCaptures: number[];
+    playerCaptures: number[];
+    materialAdvantage: number;
     color: number;
     isUp: boolean;
     name: string;
@@ -53,9 +56,12 @@ export const Player: React.FC<IPlayerProps> = ({
     name,
     color,
     isUp,
-    playerCaptureList,
-    enemyCaptureList,
+    materialAdvantage,
+    playerCaptures,
+    enemyCaptures,
 }) => {
+    const relativeCaptures = getRelativeCaptures(playerCaptures, enemyCaptures);
+    const captureSymbols = getCaptureSymbols(relativeCaptures);
     return (
         <div
             className={[
@@ -69,7 +75,8 @@ export const Player: React.FC<IPlayerProps> = ({
             >
                 <div className={styles.element}>{name}</div>
                 <div className={styles.element}>
-                    {getCaptureText(playerCaptureList, enemyCaptureList)}
+                    {captureSymbols}
+                    {materialAdvantage > 0 ? `+${materialAdvantage}` : ""}
                 </div>
             </div>
         </div>

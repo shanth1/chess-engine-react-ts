@@ -1,8 +1,9 @@
 import { updateBoard } from "entities/gameSlice";
 import { makeMove } from "featuresComplex/makeMove";
 import { useState } from "react";
-import { PieceColors } from "shared/enums";
+import { PieceColors, PieceTypes } from "shared/enums";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
+import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import { EvaluationBar } from "../components/EvaluationBar/EvaluationBar";
 import { Header } from "../components/Header/Header";
 import { Info } from "../components/Info/Info";
@@ -11,6 +12,35 @@ import { Settings } from "../components/Settrings/Settings";
 import { getEngineData } from "../model/engineData";
 import styles from "./styles.module.css";
 
+const getMaterialEvaluation = (position: number[]): number => {
+    let materialAdvantage = 0;
+    const getPieceValue = (piece: number): number => {
+        switch (getPieceType(piece)) {
+            case PieceTypes.QUEEN:
+                return 9;
+            case PieceTypes.ROOK:
+                return 5;
+            case PieceTypes.BISHOP:
+            case PieceTypes.KNIGHT:
+                return 3;
+            case PieceTypes.PAWN:
+                return 1;
+            default:
+                return 0;
+        }
+    };
+
+    for (let index = 0; index < position.length; index++) {
+        if (!position[index]) continue;
+        const pieceValue = getPieceValue(position[index]);
+        materialAdvantage +=
+            getPieceColor(position[index]) === PieceColors.WHITE
+                ? pieceValue
+                : -pieceValue;
+    }
+    return materialAdvantage;
+};
+
 export const Engine: React.FC = () => {
     const dispatch: AppDispatch = useAppDispatch();
     const board = useAppSelector((state) => state.game.board);
@@ -18,6 +48,7 @@ export const Engine: React.FC = () => {
     const playerColor = useAppSelector((state) => state.player.playerColor);
     const playerView = useAppSelector((state) => state.player.colorView);
     const isWhiteView = playerView === PieceColors.WHITE;
+    const materialAdvantage = getMaterialEvaluation(board.position);
 
     const startEngine = (depth: number) => {
         const { bestMove } = getEngineData(board, depth);
@@ -26,7 +57,7 @@ export const Engine: React.FC = () => {
         dispatch(updateBoard({ board: boardAfterMove }));
     };
 
-    if (board.activeColor !== playerColor) {
+    if (board.activeColor !== playerColor && false) {
         setTimeout(() => {
             startEngine(depth);
         });
@@ -40,12 +71,13 @@ export const Engine: React.FC = () => {
                     isUp={true}
                     color={isWhiteView ? PieceColors.BLACK : PieceColors.WHITE}
                     name={"Engine"}
-                    enemyCaptureList={
+                    materialAdvantage={-materialAdvantage}
+                    enemyCaptures={
                         isWhiteView
                             ? board.capturedBlackPieces.slice()
                             : board.capturedWhitePieces.slice()
                     }
-                    playerCaptureList={
+                    playerCaptures={
                         isWhiteView
                             ? board.capturedWhitePieces.slice()
                             : board.capturedBlackPieces.slice()
@@ -56,12 +88,13 @@ export const Engine: React.FC = () => {
                     isUp={false}
                     color={isWhiteView ? PieceColors.WHITE : PieceColors.BLACK}
                     name={"Player"}
-                    enemyCaptureList={
+                    materialAdvantage={materialAdvantage}
+                    enemyCaptures={
                         isWhiteView
                             ? board.capturedWhitePieces.slice()
                             : board.capturedBlackPieces.slice()
                     }
-                    playerCaptureList={
+                    playerCaptures={
                         isWhiteView
                             ? board.capturedBlackPieces.slice()
                             : board.capturedWhitePieces.slice()
