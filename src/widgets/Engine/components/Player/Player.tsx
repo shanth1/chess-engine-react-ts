@@ -1,56 +1,9 @@
 import React from "react";
-import { PieceColors, PieceTypes } from "shared/enums";
-import { getPieceType } from "shared/pieceInfo";
+import { PieceColors } from "shared/enums";
+import { getCaptureSymbols } from "./lib/captureSymbols";
+import { getRelativeCaptures } from "./lib/relativeCaptures";
+import { IPlayerProps } from "./props";
 import styles from "./styles.module.css";
-
-const getRelativeCaptures = (
-    playerCaptures: number[],
-    enemyCaptures: number[],
-): number[] => {
-    const enemyCapturesCopy = enemyCaptures.slice();
-    let relativeCaptures: number[] = [];
-    playerCaptures.forEach((playerPiece) => {
-        const index = enemyCapturesCopy
-            .map((piece) => getPieceType(piece))
-            .indexOf(getPieceType(playerPiece));
-
-        if (index >= 0) {
-            enemyCapturesCopy.splice(index, 1);
-        } else {
-            relativeCaptures.push(playerPiece);
-        }
-    });
-    return relativeCaptures;
-};
-
-const getCaptureSymbols = (relativeCaptures: number[]) => {
-    return relativeCaptures.reduce((previousValue, currentValue) => {
-        switch (getPieceType(currentValue)) {
-            case PieceTypes.QUEEN:
-                return previousValue + "♛ ";
-            case PieceTypes.ROOK:
-                return previousValue + "♜ ";
-            case PieceTypes.KNIGHT:
-                return previousValue + "♞ ";
-            case PieceTypes.BISHOP:
-                return previousValue + "♝ ";
-            case PieceTypes.PAWN:
-                return previousValue + "♟︎ ";
-            default:
-                alert("unknown piece type in getCaptureText");
-                return previousValue + "";
-        }
-    }, "");
-};
-
-interface IPlayerProps {
-    enemyCaptures: number[];
-    playerCaptures: number[];
-    materialAdvantage: number;
-    color: number;
-    isUp: boolean;
-    name: string;
-}
 
 export const Player: React.FC<IPlayerProps> = ({
     name,

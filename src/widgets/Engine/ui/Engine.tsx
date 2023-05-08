@@ -57,7 +57,7 @@ export const Engine: React.FC = () => {
         dispatch(updateBoard({ board: boardAfterMove }));
     };
 
-    if (board.activeColor !== playerColor && false) {
+    if (board.activeColor !== playerColor) {
         setTimeout(() => {
             startEngine(depth);
         });
