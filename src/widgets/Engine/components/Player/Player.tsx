@@ -61,6 +61,7 @@ export const Player: React.FC<IPlayerProps> = ({
     enemyCaptures,
 }) => {
     const relativeCaptures = getRelativeCaptures(playerCaptures, enemyCaptures);
+    relativeCaptures.sort((a, b) => a - b);
     const captureSymbols = getCaptureSymbols(relativeCaptures);
     return (
         <div
