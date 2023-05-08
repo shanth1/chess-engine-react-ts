@@ -1,0 +1,9 @@
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white-secondary-color);
+    border-top: 2px solid var(--black-secondary-color);
+    border-bottom: 2px solid var(--black-secondary-color);
+}
