@@ -1,6 +1,6 @@
 import { updateBoard } from "entities/gameSlice";
 import { makeMove } from "featuresComplex/makeMove";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PieceColors, PieceTypes } from "shared/enums";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
 import { getPieceColor, getPieceType } from "shared/pieceInfo";
@@ -9,8 +9,11 @@ import { Header } from "../components/Header/Header";
 import { Info } from "../components/Info/Info";
 import { Player } from "../components/Player/Player";
 import { Settings } from "../components/Settings/Settings";
-import { getEngineData } from "../model/engineData/engineData";
 import { getEvaluation } from "../model/engineData/evaluation/evaluation";
+import {
+    startEngineAsync,
+    turnOffEngine,
+} from "../model/engineSlice/engineSlice";
 import styles from "./styles.module.css";
 
 const getMaterialEvaluation = (position: number[]): number => {
@@ -50,20 +53,21 @@ export const Engine: React.FC = () => {
     const playerView = useAppSelector((state) => state.player.colorView);
     const isWhiteView = playerView === PieceColors.WHITE;
     const materialAdvantage = getMaterialEvaluation(board.position);
-
+    const status = useAppSelector((state) => state.engine.status);
+    const bestMove = useAppSelector((state) => state.engine.bestMove);
     const staticEvaluation = getEvaluation(board.position);
+    debugger;
 
-    const startEngine = (depth: number) => {
-        const { bestMove } = getEngineData(board, depth);
-        if (!bestMove) return;
+    debugger;
+    if (bestMove) {
         const boardAfterMove = makeMove(board, bestMove[0], bestMove[1]);
         dispatch(updateBoard({ board: boardAfterMove }));
-    };
+        dispatch(turnOffEngine());
+    }
 
-    if (board.activeColor !== playerColor) {
-        setTimeout(() => {
-            startEngine(depth);
-        });
+    if (board.activeColor !== playerColor && status === "off") {
+        debugger;
+        dispatch(startEngineAsync({ board: board, depth: depth }));
     }
 
     return (

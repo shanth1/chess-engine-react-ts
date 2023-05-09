@@ -1,5 +1,6 @@
 import React from "react";
 import { PieceColors } from "shared/enums";
+import { useAppSelector } from "shared/hooks";
 import { getCaptureSymbols } from "./lib/captureSymbols";
 import { getRelativeCaptures } from "./lib/relativeCaptures";
 import { IPlayerProps } from "./props";
@@ -13,6 +14,7 @@ export const Player: React.FC<IPlayerProps> = ({
     playerCaptures,
     enemyCaptures,
 }) => {
+    const status = useAppSelector((state) => state.engine.status);
     const relativeCaptures = getRelativeCaptures(playerCaptures, enemyCaptures);
     relativeCaptures.sort((a, b) => a - b);
     const captureSymbols = getCaptureSymbols(relativeCaptures);
@@ -23,7 +25,7 @@ export const Player: React.FC<IPlayerProps> = ({
                 color === PieceColors.WHITE ? styles.white : styles.black,
             ].join(" ")}
         >
-            <div className={styles.status}>status</div>
+            <div className={styles.status}>{status}</div>
             <div
                 className={[styles.content, isUp ? styles.isUp : ""].join(" ")}
             >

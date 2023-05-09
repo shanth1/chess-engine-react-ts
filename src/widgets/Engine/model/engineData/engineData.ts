@@ -8,7 +8,10 @@ interface IEngineReturn {
     bestEvaluation: number;
     searchCount: number;
 }
-export const getEngineData = (board: IBoard, depth: number): IEngineReturn => {
+export const getEngineData = async (
+    board: IBoard,
+    depth: number,
+): Promise<IEngineReturn> => {
     window.searchCount = 0;
     const isWhiteActive = board.activeColor === PieceColors.WHITE;
     const allLegalMoves: number[][] = getAllLegalMoves(board);
@@ -16,11 +19,13 @@ export const getEngineData = (board: IBoard, depth: number): IEngineReturn => {
     if (!allLegalMoves.length) {
         const colorConsideration = isWhiteActive ? -1 : 1;
         bestEvaluation = board.isCheck ? colorConsideration * Infinity : 0;
-        return {
-            bestMove: null,
-            bestEvaluation: bestEvaluation,
-            searchCount: window.searchCount,
-        };
+        return new Promise((resolve) => {
+            resolve({
+                bestMove: null,
+                bestEvaluation: bestEvaluation,
+                searchCount: window.searchCount,
+            });
+        });
     }
     let bestMove = allLegalMoves[0];
 
@@ -51,9 +56,11 @@ export const getEngineData = (board: IBoard, depth: number): IEngineReturn => {
         }
     }
 
-    return {
-        bestMove: bestMove,
-        bestEvaluation: bestEvaluation,
-        searchCount: window.searchCount,
-    };
+    return new Promise((resolve) => {
+        resolve({
+            bestMove: bestMove,
+            bestEvaluation: bestEvaluation,
+            searchCount: window.searchCount,
+        });
+    });
 };
