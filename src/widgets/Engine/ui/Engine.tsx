@@ -8,8 +8,9 @@ import { EvaluationBar } from "../components/EvaluationBar/EvaluationBar";
 import { Header } from "../components/Header/Header";
 import { Info } from "../components/Info/Info";
 import { Player } from "../components/Player/Player";
-import { Settings } from "../components/Settrings/Settings";
-import { getEngineData } from "../model/engineData";
+import { Settings } from "../components/Settings/Settings";
+import { getEngineData } from "../model/engineData/engineData";
+import { getEvaluation } from "../model/engineData/evaluation/evaluation";
 import styles from "./styles.module.css";
 
 const getMaterialEvaluation = (position: number[]): number => {
@@ -50,6 +51,8 @@ export const Engine: React.FC = () => {
     const isWhiteView = playerView === PieceColors.WHITE;
     const materialAdvantage = getMaterialEvaluation(board.position);
 
+    const staticEvaluation = getEvaluation(board.position);
+
     const startEngine = (depth: number) => {
         const { bestMove } = getEngineData(board, depth);
         if (!bestMove) return;
@@ -83,7 +86,12 @@ export const Engine: React.FC = () => {
                             : board.capturedBlackPieces.slice()
                     }
                 />
-                <Info />
+                <Info
+                    staticEvaluation={staticEvaluation}
+                    depthEvaluation={null}
+                    searchCount={null}
+                    analysisTime={null}
+                />
                 <Player
                     isUp={false}
                     color={isWhiteView ? PieceColors.WHITE : PieceColors.BLACK}
