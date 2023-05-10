@@ -4,12 +4,6 @@
     grid-template-columns: 1fr 3fr;
 }
 
-.status {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .white {
     color: var(--black-primary-color);
     background-color: var(--white-primary-color);

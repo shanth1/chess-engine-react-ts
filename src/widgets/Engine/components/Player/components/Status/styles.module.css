@@ -1,0 +1,48 @@
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-style: solid;
+}
+.borderWhite {
+    border-width: 2px;
+    border-color: (--black-primary-color);
+}
+.borderBlack {
+    border-width: 2px;
+    border-color: (--White-primary-color);
+}
+
+.active {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--selected-white-color);
+}
+
+.spinner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    border-style: dashed;
+    animation: spinner 0.5s linear infinite;
+}
+
+@keyframes spinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
