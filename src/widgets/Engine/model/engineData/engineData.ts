@@ -12,55 +12,57 @@ export const getEngineData = async (
     board: IBoard,
     depth: number,
 ): Promise<IEngineReturn> => {
-    window.searchCount = 0;
-    const isWhiteActive = board.activeColor === PieceColors.WHITE;
-    const allLegalMoves: number[][] = getAllLegalMoves(board);
-    let bestEvaluation = 0;
-    if (!allLegalMoves.length) {
-        const colorConsideration = isWhiteActive ? -1 : 1;
-        bestEvaluation = board.isCheck ? colorConsideration * Infinity : 0;
-        return new Promise((resolve) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            window.searchCount = 0;
+            const isWhiteActive = board.activeColor === PieceColors.WHITE;
+            const allLegalMoves: number[][] = getAllLegalMoves(board);
+            let bestEvaluation = 0;
+            if (!allLegalMoves.length) {
+                const colorConsideration = isWhiteActive ? -1 : 1;
+                bestEvaluation = board.isCheck
+                    ? colorConsideration * Infinity
+                    : 0;
+                resolve({
+                    bestMove: null,
+                    bestEvaluation: bestEvaluation,
+                    searchCount: window.searchCount,
+                });
+            }
+            let bestMove = allLegalMoves[0];
+
+            let alpha = -Infinity;
+            let beta = Infinity;
+
+            for (let index in allLegalMoves) {
+                const move = allLegalMoves[index];
+                const newBoard = getBoardAfterMove(board, move);
+                const newLegalMoves = getAllLegalMoves(newBoard);
+                const evaluation = minimax_ab(
+                    newBoard,
+                    newLegalMoves,
+                    depth,
+                    alpha,
+                    beta,
+                );
+
+                if (isWhiteActive && evaluation > alpha) {
+                    bestEvaluation = evaluation;
+                    alpha = evaluation;
+                    bestMove = move;
+                }
+                if (!isWhiteActive && evaluation < beta) {
+                    bestEvaluation = evaluation;
+                    beta = evaluation;
+                    bestMove = move;
+                }
+            }
+
             resolve({
-                bestMove: null,
+                bestMove: bestMove,
                 bestEvaluation: bestEvaluation,
                 searchCount: window.searchCount,
             });
-        });
-    }
-    let bestMove = allLegalMoves[0];
-
-    let alpha = -Infinity;
-    let beta = Infinity;
-
-    for (let index in allLegalMoves) {
-        const move = allLegalMoves[index];
-        const newBoard = getBoardAfterMove(board, move);
-        const newLegalMoves = getAllLegalMoves(newBoard);
-        const evaluation = minimax_ab(
-            newBoard,
-            newLegalMoves,
-            depth,
-            alpha,
-            beta,
-        );
-
-        if (isWhiteActive && evaluation > alpha) {
-            bestEvaluation = evaluation;
-            alpha = evaluation;
-            bestMove = move;
-        }
-        if (!isWhiteActive && evaluation < beta) {
-            bestEvaluation = evaluation;
-            beta = evaluation;
-            bestMove = move;
-        }
-    }
-
-    return new Promise((resolve) => {
-        resolve({
-            bestMove: bestMove,
-            bestEvaluation: bestEvaluation,
-            searchCount: window.searchCount,
         });
     });
 };

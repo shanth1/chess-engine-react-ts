@@ -33,11 +33,8 @@ interface IStartEngineData {
 
 export const startEngineAsync = createAsyncThunk(
     "engine/startEngineAsync",
-    async ({ board, depth }: IStartEngineData, { dispatch }) => {
-        debugger;
+    async ({ board, depth }: IStartEngineData) => {
         const engineData = await getEngineData(board, depth);
-        // dispatch(turnOffEngine());
-
         return engineData;
     },
 );
@@ -47,20 +44,18 @@ const engineSlice = createSlice({
     initialState,
     reducers: {
         turnOffEngine: (state) => {
-            debugger;
             state.status = "off";
             state.bestMove = null;
         },
     },
     extraReducers(builder) {
         builder.addCase(startEngineAsync.pending, (state) => {
-            debugger;
             state.status = "analysis";
         });
         builder.addCase(startEngineAsync.fulfilled, (state, action) => {
-            debugger;
             state.bestMove = action.payload.bestMove;
             state.depthEvaluation = action.payload.bestEvaluation;
+            state.searchCount = action.payload.searchCount;
             state.status = "completed";
         });
     },

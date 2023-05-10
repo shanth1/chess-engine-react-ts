@@ -56,19 +56,17 @@ export const Engine: React.FC = () => {
     const status = useAppSelector((state) => state.engine.status);
     const bestMove = useAppSelector((state) => state.engine.bestMove);
     const staticEvaluation = getEvaluation(board.position);
-    debugger;
 
-    debugger;
-    if (bestMove) {
-        const boardAfterMove = makeMove(board, bestMove[0], bestMove[1]);
-        dispatch(updateBoard({ board: boardAfterMove }));
-        dispatch(turnOffEngine());
-    }
-
-    if (board.activeColor !== playerColor && status === "off") {
-        debugger;
-        dispatch(startEngineAsync({ board: board, depth: depth }));
-    }
+    useEffect(() => {
+        if (bestMove) {
+            const boardAfterMove = makeMove(board, bestMove[0], bestMove[1]);
+            dispatch(updateBoard({ board: boardAfterMove }));
+            dispatch(turnOffEngine());
+        }
+        if (board.activeColor !== playerColor && status === "off") {
+            dispatch(startEngineAsync({ board: board, depth: depth }));
+        }
+    });
 
     return (
         <div className={styles.engine}>
