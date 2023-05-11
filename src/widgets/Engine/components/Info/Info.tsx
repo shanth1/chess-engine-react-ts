@@ -1,3 +1,4 @@
+import { useAppSelector } from "shared/hooks";
 import styles from "./styles.module.css";
 
 interface IInfoProps {
@@ -8,11 +9,21 @@ interface IInfoProps {
 }
 
 export const Info: React.FC<IInfoProps> = ({ staticEvaluation }) => {
+    const { depthEvaluation, searchCount } = useAppSelector(
+        (state) => state.engine,
+    );
+
     return (
         <div className={styles.info}>
-            <div>Depth evaluation: +</div>
-            <div>Static evaluation: {staticEvaluation}</div>
-            <div>Search count: 100000</div>
+            <div>
+                Depth evaluation: {depthEvaluation > 0 && "+"}
+                {depthEvaluation}
+            </div>
+            <div>
+                Static evaluation: {staticEvaluation > 0 && "+"}
+                {staticEvaluation}
+            </div>
+            <div>Search count: {searchCount}</div>
             <div>Analysis time: 10s</div>
         </div>
     );
