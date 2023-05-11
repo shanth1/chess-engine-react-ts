@@ -7,14 +7,16 @@ interface IEngineReturn {
     bestMove: number[] | null;
     bestEvaluation: number;
     searchCount: number;
+    analysisTime: number;
 }
 export const getEngineData = async (
     board: IBoard,
     depth: number,
 ): Promise<IEngineReturn> => {
     return new Promise((resolve) => {
+        window.searchCount = 0;
+        const startTime: number = performance.now();
         setTimeout(() => {
-            window.searchCount = 0;
             const isWhiteActive = board.activeColor === PieceColors.WHITE;
             const allLegalMoves: number[][] = getAllLegalMoves(board);
             let bestEvaluation = 0;
@@ -27,6 +29,7 @@ export const getEngineData = async (
                     bestMove: null,
                     bestEvaluation: bestEvaluation,
                     searchCount: window.searchCount,
+                    analysisTime: 0,
                 });
             }
             let bestMove = allLegalMoves[0];
@@ -62,6 +65,7 @@ export const getEngineData = async (
                 bestMove: bestMove,
                 bestEvaluation: bestEvaluation,
                 searchCount: window.searchCount,
+                analysisTime: performance.now() - startTime,
             });
         });
     });

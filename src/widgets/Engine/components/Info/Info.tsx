@@ -9,9 +9,12 @@ interface IInfoProps {
 }
 
 export const Info: React.FC<IInfoProps> = ({ staticEvaluation }) => {
-    const { depthEvaluation, searchCount } = useAppSelector(
+    const { depthEvaluation, searchCount, analysisTime } = useAppSelector(
         (state) => state.engine,
     );
+
+    const seconds = Math.floor(analysisTime / 100);
+    const milliseconds = analysisTime % 100;
 
     return (
         <div className={styles.info}>
@@ -24,7 +27,9 @@ export const Info: React.FC<IInfoProps> = ({ staticEvaluation }) => {
                 {staticEvaluation}
             </div>
             <div>Search count: {searchCount}</div>
-            <div>Analysis time: 10s</div>
+            <div>
+                Analysis time: {seconds}.{milliseconds}s
+            </div>
         </div>
     );
 };
