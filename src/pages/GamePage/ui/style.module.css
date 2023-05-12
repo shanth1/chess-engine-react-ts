@@ -1,11 +1,10 @@
 .page {
     display: flex;
     flex-direction: column;
-    gap: 50px;
 }
 
 .body_wrapper {
-    margin-top: 50px;
+    margin-top: 64px;
     display: flex;
     flex-direction: column;
     padding: 20px;
