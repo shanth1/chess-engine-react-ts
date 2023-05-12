@@ -1,4 +1,4 @@
-import { Analysis } from "widgets/Analysis";
+import { Engine } from "widgets/Engine";
 import { BoardManager } from "widgets/BoardManager";
 import { ChessGame } from "widgets/ChessGame";
 import { Header } from "widgets/Header";
@@ -11,7 +11,7 @@ export const GamePage: React.FC = () => {
             <Header />
             <div className={styles.body_wrapper}>
                 <div className={styles.horizontal_split}>
-                    <Analysis />
+                    <Engine />
                     <ChessGame />
                     <History />
                 </div>

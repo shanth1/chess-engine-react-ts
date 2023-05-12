@@ -9,6 +9,9 @@ export const resolvePawnPromotion = (board: IBoard, targetIndex: number) => {
             ? PieceColors.BLACK
             : PieceColors.WHITE;
     const newQueen = getPieceCode(PieceTypes.QUEEN, queenColor);
+    queenColor === PieceColors.WHITE
+        ? board.capturedBlackPieces.push(newQueen)
+        : board.capturedWhitePieces.push(newQueen);
     board.position[targetIndex] = newQueen;
     board.isPromotion = true;
 };

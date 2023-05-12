@@ -5,7 +5,7 @@
 
 body {
     position: fixed;
-    background-color: rgb(227, 212, 192);
+    background-color: var(--white-secondary-color);
 }
 
 :root {
@@ -13,6 +13,11 @@ body {
     --black-primary-color: #3b4754;
     --white-secondary-color: #dcd3be;
     --black-secondary-color: #2d3641;
-
+    --selected-white-color: #80a465;
+    --selected-black-color: #62814b;
+    --start-white-color: #c3c3d5;
+    --target-white-color: #9f9fbc;
+    --start-black-color: #7c7ca2;
+    --target-black-color: #5c5c84;
     font-family: "Courier New", Courier, monospace;
 }

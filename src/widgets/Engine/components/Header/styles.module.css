@@ -1,0 +1,10 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--black-primary-color);
+    font-size: x-large;
+    font-weight: bold;
+    background-color: var(--white-primary-color);
+    border-bottom: 2px solid var(--black-secondary-color);
+}

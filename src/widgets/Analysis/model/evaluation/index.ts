@@ -1,1 +1,0 @@
-export { getEvaluation } from "./evaluation";

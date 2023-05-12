@@ -1,0 +1,33 @@
+.player {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.white {
+    color: var(--black-primary-color);
+    background-color: var(--white-primary-color);
+}
+
+.black {
+    color: var(--white-primary-color);
+    background-color: var(--black-primary-color);
+}
+
+.content {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+}
+
+.isUp {
+    flex-direction: column;
+}
+
+.element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}

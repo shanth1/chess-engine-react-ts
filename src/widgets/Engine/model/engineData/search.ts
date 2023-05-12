@@ -1,7 +1,7 @@
 import { getBoardAfterMove } from "entities/boardAfterMove";
 import { getAllLegalMoves } from "features/legalMoves";
 import { PieceColors } from "shared/enums";
-import { getEvaluation } from "./evaluation";
+import { getEvaluation } from "./evaluation/evaluation";
 
 export const minimax_ab = (
     board: IBoard,
@@ -20,10 +20,7 @@ export const minimax_ab = (
         for (let index in legalMoves) {
             const move = legalMoves[index];
             const newBoard = getBoardAfterMove(board, move);
-            const newLegalMoves = getAllLegalMoves(
-                newBoard,
-                newBoard.activeColor,
-            );
+            const newLegalMoves = getAllLegalMoves(newBoard);
             const evaluation = minimax_ab(
                 newBoard,
                 newLegalMoves,
@@ -41,10 +38,7 @@ export const minimax_ab = (
         for (let index in legalMoves) {
             const move = legalMoves[index];
             const newBoard = getBoardAfterMove(board, move);
-            const newLegalMoves = getAllLegalMoves(
-                newBoard,
-                newBoard.activeColor,
-            );
+            const newLegalMoves = getAllLegalMoves(newBoard);
             const evaluation = minimax_ab(
                 newBoard,
                 newLegalMoves,
