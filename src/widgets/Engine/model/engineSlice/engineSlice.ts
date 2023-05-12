@@ -56,6 +56,7 @@ const engineSlice = createSlice({
             state.bestMove = action.payload.bestMove;
             state.depthEvaluation = action.payload.bestEvaluation;
             state.searchCount = action.payload.searchCount;
+            state.analysisTime = Math.floor(action.payload.analysisTime / 10);
             state.status = "completed";
         });
     },
