@@ -112,7 +112,7 @@ export const Engine: React.FC = () => {
                 />
                 <Settings depth={depth} setDepth={setDepth} />
             </div>
-            <EvaluationBar />
+            <EvaluationBar staticEvaluation={staticEvaluation} />
         </div>
     );
 };
