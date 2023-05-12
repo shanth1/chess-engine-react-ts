@@ -20,11 +20,11 @@ export const Info: React.FC<IInfoProps> = ({ staticEvaluation }) => {
         <div className={styles.info}>
             <div>
                 Depth evaluation: {depthEvaluation > 0 && "+"}
-                {depthEvaluation}
+                {depthEvaluation.toFixed(1)}
             </div>
             <div>
                 Static evaluation: {staticEvaluation > 0 && "+"}
-                {staticEvaluation}
+                {staticEvaluation.toFixed(1)}
             </div>
             <div>Search count: {searchCount}</div>
             <div>
