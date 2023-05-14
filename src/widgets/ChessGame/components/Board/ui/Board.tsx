@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Square } from "../components/Square";
 import { updateLegalMoves } from "../model/updateLegalMoves";
 import styles from "./styles.module.css";
@@ -18,6 +18,10 @@ export const Board: React.FC = () => {
     updateLegalMoves(board, selectedIndex);
     let checkIndex: null | number = null;
 
+    useEffect(() => {
+        setSelectedIndex(null);
+    }, [board]);
+
     if (board.isCheck) {
         const piecePositions =
             board.activeColor === PieceColors.WHITE
@@ -29,8 +33,6 @@ export const Board: React.FC = () => {
             }
         });
     }
-
-    console.log(checkIndex, board.isCheck);
 
     const resolveSquareClick = (square: ISquare) => {
         const {
