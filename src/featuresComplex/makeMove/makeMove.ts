@@ -9,56 +9,39 @@ export const makeMove = (
     startIndex: number,
     targetIndex: number,
 ): IBoard => {
-    const activeColor = board.activeColor;
     const newBoard = getBoardAfterMove(board, [startIndex, targetIndex]);
-    if (activeColor === PieceColors.WHITE) {
-        for (let index in newBoard.whitePiecePositions) {
-            const pieceIndex = newBoard.whitePiecePositions[index];
-            const moves = getPseudoLegalMoves(newBoard, pieceIndex);
-            if (checkAttackOnKing(newBoard.position, pieceIndex, moves)) {
-                newBoard.isCheck = true;
-                break;
-            }
+
+    const piecePositions =
+        board.activeColor === PieceColors.WHITE
+            ? newBoard.whitePiecePositions
+            : newBoard.blackPiecePositions;
+
+    for (let index = 0; index < piecePositions.length; index++) {
+        const boardIndex = piecePositions[index];
+        const piece = newBoard.position[boardIndex];
+        const moves = getPseudoLegalMoves(newBoard, boardIndex);
+        if (checkAttackOnKing(newBoard.position, piece, moves)) {
+            newBoard.isCheck = true;
+            break;
         }
+    }
+
+    const enemyPiecePosition =
+        board.activeColor === PieceColors.WHITE
+            ? newBoard.blackPiecePositions
+            : newBoard.whitePiecePositions;
+    if (newBoard.isCheck) {
         let isAvailableToMove = false;
-        for (let index in newBoard.blackPiecePositions) {
-            const pieceIndex = newBoard.blackPiecePositions[index];
+        for (let index in enemyPiecePosition) {
+            const pieceIndex = enemyPiecePosition[index];
             const moves = getLegalMoves(newBoard, pieceIndex);
             isAvailableToMove = moves.length ? true : false;
             if (isAvailableToMove) break;
         }
-
-        if (newBoard.isCheck) {
-            if (isAvailableToMove) {
-                newBoard.isStalemate = true;
-            } else {
-                newBoard.isCheckmate = true;
-            }
-        }
-    } else {
-        for (let index in newBoard.blackPiecePositions) {
-            const pieceIndex = newBoard.blackPiecePositions[index];
-            const moves = getPseudoLegalMoves(newBoard, pieceIndex);
-            if (checkAttackOnKing(newBoard.position, pieceIndex, moves)) {
-                newBoard.isCheck = true;
-                break;
-            }
-        }
-
-        let isAvailableToMove = false;
-        for (let index in newBoard.whitePiecePositions) {
-            const pieceIndex = newBoard.whitePiecePositions[index];
-            const moves = getLegalMoves(newBoard, pieceIndex);
-            isAvailableToMove = moves.length ? true : false;
-            if (isAvailableToMove) break;
-        }
-
-        if (newBoard.isCheck) {
-            if (isAvailableToMove) {
-                newBoard.isStalemate = true;
-            } else {
-                newBoard.isCheckmate = true;
-            }
+        if (isAvailableToMove) {
+            newBoard.isStalemate = true;
+        } else {
+            newBoard.isCheckmate = true;
         }
     }
 
