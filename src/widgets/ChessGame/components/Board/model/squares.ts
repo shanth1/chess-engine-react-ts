@@ -22,6 +22,7 @@ for (let rank: number = 7; rank >= 0; rank--) {
             isStart: false,
             isTarget: false,
             isFriendly: false,
+            isCheck: false,
         });
         index++;
     }

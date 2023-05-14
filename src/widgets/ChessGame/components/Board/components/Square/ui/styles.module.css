@@ -132,3 +132,7 @@
 .white.rank {
     color: var(--black-primary-color);
 }
+
+.check {
+    background-color: red;
+}
