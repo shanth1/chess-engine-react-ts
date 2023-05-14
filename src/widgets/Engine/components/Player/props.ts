@@ -1,7 +1,7 @@
 export interface IPlayerProps {
     enemyCaptures: number[];
     playerCaptures: number[];
-    materialAdvantage: number;
+    materialEvaluation: number;
     color: number;
     isUp: boolean;
     name: string;

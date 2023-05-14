@@ -52,10 +52,10 @@ export const Engine: React.FC = () => {
     const playerColor = useAppSelector((state) => state.player.playerColor);
     const playerView = useAppSelector((state) => state.player.colorView);
     const isWhiteView = playerView === PieceColors.WHITE;
-    const materialAdvantage = getMaterialEvaluation(board.position);
     const status = useAppSelector((state) => state.engine.status);
     const bestMove = useAppSelector((state) => state.engine.bestMove);
     const staticEvaluation = getEvaluation(board.position);
+    const materialEvaluation = getMaterialEvaluation(board.position);
 
     useEffect(() => {
         if (bestMove) {
@@ -76,7 +76,7 @@ export const Engine: React.FC = () => {
                     isUp={true}
                     color={isWhiteView ? PieceColors.BLACK : PieceColors.WHITE}
                     name={"Engine"}
-                    materialAdvantage={-materialAdvantage}
+                    materialEvaluation={materialEvaluation}
                     enemyCaptures={
                         isWhiteView
                             ? board.capturedBlackPieces.slice()
@@ -98,7 +98,7 @@ export const Engine: React.FC = () => {
                     isUp={false}
                     color={isWhiteView ? PieceColors.WHITE : PieceColors.BLACK}
                     name={"Player"}
-                    materialAdvantage={materialAdvantage}
+                    materialEvaluation={materialEvaluation}
                     enemyCaptures={
                         isWhiteView
                             ? board.capturedWhitePieces.slice()

@@ -10,7 +10,7 @@ export const Player: React.FC<IPlayerProps> = ({
     name,
     color,
     isUp,
-    materialAdvantage,
+    materialEvaluation,
     playerCaptures,
     enemyCaptures,
 }) => {
@@ -19,6 +19,9 @@ export const Player: React.FC<IPlayerProps> = ({
     const captureSymbols = getCaptureSymbols(relativeCaptures);
 
     const isWhite = color === PieceColors.WHITE;
+    const materialAdvantage = isWhite
+        ? materialEvaluation
+        : -materialEvaluation;
     const colorStyle = isWhite ? styles.white : styles.black;
     const playerStyle = [styles.player, colorStyle].join(" ");
     return (
