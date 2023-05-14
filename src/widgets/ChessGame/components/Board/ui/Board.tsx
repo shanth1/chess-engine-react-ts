@@ -4,8 +4,8 @@ import { updateLegalMoves } from "../model/updateLegalMoves";
 import styles from "./styles.module.css";
 import { getBoardView } from "../lib/boardView";
 import { useAppDispatch, useAppSelector } from "shared/hooks";
-import { PieceColors } from "shared/enums";
-import { getPieceColor } from "shared/pieceInfo";
+import { PieceColors, PieceTypes } from "shared/enums";
+import { getPieceColor, getPieceType } from "shared/pieceInfo";
 import { ISquare } from "../types/interfaces";
 import { makeMove } from "featuresComplex/makeMove";
 import { updateBoard } from "entities/gameSlice";
@@ -16,6 +16,21 @@ export const Board: React.FC = () => {
     const colorView = useAppSelector((state) => state.player.colorView);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     updateLegalMoves(board, selectedIndex);
+    let checkIndex: null | number = null;
+
+    if (board.isCheck) {
+        const piecePositions =
+            board.activeColor === PieceColors.WHITE
+                ? board.whitePiecePositions
+                : board.blackPiecePositions;
+        piecePositions.forEach((index) => {
+            if (getPieceType(board.position[index]) === PieceTypes.KING) {
+                checkIndex = index;
+            }
+        });
+    }
+
+    console.log(checkIndex, board.isCheck);
 
     const resolveSquareClick = (square: ISquare) => {
         const {
@@ -45,6 +60,7 @@ export const Board: React.FC = () => {
         <div className={styles.board}>
             {boardView.map((square) => {
                 const piece = board.position[square.index];
+                square.isCheck = square.index === checkIndex;
                 square.renderIndex = renderIndex;
                 square.piece = piece;
                 square.isFriendly = getPieceColor(piece) === board.activeColor;

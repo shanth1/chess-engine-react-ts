@@ -12,6 +12,7 @@ export interface ISquare {
     isStart: boolean;
     isTarget: boolean;
     isFriendly: boolean;
+    isCheck: boolean;
 }
 
 export interface IBoardProps {
