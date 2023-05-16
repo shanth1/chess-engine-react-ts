@@ -45,7 +45,9 @@ export const Board: React.FC = () => {
         const pieceColor: PieceColors = getPieceColor(piece);
         const isPlayerTurn: boolean = board.activeColor === pieceColor;
         if (!isPlayerTurn && !isLegal) return;
-        setSelectedIndex(isSelected || isLegal ? null : index);
+        if (!board.isCheckmate) {
+            setSelectedIndex(isSelected || isLegal ? null : index);
+        }
 
         if (!isLegal || selectedIndex === null) return;
         let targetIndex = index;
@@ -70,6 +72,9 @@ export const Board: React.FC = () => {
                 if (board.move) {
                     square.isStart = square.index === board.move[0];
                     square.isTarget = square.index === board.move[1];
+                } else {
+                    square.isStart = false;
+                    square.isTarget = false;
                 }
                 renderIndex++;
                 return (
