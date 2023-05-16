@@ -30,18 +30,20 @@ export const makeMove = (
         board.activeColor === PieceColors.WHITE
             ? newBoard.blackPiecePositions
             : newBoard.whitePiecePositions;
-    if (newBoard.isCheck) {
-        let isAvailableToMove = false;
-        for (let index in enemyPiecePosition) {
-            const pieceIndex = enemyPiecePosition[index];
-            const moves = getLegalMoves(newBoard, pieceIndex);
-            isAvailableToMove = moves.length ? true : false;
-            if (isAvailableToMove) break;
-        }
-        if (isAvailableToMove) {
-            newBoard.isStalemate = true;
-        } else {
+
+    let isAvailableToMove = false;
+    for (let index in enemyPiecePosition) {
+        const pieceIndex = enemyPiecePosition[index];
+        const moves = getLegalMoves(newBoard, pieceIndex);
+        isAvailableToMove = moves.length ? true : false;
+        if (isAvailableToMove) break;
+    }
+
+    if (!isAvailableToMove) {
+        if (newBoard.isCheck) {
             newBoard.isCheckmate = true;
+        } else {
+            newBoard.isStalemate = true;
         }
     }
 
