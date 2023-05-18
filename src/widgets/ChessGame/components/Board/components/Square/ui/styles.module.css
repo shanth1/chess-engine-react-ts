@@ -1,7 +1,7 @@
 .square {
     display: flex;
-    width: 64px;
-    height: 64px;
+    width: calc(100% / 8);
+    height: calc(100% / 8);
     justify-content: center;
     align-items: center;
     position: relative;
@@ -35,8 +35,8 @@
 .legal::after {
     content: "";
     position: absolute;
-    height: 10px;
-    width: 10px;
+    height: 15%;
+    width: 15%;
     border-radius: 40%;
     background-color: var(--green-color);
     filter: brightness(90%);

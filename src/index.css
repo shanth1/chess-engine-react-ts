@@ -4,8 +4,14 @@
 }
 
 body {
-    position: fixed;
     background-color: var(--white-secondary-color);
+    -ms-overflow-style: none; /* IE и Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Chrome, Safari и Opera */
+body::-webkit-scrollbar {
+    display: none;
 }
 
 :root {

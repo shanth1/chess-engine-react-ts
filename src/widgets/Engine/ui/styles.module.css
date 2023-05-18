@@ -1,11 +1,11 @@
 .engine {
     display: flex;
-    background-color: var(--white-secondary-color);
     gap: 8px;
+    height: 64vh;
 }
 
 .contentWrapper {
     width: 100%;
     display: grid;
-    grid-template-rows: 64px 128px 1fr 128px 64px;
+    grid-template-rows: 12.5% 25% 25% 25% 12.5%;
 }
