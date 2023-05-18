@@ -1,6 +1,6 @@
 .history {
     display: grid;
-    height: 100%;
-    grid-template-rows: 64px 384px 64px;
+    height: 64vh;
+    grid-template-rows: 12.5% 75% 12.5%;
     grid-template-columns: 1fr;
 }

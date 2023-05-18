@@ -8,8 +8,8 @@ import styles from "./style.module.css";
 export const GamePage: React.FC = () => {
     return (
         <div className={styles.page}>
-            <Header />
             <div className={styles.body_wrapper}>
+                <Header />
                 <div className={styles.horizontal_split}>
                     <Engine />
                     <ChessGame />

@@ -1,6 +1,5 @@
 .board {
-    width: calc(64px * 8);
-    height: calc(64px * 8);
+    height: 64vh;
     display: flex;
     flex-wrap: wrap;
 }
