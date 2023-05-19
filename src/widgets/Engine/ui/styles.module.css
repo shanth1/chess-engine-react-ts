@@ -1,7 +1,8 @@
 .engine {
     display: flex;
-    gap: 8px;
+    gap: 2%;
     height: 64vh;
+    width: 100%;
 }
 
 .contentWrapper {
