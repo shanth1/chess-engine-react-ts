@@ -13,41 +13,26 @@ import {
     UnmakeMoveIcon,
     WhiteAttackDisplayIcon,
 } from "../assets";
+import { Button } from "../components/Button/Button";
 import styles from "./styles.module.css";
 
 export const BoardManager: React.FC = () => {
     return (
         <div className={styles.boardManager}>
             <div className={styles.engineControlWrapper}>
-                <div className={styles.button}>
-                    <ArrowMovesIcon />
-                </div>
-                <div className={styles.button}>
-                    <HelpMoveIcon />
-                </div>
+                <Button Icon={ArrowMovesIcon} />
+                <Button Icon={HelpMoveIcon} />
             </div>
             <div className={styles.historyControlWrapper}>
-                <div className={styles.button}>
-                    <UnmakeMoveIcon />
-                </div>
-                <div className={styles.button}>
-                    <ResignIcon />
-                </div>
+                <Button Icon={UnmakeMoveIcon} />
+                <Button Icon={ResignIcon} />
             </div>
 
             <div className={styles.boardControlWrapper}>
-                <div className={styles.button}>
-                    <FigureDisplayIcon />
-                </div>
-                <div className={styles.button}>
-                    <WhiteAttackDisplayIcon />
-                </div>
-                <div className={styles.button}>
-                    <BlackAttackDisplayIcon />
-                </div>
-                <div className={styles.button}>
-                    <FlipBoardIcon />
-                </div>
+                <Button Icon={FigureDisplayIcon} />
+                <Button Icon={WhiteAttackDisplayIcon} />
+                <Button Icon={BlackAttackDisplayIcon} />
+                <Button Icon={FlipBoardIcon} />
             </div>
 
             <div className={styles.fenInputWrapper}>
@@ -55,18 +40,10 @@ export const BoardManager: React.FC = () => {
                 <input className={styles.input} type="text" />
             </div>
             <div className={styles.fenControlWrapper}>
-                <div className={styles.button}>
-                    <EmptyBoardFenIcon />
-                </div>
-                <div className={styles.button}>
-                    <DefaultBoardFenIcon />
-                </div>
-                <div className={styles.button}>
-                    <ExportDataIcon />
-                </div>
-                <div className={styles.button}>
-                    <LoadDataIcon />
-                </div>
+                <Button Icon={EmptyBoardFenIcon} />
+                <Button Icon={DefaultBoardFenIcon} />
+                <Button Icon={ExportDataIcon} />
+                <Button Icon={LoadDataIcon} />
             </div>
 
             <div className={styles.pgnInputWrapper}>
@@ -74,18 +51,9 @@ export const BoardManager: React.FC = () => {
                 <input className={styles.input} type="text" />
             </div>
             <div className={styles.pgnControlWrapper}>
-                <div className={styles.button}>
-                    <OpeningBookIcon />
-                </div>
-                <div className={styles.button}>
-                    <ExportDataIcon />
-                </div>
-                <div
-                    style={{ borderRadius: "0 0 3vh 0" }}
-                    className={styles.button}
-                >
-                    <LoadDataIcon />
-                </div>
+                <Button Icon={OpeningBookIcon} />
+                <Button Icon={ExportDataIcon} />
+                <Button Icon={LoadDataIcon} />
             </div>
 
             <div className={styles.clock}>
