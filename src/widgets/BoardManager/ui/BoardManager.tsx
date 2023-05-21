@@ -1,3 +1,4 @@
+import { changeColorView } from "entities/playerSlice";
 import {
     ArrowMovesIcon,
     BlackAttackDisplayIcon,
@@ -32,7 +33,7 @@ export const BoardManager: React.FC = () => {
                 <Button Icon={FigureDisplayIcon} />
                 <Button Icon={WhiteAttackDisplayIcon} />
                 <Button Icon={BlackAttackDisplayIcon} />
-                <Button Icon={FlipBoardIcon} />
+                <Button Icon={FlipBoardIcon} action={changeColorView} />
             </div>
 
             <div className={styles.fenInputWrapper}>
