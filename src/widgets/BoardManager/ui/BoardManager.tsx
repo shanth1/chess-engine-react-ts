@@ -1,23 +1,37 @@
-import { changeColorView } from "entities/playerSlice";
+import { useState } from "react";
+import { Input } from "shared/Input";
 import {
     ArrowMovesIcon,
     BlackAttackDisplayIcon,
-    DefaultBoardFenIcon,
-    EmptyBoardFenIcon,
     ExportDataIcon,
     FigureDisplayIcon,
-    FlipBoardIcon,
     HelpMoveIcon,
-    LoadDataIcon,
     OpeningBookIcon,
     ResignIcon,
     UnmakeMoveIcon,
     WhiteAttackDisplayIcon,
 } from "../assets";
-import { Button } from "../components/Button/Button";
+import { Button } from "../../../shared/Button/ui/Button";
 import styles from "./styles.module.css";
+import { FlipBoardButton } from "../components/FlipBoardButton/FlipBoardButton";
+import { LoadFenButton } from "../components/LoadFenButton/LoadFenButton";
+import { LoadPgnButton } from "../components/LoadPgnButton/LoadPgnButton";
+import { EmptyFenButton } from "../components/EmptyFenButton/EmptyFenButton";
+import { DefaultFenButton } from "../components/DefaultFenButton/DefaultFenButton";
 
 export const BoardManager: React.FC = () => {
+    const [fen, setFen] = useState(
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    );
+    const onFenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFen(event.target.value);
+    };
+
+    const [pgn, setPgn] = useState("");
+    const onPgnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPgn(event.target.value);
+    };
+
     return (
         <div className={styles.boardManager}>
             <div className={styles.engineControlWrapper}>
@@ -33,28 +47,28 @@ export const BoardManager: React.FC = () => {
                 <Button Icon={FigureDisplayIcon} />
                 <Button Icon={WhiteAttackDisplayIcon} />
                 <Button Icon={BlackAttackDisplayIcon} />
-                <Button Icon={FlipBoardIcon} action={changeColorView} />
+                <FlipBoardButton />
             </div>
 
             <div className={styles.fenInputWrapper}>
-                <span>FEN:</span>
-                <input className={styles.input} type="text" />
+                <span>FEN</span>
+                <Input value={fen} handlerChange={onFenChange} />
             </div>
             <div className={styles.fenControlWrapper}>
-                <Button Icon={EmptyBoardFenIcon} />
-                <Button Icon={DefaultBoardFenIcon} />
+                <EmptyFenButton setFen={setFen} />
+                <DefaultFenButton setFen={setFen} />
                 <Button Icon={ExportDataIcon} />
-                <Button Icon={LoadDataIcon} />
+                <LoadFenButton fen={fen} setFen={setFen} />
             </div>
 
             <div className={styles.pgnInputWrapper}>
                 <span>PGN:</span>
-                <input className={styles.input} type="text" />
+                <Input value={pgn} handlerChange={onPgnChange} />
             </div>
             <div className={styles.pgnControlWrapper}>
                 <Button Icon={OpeningBookIcon} />
                 <Button Icon={ExportDataIcon} />
-                <Button Icon={LoadDataIcon} />
+                <LoadPgnButton />
             </div>
 
             <div className={styles.clock}>

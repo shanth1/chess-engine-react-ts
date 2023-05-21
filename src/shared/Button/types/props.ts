@@ -1,4 +1,4 @@
 export interface IButtonProps {
-    text: string;
-    onClick: () => void;
+    Icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
+    onClick?: () => void;
 }
