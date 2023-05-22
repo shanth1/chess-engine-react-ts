@@ -52,6 +52,7 @@
     grid-row-end: 4;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    border-bottom: 2px solid var(--black-primary-color);
 }
 
 .pgnInputWrapper {
@@ -72,6 +73,10 @@
     grid-row-end: 4;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    border-bottom: 2px solid var(--black-primary-color);
+    border-right: 2px solid var(--black-primary-color);
+    border-radius: 0 0 3vh 0;
+    overflow: hidden;
 }
 
 .clock {
@@ -104,4 +109,8 @@
     color: var(--black-primary-color);
     background-color: var(--white-primary-color);
     border-radius: 0 0 0 3vh;
+}
+
+.borderBottom {
+    border-bottom: 2px solid var(--black-primary-color);
 }
