@@ -4,6 +4,7 @@ import { PieceColors } from "shared/enums";
 const initialState = {
     playerColor: PieceColors.WHITE,
     colorView: PieceColors.WHITE,
+    pieceVisibility: true,
 };
 
 const playerSlice = createSlice({
@@ -19,9 +20,13 @@ const playerSlice = createSlice({
                     ? PieceColors.BLACK
                     : PieceColors.WHITE;
         },
+        changePieceVisibility: (state) => {
+            state.pieceVisibility = !state.pieceVisibility;
+        },
     },
 });
 
-export const { setPlayerColor, changeColorView } = playerSlice.actions;
+export const { setPlayerColor, changeColorView, changePieceVisibility } =
+    playerSlice.actions;
 
 export const playerSliceReducer = playerSlice.reducer;
