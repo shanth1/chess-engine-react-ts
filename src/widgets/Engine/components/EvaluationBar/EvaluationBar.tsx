@@ -8,15 +8,19 @@ export const EvaluationBar: React.FC<IBarProps> = ({ staticEvaluation }) => {
     const evaluation: number = null || staticEvaluation;
 
     const getPercentEvaluation = (evaluation: number): number => {
-        const border = 20;
+        const colorCoefficient = evaluation >= 0 ? 1 : -1;
+        const logEvaluation =
+            colorCoefficient * Math.log2(Math.abs(evaluation) + 1);
+
+        const border = 5;
         const percentCoefficient = 50 / border;
         const minEvaluation = -border;
         const maxEvaluation = border;
 
-        let formattedEvaluation = evaluation;
-        if (evaluation > maxEvaluation) {
+        let formattedEvaluation = logEvaluation;
+        if (logEvaluation > maxEvaluation) {
             formattedEvaluation = maxEvaluation;
-        } else if (evaluation < minEvaluation) {
+        } else if (logEvaluation < minEvaluation) {
             formattedEvaluation = minEvaluation;
         }
 
