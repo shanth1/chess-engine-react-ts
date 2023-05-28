@@ -31,6 +31,15 @@ export const EvaluationBar: React.FC<IBarProps> = ({ staticEvaluation }) => {
 
     const percentEvaluation = getPercentEvaluation(evaluation);
 
+    const getPercentScaleMark = (scaleMark: number): number => {
+        const border = 5;
+        const percentCoefficient = 50 / border;
+        const percentScaleMark =
+            (border + Math.log2(scaleMark + 1)) * percentCoefficient;
+
+        return percentScaleMark;
+    };
+
     return (
         <div className={styles.evaluationBar}>
             <div
@@ -40,6 +49,11 @@ export const EvaluationBar: React.FC<IBarProps> = ({ staticEvaluation }) => {
             <div
                 style={{ height: `${percentEvaluation}%` }}
                 className={styles.evaluationWhite}
+            ></div>
+
+            <div
+                style={{ top: `calc(${getPercentScaleMark(20)}% - 2px)` }}
+                className={styles.scaleMark}
             ></div>
         </div>
     );

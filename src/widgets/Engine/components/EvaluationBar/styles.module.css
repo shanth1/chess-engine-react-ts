@@ -2,6 +2,7 @@
     position: relative;
     width: 4vh;
     height: 100%;
+    overflow: hidden;
 }
 .evaluationBlack {
     position: absolute;
@@ -18,4 +19,12 @@
     width: 100%;
     background-color: var(--white-primary-color);
     transition: 1s;
+}
+
+.scaleMark {
+    width: 50%;
+    height: 4px;
+    border-radius: 4px;
+    background-color: black;
+    position: absolute;
 }
