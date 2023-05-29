@@ -12,7 +12,7 @@ export const EvaluationBar: React.FC<IBarProps> = ({ staticEvaluation }) => {
         const logEvaluation =
             colorCoefficient * Math.log2(Math.abs(evaluation) + 1);
 
-        const border = 5;
+        const border = 4;
         const percentCoefficient = 50 / border;
         const minEvaluation = -border;
         const maxEvaluation = border;
@@ -32,13 +32,35 @@ export const EvaluationBar: React.FC<IBarProps> = ({ staticEvaluation }) => {
     const percentEvaluation = getPercentEvaluation(evaluation);
 
     const getPercentScaleMark = (scaleMark: number): number => {
-        const border = 5;
+        const border = 4;
         const percentCoefficient = 50 / border;
         const percentScaleMark =
             (border + Math.log2(scaleMark + 1)) * percentCoefficient;
 
         return percentScaleMark;
     };
+
+    let scaleMarkElements = [];
+    for (let evaluation = 0; evaluation <= 25; evaluation++) {
+        scaleMarkElements.push(
+            <div
+                style={{
+                    top: `calc(${getPercentScaleMark(evaluation)}% - 1px)`,
+                }}
+                className={styles.scaleMark}
+            ></div>,
+        );
+        scaleMarkElements.push(
+            <div
+                style={{
+                    top: `calc(100% - ${getPercentScaleMark(
+                        evaluation,
+                    )}% - 1px)`,
+                }}
+                className={styles.scaleMark}
+            ></div>,
+        );
+    }
 
     return (
         <div className={styles.evaluationBar}>
@@ -50,11 +72,7 @@ export const EvaluationBar: React.FC<IBarProps> = ({ staticEvaluation }) => {
                 style={{ height: `${percentEvaluation}%` }}
                 className={styles.evaluationWhite}
             ></div>
-
-            <div
-                style={{ top: `calc(${getPercentScaleMark(20)}% - 2px)` }}
-                className={styles.scaleMark}
-            ></div>
+            {scaleMarkElements}
         </div>
     );
 };
