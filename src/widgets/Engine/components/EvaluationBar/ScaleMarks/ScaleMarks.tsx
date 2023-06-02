@@ -25,7 +25,19 @@ export const ScaleMarks: React.FC<IScaleMarksProps> = ({ color }) => {
                         evaluation,
                     )} * 64vh - 1px)`,
                 }}
-                className={[styles.scaleMark, colorStyle].join(" ")}
+                className={[styles.scaleMark, colorStyle, styles.left].join(
+                    " ",
+                )}
+            ></div>,
+            <div
+                style={{
+                    top: `calc(${getPercentScaleMark(
+                        evaluation,
+                    )} * 64vh - 1px)`,
+                }}
+                className={[styles.scaleMark, colorStyle, styles.right].join(
+                    " ",
+                )}
             ></div>,
         );
         scaleMarkElements.push(
@@ -35,7 +47,19 @@ export const ScaleMarks: React.FC<IScaleMarksProps> = ({ color }) => {
                         evaluation,
                     )} * 64vh - 1px)`,
                 }}
-                className={[styles.scaleMark, colorStyle].join(" ")}
+                className={[styles.scaleMark, colorStyle, styles.left].join(
+                    " ",
+                )}
+            ></div>,
+            <div
+                style={{
+                    top: `calc(64vh - ${getPercentScaleMark(
+                        evaluation,
+                    )} * 64vh - 1px)`,
+                }}
+                className={[styles.scaleMark, colorStyle, styles.right].join(
+                    " ",
+                )}
             ></div>,
         );
     }
