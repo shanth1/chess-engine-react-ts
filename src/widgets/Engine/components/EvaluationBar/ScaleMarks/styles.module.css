@@ -1,0 +1,23 @@
+.scaleMark {
+    width: 20%;
+    height: 2px;
+    position: absolute;
+}
+
+.left {
+    left: 0px;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.right {
+    right: 0px;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.white {
+    background-color: var(--white-primary-color);
+}
+
+.black {
+    background-color: var(--black-primary-color);
+}

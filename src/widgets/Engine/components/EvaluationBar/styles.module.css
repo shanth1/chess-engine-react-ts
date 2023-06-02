@@ -2,20 +2,14 @@
     position: relative;
     width: 4vh;
     height: 100%;
+    overflow: hidden;
+    background-color: var(--white-primary-color);
 }
 .evaluationBlack {
     position: absolute;
-    display: flex;
-    justify-content: center;
+    overflow: hidden;
     top: 0;
     width: 100%;
     background-color: var(--black-primary-color);
-    transition: 1s;
-}
-.evaluationWhite {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--white-primary-color);
     transition: 1s;
 }
