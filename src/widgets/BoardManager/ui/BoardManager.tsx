@@ -4,7 +4,6 @@ import {
     ArrowMovesIcon,
     BlackAttackDisplayIcon,
     ExportDataIcon,
-    FigureDisplayIcon,
     HelpMoveIcon,
     OpeningBookIcon,
     ResignIcon,
@@ -18,6 +17,7 @@ import { LoadFenButton } from "../components/LoadFenButton/LoadFenButton";
 import { LoadPgnButton } from "../components/LoadPgnButton/LoadPgnButton";
 import { EmptyFenButton } from "../components/EmptyFenButton/EmptyFenButton";
 import { DefaultFenButton } from "../components/DefaultFenButton/DefaultFenButton";
+import { PieceVisibilityButton } from "../components/PieceVisibilityButton/PieceVisibilityButton";
 
 export const BoardManager: React.FC = () => {
     const [fen, setFen] = useState(
@@ -44,7 +44,7 @@ export const BoardManager: React.FC = () => {
             </div>
 
             <div className={styles.boardControlWrapper}>
-                <Button Icon={FigureDisplayIcon} />
+                <PieceVisibilityButton />
                 <Button Icon={WhiteAttackDisplayIcon} />
                 <Button Icon={BlackAttackDisplayIcon} />
                 <FlipBoardButton />

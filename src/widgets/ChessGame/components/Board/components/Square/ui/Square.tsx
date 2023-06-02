@@ -1,4 +1,5 @@
 import { getFileName } from "shared/boardInfo";
+import { useAppSelector } from "shared/hooks";
 import { Piece } from "../../Piece/ui/Piece";
 import { ISquareProps } from "../types/interfaces";
 import { getSquareStyle } from "./lib/squareStyle";
@@ -8,6 +9,10 @@ export const Square: React.FC<ISquareProps> = ({
     square,
     resolveSquareClick,
 }) => {
+    const pieceVisibility = useAppSelector(
+        (state) => state.player.pieceVisibility,
+    );
+
     const { index, renderIndex, color, piece, isFriendly } = square;
     const squareStyle: string = getSquareStyle(square);
     const fileName =
@@ -29,7 +34,9 @@ export const Square: React.FC<ISquareProps> = ({
                     {rankName}
                 </div>
             )}
-            {!!piece && <Piece piece={piece} isFriendly={isFriendly} />}
+            {!!piece && pieceVisibility && (
+                <Piece piece={piece} isFriendly={isFriendly} />
+            )}
         </div>
     );
 };
