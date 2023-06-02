@@ -1,0 +1,14 @@
+.scaleMark {
+    width: 10px;
+    height: 2px;
+    border-radius: 4px;
+    position: absolute;
+}
+
+.white {
+    background-color: var(--white-primary-color);
+}
+
+.black {
+    background-color: var(--black-primary-color);
+}

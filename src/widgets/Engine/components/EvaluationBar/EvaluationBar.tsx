@@ -1,3 +1,4 @@
+import { ScaleMarks } from "./ScaleMarks/ScaleMarks";
 import styles from "./styles.module.css";
 
 interface IBarProps {
@@ -31,48 +32,15 @@ export const EvaluationBar: React.FC<IBarProps> = ({ staticEvaluation }) => {
 
     const percentEvaluation = getPercentEvaluation(evaluation);
 
-    const getPercentScaleMark = (scaleMark: number): number => {
-        const border = 4;
-        const percentCoefficient = 50 / border;
-        const percentScaleMark =
-            (border + Math.log2(scaleMark + 1)) * percentCoefficient;
-
-        return percentScaleMark;
-    };
-
-    let scaleMarkElements = [];
-    for (let evaluation = 0; evaluation <= 25; evaluation++) {
-        scaleMarkElements.push(
-            <div
-                style={{
-                    top: `calc(${getPercentScaleMark(evaluation)}% - 1px)`,
-                }}
-                className={styles.scaleMark}
-            ></div>,
-        );
-        scaleMarkElements.push(
-            <div
-                style={{
-                    top: `calc(100% - ${getPercentScaleMark(
-                        evaluation,
-                    )}% - 1px)`,
-                }}
-                className={styles.scaleMark}
-            ></div>,
-        );
-    }
-
     return (
         <div className={styles.evaluationBar}>
+            <ScaleMarks color="black" />
             <div
                 style={{ height: `${100 - percentEvaluation}%` }}
                 className={styles.evaluationBlack}
-            ></div>
-            <div
-                style={{ height: `${percentEvaluation}%` }}
-                className={styles.evaluationWhite}
-            ></div>
-            {scaleMarkElements}
+            >
+                <ScaleMarks color="white" />
+            </div>
         </div>
     );
 };
