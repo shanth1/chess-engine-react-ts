@@ -17,7 +17,7 @@ export const ScaleMarks: React.FC<IScaleMarksProps> = ({ color }) => {
     let scaleMarkElements = [];
 
     const colorStyle = color === "white" ? styles.white : styles.black;
-    for (let evaluation = 0; evaluation <= 25; evaluation++) {
+    for (let evaluation = 0; evaluation <= 15; evaluation++) {
         scaleMarkElements.push(
             <div
                 style={{
