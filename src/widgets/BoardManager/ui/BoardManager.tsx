@@ -73,10 +73,10 @@ export const BoardManager: React.FC = () => {
 
             <div className={styles.clock}>
                 <div className={[styles.timer, styles.white].join(" ")}>
-                    4:12
+                    0:00
                 </div>
                 <div className={[styles.timer, styles.black].join(" ")}>
-                    3:23
+                    0:00
                 </div>
             </div>
         </div>
