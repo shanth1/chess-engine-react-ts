@@ -77,9 +77,10 @@ export const checkPseudoLegalMove = (
                 boardAfterMove,
                 enemyIndex,
             );
+            const enemyPiece = boardAfterMove.position[enemyIndex];
             const isKingUnderAttack: boolean = checkAttackOnKing(
                 boardAfterMove.position,
-                enemyIndex,
+                enemyPiece,
                 enemyMoves,
             );
             if (isKingUnderAttack) {
